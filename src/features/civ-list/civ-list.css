@@ -1,0 +1,36 @@
+.CivList {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    border-bottom: 3px solid black;
+    height: 46px;
+}
+
+.CivTree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.CivTree > span {
+    display: none;
+    position: absolute;
+    background: #00000099;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 4px;
+    cursor: default;
+    outline: none;
+    user-select: none;
+    /* margin-top: 88px; */
+}
+
+.CivTree:hover > span {
+    display: block;
+}
+
+.CivTree > img {
+    width: 48px
+}
