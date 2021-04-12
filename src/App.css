@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+
+.Header {
+  height: 64px;
+  background-size: cover;
+}
+
+.Body {
+  height: calc(100vh - 96px);
+  background-size: 100vw;
+}

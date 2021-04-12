@@ -1,0 +1,39 @@
+.GroupTechTree {
+  display: flex;
+}
+
+.Units, .Upgrades {
+  display: flex;
+  margin: 0 16px;
+}
+
+.Upgrades {
+  flex-direction: column;
+}
+
+.UnitLine {
+  margin: 0 8px;
+}
+
+.Age {
+  height: 150px;
+}
+
+.Age > .UpgradeTech:not(:first-child) {
+  margin-left: 4px;
+}
+
+.Age > .UnitTech:not(:first-child) {
+  margin-top: 4px;
+}
+
+.Upgrades > .Age {
+  display: flex;
+  flex-direction: row;
+}
+
+.Age4 {
+  height: 300px;
+}
+
+/* .UnitLine {} */

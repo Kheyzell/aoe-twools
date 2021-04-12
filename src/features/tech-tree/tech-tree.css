@@ -1,0 +1,16 @@
+.TechTree {
+    display: flex;
+    overflow: auto;
+    padding: 16px 0;
+    height: 100%;
+}
+
+.Tools {
+    position: fixed;
+    z-index: 1000;
+    padding: 0 16px;
+}
+
+.Tools > button {
+    cursor: pointer;
+}

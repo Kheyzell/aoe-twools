@@ -1,0 +1,48 @@
+.Tech {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    font-size: 1em;
+    color: white;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    text-align: center;
+}
+
+.Tech.UnitTech {
+    background-color: #016288;
+}
+
+.Tech.UpgradeTech {
+    background-color: #357738;
+}
+
+.Tech.Selected {
+    border: 3px solid yellow;
+    width: 96px;
+    height: 96px;
+}
+
+.Tech > .Name {
+    position: absolute;
+    background: #00000050;
+    color: white;
+    font-size: .9rem;
+    font-weight: 600;
+    width: 96px;
+    padding: 4px;
+    outline: none;
+    user-select: none;
+}
+
+.Tech > img {
+    height: 80px;
+    width: 80px;
+}
