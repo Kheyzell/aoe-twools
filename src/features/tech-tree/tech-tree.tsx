@@ -18,6 +18,11 @@ import { millTechs } from "../../constants/GroupTechTree/mill-tech-tree.const";
 import { miningCampTechs } from "../../constants/GroupTechTree/mining-camp-tech-tree.const";
 import { marketTechs } from "../../constants/GroupTechTree/market-tech-tree.const";
 import { dockTechs } from "../../constants/GroupTechTree/dock-tech-tree.const";
+import woodenBackground from "../../resources/images/backgrounds/wood2.jpg";
+import darkAge from "../../resources/images/darkAge.png"
+import feudalAge from "../../resources/images/feudalAge.png"
+import castleAge from "../../resources/images/castleAge.png"
+import imperialAge from "../../resources/images/imperialAge.png"
 
 type Props = {}
 type State = {}
@@ -49,6 +54,26 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
     <div className="TechTree" ref={scrollRef as React.RefObject<HTMLDivElement>} onWheel={onWheel}>
       <div className="Tools">
         <button onClick={onResetClick}> Reset </button>
+      </div>
+      <div className="LeftPanel" style={{ background: `url(${woodenBackground})` }}>
+        <div className="AgeRow">
+          <img src={darkAge} alt="Dark Age" />
+        </div>
+        <div className="AgeRow">
+          <img src={feudalAge} alt="Feudal Age" />
+        </div>
+        <div className="AgeRow">
+          <img src={castleAge} alt="Castle Age" />
+        </div>
+        <div className="AgeRow">
+          <img src={imperialAge} alt="Imperial Age" />
+        </div>
+      </div>
+      <div className="AgePanels">
+        <div className="Panel"></div>
+        <div className="Panel"></div>
+        <div className="Panel"></div>
+        <div className="Panel"></div>
       </div>
       <GroupTechTreeComponent groupTechTree={blacksmithTechs}></GroupTechTreeComponent>
       <GroupTechTreeComponent groupTechTree={barracksTechs}></GroupTechTreeComponent>

@@ -1,7 +1,7 @@
 .Tech {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 92px;
+    height: 92px;
     border: 1px solid black;
     font-size: 1em;
     color: white;
@@ -26,8 +26,8 @@
 
 .Tech.Selected {
     border: 3px solid yellow;
-    width: 96px;
-    height: 96px;
+    width: 88px;
+    height: 88px;
 }
 
 .Tech > .Name {
@@ -36,13 +36,13 @@
     color: white;
     font-size: .9rem;
     font-weight: 600;
-    width: 96px;
+    width: 86px;
     padding: 4px;
     outline: none;
     user-select: none;
 }
 
 .Tech > img {
-    height: 80px;
-    width: 80px;
+    height: 76px;
+    width: 76px;
 }

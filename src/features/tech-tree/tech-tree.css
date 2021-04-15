@@ -1,16 +1,69 @@
 .TechTree {
     display: flex;
     overflow: auto;
-    padding: 16px 0;
+    padding: 16px 0 0 112px;
     height: 100%;
 }
 
 .Tools {
     position: fixed;
-    z-index: 1000;
+    z-index: 1001;
     padding: 0 16px;
+    margin-top: -18px;
 }
 
 .Tools > button {
     cursor: pointer;
+}
+
+.LeftPanel {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    margin-left: -112px;
+    border-width: 0 1px 0px 0;
+    border-color: white;
+    border-style: solid;
+    margin-top: -18px;
+    padding: 18px 8px 0 0;
+    height: 100%;
+}
+
+.LeftPanel .AgeRow {
+    height: 150px;
+}
+
+.LeftPanel img {
+    width: 96px;
+}
+
+.AgePanels {
+    position: fixed;
+    width: 100%;
+    text-align: left;
+    margin-left: -112px;
+    padding-left: 16px;
+}
+
+.AgePanels .Panel {
+    height: 150px;
+    margin-top: -7px;
+}
+
+.AgePanels .Panel:not(:first-child) {
+    height: 149px;
+    border-top: 1px solid white;
+}
+
+.AgePanels .Panel:nth-child(4) {
+    height: 255px;
+}
+
+.AgePanels .Panel:nth-child(2n) {
+    /* background-color: #00000061; */
+}
+
+.AgePanels .Panel:nth-child(2n+1) {
+    /* background-color: red; */
 }
