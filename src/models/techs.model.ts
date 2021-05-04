@@ -9,6 +9,8 @@ export interface Tech {
     age: number
     cost: Cost
     duration: number
+    previousLineTech?: Tech
+    nextLineTech?: Tech
     type: TechType
 }
 
@@ -26,6 +28,8 @@ export class Unit implements Tech {
     cost: Cost
     duration: number
     type: TechType
+    previousLineTech?: Unit
+    nextLineTech?: Unit
     isSelected?: boolean
 
     constructor(data: any) {
@@ -35,6 +39,8 @@ export class Unit implements Tech {
         this.age = data.age
         this.cost = data.cost
         this.duration = data.duration
+        this.previousLineTech = data.previousLineTech
+        this.nextLineTech = data.nextLineTech
     }
 }
 
@@ -45,6 +51,8 @@ export class Upgrade implements Tech {
     cost: Cost
     duration: number
     type: TechType
+    previousLineTech?: Tech
+    nextLineTech?: Tech
     isSelected?: boolean
 
     constructor(data: any) {
@@ -54,6 +62,8 @@ export class Upgrade implements Tech {
         this.age = data.age
         this.cost = data.cost
         this.duration = data.duration
+        this.previousLineTech = data.previousLineTech
+        this.nextLineTech = data.nextLineTech
     }
 }
 

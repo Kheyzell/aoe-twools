@@ -1,4 +1,5 @@
 import { Unit, Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface BarracksUnits {
     militia: Unit
@@ -8,7 +9,7 @@ interface BarracksUnits {
     champion: Unit
     spearman: Unit
     pikeman: Unit
-    halbedier: Unit
+    halberdier: Unit
     eagleScout: Unit
     eagleWarrior: Unit
     eliteEagleWarrior: Unit
@@ -105,7 +106,7 @@ export const barracksUnits: BarracksUnits = {
         },
         duration: 22
     }),
-    halbedier: new Unit({
+    halberdier: new Unit({
         id: 'halberdier',
         name: 'Halberdier',
         age: 4,
@@ -154,6 +155,10 @@ export const barracksUnits: BarracksUnits = {
         duration: 20
     })
 }
+
+chainTechs([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion])
+chainTechs([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier])
+chainTechs([barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior])
 
 export const barracksUpgrade: BarracksUpgrades = {
     supplies: new Upgrade({

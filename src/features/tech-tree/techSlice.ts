@@ -26,12 +26,30 @@ export const counterSlice = createSlice({
       state.selectedTechs.splice(state.selectedTechs.findIndex(tech => tech === action.payload), 1)
     },
 
-    toggleTechSelelection: (state, action: PayloadAction<Tech>) => {
+    toggleTechsSelelection: (state, action: PayloadAction<Tech>) => {
       const isAlreadySelected = !!state.selectedTechs.find(tech => tech.name === action.payload.name)      
+      let tech: Tech | void = action.payload
       if (isAlreadySelected) {
-        state.selectedTechs.splice(state.selectedTechs.findIndex(tech => tech.name === action.payload.name), 1)
+        const techsToUnselect: Tech[] = []
+        while(!!tech) { // previous techs
+          techsToUnselect.push(tech)
+          tech = tech.previousLineTech
+        }
+        tech = action.payload.nextLineTech
+        while(!!tech) { // next techs
+          techsToUnselect.push(tech)
+          tech = tech.nextLineTech
+        }
+
+        state.selectedTechs = state.selectedTechs.filter(tech => !techsToUnselect.find(t => t.id === tech.id))
       } else {
-        state.selectedTechs.push(action.payload)
+        const techsToSelect: Tech[] = []
+        do { // select all previous line tech
+          techsToSelect.push(tech)
+          tech = tech.previousLineTech
+        } while (!!tech);
+        
+        state.selectedTechs.push(...techsToSelect)
       }
     },
 
@@ -41,7 +59,7 @@ export const counterSlice = createSlice({
   },
 })
 
-export const { selectTech, unselectTech, toggleTechSelelection, resetSelection } = counterSlice.actions
+export const { selectTech, unselectTech, toggleTechsSelelection, resetSelection } = counterSlice.actions
 
 export const selectedTechsSelector = (state: RootState) => state.techs.selectedTechs
 

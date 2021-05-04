@@ -1,4 +1,5 @@
 import { Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface MillUpgrades {
     horseColar: Upgrade
@@ -44,3 +45,5 @@ export const millUpgrades: MillUpgrades = {
         duration: 70
     }),
 }
+
+chainTechs([millUpgrades.horseColar, millUpgrades.heavyPlow, millUpgrades.cropRotation])

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "AoE Civ Picker",
+  "name": "Age of Empires 2 DE Civilisation Picker",
   "icons": [
     {
       "src": "favicon.ico",

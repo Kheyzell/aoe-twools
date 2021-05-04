@@ -2,7 +2,7 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { Tech, TechType } from "../../../models/techs.model"
-import { selectedTechsSelector, toggleTechSelelection } from "../techSlice"
+import { selectedTechsSelector, selectTech, toggleTechsSelelection } from "../techSlice"
 
 import './tech.component.css'
 
@@ -19,10 +19,7 @@ const TechComponent: React.FC<Props> = (props, state: State) => {
   const isSelected = () => !!selectedTechs.find(selectedTech => selectedTech.id === props.tech.id)
 
   const onTechClick = () => {
-    dispatch(toggleTechSelelection({ ...props.tech }))
-    if (props.onTechSelected) {
-      props.onTechSelected(props.tech)
-    }
+    dispatch(toggleTechsSelelection({ ...props.tech }))
   }
 
   const techClass = props.tech.type === TechType.unit ? 'UnitTech' : 'UpgradeTech'

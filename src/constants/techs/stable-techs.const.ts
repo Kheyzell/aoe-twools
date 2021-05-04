@@ -1,4 +1,5 @@
 import { Unit, Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface StableUnits {
     scoutCavalry: Unit
@@ -166,6 +167,12 @@ export const stableUnits: StableUnits = {
         duration: 20
     }),
 }
+
+chainTechs([stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar])
+chainTechs([stableUnits.knight, stableUnits.cavalier, stableUnits.paladin])
+chainTechs([stableUnits.camelRider, stableUnits.heavyCamelRider])
+chainTechs([stableUnits.battleElephant, stableUnits.eliteBattleElephant])
+chainTechs([stableUnits.steppeLancer, stableUnits.eliteSteppeLancer])
 
 export const stableUpgrades: StableUpgrades = {
     bloodlines: new Upgrade({

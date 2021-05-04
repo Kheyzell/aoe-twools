@@ -1,4 +1,5 @@
 import { Unit, Upgrade } from "../../models/techs.model"
+import { chainTechs } from "../../utils/techs.utils"
 
 interface ArcheryUnits {
     archer: Unit
@@ -114,6 +115,11 @@ export const archeryUnits: ArcheryUnits = {
         duration: 27
     }),
 }
+
+chainTechs([archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester])
+chainTechs([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher])
+chainTechs([archeryUnits.handCannoneer])
+chainTechs([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher])
 
 export const archeryUpgrades: ArcheryUpgrades = {
     thumbRing: new Upgrade({

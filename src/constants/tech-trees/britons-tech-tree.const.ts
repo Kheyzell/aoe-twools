@@ -22,7 +22,7 @@ export const britonsTechTree: CivTechTree = {
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
-            new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halbedier]),
+            new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
         upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
     },

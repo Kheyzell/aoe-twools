@@ -1,4 +1,5 @@
 import { Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface BlacksmithUpgrades {
     forging: Upgrade
@@ -200,3 +201,9 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
         duration: 70
     }),
 }
+
+chainTechs([blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,])
+chainTechs([blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,])
+chainTechs([blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,])
+chainTechs([blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,])
+chainTechs([blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor])

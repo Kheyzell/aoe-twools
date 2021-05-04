@@ -1,4 +1,5 @@
 import { Unit, Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface CastleUnits {
     uniqueUnit: Unit
@@ -66,6 +67,8 @@ export const castleUnits: CastleUnits = {
         duration: 50
     }),
 }
+
+chainTechs([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit])
 
 export const castleUpgrades: CastleUpgrades = {
     castleUniqueTech: new Upgrade({
