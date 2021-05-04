@@ -1,4 +1,5 @@
 import { Unit, Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface MarketUnits {
     tradeCart: Unit
@@ -76,3 +77,5 @@ export const marketUpgrade: MarketUpgrades = {
         duration: 50
     }),
 }
+
+chainTechs([marketUpgrade.coinage, marketUpgrade.banking])
