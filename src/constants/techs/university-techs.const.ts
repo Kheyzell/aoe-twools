@@ -1,4 +1,5 @@
 import { Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface UniversityUpgrades {
     masonry: Upgrade
@@ -174,3 +175,6 @@ export const universityUpgrades: UniversityUpgrades = {
         duration: 25
     }),
 }
+
+chainTechs([universityUpgrades.masonry, universityUpgrades.architecture])
+chainTechs([universityUpgrades.guardTower, universityUpgrades.keep])

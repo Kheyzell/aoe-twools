@@ -30,25 +30,21 @@ class GroupTechTreeComponent extends Component<Props, State> {
 
         <div className="Upgrades">
           <div className="Age Age1">
-            {/* <div> Age1 </div> */}
             {upgradeLine.age1.map((upgrade, index) => {
               return (<TechComponent key={index} tech={upgrade}></TechComponent>)
             })}
           </div>
           <div className="Age Age2">
-            {/* <div> Age2 </div> */}
             {upgradeLine.age2.map((upgrade, index) => {
               return (<TechComponent key={index} tech={upgrade}></TechComponent>)
             })}
           </div>
           <div className="Age Age3">
-            {/* <div> Age3 </div> */}
             {upgradeLine.age3.map((upgrade, index) => {
               return (<TechComponent key={index} tech={upgrade}></TechComponent>)
             })}
           </div>
           <div className="Age Age4">
-            {/* <div> Age4 </div> */}
             {upgradeLine.age4.map((upgrade, index) => {
               return (<TechComponent key={index} tech={upgrade}></TechComponent>)
             })}

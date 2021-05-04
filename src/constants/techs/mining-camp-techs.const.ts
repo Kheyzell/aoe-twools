@@ -1,4 +1,5 @@
 import { Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface MiningCampUpgrades {
     goldMining: Upgrade
@@ -57,3 +58,6 @@ export const miningCampUpgrades: MiningCampUpgrades = {
         duration: 75
     }),
 }
+
+chainTechs([miningCampUpgrades.goldMining, miningCampUpgrades.goldShaftMining])
+chainTechs([miningCampUpgrades.stoneMining, miningCampUpgrades.stoneShaftMining])

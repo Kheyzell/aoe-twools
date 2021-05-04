@@ -22,7 +22,7 @@ export const mayansTechTree: CivTechTree = {
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
-            new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halbedier]),
+            new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
             new UnitLine([barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior]),
         ],
         upgrades: new UpgradePerAgeGroup([barracksUpgrade.squires, barracksUpgrade.arson])

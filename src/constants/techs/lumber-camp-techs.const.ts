@@ -1,4 +1,5 @@
 import { Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface LumberCampUpgrades {
     doubleBitAxe: Upgrade
@@ -44,3 +45,5 @@ export const lumberCampUpgrades: LumberCampUpgrades = {
         duration: 100
     }),
 }
+
+chainTechs([lumberCampUpgrades.doubleBitAxe, lumberCampUpgrades.bowSaw, lumberCampUpgrades.twoManSaw])

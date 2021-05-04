@@ -1,4 +1,5 @@
 import { Unit, Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface SiegeUnits {
     batteringRam: Unit
@@ -135,3 +136,9 @@ export const siegeUnits: SiegeUnits = {
         duration: 56
     }),
 }
+
+chainTechs([siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam])
+chainTechs([siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager])
+chainTechs([siegeUnits.scorpion, siegeUnits.heavyScorpion])
+chainTechs([siegeUnits.siegeTower])
+chainTechs([siegeUnits.bombardCannon])

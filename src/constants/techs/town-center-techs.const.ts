@@ -1,4 +1,5 @@
 import { Unit, Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface TownCenterUnits {
     villager: Unit
@@ -128,3 +129,7 @@ export const townCenterUpgrade: TownCenterUpgrades = {
         duration: 40
     }),
 }
+
+chainTechs([townCenterUpgrade.feudalAge, townCenterUpgrade.casteAge, townCenterUpgrade.imperialAge])
+chainTechs([townCenterUpgrade.wheelbarrow, townCenterUpgrade.handCart])
+chainTechs([townCenterUpgrade.townWatch, townCenterUpgrade.townPatrol])

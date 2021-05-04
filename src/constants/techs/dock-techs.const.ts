@@ -1,4 +1,5 @@
 import { Unit, Upgrade } from "../../models/techs.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 interface DockUnits {
     fishingShip: Unit
@@ -195,6 +196,13 @@ export const dockUnits: DockUnits = {
     }),
 }
 
+chainTechs([dockUnits.fishingShip])
+chainTechs([dockUnits.transportShip])
+chainTechs([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon])
+chainTechs([dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip])
+chainTechs([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip])
+chainTechs([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon])
+
 export const dockUpgrades: DockUpgrades = {
     gillnets: new Upgrade({
         id: 'gillnets',
@@ -245,3 +253,5 @@ export const dockUpgrades: DockUpgrades = {
         duration: 60
     }),
 }
+
+chainTechs([dockUpgrades.careening, dockUpgrades.dryDock])
