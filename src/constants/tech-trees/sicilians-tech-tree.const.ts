@@ -44,7 +44,7 @@ export const siciliansTechTree: CivTechTree = {
     siege: {
         units: [
             new UnitLine([siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam]),
-            new UnitLine([siegeUnits.mangonel, siegeUnits.onager]),
+            new UnitLine([siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager]),
             new UnitLine([siegeUnits.scorpion, siegeUnits.heavyScorpion]),
             new UnitLine([siegeUnits.siegeTower]),
         ],
