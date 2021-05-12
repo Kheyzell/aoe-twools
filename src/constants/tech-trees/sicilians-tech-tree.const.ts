@@ -14,11 +14,79 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/sicilians.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const siciliansTechTree: CivTechTree = {
     id: 'sicilians',
     name: 'Sicilians',
     crest,
+    bonuses: [
+        {
+            id: 'sicilians1',
+            description: 'Castles and Town Centers are constructed 100% faster',
+            effectType: EffectType.constructionSpeed,
+            value: 100,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'sicilians2',
+            description: 'Land military units (except Siege weapons) absorb 50% of all incoming bonus damage',
+            effectType: EffectType.miscallenous,
+            value: 50,
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.cavalryArcher, stableUnits.lightCavalry, stableUnits.cavalier],
+            affectedUpgrades: []
+        },
+        {
+            id: 'sicilians3',
+            description: 'Farm upgrades provide +100% additional food to Farms before they need to be reseeded',
+            effectType: EffectType.miscallenous,
+            value: 100,
+            affectedUnits: [],
+            affectedUpgrades: [millUpgrades.horseColar, millUpgrades.heavyPlow, millUpgrades.cropRotation]
+        },
+        {
+            id: 'sicilians4',
+            description: 'Can build Donjons, which replace the regular Watch Tower line',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'sicilians5',
+            description: 'Transport Ships +5 carry capacity and +10 armor versus anti-ship bonus damage',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [dockUnits.transportShip],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'firstCrusade',
+            name: 'First Crusade',
+            description: 'Upon researching, each Town Center (up to 5) spawns a one-time group of 7 Serjeants; units become more resistant to conversion (+3)',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 300, gold: 600, stone: 0 },
+            duration: 60,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'scutage',
+            name: 'Scutage',
+            description: 'Upon researching, each team member receives a one-time payment of 15 gold for each military unit that they own',
+            effectType: EffectType.miscallenous,
+            value: 15,
+            cost: { wood: 0, food: 500, gold: 400, stone: 0 },
+            duration: 45,
+            affectedUnits: [],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

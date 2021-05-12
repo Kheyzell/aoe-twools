@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/cumans.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const cumansTechTree: CivTechTree = {
     id: 'cumans',
     name: 'Cumans',
     crest,
+    bonuses: [
+        {
+            id: 'cumans1',
+            description: 'Can build one additional Town Center in the Feudal Age',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'cumans2',
+            description: 'Siege Workshops and Battering Rams are available in the Feudal Age and Capped Ram upgrade available in the Castle Age',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [siegeUnits.siegeRam],
+            affectedUpgrades: []
+        },
+        {
+            id: 'cumans3',
+            description: 'Mounted units move 5%/10%/15% faster in the Feudal/Castle/Imperial Age',
+            effectType: EffectType.movementSpeed,
+            value: { age2: 5, age3: 10, age4: 15 },
+            affectedUnits: [stableUnits.hussar, stableUnits.paladin, stableUnits.camelRider, stableUnits.eliteSteppeLancer],
+            affectedUpgrades: []
+        },
+        {
+            id: 'cumans4',
+            description: 'Palisade Walls have +33% HP',
+            effectType: EffectType.healthPercent,
+            value: 33,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'steppeHusbandry',
+            name: 'Steppe Husbandry',
+            description: 'Scout Cavalry line, Steppe Lancers and Cavalry Archers are trained 100% faster',
+            effectType: EffectType.creationSpeed,
+            value: 100,
+            cost: { wood: 300, food: 200, gold: 0, stone: 0 },
+            duration: 40,
+            affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer, archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'cumanMercenaries',
+            name: 'Cuman Mercenaries',
+            description: 'team members can create 10 free Elite Kipchaks at the Castle',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 650, gold: 400, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

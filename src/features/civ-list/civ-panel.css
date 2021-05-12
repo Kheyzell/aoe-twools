@@ -1,0 +1,52 @@
+.CivPanel {
+    position: absolute;
+    z-index: 1001;
+    padding: 16px;
+    top: 72px;
+    min-width: 480px;
+    color: black;
+    border: 2px solid #ffffff;
+    border-radius: 3px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 8px;
+    cursor: default;
+    outline: none;
+    user-select: none;
+}
+
+.Title {
+    font-size: 1.2em;
+    font-weight: bold;
+    border-bottom: solid 2px white;
+    margin: -4px -4px 8px -4px;
+    padding: 0 0 4px 0;
+}
+
+.Section:not(:first-child) {
+    margin-top: 8px;
+}
+
+.SubTitle {
+    text-align: left;
+    margin-bottom: 4px;
+    text-decoration: underline;
+}
+
+.Bonuses {
+    text-align: left;
+    font-size: .9em;
+    color: rgb(51, 51, 51);
+}
+
+.TeamBonus {
+    font-weight: bold;
+}
+
+.UnitList {
+    display: flex;
+}
+
+.UnitList > .Tech:not(:first-child) {
+    margin-left: 8px;
+}

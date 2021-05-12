@@ -14,11 +14,63 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/persians.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const persiansTechTree: CivTechTree = {
     id: 'persians',
     name: 'Persians',
     crest,
+    bonuses: [
+        {
+            id: 'persians1',
+            description: 'Start the game with +50 food and +50 wood',
+            effectType: EffectType.miscallenous,
+            value: 50,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'persians2',
+            description: 'Town Centers and Docks have double HP and work 10%/15%/20% faster in the Feudal/Castle/Imperial Age',
+            effectType: EffectType.creationSpeed,
+            value: { age2: 10, age3: 15, age4: 20 },
+            affectedUnits: [townCenterUnits.villager, dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fastFireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.loom, townCenterUpgrade.casteAge, townCenterUpgrade.wheelbarrow, townCenterUpgrade.townWatch, townCenterUpgrade.imperialAge, townCenterUpgrade.handCart, townCenterUpgrade.townPatrol, dockUpgrades.gillnets, dockUpgrades.careening, dockUpgrades.dryDock]
+        },
+        {
+            id: 'persians3',
+            description: 'Knights have +2 attack against archers',
+            effectType: EffectType.miscallenous,
+            value: 2,
+            affectedUnits: [stableUnits.paladin],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'kamandaran',
+            name: 'Kamandaran',
+            description: 'turns Archer gold cost into wood cost',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 400, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [archeryUnits.crossbowman],
+            affectedUpgrades: []
+        },
+        {
+            id: 'mahouts',
+            name: 'Mahouts',
+            description: 'War Elephants move +30% faster',
+            effectType: EffectType.movementSpeed,
+            value: 30,
+            cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+            duration: 50,
+            affectedUnits: [],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman]),
@@ -103,7 +155,7 @@ export const persiansTechTree: CivTechTree = {
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,
             townCenterUpgrade.handCart,
-            townCenterUpgrade.townPatrol,
+            townCenterUpgrade.townPatrol
         ])
     },
     lumberCamp: {

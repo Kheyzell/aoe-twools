@@ -14,11 +14,79 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/khmer.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const khmerTechTree: CivTechTree = {
     id: 'khmer',
     name: 'Khmer',
     crest,
+    bonuses: [
+        {
+            id: 'khmer1',
+            description: 'No buildings are required to advance to the next Age or to unlock other buildings',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'khmer2',
+            description: 'Battle Elephants move +10% faster',
+            effectType: EffectType.movementSpeed,
+            value: 10,
+            affectedUnits: [stableUnits.eliteBattleElephant],
+            affectedUpgrades: []
+        },
+        {
+            id: 'khmer3',
+            description: 'Farmers do not require Mills or Town Centers to drop off food but work 5% slower',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'khmer4',
+            description: 'Villagers can garrison in Houses',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'khmer5',
+            description: 'Scorpions have +1 range',
+            effectType: EffectType.range,
+            value: 1,
+            affectedUnits: [siegeUnits.heavyScorpion],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'tuskSwords',
+            name: 'Tusk Swords',
+            description: 'Battle Elephants +3 attack',
+            effectType: EffectType.damage,
+            value: 3,
+            cost: { wood: 300, food: 0, gold: 450, stone: 0 },
+            duration: 40,
+            affectedUnits: [stableUnits.eliteBattleElephant],
+            affectedUpgrades: []
+        },
+        {
+            id: 'doubleCrossbow',
+            name: 'Double Crossbow',
+            description: 'Ballista Elephants and Scorpions shoot two projectiles',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 700, gold: 400, stone: 0 },
+            duration: 40,
+            affectedUnits: [siegeUnits.heavyScorpion],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),

@@ -1,4 +1,4 @@
-import { Unit, Upgrade } from "../../models/techs.model";
+import { Unit, UnitType, Upgrade } from "../../models/techs.model";
 import { chainTechs } from "../../utils/techs.utils";
 
 interface StableUnits {
@@ -26,6 +26,7 @@ export const stableUnits: StableUnits = {
         id: 'scoutCavalry',
         name: 'Scout Cavalry',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 80,
@@ -38,6 +39,7 @@ export const stableUnits: StableUnits = {
         id: 'lightCavalry',
         name: 'Light Cavalry',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 80,
@@ -50,6 +52,7 @@ export const stableUnits: StableUnits = {
         id: 'hussar',
         name: 'Hussar',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 80,
@@ -62,6 +65,7 @@ export const stableUnits: StableUnits = {
         id: 'knight',
         name: 'Knight',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 60,
@@ -74,6 +78,7 @@ export const stableUnits: StableUnits = {
         id: 'cavalier',
         name: 'Cavalier',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 60,
@@ -86,6 +91,7 @@ export const stableUnits: StableUnits = {
         id: 'paladin',
         name: 'Paladin',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 60,
@@ -98,6 +104,7 @@ export const stableUnits: StableUnits = {
         id: 'camelRider',
         name: 'Camel Rider',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 55,
@@ -110,6 +117,7 @@ export const stableUnits: StableUnits = {
         id: 'heavyCamelRider',
         name: 'Heavy Camel Rider',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 55,
@@ -122,6 +130,7 @@ export const stableUnits: StableUnits = {
         id: 'battleElephant',
         name: 'Battle Elephant',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 120,
@@ -134,6 +143,7 @@ export const stableUnits: StableUnits = {
         id: 'eliteBattleElephant',
         name: 'Elite Battle Elephant',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 120,
@@ -146,6 +156,7 @@ export const stableUnits: StableUnits = {
         id: 'steppeLancer',
         name: 'Steppe Lancer',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 70,
@@ -158,6 +169,7 @@ export const stableUnits: StableUnits = {
         id: 'eliteSteppeLancer',
         name: 'Elite Steppe Lancer',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 70,
@@ -179,6 +191,7 @@ export const stableUpgrades: StableUpgrades = {
         id: 'bloodlines',
         name: 'Bloodlines',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 150,
@@ -191,6 +204,7 @@ export const stableUpgrades: StableUpgrades = {
         id: 'husbandry',
         name: 'Husbandry',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 150,

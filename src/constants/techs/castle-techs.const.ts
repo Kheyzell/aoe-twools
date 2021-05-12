@@ -1,4 +1,4 @@
-import { Unit, Upgrade } from "../../models/techs.model";
+import { Unit, UnitType, Upgrade } from "../../models/techs.model";
 import { chainTechs } from "../../utils/techs.utils";
 
 interface CastleUnits {
@@ -22,6 +22,7 @@ export const castleUnits: CastleUnits = {
         id: 'uniqueUnit',
         name: 'Unique Unit',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 0,
@@ -34,6 +35,7 @@ export const castleUnits: CastleUnits = {
         id: 'eliteUniqueUnit',
         name: 'Elite Unique Unit',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 0,
@@ -46,6 +48,7 @@ export const castleUnits: CastleUnits = {
         id: 'petard',
         name: 'Petard',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 65,
@@ -58,6 +61,7 @@ export const castleUnits: CastleUnits = {
         id: 'trebuchet',
         name: 'Trebuchet',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 200,
             food: 0,

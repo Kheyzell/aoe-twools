@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/mongols.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const mongolsTechTree: CivTechTree = {
     id: 'mongols',
     name: 'Mongols',
     crest,
+    bonuses: [
+        {
+            id: 'mongols1',
+            description: 'Cavalry archers fire 25% faster',
+            effectType: EffectType.fireRate,
+            value: 25,
+            affectedUnits: [archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'mongols2',
+            description: 'Light Cavalry, Hussars, and Steppe Lancers have +30% HP',
+            effectType: EffectType.healthPercent,
+            value: 30,
+            affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer],
+            affectedUpgrades: []
+        },
+        {
+            id: 'mongols3',
+            description: 'Hunters work +40% faster',
+            effectType: EffectType.miscallenous,
+            value: 40,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'mongols4',
+            description: 'The Scout Cavalry line has +2 Line of Sight',
+            effectType: EffectType.lineOfSight,
+            value: 2,
+            affectedUnits: [stableUnits.hussar],
+            affectedUpgrades: [],
+            team: true
+        },
+    ],
+    uniqueTechs: [
+        {
+            id: 'nomads',
+            name: 'Nomads',
+            description: 'Houses retain population when destroyed',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 300, food: 0, gold: 150, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'drill',
+            name: 'Drill',
+            description: 'Siege Workshop units move +50% faster',
+            effectType: EffectType.movementSpeed,
+            value: 50,
+            cost: { wood: 500, food: 0, gold: 450, stone: 0 },
+            duration: 60,
+            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

@@ -14,11 +14,79 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/bulgarians.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const bulgariansTechTree: CivTechTree = {
     id: 'bulgarians',
     name: 'Bulgarians',
     crest,
+    bonuses: [
+        {
+            id: 'bulgarians1',
+            description: 'Militia line upgrades are free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [barracksUnits.twoHandedSwordsman],
+            affectedUpgrades: []
+        },
+        {
+            id: 'bulgarians2',
+            description: 'Town Centers cost -50% stone',
+            effectType: EffectType.discoutWood,
+            value: 50,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'bulgarians3',
+            description: 'The Krepost becomes available for construction in the Castle Age',
+            effectType: EffectType.uniqueBuilding,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'bulgarians4',
+            description: 'Blacksmith and Siege Workshop upgrades cost -50% food',
+            effectType: EffectType.discoutFood,
+            value: 50,
+            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion],
+            affectedUpgrades: [blacksmithUpgrades.blastFurnace, blacksmithUpgrades.plateMailArmor, blacksmithUpgrades.plateBardingArmor, blacksmithUpgrades.bracer, blacksmithUpgrades.leatherArcherArmor]
+        },
+        {
+            id: 'bulgarians5',
+            description: 'Blacksmiths work 80% faster',
+            effectType: EffectType.creationSpeed,
+            value: 80,
+            affectedUnits: [],
+            affectedUpgrades: [blacksmithUpgrades.blastFurnace, blacksmithUpgrades.plateMailArmor, blacksmithUpgrades.plateBardingArmor, blacksmithUpgrades.bracer, blacksmithUpgrades.leatherArcherArmor],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'stirrups',
+            name: 'Stirrups',
+            description: 'Light Cavalry, Knight line and Konniks attack 33% faster',
+            effectType: EffectType.fireRate,
+            value: 33,
+            cost: { wood: 0, food: 400, gold: 200, stone: 0 },
+            duration: 35,
+            affectedUnits: [stableUnits.hussar, stableUnits.cavalier],
+            affectedUpgrades: []
+        },
+        {
+            id: 'bagains',
+            name: 'Bagains',
+            description: 'Militia line +5 melee armor',
+            effectType: EffectType.meleeArmor,
+            value: 5,
+            cost: { wood: 0, food: 900, gold: 450, stone: 0 },
+            duration: 40,
+            affectedUnits: [barracksUnits.twoHandedSwordsman],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),

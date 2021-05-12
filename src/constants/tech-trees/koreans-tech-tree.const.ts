@@ -14,11 +14,87 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/koreans.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const koreansTechTree: CivTechTree = {
     id: 'koreans',
     name: 'Koreans',
     crest,
+    bonuses: [
+        {
+            id: 'koreans1',
+            description: 'Villagers have +3 Line of Sight',
+            effectType: EffectType.lineOfSight,
+            value: 3,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'koreans2',
+            description: 'Stone Miners work 20% faster',
+            effectType: EffectType.miscallenous,
+            value: 20,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'koreans3',
+            description: 'Tower upgrades are free (Bombard Tower requires Chemistry)',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [universityUpgrades.guardTower, universityUpgrades.keep, universityUpgrades.bombardTower]
+        },
+        {
+            id: 'koreans4',
+            description: 'Archer Armor upgrades are free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor]
+        },
+        {
+            id: 'koreans5',
+            description: 'Military units cost –20% less wood (except siege weapons)',
+            effectType: EffectType.discoutWood,
+            value: 20,
+            affectedUnits: [barracksUnits.halberdier, archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.heavyCavalryArcher, dockUnits.fastFireShip, dockUnits.galleon, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'koreans6',
+            description: 'Mangonel line minimum range reduced',
+            effectType: EffectType.minimumRange,
+            value: 1,
+            affectedUnits: [siegeUnits.siegeOnager],
+            affectedUpgrades: [],
+            team: true
+        },
+    ],
+    uniqueTechs: [
+        {
+            id: 'eupseong',
+            name: 'Eupseong',
+            description: 'Towers (except Bombard Towers) have +2 range',
+            effectType: EffectType.range,
+            value: 2,
+            cost: { wood: 300, food: 300, gold: 0, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'shinkichon',
+            name: 'Shinkichon',
+            description: 'Gives the Mangonel line +1 range',
+            effectType: EffectType.range,
+            value: 1,
+            cost: { wood: 800, food: 0, gold: 500, stone: 0 },
+            duration: 60,
+            affectedUnits: [siegeUnits.siegeOnager],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

@@ -1,4 +1,4 @@
-import { Unit, Upgrade } from "../../models/techs.model"
+import { Unit, UnitType, Upgrade } from "../../models/techs.model"
 import { chainTechs } from "../../utils/techs.utils"
 
 interface ArcheryUnits {
@@ -22,6 +22,7 @@ export const archeryUnits: ArcheryUnits = {
         id: 'archer',
         name: 'Archer',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 25,
             food: 0,
@@ -34,6 +35,7 @@ export const archeryUnits: ArcheryUnits = {
         id: 'crossbowman',
         name: 'Crossbowman',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 25,
             food: 0,
@@ -46,6 +48,7 @@ export const archeryUnits: ArcheryUnits = {
         id: 'arbalester',
         name: 'Arbalester',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 25,
             food: 0,
@@ -58,6 +61,7 @@ export const archeryUnits: ArcheryUnits = {
         id: 'skirmisher',
         name: 'Skirmisher',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 35,
             food: 25,
@@ -70,6 +74,7 @@ export const archeryUnits: ArcheryUnits = {
         id: 'eliteSkirmisher',
         name: 'Elite Skirmisher',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 35,
             food: 25,
@@ -82,6 +87,7 @@ export const archeryUnits: ArcheryUnits = {
         id: 'handCannoneer',
         name: 'Hand Cannoneer',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 45,
@@ -94,6 +100,7 @@ export const archeryUnits: ArcheryUnits = {
         id: 'cavalryArcher',
         name: 'Cavalry Archer',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 40,
             food: 0,
@@ -106,6 +113,7 @@ export const archeryUnits: ArcheryUnits = {
         id: 'heavyCavalryArcher',
         name: 'Heavy Cavalry Archer',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 40,
             food: 0,
@@ -126,6 +134,7 @@ export const archeryUpgrades: ArcheryUpgrades = {
         id: 'thumbRing',
         name: 'Thumb Ring',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 250,
             food: 300,
@@ -138,6 +147,7 @@ export const archeryUpgrades: ArcheryUpgrades = {
         id: 'parthianTactics',
         name: 'Parthian Tactics',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 200,

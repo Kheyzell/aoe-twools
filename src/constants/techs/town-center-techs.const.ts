@@ -1,4 +1,4 @@
-import { Unit, Upgrade } from "../../models/techs.model";
+import { Unit, UnitType, Upgrade } from "../../models/techs.model";
 import { chainTechs } from "../../utils/techs.utils";
 
 interface TownCenterUnits {
@@ -21,6 +21,7 @@ export const townCenterUnits: TownCenterUnits = {
         id: 'villager',
         name: 'Villager',
         age: 1,
+        unitType: UnitType.civilian,
         cost: {
             wood: 0,
             food: 50,

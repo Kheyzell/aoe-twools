@@ -14,11 +14,79 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malay.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const malayTechTree: CivTechTree = {
     id: 'malay',
     name: 'Malay',
     crest,
+    bonuses: [
+        {
+            id: 'malay1',
+            description: 'Advancing in Age is 66% faster',
+            effectType: EffectType.miscallenous,
+            value: 66,
+            affectedUnits: [],
+            affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.casteAge, townCenterUpgrade.imperialAge]
+        },
+        {
+            id: 'malay2',
+            description: 'Fish Traps are 33% cheaper',
+            effectType: EffectType.discount,
+            value: 33,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'malay3',
+            description: 'Fish Traps provide 3 times more food',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'malay4',
+            description: 'Battle Elephants are 30% cheaper in the Castle Age, 40% cheaper in the Imperial Age',
+            effectType: EffectType.discount,
+            value: { age3: 30, age4: 40 },
+            affectedUnits: [stableUnits.eliteBattleElephant],
+            affectedUpgrades: []
+        },
+        {
+            id: 'malay5',
+            description: 'Docks have double Line of Sight',
+            effectType: EffectType.lineOfSightPercent,
+            value: 100,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'thalassocracy',
+            name: 'Thalassocracy',
+            description: 'upgrades Docks to Harbors, which shoot arrows',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'forcedLevy',
+            name: 'Forced Levy',
+            description: 'Turns Militia line gold cost to food cost',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 850, gold: 500, stone: 0 },
+            duration: 40,
+            affectedUnits: [barracksUnits.twoHandedSwordsman],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),

@@ -14,11 +14,79 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/celts.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const celtsTechTree: CivTechTree = {
     id: 'celts',
     name: 'Celts',
     crest,
+    bonuses: [
+        {
+            id: 'celts1',
+            description: 'Infantry units move 15% faster starting from the Feudal Age',
+            effectType: EffectType.movementSpeed,
+            value: { age2: 15, age3: 15, age4: 15 },
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUpgrades: []
+        },
+        {
+            id: 'celts2',
+            description: 'Lumberjacks work 15% faster',
+            effectType: EffectType.miscallenous,
+            value: 15,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'celts3',
+            description: 'Siege weapons fire 25% faster',
+            effectType: EffectType.fireRate,
+            value: 25,
+            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion],
+            affectedUpgrades: []
+        },
+        {
+            id: 'celts4',
+            description: 'Enemy herdables can be converted regardless of enemy units next to them',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'celts5',
+            description: 'Siege Workshops work 20% faster',
+            effectType: EffectType.creationSpeed,
+            value: 20,
+            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'stronghold',
+            name: 'Stronghold',
+            description: 'Castles and towers fire 25% faster',
+            effectType: EffectType.fireRate,
+            value: 25,
+            cost: { wood: 0, food: 250, gold: 200, stone: 0 },
+            duration: 30,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'furorCeltica',
+            name: 'Furor Celtica',
+            description: 'Siege Workshop units have +40% HP',
+            effectType: EffectType.healthPercent,
+            value: 40,
+            cost: { wood: 0, food: 750, gold: 450, stone: 0 },
+            duration: 50,
+            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

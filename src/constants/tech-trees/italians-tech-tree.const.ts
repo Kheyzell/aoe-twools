@@ -14,11 +14,79 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/italians.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const italiansTechTree: CivTechTree = {
     id: 'italians',
     name: 'Italians',
     crest,
+    bonuses: [
+        {
+            id: 'italians1',
+            description: 'Dock and University technologies are 33% cheaper',
+            effectType: EffectType.discount,
+            value: 33,
+            affectedUnits: [dockUnits.galleon, dockUnits.fastFireShip, dockUnits.demotionShip, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: [dockUpgrades.gillnets, dockUpgrades.careening, dockUpgrades.shipwright, dockUpgrades.dryDock, universityUpgrades.masonry, universityUpgrades.fortifiedWall, universityUpgrades.ballistics, universityUpgrades.guardTower, universityUpgrades.heatedShot, universityUpgrades.murderHoles, universityUpgrades.treadmillCrane, universityUpgrades.architecture, universityUpgrades.chemistry, universityUpgrades.bombardTower, universityUpgrades.keep, universityUpgrades.arrowslits]
+        },
+        {
+            id: 'italians2',
+            description: 'Fishing Ships are 15% cheaper',
+            effectType: EffectType.discount,
+            value: 15,
+            affectedUnits: [dockUnits.fishingShip],
+            affectedUpgrades: []
+        },
+        {
+            id: 'italians3',
+            description: 'Gunpowder units are 20% cheaper',
+            effectType: EffectType.discount,
+            value: 20,
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'italians4',
+            description: 'Advancing to the next Age is 15% cheaper',
+            effectType: EffectType.discount,
+            value: 15,
+            affectedUnits: [],
+            affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.casteAge, townCenterUpgrade.imperialAge]
+        },
+        {
+            id: 'italians5',
+            description: 'Condottiero available at the Barracks',
+            effectType: EffectType.uniqueUnit,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        },
+    ],
+    uniqueTechs: [
+        {
+            id: 'pavise',
+            name: 'Pavise',
+            description: 'foot archers (except Skirmishers) and Condottieri +1/+1 armor',
+            effectType: EffectType.armor,
+            value: 1,
+            cost: { wood: 0, food: 300, gold: 150, stone: 0 },
+            duration: 40,
+            affectedUnits: [archeryUnits.arbalester],
+            affectedUpgrades: []
+        },
+        {
+            id: 'silkRoad',
+            name: 'Silk Road',
+            description: 'trade units cost -50%',
+            effectType: EffectType.discount,
+            value: 50,
+            cost: { wood: 0, food: 500, gold: 250, stone: 0 },
+            duration: 60,
+            affectedUnits: [marketUnits.tradeCart],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -81,7 +149,7 @@ export const italiansTechTree: CivTechTree = {
             monasteryUpgrade.faith,
             monasteryUpgrade.illumination,
             monasteryUpgrade.blockPrinting,
-            monasteryUpgrade.theocracy,
+            monasteryUpgrade.theocracy
         ])
     },
     university: {
@@ -98,7 +166,7 @@ export const italiansTechTree: CivTechTree = {
             universityUpgrades.chemistry,
             universityUpgrades.bombardTower,
             universityUpgrades.keep,
-            universityUpgrades.arrowslits,
+            universityUpgrades.arrowslits
         ])
     },
     townCenter: {
@@ -111,7 +179,7 @@ export const italiansTechTree: CivTechTree = {
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,
             townCenterUpgrade.handCart,
-            townCenterUpgrade.townPatrol,
+            townCenterUpgrade.townPatrol
         ])
     },
     lumberCamp: {
@@ -160,7 +228,7 @@ export const italiansTechTree: CivTechTree = {
             dockUpgrades.gillnets,
             dockUpgrades.careening,
             dockUpgrades.shipwright,
-            dockUpgrades.dryDock,
+            dockUpgrades.dryDock
         ])
     }
 }

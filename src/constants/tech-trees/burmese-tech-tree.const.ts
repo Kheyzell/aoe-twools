@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/burmese.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const burmeseTechTree: CivTechTree = {
     id: 'burmese',
     name: 'Burmese',
     crest,
+    bonuses: [
+        {
+            id: 'burmese1',
+            description: 'Lumber Camp upgrades are free',
+            effectType: EffectType.freeUpgrade,
+            value: 50,
+            affectedUnits: [],
+            affectedUpgrades: [lumberCampUpgrades.doubleBitAxe, lumberCampUpgrades.bowSaw, lumberCampUpgrades.twoManSaw]
+        },
+        {
+            id: 'burmese2',
+            description: 'Infantry units have +1/+2/+3 attack in the Feudal/Castle/Imperial Age',
+            effectType: EffectType.damage,
+            value: { age2: 1, age3: 2, age4: 3 },
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUpgrades: []
+        },
+        {
+            id: 'burmese3',
+            description: 'Monastery technologies are 50% cheaper',
+            effectType: EffectType.discount,
+            value: 50,
+            affectedUnits: [],
+            affectedUpgrades: [monasteryUpgrade.redemption, monasteryUpgrade.atonement, monasteryUpgrade.herbalMedecine, monasteryUpgrade.sanctity, monasteryUpgrade.fervor, monasteryUpgrade.faith, monasteryUpgrade.illumination, monasteryUpgrade.blockPrinting, monasteryUpgrade.theocracy]
+        },
+        {
+            id: 'burmese4',
+            description: 'Relics are visible on the map at game start',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        },
+    ],
+    uniqueTechs: [
+        {
+            id: 'howdah',
+            name: 'Howdah',
+            description: 'Battle Elephants +1/+1 armor',
+            effectType: EffectType.armor,
+            value: 1,
+            cost: { wood: 300, food: 400, gold: 0, stone: 0 },
+            duration: 40,
+            affectedUnits: [stableUnits.eliteBattleElephant],
+            affectedUpgrades: []
+        },
+        {
+            id: 'manipurCavalry',
+            name: 'Manipur Cavalry',
+            description: 'cavalry and Arambai +6 attack against standard buildings',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 650, gold: 400, stone: 0 },
+            duration: 40,
+            affectedUnits: [stableUnits.hussar, stableUnits.cavalier, stableUnits.eliteBattleElephant],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -81,7 +141,7 @@ export const burmeseTechTree: CivTechTree = {
             monasteryUpgrade.faith,
             monasteryUpgrade.illumination,
             monasteryUpgrade.blockPrinting,
-            monasteryUpgrade.theocracy,
+            monasteryUpgrade.theocracy
         ])
     },
     university: {
@@ -97,7 +157,7 @@ export const burmeseTechTree: CivTechTree = {
             universityUpgrades.architecture,
             universityUpgrades.chemistry,
             universityUpgrades.siegeEngineers,
-            universityUpgrades.keep,
+            universityUpgrades.keep
         ])
     },
     townCenter: {

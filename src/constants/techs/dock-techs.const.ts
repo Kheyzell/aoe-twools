@@ -1,4 +1,4 @@
-import { Unit, Upgrade } from "../../models/techs.model";
+import { Unit, UnitType, Upgrade } from "../../models/techs.model";
 import { chainTechs } from "../../utils/techs.utils";
 
 interface DockUnits {
@@ -30,6 +30,7 @@ export const dockUnits: DockUnits = {
         id: 'fishingShip',
         name: 'Fishing Ship',
         age: 1,
+        unitType: UnitType.civilian,
         cost: {
             wood: 75,
             food: 0,
@@ -42,6 +43,7 @@ export const dockUnits: DockUnits = {
         id: 'transportShip',
         name: 'Transport Ship',
         age: 1,
+        unitType: UnitType.civilian,
         cost: {
             wood: 255,
             food: 0,
@@ -54,6 +56,7 @@ export const dockUnits: DockUnits = {
         id: 'tradeCog',
         name: 'Trade Cog',
         age: 2,
+        unitType: UnitType.civilian,
         cost: {
             wood: 100,
             food: 0,
@@ -66,6 +69,7 @@ export const dockUnits: DockUnits = {
         id: 'galley',
         name: 'Galley',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 90,
             food: 0,
@@ -78,6 +82,7 @@ export const dockUnits: DockUnits = {
         id: 'fireGalley',
         name: 'Fire Galley',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 75,
             food: 0,
@@ -90,6 +95,7 @@ export const dockUnits: DockUnits = {
         id: 'demolitionRaft',
         name: 'Demolition Raft',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 70,
             food: 0,
@@ -102,6 +108,7 @@ export const dockUnits: DockUnits = {
         id: 'warGalley',
         name: 'War Galley',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 90,
             food: 0,
@@ -114,6 +121,7 @@ export const dockUnits: DockUnits = {
         id: 'fireShip',
         name: 'Fire Ship',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 75,
             food: 0,
@@ -126,6 +134,7 @@ export const dockUnits: DockUnits = {
         id: 'demolitionShip',
         name: 'Demolition Ship',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 70,
             food: 0,
@@ -138,6 +147,7 @@ export const dockUnits: DockUnits = {
         id: 'galleon',
         name: 'Galleon',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 90,
             food: 0,
@@ -150,6 +160,7 @@ export const dockUnits: DockUnits = {
         id: 'fastFireShip',
         name: 'Fast Fire Ship',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 75,
             food: 0,
@@ -162,6 +173,7 @@ export const dockUnits: DockUnits = {
         id: 'heavyDemolitionShip',
         name: 'Heavy Demolition Ship',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 70,
             food: 0,
@@ -174,6 +186,7 @@ export const dockUnits: DockUnits = {
         id: 'cannonGalleon',
         name: 'Cannon Galleon',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 200,
             food: 0,
@@ -186,6 +199,7 @@ export const dockUnits: DockUnits = {
         id: 'eliteCannonGalleon',
         name: 'Elite Cannon Galleon',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 200,
             food: 0,
@@ -208,6 +222,7 @@ export const dockUpgrades: DockUpgrades = {
         id: 'gillnets',
         name: 'Gillnets',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 200,
             food: 150,
@@ -220,6 +235,7 @@ export const dockUpgrades: DockUpgrades = {
         id: 'careening',
         name: 'Careening',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 250,
@@ -232,6 +248,7 @@ export const dockUpgrades: DockUpgrades = {
         id: 'shipwright',
         name: 'Shipwright',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 1000,
@@ -244,6 +261,7 @@ export const dockUpgrades: DockUpgrades = {
         id: 'dryDock',
         name: 'Dry Dock',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 600,

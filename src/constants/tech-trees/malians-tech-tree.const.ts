@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malians.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const maliansTechTree: CivTechTree = {
     id: 'malians',
     name: 'Malians',
     crest,
+    bonuses: [
+        {
+            id: 'malians1',
+            description: 'Buildings cost -15% wood (except Farms)',
+            effectType: EffectType.discount,
+            value: 15,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'malians2',
+            description: 'Barracks units have +1/+2/+3 pierce armor in the Feudal/Castle/Imperial Age',
+            effectType: EffectType.pierceArmor,
+            value: { age2: 1, age3: 2, age4: 3 },
+            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman],
+            affectedUpgrades: []
+        },
+        {
+            id: 'malians3',
+            description: 'Gold Mining is free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [miningCampUpgrades.goldMining]
+        },
+        {
+            id: 'malians4',
+            description: 'Universities research +80% faster',
+            effectType: EffectType.creationSpeed,
+            value: 80,
+            affectedUnits: [],
+            affectedUpgrades: [universityUpgrades.masonry, universityUpgrades.fortifiedWall, universityUpgrades.ballistics, universityUpgrades.guardTower, universityUpgrades.heatedShot, universityUpgrades.murderHoles, universityUpgrades.treadmillCrane, universityUpgrades.architecture, universityUpgrades.chemistry, universityUpgrades.keep],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'tigui',
+            name: 'Tigui',
+            description: 'Town Centers fire arrows even without garrison',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 300, food: 200, gold: 0, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'farimba',
+            name: 'Farimba',
+            description: 'Stable units +5 attack',
+            effectType: EffectType.damage,
+            value: 5,
+            cost: { wood: 0, food: 650, gold: 400, stone: 0 },
+            duration: 40,
+            affectedUnits: [stableUnits.lightCavalry, stableUnits.cavalier, stableUnits.heavyCamelRider],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -97,7 +157,7 @@ export const maliansTechTree: CivTechTree = {
             universityUpgrades.treadmillCrane,
             universityUpgrades.architecture,
             universityUpgrades.chemistry,
-            universityUpgrades.keep,
+            universityUpgrades.keep
         ])
     },
     townCenter: {

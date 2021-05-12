@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/slavs.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const slavsTechTree: CivTechTree = {
     id: 'slavs',
     name: 'Slavs',
     crest,
+    bonuses: [
+        {
+            id: 'slavs1',
+            description: 'Farmers work 10% faster',
+            effectType: EffectType.miscallenous,
+            value: 10,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'slavs2',
+            description: 'Supplies is free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [barracksUpgrade.supplies]
+        },
+        {
+            id: 'slavs3',
+            description: 'Siege Workshop units are 15% cheaper',
+            effectType: EffectType.discount,
+            value: 15,
+            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
+            affectedUpgrades: []
+        },
+        {
+            id: 'slavs4',
+            description: 'Military buildings (excluding Castles and Docks) provide +5 population',
+            effectType: EffectType.miscallenous,
+            value: 5,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'orthodoxy',
+            name: 'Orthodoxy',
+            description: '+3/+3 armor for Monks',
+            effectType: EffectType.armor,
+            value: 3,
+            cost: { wood: 0, food: 200, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [monasteryUnits.monk],
+            affectedUpgrades: []
+        },
+        {
+            id: 'druzhina',
+            name: 'Druzhina',
+            description: 'infantry damage adjacent units',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 1200, gold: 500, stone: 0 },
+            duration: 40,
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

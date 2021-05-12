@@ -14,11 +14,87 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/saracens.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const saracensTechTree: CivTechTree = {
     id: 'saracens',
     name: 'Saracens',
     crest,
+    bonuses: [
+        {
+            id: 'saracens1',
+            description: 'The commodity trading fee is 5%',
+            effectType: EffectType.miscallenous,
+            value: 5,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'saracens2',
+            description: 'Markets cost -100 wood',
+            effectType: EffectType.discoutWoodValue,
+            value: 100,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'saracens3',
+            description: 'Transport Ships have double HP and +5 carry capacity',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [dockUnits.transportShip],
+            affectedUpgrades: []
+        },
+        {
+            id: 'saracens4',
+            description: 'Galleys attack 25% faster',
+            effectType: EffectType.fireRate,
+            value: 25,
+            affectedUnits: [dockUnits.galleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'saracens5',
+            description: 'Camel units +10 HP',
+            effectType: EffectType.health,
+            value: 10,
+            affectedUnits: [stableUnits.heavyCamelRider],
+            affectedUpgrades: []
+        },
+        {
+            id: 'saracens6',
+            description: 'Foot archers have +2 attack against standard buildings',
+            effectType: EffectType.miscallenous,
+            value: 2,
+            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'madrasah',
+            name: 'Madrasah',
+            description: `33% of a Monk's gold cost are returned if the Monk gets killed`,
+            effectType: EffectType.miscallenous,
+            value: 33,
+            cost: { wood: 0, food: 200, gold: 100, stone: 0 },
+            duration: 30,
+            affectedUnits: [monasteryUnits.monk],
+            affectedUpgrades: []
+        },
+        {
+            id: 'zealotry',
+            name: 'Zealotry',
+            description: 'Camel Riders and Mamelukes +20 hit points',
+            effectType: EffectType.health,
+            value: 20,
+            cost: { wood: 0, food: 500, gold: 450, stone: 0 },
+            duration: 50,
+            affectedUnits: [stableUnits.heavyCamelRider],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

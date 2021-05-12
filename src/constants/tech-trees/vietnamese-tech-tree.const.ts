@@ -14,11 +14,86 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/vietnamese.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const vietnameseTechTree: CivTechTree = {
     id: 'vietnamese',
     name: 'Vietnamese',
     crest,
+    bonuses: [
+        {
+            id: 'vietnamese1',
+            description: 'Reveal enemy positions at game start',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'vietnamese2',
+            description: 'Archery Range units have +20% HP',
+            effectType: EffectType.healthPercent,
+            value: 20,
+            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'vietnamese3',
+            description: 'Conscription is free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [castleUpgrades.conscription]
+        },
+        {
+            id: 'vietnamese4',
+            description: 'Economic upgrades cost no wood',
+            effectType: EffectType.discoutWood,
+            value: 100,
+            affectedUnits: [],
+            affectedUpgrades: [
+                townCenterUpgrade.wheelbarrow, townCenterUpgrade.handCart,
+                lumberCampUpgrades.doubleBitAxe, lumberCampUpgrades.bowSaw, lumberCampUpgrades.twoManSaw,
+                millUpgrades.horseColar, millUpgrades.heavyPlow, millUpgrades.cropRotation,
+                miningCampUpgrades.goldMining, miningCampUpgrades.stoneMining, miningCampUpgrades.goldShaftMining, miningCampUpgrades.stoneShaftMining,
+                marketUpgrade.caravan, marketUpgrade.guilds,
+                dockUpgrades.gillnets
+            ]
+        },
+        {
+            id: 'vietnamese5',
+            description: ' Imperial Skirmisher available at the Archery Range',
+            effectType: EffectType.uniqueUnit,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        },
+    ],
+    uniqueTechs: [
+        {
+            id: 'chatras',
+            name: 'Chatras',
+            description: 'Battle Elephants +50 hit points',
+            effectType: EffectType.health,
+            value: 50,
+            cost: { wood: 0, food: 250, gold: 250, stone: 0 },
+            duration: 40,
+            affectedUnits: [stableUnits.eliteBattleElephant],
+            affectedUpgrades: []
+        },
+        {
+            id: 'paperMoney',
+            name: 'Paper Money',
+            description: 'tributes 500 gold to each ally',
+            effectType: EffectType.miscallenous,
+            value: 500,
+            cost: { wood: 500, food: 500, gold: 0, stone: 0 },
+            duration: 60,
+            affectedUnits: [],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
