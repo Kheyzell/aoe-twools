@@ -14,11 +14,95 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/turks.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const turksTechTree: CivTechTree = {
     id: 'turks',
     name: 'Turks',
     crest,
+    bonuses: [
+        {
+            id: 'turks1',
+            description: 'Gunpowder units have +25% HP',
+            effectType: EffectType.healthPercent,
+            value: 25,
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'turks2',
+            description: 'Gunpowder technologies are 50% cheaper',
+            effectType: EffectType.discount,
+            value: 50,
+            affectedUnits: [dockUnits.eliteCannonGalleon],
+            affectedUpgrades: [universityUpgrades.bombardTower]
+        },
+        {
+            id: 'turks3',
+            description: 'Chemistry is free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [universityUpgrades.chemistry]
+        },
+        {
+            id: 'turks4',
+            description: 'Gold Miners work 20% faster',
+            effectType: EffectType.miscallenous,
+            value: 20,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'turks5',
+            description: 'Light Cavalry and Hussar upgrades are free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [stableUnits.hussar],
+            affectedUpgrades: []
+        },
+        {
+            id: 'turks6',
+            description: 'Scout Cavalry line gain +1 pierce armor',
+            effectType: EffectType.pierceArmor,
+            value: 1,
+            affectedUnits: [stableUnits.hussar],
+            affectedUpgrades: []
+        },
+        {
+            id: 'turks7',
+            description: 'Gunpowder units are created 25% faster',
+            effectType: EffectType.creationSpeed,
+            value: 25,
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'sipahi',
+            name: 'Sipahi',
+            description: 'Cavalry Archer units +20 hit points',
+            effectType: EffectType.health,
+            value: 20,
+            cost: { wood: 0, food: 350, gold: 150, stone: 0 },
+            duration: 60,
+            affectedUnits: [archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'artillery',
+            name: 'Artillery',
+            description: '+2 range for Bombard Towers, Bombard Cannons, Cannon Galleons',
+            effectType: EffectType.range,
+            value: 2,
+            cost: { wood: 0, food: 0, gold: 500, stone: 450 },
+            duration: 40,
+            affectedUnits: [siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/huns.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const hunsTechTree: CivTechTree = {
     id: 'huns',
     name: 'Huns',
     crest,
+    bonuses: [
+        {
+            id: 'huns1',
+            description: 'Do not need Houses, but start game with -100 wood',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'huns2',
+            description: 'Cavalry Archers are 10%/20% cheaper in the Castle/Imperial Age',
+            effectType: EffectType.discount,
+            value: { age3: 10, age4: 20 },
+            affectedUnits: [archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'huns3',
+            description: 'Trebuchets are 30% more accurate',
+            effectType: EffectType.accuracy,
+            value: 30,
+            affectedUnits: [castleUnits.trebuchet],
+            affectedUpgrades: []
+        },
+        {
+            id: 'huns4',
+            description: 'Stables work 20% faster',
+            effectType: EffectType.creationSpeed,
+            value: 20,
+            affectedUnits: [stableUnits.hussar, stableUnits.paladin],
+            affectedUpgrades: [stableUpgrades.bloodlines, stableUpgrades.husbandry],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'marauders',
+            name: 'Marauders',
+            description: 'create Tarkans at Stables',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 300, food: 0, gold: 200, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'atheism',
+            name: 'Atheism',
+            description: '+100 years for Relic/Wonder victories; enemy Relic gold generation reduced by 50%',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 500, gold: 500, stone: 0 },
+            duration: 60,
+            affectedUnits: [],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),

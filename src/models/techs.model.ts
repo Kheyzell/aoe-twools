@@ -1,7 +1,11 @@
+import { Bonus, UniqueTech } from "./bonus.model"
+
 export enum TechType {
     unit = 'unit',
     upgrade = 'upgrade'
 }
+
+export enum UnitType { civilian, military }
 
 export interface Tech {
     id: string
@@ -28,8 +32,10 @@ export class Unit implements Tech {
     cost: Cost
     duration: number
     type: TechType
+    unitType: UnitType
     previousLineTech?: Unit
     nextLineTech?: Unit
+    affectingUpgrades?: Tech[]
     isSelected?: boolean
 
     constructor(data: any) {
@@ -39,8 +45,10 @@ export class Unit implements Tech {
         this.age = data.age
         this.cost = data.cost
         this.duration = data.duration
+        this.unitType = data.unitType
         this.previousLineTech = data.previousLineTech
         this.nextLineTech = data.nextLineTech
+        this.affectingUpgrades = data.affectingUpgrades
     }
 }
 
@@ -71,6 +79,8 @@ export interface CivTechTree {
     id: string;
     name: string;
     crest?: string;
+    bonuses: Bonus[]
+    uniqueTechs: UniqueTech[]
     barracks: GroupTechTree,
     archery: GroupTechTree,
     stable: GroupTechTree,
@@ -105,8 +115,10 @@ export class UnitLine implements LineTechTree {
     age2: Unit[] = []
     age3: Unit[] = []
     age4: Unit[] = []
+    list: Unit[] = []
 
     constructor(units: Unit[]) {
+        this.list = units
         units.forEach(unit => {
             switch (unit.age) {
                 case 1:
@@ -131,8 +143,10 @@ export class UpgradePerAgeGroup implements LineTechTree {
     age2: Upgrade[] = []
     age3: Upgrade[] = []
     age4: Upgrade[] = []
+    list: Upgrade[] = []
 
     constructor(upgrades: Upgrade[]) {
+        this.list = upgrades
         upgrades.forEach(upgrade => {
             switch (upgrade.age) {
                 case 1:

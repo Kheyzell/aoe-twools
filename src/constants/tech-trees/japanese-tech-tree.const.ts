@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/japanese.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const japaneseTechTree: CivTechTree = {
     id: 'japanese',
     name: 'Japanese',
     crest,
+    bonuses: [
+        {
+            id: 'japanese1',
+            description: 'Fishing Ships have double HP, +2 pierce armor, and work 5%/10%/15%/20% faster in the Dark/Feudal/Castle/Imperial Age',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [dockUnits.fishingShip],
+            affectedUpgrades: []
+        },
+        {
+            id: 'japanese2',
+            description: 'Mills, Lumber Camps, and Mining Camps are 50% cheaper',
+            effectType: EffectType.discount,
+            value: 50,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'japanese3',
+            description: 'Infantry attack 33% faster starting in the Feudal Age',
+            effectType: EffectType.fireRate,
+            value: 33,
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUpgrades: []
+        },
+        {
+            id: 'japanese4',
+            description: 'Galleys have +50% Line of Sight',
+            effectType: EffectType.lineOfSightPercent,
+            value: 50,
+            affectedUnits: [dockUnits.galleon],
+            affectedUpgrades: [],
+            team: true
+        },
+    ],
+    uniqueTechs: [
+        {
+            id: 'yasama',
+            name: 'Yasama',
+            description: 'towers fire 2 extra arrows',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 300, food: 300, gold: 0, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'kataparuto',
+            name: 'Kataparuto',
+            description: 'Trebuchets fire 33% and pack 4x faster',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 750, food: 0, gold: 400, stone: 0 },
+            duration: 60,
+            affectedUnits: [castleUnits.trebuchet],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

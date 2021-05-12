@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/lithuanians.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const lithuaniansTechTree: CivTechTree = {
     id: 'lithuanians',
     name: 'Lithuanians',
     crest,
+    bonuses: [
+        {
+            id: 'lithuanians1',
+            description: 'Start the game with +150 food',
+            effectType: EffectType.miscallenous,
+            value: 150,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'lithuanians2',
+            description: 'Spearman and Skirmisher lines move 10% faster',
+            effectType: EffectType.movementSpeed,
+            value: 10,
+            affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'lithuanians3',
+            description: 'Each garrisoned Relic gives +1 attack to Knights and Leitis (maximum +4)',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [stableUnits.paladin],
+            affectedUpgrades: []
+        },
+        {
+            id: 'lithuanians4',
+            description: 'Monasteries work 20% faster',
+            effectType: EffectType.creationSpeed,
+            value: 20,
+            affectedUnits: [monasteryUnits.monk],
+            affectedUpgrades: [monasteryUpgrade.redemption, monasteryUpgrade.atonement, monasteryUpgrade.herbalMedecine, monasteryUpgrade.heresy, monasteryUpgrade.sanctity, monasteryUpgrade.fervor, monasteryUpgrade.faith, monasteryUpgrade.illumination, monasteryUpgrade.blockPrinting, monasteryUpgrade.theocracy],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'hillForts',
+            name: 'Hill Forts',
+            description: 'Town Centers +3 range',
+            effectType: EffectType.range,
+            value: 3,
+            cost: { wood: 0, food: 250, gold: 250, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'towerShields',
+            name: 'Tower Shields',
+            description: 'Spearman line and Skirmishers +2 pierce armor',
+            effectType: EffectType.pierceArmor,
+            value: 2,
+            cost: { wood: 0, food: 500, gold: 200, stone: 0 },
+            duration: 40,
+            affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -82,7 +142,7 @@ export const lithuaniansTechTree: CivTechTree = {
             monasteryUpgrade.faith,
             monasteryUpgrade.illumination,
             monasteryUpgrade.blockPrinting,
-            monasteryUpgrade.theocracy,
+            monasteryUpgrade.theocracy
         ])
     },
     university: {

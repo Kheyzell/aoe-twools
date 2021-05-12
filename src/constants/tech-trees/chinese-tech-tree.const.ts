@@ -14,11 +14,38 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/chinese.png'
+import { EffectType } from "../../models/bonus.model";
+import { getAllCivUpgrades } from "../../utils/techs.utils";
 
 export const chineseTechTree: CivTechTree = {
     id: 'chinese',
     name: 'Chinese',
     crest,
+    bonuses: [],
+    uniqueTechs: [
+        {
+            id: 'greatWall',
+            name: 'Great Wall',
+            description: 'Walls and towers +30% HP',
+            effectType: EffectType.healthPercent,
+            value: 30,
+            cost: { wood: 400, food: 0, gold: 0, stone: 200 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'rocketry',
+            name: 'Rocketry',
+            description: 'Chu Ko Nu +2, Scorpions +4 attack',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 600, food: 0, gold: 600, stone: 0 },
+            duration: 60,
+            affectedUnits: [siegeUnits.heavyScorpion],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -160,3 +187,47 @@ export const chineseTechTree: CivTechTree = {
         ])
     }
 }
+
+chineseTechTree.bonuses = [
+    {
+        id: 'chinese1',
+        description: 'Start game with three extra Villagers, but with -200 food and -50 wood',
+        effectType: EffectType.miscallenous,
+        value: null,
+        affectedUnits: [townCenterUnits.villager],
+        affectedUpgrades: []
+    },
+    {
+        id: 'chinese2',
+        description: 'Town Centers support ten population and have +5 LOS',
+        effectType: EffectType.lineOfSight,
+        value: 5,
+        affectedUnits: [],
+        affectedUpgrades: []
+    },
+    {
+        id: 'chinese3',
+        description: 'Technologies are 10%/15%/20% cheaper in the Feudal/Castle/Imperial Age',
+        effectType: EffectType.discount,
+        value: { age2: 10, age3: 15, age4: 20 },
+        affectedUnits: [],
+        affectedUpgrades: getAllCivUpgrades(chineseTechTree)
+    },
+    {
+        id: 'chinese4',
+        description: 'Demolition Ships have +50% HP',
+        effectType: EffectType.healthPercent,
+        value: 50,
+        affectedUnits: [dockUnits.heavyDemolitionShip],
+        affectedUpgrades: []
+    },
+    {
+        id: 'chinese5',
+        description: 'Farms provide +45 food',
+        effectType: EffectType.miscallenous,
+        value: 45,
+        affectedUnits: [],
+        affectedUpgrades: [],
+        team: true
+    }
+]

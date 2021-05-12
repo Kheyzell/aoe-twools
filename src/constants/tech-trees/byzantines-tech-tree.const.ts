@@ -14,11 +14,87 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/byzantines.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const byzantinesTechTree: CivTechTree = {
     id: 'byzantines',
     name: 'Byzantines',
     crest,
+    bonuses: [
+        {
+            id: 'byzantines1',
+            description: 'Buildings have +10%/+20%/+30%/+40% HP in the Dark/Feudal/Castle/Imperial Age',
+            effectType: EffectType.healthPercent,
+            value: { age1: 10, age2: 20, age3: 30, age4: 40 },
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'byzantines2',
+            description: 'Camel Riders, Skirmishers, and Spearmen are 25% cheaper',
+            effectType: EffectType.discount,
+            value: 25,
+            affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher, stableUnits.heavyCamelRider],
+            affectedUpgrades: []
+        },
+        {
+            id: 'byzantines3',
+            description: 'Fire Ships fire 25% faster',
+            effectType: EffectType.fireRate,
+            value: 25,
+            affectedUnits: [dockUnits.fastFireShip],
+            affectedUpgrades: []
+        },
+        {
+            id: 'byzantines4',
+            description: 'Advancing to the Imperial Age is 33% cheaper',
+            effectType: EffectType.discount,
+            value: 33,
+            affectedUnits: [],
+            affectedUpgrades: [townCenterUpgrade.imperialAge]
+        },
+        {
+            id: 'byzantines5',
+            description: 'Town Watch is free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [townCenterUpgrade.townWatch]
+        },
+        {
+            id: 'byzantines6',
+            description: 'Monks heal 50% faster',
+            effectType: EffectType.miscallenous,
+            value: 50,
+            affectedUnits: [monasteryUnits.monk],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'greekFire',
+            name: 'Greek Fire',
+            description: 'Fire Ships +1 range',
+            effectType: EffectType.range,
+            value: 1,
+            cost: { wood: 0, food: 250, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [dockUnits.fastFireShip],
+            affectedUpgrades: []
+        },
+        {
+            id: 'logistica',
+            name: 'Logistica',
+            description: 'Cataphracts deal trample damage and +6 attack against infantry',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 800, gold: 600, stone: 0 },
+            duration: 50,
+            affectedUnits: [],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

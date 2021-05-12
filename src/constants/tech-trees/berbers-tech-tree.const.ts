@@ -14,11 +14,72 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/berbers.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const berbersTechTree: CivTechTree = {
     id: 'berbers',
     name: 'Berbers',
     crest,
+    bonuses: [
+        {
+            id: 'berbers1',
+            description: 'Villagers move +10% faster',
+            effectType: EffectType.movementSpeed,
+            value: 10,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'berbers2',
+            description: 'Stable units are 15%/20% cheaper in the Castle/Imperial Age',
+            effectType: EffectType.discount,
+            value: { age3: 15, age4: 20 },
+            affectedUnits: [stableUnits.hussar, stableUnits.cavalier, stableUnits.heavyCamelRider],
+            affectedUpgrades: []
+        },
+        {
+            id: 'berbers3',
+            description: 'Ships move +10% faster',
+            effectType: EffectType.movementSpeed,
+            value: 10,
+            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fastFireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'berbers4',
+            description: 'Genitour available at the Archery Range',
+            effectType: EffectType.uniqueUnit,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'kasbah',
+            name: 'Kasbah',
+            description: 'team Castles work +25% faster',
+            effectType: EffectType.creationSpeed,
+            value: 25,
+            cost: { wood: 0, food: 250, gold: 250, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: [castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies],
+            team: true
+        },
+        {
+            id: 'maghrebiCamels',
+            name: 'Maghrebi Camels',
+            description: 'camel troops regenerate (15HP/min)',
+            effectType: EffectType.regen,
+            value: 15,
+            cost: { wood: 0, food: 700, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [stableUnits.heavyCamelRider],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

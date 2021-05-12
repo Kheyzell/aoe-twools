@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/britons.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const britonsTechTree: CivTechTree = {
     id: 'britons',
     name: 'Britons',
     crest,
+    bonuses: [
+        {
+            id: 'britons1',
+            description: 'Town Centers cost -50% wood once the Castle Age is reached',
+            effectType: EffectType.discoutWood,
+            value: { age3: 50, age4: 50 },
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'britons2',
+            description: 'Foot archers (except Skirmishers) have +1/+2 range in the Castle/Imperial Age',
+            effectType: EffectType.range,
+            value: { age3: 1, age4: 2 },
+            affectedUnits: [archeryUnits.arbalester],
+            affectedUpgrades: []
+        },
+        {
+            id: 'britons3',
+            description: 'Shepherds work 25% faster',
+            effectType: EffectType.miscallenous,
+            value: 25,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'britons4',
+            description: 'Archery Ranges work 20% faster',
+            effectType: EffectType.creationSpeed,
+            value: 20,
+            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'yeomen',
+            name: 'Yeomen',
+            description: '+1 range for foot archers and +2 attack for towers',
+            effectType: EffectType.range,
+            value: 1,
+            cost: { wood: 750, food: 0, gold: 450, stone: 0 },
+            duration: 60,
+            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'warwolf',
+            name: 'Warwolf',
+            description: 'Trebuchets do blast damage and have 100% accuracy',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 800, food: 0, gold: 400, stone: 0 },
+            duration: 40,
+            affectedUnits: [castleUnits.trebuchet],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

@@ -14,11 +14,78 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/incas.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const incasTechTree: CivTechTree = {
     id: 'incas',
     name: 'Incas',
     crest,
+    bonuses: [
+        {
+            id: 'incas1',
+            description: 'Start with a free Llama',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'incas2',
+            description: 'Villagers benefit from Blacksmith infantry upgrades starting in the Castle Age',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'incas3',
+            description: 'Houses support 10 population',
+            effectType: EffectType.miscallenous,
+            value: 10,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'incas4',
+            description: 'Buildings cost -15% stone',
+            effectType: EffectType.discoutStone,
+            value: 15,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'incas5',
+            description: 'Farms are built 100% faster',
+            effectType: EffectType.miscallenous,
+            value: 100,
+            affectedUnits: [],
+            affectedUpgrades: []
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'andeanSling',
+            name: 'Andean Sling',
+            description: 'Slingers and Skirmisher have no minimum range',
+            effectType: EffectType.minimumRange,
+            value: 0,
+            cost: { wood: 0, food: 200, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [archeryUnits.eliteSkirmisher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'fabricShields',
+            name: 'Fabric Shields',
+            description: 'Kamayuks, Slingers, and Eagle Warriors +1/+2 armor',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 600, gold: 600, stone: 0 },
+            duration: 60,
+            affectedUnits: [barracksUnits.eliteEagleWarrior],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

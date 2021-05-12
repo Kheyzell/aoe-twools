@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/ethiopians.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const ethiopiansTechTree: CivTechTree = {
     id: 'ethiopians',
     name: 'Ethiopians',
     crest,
+    bonuses: [
+        {
+            id: 'ethiopians1',
+            description: 'The Archer line fires 18% faster',
+            effectType: EffectType.fireRate,
+            value: 18,
+            affectedUnits: [archeryUnits.arbalester],
+            affectedUpgrades: []
+        },
+        {
+            id: 'ethiopians2',
+            description: 'Receive 100 gold and 100 food when advancing to the next Age',
+            effectType: EffectType.miscallenous,
+            value: 100,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'ethiopians3',
+            description: 'The Pikeman upgrade is free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [barracksUnits.pikeman],
+            affectedUpgrades: []
+        },
+        {
+            id: 'ethiopians4',
+            description: 'Towers and Outposts have +3 LOS',
+            effectType: EffectType.lineOfSight,
+            value: 3,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'royalHeirs',
+            name: 'Royal Heirs',
+            description: 'halves Shotel Warrior training time',
+            effectType: EffectType.creationSpeed,
+            value: 100,
+            cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'torsionEngines',
+            name: 'Torsion Engines',
+            description: `Siege Workshop units' blast radius increased`,
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 1000, gold: 600, stone: 0 },
+            duration: 40,
+            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.bombardCannon],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),

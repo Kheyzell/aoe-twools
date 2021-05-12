@@ -1,4 +1,4 @@
-import { Unit, Upgrade } from "../../models/techs.model";
+import { Unit, UnitType, Upgrade } from "../../models/techs.model";
 import { chainTechs } from "../../utils/techs.utils";
 
 interface MarketUnits {
@@ -17,6 +17,7 @@ export const marketUnits: MarketUnits = {
         id: 'tradeCart',
         name: 'Trade Cart',
         age: 2,
+        unitType: UnitType.civilian,
         cost: {
             wood: 100,
             food: 0,

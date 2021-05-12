@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/vikings.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const vikingsTechTree: CivTechTree = {
     id: 'vikings',
     name: 'Vikings',
     crest,
+    bonuses: [
+        {
+            id: 'vikings1',
+            description: 'Warships are 15%/15%/20% cheaper in the Feudal/Castle/Imperial Age',
+            effectType: EffectType.discount,
+            value: { age2: 15, age3: 15, age4: 20 },
+            affectedUnits: [dockUnits.galleon, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'vikings2',
+            description: 'Infantry have +10%/+15%/+20% HP in the Feudal/Castle/Imperial Age',
+            effectType: EffectType.healthPercent,
+            value: { age2: 10, age3: 15, age4: 20 },
+            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman],
+            affectedUpgrades: []
+        },
+        {
+            id: 'vikings3',
+            description: 'Wheelbarrow and Hand Cart are free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [townCenterUpgrade.wheelbarrow, townCenterUpgrade.handCart]
+        },
+        {
+            id: 'vikings4',
+            description: 'Docks are 15% cheaper',
+            effectType: EffectType.discount,
+            value: 15,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'chieftains',
+            name: 'Chieftains',
+            description: 'Infantry +5 attack against cavalry and +4 attack against camels',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 700, gold: 500, stone: 0 },
+            duration: 40,
+            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman],
+            affectedUpgrades: []
+        },
+        {
+            id: 'berserkergang',
+            name: 'Berserkergang',
+            description: 'Berserks regenerate faster (40HP/min)',
+            effectType: EffectType.regen,
+            value: 40,
+            cost: { wood: 0, food: 850, gold: 400, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

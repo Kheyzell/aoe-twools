@@ -13,11 +13,38 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/aztecs.png'
+import { Bonus, EffectType } from "../../models/bonus.model";
+import { getAllCivMilitaryUnits } from "../../utils/techs.utils";
 
 export const aztecsTechTree: CivTechTree = {
     id: 'aztecs',
     name: 'Aztecs',
     crest,
+    bonuses: [],
+    uniqueTechs: [
+        {
+            id: 'atlatl',
+            name: 'Atlatl',
+            description: 'Skirmishers +1 attack, +1 range',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 400, gold: 350, stone: 0 },
+            duration: 40,
+            affectedUnits: [archeryUnits.eliteSkirmisher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'garlandWars',
+            name: 'Garland Wars',
+            description: '+4 infantry attack',
+            effectType: EffectType.damage,
+            value: 4,
+            cost: { wood: 0, food: 450, gold: 750, stone: 0 },
+            duration: 60,
+            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, barracksUnits.eagleWarrior],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -150,3 +177,50 @@ export const aztecsTechTree: CivTechTree = {
         ])
     }
 }
+
+const bonuses: Bonus[] = [
+    {
+        id: 'aztecs1',
+        description: 'Villagers carry +3 extra resources',
+        effectType: EffectType.miscallenous,
+        value: null,
+        affectedUnits: [townCenterUnits.villager],
+        affectedUpgrades: []
+    },
+    {
+        id: 'aztecs2',
+        description: 'All military units are created 11% faster',
+        effectType: EffectType.creationSpeed,
+        value: 11,
+        affectedUnits: getAllCivMilitaryUnits(aztecsTechTree),
+        affectedUpgrades: [],
+        hideInUnitRecap: true
+    },
+    {
+        id: 'aztecs3',
+        description: 'Monks gain 5 HP for every researched Monastery technology',
+        effectType: EffectType.miscallenous,
+        value: 5,
+        affectedUnits: [monasteryUnits.monk],
+        affectedUpgrades: []
+    },
+    {
+        id: 'aztecs4',
+        description: 'Start with +50 gold',
+        effectType: EffectType.resourceGold,
+        value: 50,
+        affectedUnits: [],
+        affectedUpgrades: []
+    },
+    {
+        id: 'aztecs5',
+        description: 'Relics generate +33% gold',
+        effectType: EffectType.miscallenous,
+        value: 33,
+        affectedUnits: [],
+        affectedUpgrades: [],
+        team: true
+    }
+]
+
+aztecsTechTree.bonuses = bonuses

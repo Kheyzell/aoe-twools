@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/magyars.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const magyarsTechTree: CivTechTree = {
     id: 'magyars',
     name: 'Magyars',
     crest,
+    bonuses: [
+        {
+            id: 'magyars1',
+            description: 'Forging, Iron Casting, and Blast Furnace are free',
+            effectType: EffectType.freeUpgrade,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace]
+        },
+        {
+            id: 'magyars2',
+            description: 'The Scout Cavalry line is 15% cheaper',
+            effectType: EffectType.discount,
+            value: 15,
+            affectedUnits: [stableUnits.hussar],
+            affectedUpgrades: []
+        },
+        {
+            id: 'magyars3',
+            description: 'Villagers kill wild animals in one strike',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'magyars4',
+            description: 'Foot archers have +2 Line of Sight',
+            effectType: EffectType.lineOfSight,
+            value: 2,
+            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'corvinianArmy',
+            name: 'Corvinian Army',
+            description: 'Magyar Huszars cost no gold',
+            effectType: EffectType.discoutGold,
+            value: 100,
+            cost: { wood: 0, food: 200, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'recurveBow',
+            name: 'Recurve Bow',
+            description: 'Cavalry Archers + 1 range and attack',
+            effectType: EffectType.miscallenous,
+            value: 1,
+            cost: { wood: 600, food: 0, gold: 400, stone: 0 },
+            duration: 40,
+            affectedUnits: [archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

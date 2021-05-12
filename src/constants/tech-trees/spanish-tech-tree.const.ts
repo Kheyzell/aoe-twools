@@ -14,11 +14,85 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/spanish.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const spanishTechTree: CivTechTree = {
     id: 'spanish',
     name: 'Spanish',
     crest,
+    bonuses: [
+        {
+            id: 'spanish1',
+            description: 'Builders work 30% faster',
+            effectType: EffectType.constructionSpeed,
+            value: 30,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'spanish2',
+            description: 'Blacksmith upgrades cost no gold',
+            effectType: EffectType.discoutGold,
+            value: 100,
+            affectedUnits: [],
+            affectedUpgrades: [
+                blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+                blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+                blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+                blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
+                blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor
+            ]
+        },
+        {
+            id: 'spanish3',
+            description: 'Cannon Galleons have better accuracy and faster cannonballs',
+            effectType: EffectType.accuracy,
+            value: null,
+            affectedUnits: [dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'spanish4',
+            description: 'Hand Cannoneers and Bombard Cannons fire 18% faster',
+            effectType: EffectType.fireRate,
+            value: 18,
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'spanish5',
+            description: 'Trade units generate +25% gold',
+            effectType: EffectType.miscallenous,
+            value: 25,
+            affectedUnits: [marketUnits.tradeCart],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'inquisition',
+            name: 'Inquisition',
+            description: 'conversion rate improved',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 100, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [monasteryUnits.monk],
+            affectedUpgrades: []
+        },
+        {
+            id: 'supremacy',
+            name: 'Supremacy',
+            description: 'increased attack (+6), armor (+2/+2), and HP (+40) for Villagers',
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 400, gold: 250, stone: 0 },
+            duration: 60,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

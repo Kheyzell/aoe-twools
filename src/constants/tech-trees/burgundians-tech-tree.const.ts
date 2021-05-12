@@ -14,11 +14,86 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/burgundians.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const burgundiansTechTree: CivTechTree = {
     id: 'burgundians',
     name: 'Burgundians',
     crest,
+    bonuses: [
+        {
+            id: 'burgundians1',
+            description: 'Economic upgrades cost -50% food and are available one Age earlier than other civilizations',
+            effectType: EffectType.miscallenous,
+            value: 50,
+            affectedUnits: [],
+            affectedUpgrades: [
+                townCenterUpgrade.wheelbarrow, townCenterUpgrade.handCart,
+                lumberCampUpgrades.doubleBitAxe, lumberCampUpgrades.bowSaw, lumberCampUpgrades.twoManSaw,
+                millUpgrades.horseColar, millUpgrades.heavyPlow, millUpgrades.cropRotation,
+                miningCampUpgrades.goldMining, miningCampUpgrades.stoneMining, miningCampUpgrades.goldShaftMining, miningCampUpgrades.stoneShaftMining,
+                marketUpgrade.caravan, marketUpgrade.guilds,
+                dockUpgrades.gillnets
+            ]
+        },
+        {
+            id: 'burgundians2',
+            description: 'Stable technologies are 50% cheaper',
+            effectType: EffectType.discount,
+            value: 50,
+            affectedUnits: [stableUnits.hussar, stableUnits.paladin],
+            affectedUpgrades: []
+        },
+        {
+            id: 'burgundians3',
+            description: 'Gunpowder units gain a +25% bonus to their attack',
+            effectType: EffectType.damagePercent,
+            value: 25,
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'burgundians4',
+            description: 'Cavalier upgrade available in the Castle Age',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [stableUnits.paladin],
+            affectedUpgrades: []
+        },
+        {
+            id: 'burgundians5',
+            description: 'Relics generate both gold and food at the same rate',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'burgundianVineyards',
+            name: 'Burgundian Vineyards',
+            description: `Transforms half of the player's food into gold at a 2:1 ratio. Farmers slowly produce gold (about 0.012 gold/s)`,
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 400, gold: 300, stone: 0 },
+            duration: 45,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'flemishRevolution',
+            name: 'Flemish Revolution',
+            description: `Transforms player's Villagers into Flemish Militia. Flemish Militia becomes trainable at the Town Center`,
+            effectType: EffectType.miscallenous,
+            value: null,
+            cost: { wood: 0, food: 800, gold: 450, stone: 0 },
+            duration: 10,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -125,7 +200,7 @@ export const burgundiansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             millUpgrades.horseColar,
             millUpgrades.heavyPlow,
-            millUpgrades.cropRotation,
+            millUpgrades.cropRotation
         ])
     },
     miningCamp: {
@@ -134,7 +209,7 @@ export const burgundiansTechTree: CivTechTree = {
             miningCampUpgrades.goldMining,
             miningCampUpgrades.stoneMining,
             miningCampUpgrades.goldShaftMining,
-            miningCampUpgrades.stoneShaftMining,
+            miningCampUpgrades.stoneShaftMining
         ])
     },
     market: {
@@ -143,7 +218,7 @@ export const burgundiansTechTree: CivTechTree = {
             marketUpgrade.coinage,
             marketUpgrade.caravan,
             marketUpgrade.banking,
-            marketUpgrade.guilds,
+            marketUpgrade.guilds
         ])
     },
     dock: {

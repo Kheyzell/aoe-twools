@@ -1,4 +1,4 @@
-import { Unit, Upgrade } from "../../models/techs.model";
+import { Unit, UnitType, Upgrade } from "../../models/techs.model";
 import { chainTechs } from "../../utils/techs.utils";
 
 interface SiegeUnits {
@@ -19,6 +19,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'batteringRam',
         name: 'Battering Ram',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 160,
             food: 0,
@@ -31,6 +32,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'cappedRam',
         name: 'Capped Ram',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 160,
             food: 0,
@@ -43,6 +45,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'siegeRam',
         name: 'Siege Ram',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 160,
             food: 0,
@@ -55,6 +58,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'mangonel',
         name: 'Mangonel',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 160,
             food: 60,
@@ -67,6 +71,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'onager',
         name: 'Onager',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 160,
             food: 60,
@@ -79,6 +84,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'siegeOnager',
         name: 'Siege Onager',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 160,
             food: 60,
@@ -91,6 +97,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'scorpion',
         name: 'Scorpion',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 75,
             food: 0,
@@ -103,6 +110,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'heavyScorpion',
         name: 'Heavy Scorpion',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 75,
             food: 0,
@@ -115,6 +123,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'siegeTower',
         name: 'Siege Tower',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 200,
             food: 0,
@@ -127,6 +136,7 @@ export const siegeUnits: SiegeUnits = {
         id: 'bombardCannon',
         name: 'Bombard Cannon',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 225,
             food: 0,

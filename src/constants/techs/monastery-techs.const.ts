@@ -1,4 +1,4 @@
-import { Unit, Upgrade } from "../../models/techs.model";
+import { Unit, UnitType, Upgrade } from "../../models/techs.model";
 
 interface MonasteryUnits {
     monk: Unit
@@ -22,6 +22,7 @@ export const monasteryUnits: MonasteryUnits = {
         id: 'monk',
         name: 'Monk',
         age: 3,
+        unitType: UnitType.civilian,
         cost: {
             wood: 0,
             food: 0,

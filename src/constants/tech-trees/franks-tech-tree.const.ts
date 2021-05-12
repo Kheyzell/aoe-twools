@@ -14,11 +14,79 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/franks.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const franksTechTree: CivTechTree = {
     id: 'franks',
     name: 'Franks',
     crest,
+    bonuses: [
+        {
+            id: 'franks1',
+            description: 'Farm upgrades are free',
+            effectType: EffectType.freeUpgrade,
+            value: 18,
+            affectedUnits: [],
+            affectedUpgrades: [millUpgrades.horseColar, millUpgrades.heavyPlow, millUpgrades.cropRotation]
+        },
+        {
+            id: 'franks2',
+            description: 'Castles are 25% cheaper',
+            effectType: EffectType.discount,
+            value: 25,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'franks3',
+            description: 'Mounted units +20% HP (starting in the Feudal Age)',
+            effectType: EffectType.healthPercent,
+            value: { age2: 20, age3: 20, age4: 20 },
+            affectedUnits: [stableUnits.lightCavalry, stableUnits.paladin, archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'franks4',
+            description: 'Foragers work 15% faster',
+            effectType: EffectType.miscallenous,
+            value: 15,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'franks5',
+            description: 'Knights have +2 Line of Sight',
+            effectType: EffectType.lineOfSight,
+            value: 2,
+            affectedUnits: [stableUnits.paladin],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'beardedAxe',
+            name: 'Bearded Axes',
+            description: 'Throwing Axeman +1 range',
+            effectType: EffectType.range,
+            value: 1,
+            cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+            duration: 60,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'chivalry',
+            name: 'Chivalry',
+            description: `Stables work 40% faster`,
+            effectType: EffectType.creationSpeed,
+            value: 40,
+            cost: { wood: 600, food: 0, gold: 500, stone: 0 },
+            duration: 40,
+            affectedUnits: [stableUnits.lightCavalry, stableUnits.paladin],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -122,7 +190,7 @@ export const franksTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             millUpgrades.horseColar,
             millUpgrades.heavyPlow,
-            millUpgrades.cropRotation,
+            millUpgrades.cropRotation
         ])
     },
     miningCamp: {
@@ -130,7 +198,7 @@ export const franksTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             miningCampUpgrades.goldMining,
             miningCampUpgrades.stoneMining,
-            miningCampUpgrades.goldShaftMining,
+            miningCampUpgrades.goldShaftMining
         ])
     },
     market: {
@@ -138,7 +206,7 @@ export const franksTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             marketUpgrade.coinage,
             marketUpgrade.caravan,
-            marketUpgrade.banking,
+            marketUpgrade.banking
         ])
     },
     dock: {
@@ -148,12 +216,12 @@ export const franksTechTree: CivTechTree = {
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
-            new UnitLine([dockUnits.cannonGalleon]),
+            new UnitLine([dockUnits.cannonGalleon])
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,
             dockUpgrades.careening,
-            dockUpgrades.dryDock,
+            dockUpgrades.dryDock
         ])
     }
 }

@@ -14,11 +14,38 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/teutons.png'
+import { EffectType } from "../../models/bonus.model";
+import { getAllCivUnits } from "../../utils/techs.utils";
 
 export const teutonsTechTree: CivTechTree = {
     id: 'teutons',
     name: 'Teutons',
     crest,
+    bonuses: [],
+    uniqueTechs: [
+        {
+            id: 'ironclad',
+            name: 'Ironclad',
+            description: 'siege weapons +4 melee armor',
+            effectType: EffectType.meleeArmor,
+            value: 4,
+            cost: { wood: 400, food: 0, gold: 350, stone: 0 },
+            duration: 60,
+            affectedUnits: [siegeUnits.cappedRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower, siegeUnits.bombardCannon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'crenellations',
+            name: 'Crenellations',
+            description: 'Castles +3 range; garrisoned infantry fires arrows',
+            effectType: EffectType.range,
+            value: 3,
+            cost: { wood: 0, food: 600, gold: 0, stone: 400 },
+            duration: 60,
+            affectedUnits: [],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -163,3 +190,64 @@ export const teutonsTechTree: CivTechTree = {
         ])
     }
 }
+
+teutonsTechTree.bonuses = [
+    {
+        id: 'teutons1',
+        description: 'Monks have double healing range',
+        effectType: EffectType.miscallenous,
+        value: 100,
+        affectedUnits: [monasteryUnits.monk],
+        affectedUpgrades: []
+    },
+    {
+        id: 'teutons2',
+        description: 'Towers garrison twice as many units',
+        effectType: EffectType.miscallenous,
+        value: null,
+        affectedUnits: [],
+        affectedUpgrades: []
+    },
+    {
+        id: 'teutons3',
+        description: 'Murder Holes and Herbal Medicine are free',
+        effectType: EffectType.freeUpgrade,
+        value: null,
+        affectedUnits: [],
+        affectedUpgrades: [monasteryUpgrade.herbalMedecine, universityUpgrades.murderHoles]
+    },
+    {
+        id: 'teutons4',
+        description: 'Farms are 40% cheaper',
+        effectType: EffectType.discount,
+        value: 40,
+        affectedUnits: [],
+        affectedUpgrades: []
+    },
+    {
+        id: 'teutons5',
+        description: 'Barracks and Stable units receive +1/+2 melee armor in the Castle/Imperial Age',
+        effectType: EffectType.meleeArmor,
+        value: { age3: 1, age4: 2 },
+        affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, stableUnits.scoutCavalry, stableUnits.paladin],
+        affectedUpgrades: []
+    },
+    {
+        id: 'teutons6',
+        description: 'Town Centers can garrison +10 units',
+        effectType: EffectType.miscallenous,
+        value: 10,
+        affectedUnits: [],
+        affectedUpgrades: []
+    },
+    {
+        id: 'teutons7',
+        description: 'Units resist conversion (+2)',
+        effectType: EffectType.convertionResistance,
+        value: 2,
+        affectedUnits: getAllCivUnits(teutonsTechTree),
+        affectedUpgrades: [],
+        hideInUnitRecap: true,
+        team: true
+    },
+]

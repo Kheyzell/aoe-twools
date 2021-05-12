@@ -5,6 +5,7 @@ import { allCivTechTrees } from "../../constants"
 import { CivTechTree, Tech, TechType, Unit, Upgrade } from "../../models/techs.model"
 import { selectedTechsSelector } from "../tech-tree/techSlice"
 import './civ-list.css'
+import CivPanel from "./civ-panel"
 
 
 type Props = {}
@@ -16,9 +17,9 @@ const CivList: React.FC<Props> = () => {
 
     const hasTech = (civTechs: CivTechTree, tech: Tech): boolean => {
         if (tech.type === TechType.unit) {
-            return hasUnit(civTechs, tech)
+            return hasUnit(civTechs, tech as Unit)
         } else {
-            return hasUpgrade(civTechs, tech)
+            return hasUpgrade(civTechs, tech as Upgrade)
         }
     }
 
@@ -208,13 +209,24 @@ const CivList: React.FC<Props> = () => {
         }, true)
     })
 
+    const [showCivPanels, setShowCivPanels] = React.useState<boolean[]>([])
+    const onEnterCivCrest = (index: number) => {
+        let newShowCivPanels = []
+        newShowCivPanels[index] = true
+        setShowCivPanels(newShowCivPanels)
+    }
+    const onLeaveCivCrest = (index: number) => {
+        setShowCivPanels([])
+    }
+
     return (
         <div className="CivList">
-            {filteredTechTrees.map(civ => {
+            {filteredTechTrees.map((civ, index) => {
                 return (
-                    <div className="CivTree" key={civ.id}>
+                    <div className="CivTree" key={civ.id} onMouseEnter={() => onEnterCivCrest(index)} onMouseLeave={() => onLeaveCivCrest(index)}>
                         <span> {civ.name} </span>
                         <img src={civ.crest} alt={civ.name} />
+                        <CivPanel civ={civ} show={showCivPanels[index]}></CivPanel>
                     </div>
                 )
             })}

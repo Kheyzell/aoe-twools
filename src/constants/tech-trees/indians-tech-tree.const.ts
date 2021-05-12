@@ -14,11 +14,71 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/indians.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const indiansTechTree: CivTechTree = {
     id: 'indians',
     name: 'Indians',
     crest,
+    bonuses: [
+        {
+            id: 'indians1',
+            description: 'Fishermen work 10% faster',
+            effectType: EffectType.miscallenous,
+            value: 10,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'indians2',
+            description: 'Villagers are 10%/15%/20%/25% cheaper in the Dark/Feudal/Castle/Imperial Age',
+            effectType: EffectType.discount,
+            value: { age1: 10, age2: 15, age3: 20, age4: 25 },
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'indians3',
+            description: 'All Stable units have +1 pierce armor in the Castle Age and +1 in the Imperial Age',
+            effectType: EffectType.pierceArmor,
+            value: { age3: 1, age4: 2 },
+            affectedUnits: [stableUnits.hussar, stableUnits.heavyCamelRider],
+            affectedUpgrades: []
+        },
+        {
+            id: 'indians4',
+            description: 'Camel units have +4 attack against standard buildings',
+            effectType: EffectType.miscallenous,
+            value: 4,
+            affectedUnits: [stableUnits.heavyCamelRider],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'sultans',
+            name: 'Sultans',
+            description: 'all gold production +10% faster',
+            effectType: EffectType.miscallenous,
+            value: 10,
+            cost: { wood: 400, food: 400, gold: 0, stone: 0 },
+            duration: 40,
+            affectedUnits: [townCenterUnits.villager, marketUnits.tradeCart],
+            affectedUpgrades: []
+        },
+        {
+            id: 'shatagni',
+            name: 'Shatagni',
+            description: 'Hand Cannoneers +1 range',
+            effectType: EffectType.range,
+            value: 1,
+            cost: { wood: 0, food: 500, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [archeryUnits.handCannoneer],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),

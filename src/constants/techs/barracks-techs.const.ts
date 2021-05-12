@@ -1,4 +1,4 @@
-import { Unit, Upgrade } from "../../models/techs.model";
+import { Unit, UnitType, Upgrade } from "../../models/techs.model";
 import { chainTechs } from "../../utils/techs.utils";
 
 interface BarracksUnits {
@@ -26,6 +26,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'militia',
         name: 'Militia',
         age: 1,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 60,
@@ -38,6 +39,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'manAtArms',
         name: 'Man-At-Arms',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 60,
@@ -50,6 +52,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'longSwordsman',
         name: 'Long Swordsman',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 60,
@@ -62,6 +65,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'twoHandedSwordsman',
         name: 'Two Handed Swordsman',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 60,
@@ -74,6 +78,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'champion',
         name: 'Champion',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 60,
@@ -86,6 +91,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'spearman',
         name: 'Spearman',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 25,
             food: 35,
@@ -98,6 +104,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'pikeman',
         name: 'Pikeman',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 25,
             food: 35,
@@ -110,6 +117,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'halberdier',
         name: 'Halberdier',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 25,
             food: 35,
@@ -122,6 +130,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'eagleScout',
         name: 'Eagle Scout',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 20,
@@ -134,6 +143,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'eagleWarrior',
         name: 'Eagle Warrior',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 20,
@@ -146,6 +156,7 @@ export const barracksUnits: BarracksUnits = {
         id: 'eliteEagleWarrior',
         name: 'Elite Eagle Warrior',
         age: 4,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 20,
@@ -165,6 +176,7 @@ export const barracksUpgrade: BarracksUpgrades = {
         id: 'supplies',
         name: 'supplies',
         age: 2,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 150,
@@ -177,6 +189,7 @@ export const barracksUpgrade: BarracksUpgrades = {
         id: 'squires',
         name: 'squires',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 100,
@@ -189,6 +202,7 @@ export const barracksUpgrade: BarracksUpgrades = {
         id: 'arson',
         name: 'arson',
         age: 3,
+        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 150,

@@ -14,11 +14,107 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/portuguese.png'
+import { EffectType } from "../../models/bonus.model";
 
 export const portugueseTechTree: CivTechTree = {
     id: 'portuguese',
     name: 'Portuguese',
     crest,
+    bonuses: [
+        {
+            id: 'portuguese1',
+            description: 'All units cost -20% gold',
+            effectType: EffectType.discount,
+            value: 20,
+            affectedUnits: [
+                barracksUnits.champion,
+                archeryUnits.arbalester, archeryUnits.handCannoneer, archeryUnits.cavalryArcher,
+                stableUnits.cavalier,
+                siegeUnits.cappedRam, siegeUnits.onager, siegeUnits.scorpion, siegeUnits.siegeTower, siegeUnits.bombardCannon,
+                castleUnits.petard, castleUnits.trebuchet,
+                monasteryUnits.monk,
+                marketUnits.tradeCart,
+                dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon
+            ],
+            affectedUpgrades: [],
+            hideInUnitRecap: true
+        },
+        {
+            id: 'portuguese2',
+            description: 'All ships have +10% HP',
+            effectType: EffectType.discount,
+            value: 20,
+            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'portuguese3',
+            description: 'The Feitoria becomes available for building in the Imperial Age',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'portuguese4',
+            description: 'All technologies (excluding advancing ages) are researched 30% faster',
+            effectType: EffectType.creationSpeed,
+            value: 30,
+            affectedUnits: [],
+            affectedUpgrades: [
+                barracksUpgrade.supplies, barracksUpgrade.arson,
+                archeryUpgrades.thumbRing,
+                stableUpgrades.bloodlines, stableUpgrades.husbandry,
+                castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies,
+                blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+                blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+                blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+                blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
+                blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+                monasteryUpgrade.redemption, monasteryUpgrade.atonement, monasteryUpgrade.herbalMedecine, monasteryUpgrade.heresy, monasteryUpgrade.sanctity, monasteryUpgrade.fervor, monasteryUpgrade.faith, monasteryUpgrade.blockPrinting, monasteryUpgrade.theocracy,
+                universityUpgrades.masonry, universityUpgrades.fortifiedWall, universityUpgrades.ballistics, universityUpgrades.guardTower, universityUpgrades.heatedShot, universityUpgrades.murderHoles, universityUpgrades.treadmillCrane, universityUpgrades.architecture, universityUpgrades.chemistry, universityUpgrades.bombardTower, universityUpgrades.siegeEngineers, universityUpgrades.keep,
+                townCenterUpgrade.loom, townCenterUpgrade.wheelbarrow, townCenterUpgrade.townWatch, townCenterUpgrade.handCart, townCenterUpgrade.townPatrol,
+                lumberCampUpgrades.doubleBitAxe, lumberCampUpgrades.bowSaw, lumberCampUpgrades.twoManSaw,
+                millUpgrades.horseColar, millUpgrades.heavyPlow, millUpgrades.cropRotation,
+                miningCampUpgrades.goldMining, miningCampUpgrades.stoneMining, miningCampUpgrades.stoneShaftMining,
+                marketUpgrade.coinage, marketUpgrade.caravan, marketUpgrade.banking, marketUpgrade.guilds,
+                dockUpgrades.gillnets, dockUpgrades.careening, dockUpgrades.dryDock
+            ]
+        },
+        {
+            id: 'portuguese5',
+            description: 'The Line of Sight is shared with the team from the beginning of the game',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
+    uniqueTechs: [
+        {
+            id: 'carrack',
+            name: 'Carrack',
+            description: 'ships +1/+1 armor',
+            effectType: EffectType.armor,
+            value: 1,
+            cost: { wood: 200, food: 0, gold: 300, stone: 0 },
+            duration: 40,
+            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        },
+        {
+            id: 'arquebus',
+            name: 'Arquebus',
+            description: 'gunpowder units fire more accurately at moving targets',
+            effectType: EffectType.accuracy,
+            value: null,
+            cost: { wood: 0, food: 700, gold: 400, stone: 0 },
+            duration: 40,
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+            affectedUpgrades: []
+        }
+    ],
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -135,7 +231,7 @@ export const portugueseTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             miningCampUpgrades.goldMining,
             miningCampUpgrades.stoneMining,
-            miningCampUpgrades.stoneShaftMining,
+            miningCampUpgrades.stoneShaftMining
         ])
     },
     market: {
@@ -144,7 +240,7 @@ export const portugueseTechTree: CivTechTree = {
             marketUpgrade.coinage,
             marketUpgrade.caravan,
             marketUpgrade.banking,
-            marketUpgrade.guilds,
+            marketUpgrade.guilds
         ])
     },
     dock: {
