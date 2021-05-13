@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,51 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/vietnamese.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Unit, imperialSkirmisher: Unit } = {
+    rattanArcher: new Unit({
+        id: 'rattanArcher',
+        name: 'Rattan Archer',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 50,
+            food: 0,
+            gold: 45,
+            stone: 0
+        },
+        duration: 16
+    }),
+    eliteRattanArcher: new Unit({
+        id: 'eliteRattanArcher',
+        name: 'Elite Rattan Archer',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 50,
+            food: 0,
+            gold: 45,
+            stone: 0
+        },
+        duration: 16
+    }),
+    imperialSkirmisher: new Unit({
+        id: 'imperialSkirmisher',
+        name: 'Imperial Skirmisher',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 35,
+            food: 25,
+            gold: 0,
+            stone: 0
+        },
+        duration: 16
+    })
+}
 
 export const vietnameseTechTree: CivTechTree = {
     id: 'vietnamese',
@@ -65,7 +110,7 @@ export const vietnameseTechTree: CivTechTree = {
             description: ' Imperial Skirmisher available at the Archery Range',
             effectType: EffectType.uniqueUnit,
             value: null,
-            affectedUnits: [],
+            affectedUnits: [vietnameseUniqueUnits.imperialSkirmisher],
             affectedUpgrades: [],
             team: true
         },
@@ -104,7 +149,7 @@ export const vietnameseTechTree: CivTechTree = {
     archery: {
         units: [
             new UnitLine([archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester]),
-            new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
+            new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher, vietnameseUniqueUnits.imperialSkirmisher]),
             new UnitLine([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher]),
         ],
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
@@ -130,6 +175,7 @@ export const vietnameseTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([vietnameseUniqueUnits.rattanArcher, vietnameseUniqueUnits.eliteRattanArcher]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

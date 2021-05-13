@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,6 +16,37 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/chinese.png'
 import { EffectType } from "../../models/bonus.model";
 import { getAllCivUpgrades } from "../../utils/techs.utils";
+
+export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
+    chukonu: new Unit({
+        id: 'chukonu',
+        name: 'Chu Ko Nu',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 40,
+            gold: 35,
+            stone: 0
+        },
+        duration: 16
+    }),
+    eliteChukonu: new Unit({
+        id: 'eliteChukonu',
+        name: 'Elite Chu Ko Nu',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 40,
+            gold: 35,
+            stone: 0
+        },
+        duration: 13
+    })
+}
 
 export const chineseTechTree: CivTechTree = {
     id: 'chinese',
@@ -42,7 +73,7 @@ export const chineseTechTree: CivTechTree = {
             value: null,
             cost: { wood: 600, food: 0, gold: 600, stone: 0 },
             duration: 60,
-            affectedUnits: [siegeUnits.heavyScorpion],
+            affectedUnits: [siegeUnits.heavyScorpion, chineseUniqueUnits.eliteChukonu],
             affectedUpgrades: []
         }
     ],
@@ -81,6 +112,7 @@ export const chineseTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([chineseUniqueUnits.chukonu, chineseUniqueUnits.eliteChukonu]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

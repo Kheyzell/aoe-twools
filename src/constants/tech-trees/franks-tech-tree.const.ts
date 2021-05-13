@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/franks.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const franksUniqueUnits: { throwingAxeman: Unit, eliteThrowingAxeman: Unit } = {
+    throwingAxeman: new Unit({
+        id: 'throwingAxeman',
+        name: 'Throwing Axeman',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 55,
+            gold: 25,
+            stone: 0
+        },
+        duration: 17
+    }),
+    eliteThrowingAxeman: new Unit({
+        id: 'eliteThrowingAxeman',
+        name: 'Elite Throwing Axeman',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 55,
+            gold: 25,
+            stone: 0
+        },
+        duration: 17
+    })
+}
 
 export const franksTechTree: CivTechTree = {
     id: 'franks',
@@ -72,7 +103,7 @@ export const franksTechTree: CivTechTree = {
             value: 1,
             cost: { wood: 0, food: 300, gold: 300, stone: 0 },
             duration: 60,
-            affectedUnits: [],
+            affectedUnits: [franksUniqueUnits.eliteThrowingAxeman],
             affectedUpgrades: []
         },
         {
@@ -123,6 +154,7 @@ export const franksTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([franksUniqueUnits.throwingAxeman, franksUniqueUnits.eliteThrowingAxeman]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

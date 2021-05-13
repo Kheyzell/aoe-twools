@@ -12,6 +12,7 @@ export interface Tech {
     name: string
     age: number
     cost: Cost
+    unique?: boolean
     duration: number
     previousLineTech?: Tech
     nextLineTech?: Tech
@@ -33,6 +34,7 @@ export class Unit implements Tech {
     duration: number
     type: TechType
     unitType: UnitType
+    unique?: boolean
     previousLineTech?: Unit
     nextLineTech?: Unit
     affectingUpgrades?: Tech[]
@@ -46,6 +48,7 @@ export class Unit implements Tech {
         this.cost = data.cost
         this.duration = data.duration
         this.unitType = data.unitType
+        this.unique = data.unique
         this.previousLineTech = data.previousLineTech
         this.nextLineTech = data.nextLineTech
         this.affectingUpgrades = data.affectingUpgrades
@@ -59,6 +62,7 @@ export class Upgrade implements Tech {
     cost: Cost
     duration: number
     type: TechType
+    unique?: boolean
     previousLineTech?: Tech
     nextLineTech?: Tech
     isSelected?: boolean

@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/persians.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } = {
+    warElephant: new Unit({
+        id: 'warElephant',
+        name: 'War Elephant',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 200,
+            gold: 75,
+            stone: 0
+        },
+        duration: 31
+    }),
+    eliteWarElephant: new Unit({
+        id: 'eliteWarElephant',
+        name: 'Elite War Elephant',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 200,
+            gold: 75,
+            stone: 0
+        },
+        duration: 31
+    })
+}
 
 export const persiansTechTree: CivTechTree = {
     id: 'persians',
@@ -67,7 +98,7 @@ export const persiansTechTree: CivTechTree = {
             value: 30,
             cost: { wood: 0, food: 300, gold: 300, stone: 0 },
             duration: 50,
-            affectedUnits: [],
+            affectedUnits: [persiansUniqueUnits.eliteWarElephant],
             affectedUpgrades: []
         }
     ],
@@ -108,6 +139,7 @@ export const persiansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

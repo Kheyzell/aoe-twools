@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/huns.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
+    tarkan: new Unit({
+        id: 'tarkan',
+        name: 'Tarkan',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 60,
+            stone: 0
+        },
+        duration: 14
+    }),
+    eliteTarkan: new Unit({
+        id: 'eliteTarkan',
+        name: 'Elite Tarkan',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 60,
+            stone: 0
+        },
+        duration: 14
+    })
+}
 
 export const hunsTechTree: CivTechTree = {
     id: 'huns',
@@ -50,7 +81,7 @@ export const hunsTechTree: CivTechTree = {
             description: 'Stables work 20% faster',
             effectType: EffectType.creationSpeed,
             value: 20,
-            affectedUnits: [stableUnits.hussar, stableUnits.paladin],
+            affectedUnits: [stableUnits.hussar, stableUnits.paladin, hunsUniqueUnits.eliteTarkan],
             affectedUpgrades: [stableUpgrades.bloodlines, stableUpgrades.husbandry],
             team: true
         }
@@ -64,7 +95,7 @@ export const hunsTechTree: CivTechTree = {
             value: null,
             cost: { wood: 300, food: 0, gold: 200, stone: 0 },
             duration: 40,
-            affectedUnits: [],
+            affectedUnits: [hunsUniqueUnits.eliteTarkan],
             affectedUpgrades: []
         },
         {
@@ -113,6 +144,7 @@ export const hunsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([hunsUniqueUnits.tarkan, hunsUniqueUnits.eliteTarkan]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

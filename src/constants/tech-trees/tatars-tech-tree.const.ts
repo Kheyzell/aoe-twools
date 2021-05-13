@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,51 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/tatars.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel: Unit } = {
+    keshik: new Unit({
+        id: 'keshik',
+        name: 'Keshik',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 40,
+            stone: 0
+        },
+        duration: 16
+    }),
+    eliteKeshik: new Unit({
+        id: 'eliteKeshik',
+        name: 'Elite Keshik',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 40,
+            stone: 0
+        },
+        duration: 14
+    }),
+    flamingCamel: new Unit({
+        id: 'flamingCamel',
+        name: 'Flaming Camel',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 75,
+            gold: 30,
+            stone: 0
+        },
+        duration: 20
+    })
+}
 
 export const tatarsTechTree: CivTechTree = {
     id: 'tatars',
@@ -83,7 +128,7 @@ export const tatarsTechTree: CivTechTree = {
             value: null,
             cost: { wood: 400, food: 0, gold: 500, stone: 0 },
             duration: 50,
-            affectedUnits: [castleUnits.trebuchet],
+            affectedUnits: [castleUnits.trebuchet, tatarsUniqueUnits.flamingCamel],
             affectedUpgrades: []
         }
     ],
@@ -124,7 +169,9 @@ export const tatarsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([tatarsUniqueUnits.keshik, tatarsUniqueUnits.eliteKeshik]),
             new UnitLine([castleUnits.petard]),
+            new UnitLine([tatarsUniqueUnits.flamingCamel]),
             new UnitLine([castleUnits.trebuchet]),
         ],
         upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])

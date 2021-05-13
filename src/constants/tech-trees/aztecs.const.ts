@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/aztecs.png'
 import { Bonus, EffectType } from "../../models/bonus.model";
 import { getAllCivMilitaryUnits } from "../../utils/techs.utils";
+
+export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit } = {
+    jaguarWarrior: new Unit({
+        id: 'jaguarWarrior',
+        name: 'Jaguar Warrior',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 60,
+            food: 0,
+            gold: 30,
+            stone: 0
+        },
+        duration: 12
+    }),
+    eliteJaguarWarrior: new Unit({
+        id: 'eliteJaguarWarrior',
+        name: 'Elite Jaguar Warrior',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 60,
+            food: 0,
+            gold: 30,
+            stone: 0
+        },
+        duration: 12
+    })
+}
 
 export const aztecsTechTree: CivTechTree = {
     id: 'aztecs',
@@ -41,7 +72,7 @@ export const aztecsTechTree: CivTechTree = {
             value: 4,
             cost: { wood: 0, food: 450, gold: 750, stone: 0 },
             duration: 60,
-            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, barracksUnits.eagleWarrior],
+            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, barracksUnits.eliteEagleWarrior, aztecsUniqueUnits.eliteJaguarWarrior],
             affectedUpgrades: []
         }
     ],
@@ -73,6 +104,7 @@ export const aztecsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([aztecsUniqueUnits.jaguarWarrior, aztecsUniqueUnits.eliteJaguarWarrior]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,51 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/spanish.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, missionary: Unit } = {
+    conquistador: new Unit({
+        id: 'conquistador',
+        name: 'Conquistador',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 70,
+            stone: 0
+        },
+        duration: 24
+    }),
+    eliteConquistador: new Unit({
+        id: 'eliteConquistador',
+        name: 'Elite Conquistador',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 70,
+            stone: 0
+        },
+        duration: 24
+    }),
+    missionary: new Unit({
+        id: 'missionary',
+        name: 'Missionary',
+        unique: true,
+        age: 3,
+        unitType: UnitType.civilian,
+        cost: {
+            wood: 0,
+            food: 0,
+            gold: 100,
+            stone: 0
+        },
+        duration: 51
+    })
+}
 
 export const spanishTechTree: CivTechTree = {
     id: 'spanish',
@@ -78,7 +123,7 @@ export const spanishTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 100, gold: 300, stone: 0 },
             duration: 40,
-            affectedUnits: [monasteryUnits.monk],
+            affectedUnits: [monasteryUnits.monk, spanishUniqueUnits.missionary],
             affectedUpgrades: []
         },
         {
@@ -129,6 +174,7 @@ export const spanishTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([spanishUniqueUnits.conquistador, spanishUniqueUnits.eliteConquistador]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -145,7 +191,7 @@ export const spanishTechTree: CivTechTree = {
         ])
     },
     monastery: {
-        units: [new UnitLine([monasteryUnits.monk])],
+        units: [new UnitLine([monasteryUnits.monk]), new UnitLine([spanishUniqueUnits.missionary])],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,

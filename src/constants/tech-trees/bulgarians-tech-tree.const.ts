@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/bulgarians.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
+    konnik: new Unit({
+        id: 'konnik',
+        name: 'Konnik',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 70,
+            stone: 0
+        },
+        duration: 19
+    }),
+    eliteKonnik: new Unit({
+        id: 'eliteKonnik',
+        name: 'Elite Konnik',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 70,
+            stone: 0
+        },
+        duration: 19
+    })
+}
 
 export const bulgariansTechTree: CivTechTree = {
     id: 'bulgarians',
@@ -72,7 +103,7 @@ export const bulgariansTechTree: CivTechTree = {
             value: 33,
             cost: { wood: 0, food: 400, gold: 200, stone: 0 },
             duration: 35,
-            affectedUnits: [stableUnits.hussar, stableUnits.cavalier],
+            affectedUnits: [stableUnits.hussar, stableUnits.cavalier, bulgariansUniqueUnits.eliteKonnik],
             affectedUpgrades: []
         },
         {
@@ -121,6 +152,7 @@ export const bulgariansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([bulgariansUniqueUnits.konnik, bulgariansUniqueUnits.eliteKonnik]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

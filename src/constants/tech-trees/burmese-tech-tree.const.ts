@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/burmese.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
+    arambai: new Unit({
+        id: 'arambai',
+        name: 'Arambai',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 75,
+            food: 0,
+            gold: 60,
+            stone: 0
+        },
+        duration: 21
+    }),
+    eliteArambai: new Unit({
+        id: 'eliteArambai',
+        name: 'Elite Arambai',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 75,
+            food: 0,
+            gold: 60,
+            stone: 0
+        },
+        duration: 21
+    })
+}
 
 export const burmeseTechTree: CivTechTree = {
     id: 'burmese',
@@ -75,7 +106,7 @@ export const burmeseTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 650, gold: 400, stone: 0 },
             duration: 40,
-            affectedUnits: [stableUnits.hussar, stableUnits.cavalier, stableUnits.eliteBattleElephant],
+            affectedUnits: [stableUnits.hussar, stableUnits.cavalier, stableUnits.eliteBattleElephant, burmeseUniqueUnits.eliteArambai],
             affectedUpgrades: []
         }
     ],
@@ -115,6 +146,7 @@ export const burmeseTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([burmeseUniqueUnits.arambai, burmeseUniqueUnits.eliteArambai]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

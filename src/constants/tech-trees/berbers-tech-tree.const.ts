@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,65 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/berbers.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, genitour: Unit, eliteGenitour: Unit } = {
+    camelArcher: new Unit({
+        id: 'camelArcher',
+        name: 'Camel Archer',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 50,
+            food: 0,
+            gold: 60,
+            stone: 0
+        },
+        duration: 25
+    }),
+    eliteCamelArcher: new Unit({
+        id: 'eliteCamelArcher',
+        name: 'Elite Camel Archer',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 50,
+            food: 0,
+            gold: 60,
+            stone: 0
+        },
+        duration: 25
+    }),
+    genitour: new Unit({
+        id: 'genitour',
+        name: 'Genitour',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 35,
+            food: 50,
+            gold: 0,
+            stone: 0
+        },
+        duration: 25
+    }),
+    eliteGenitour: new Unit({
+        id: 'eliteGenitour',
+        name: 'Elite Genitour',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 35,
+            food: 50,
+            gold: 0,
+            stone: 0
+        },
+        duration: 25
+    })
+}
 
 export const berbersTechTree: CivTechTree = {
     id: 'berbers',
@@ -50,7 +109,7 @@ export const berbersTechTree: CivTechTree = {
             description: 'Genitour available at the Archery Range',
             effectType: EffectType.uniqueUnit,
             value: null,
-            affectedUnits: [],
+            affectedUnits: [berbersUniqueUnits.eliteGenitour],
             affectedUpgrades: [],
             team: true
         }
@@ -64,7 +123,7 @@ export const berbersTechTree: CivTechTree = {
             value: 25,
             cost: { wood: 0, food: 250, gold: 250, stone: 0 },
             duration: 40,
-            affectedUnits: [],
+            affectedUnits: [berbersUniqueUnits.eliteCamelArcher],
             affectedUpgrades: [castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies],
             team: true
         },
@@ -76,7 +135,7 @@ export const berbersTechTree: CivTechTree = {
             value: 15,
             cost: { wood: 0, food: 700, gold: 300, stone: 0 },
             duration: 40,
-            affectedUnits: [stableUnits.heavyCamelRider],
+            affectedUnits: [stableUnits.heavyCamelRider, berbersUniqueUnits.eliteCamelArcher],
             affectedUpgrades: []
         }
     ],
@@ -117,6 +176,7 @@ export const berbersTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

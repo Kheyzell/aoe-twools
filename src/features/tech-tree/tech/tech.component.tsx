@@ -24,7 +24,7 @@ const TechComponent: React.FC<Props> = (props, state: State) => {
 
   const techClass = props.tech.type === TechType.unit ? 'UnitTech' : 'UpgradeTech'
   return (
-    <div className={`Tech ${techClass} ${isSelected() ? 'Selected' : ''}`} onClick={onTechClick}>
+    <div className={`Tech ${techClass} ${isSelected() ? 'Selected' : ''} ${props.tech.unique ? 'Unique' : ''}`} onClick={onTechClick}>
       <span className="Name"> {props.tech.name} </span>
       <img src={'./' + process.env.PUBLIC_URL + '/images/techs/' + props.tech.id + '.png'} />
     </div>

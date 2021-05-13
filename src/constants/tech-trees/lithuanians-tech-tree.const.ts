@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/lithuanians.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
+    leitis: new Unit({
+        id: 'leitis',
+        name: 'Leitis',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 70,
+            gold: 50,
+            stone: 0
+        },
+        duration: 20
+    }),
+    eliteLeitis: new Unit({
+        id: 'eliteLeitis',
+        name: 'Elite Leitis',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 70,
+            gold: 50,
+            stone: 0
+        },
+        duration: 18
+    })
+}
 
 export const lithuaniansTechTree: CivTechTree = {
     id: 'lithuanians',
@@ -42,7 +73,7 @@ export const lithuaniansTechTree: CivTechTree = {
             description: 'Each garrisoned Relic gives +1 attack to Knights and Leitis (maximum +4)',
             effectType: EffectType.miscallenous,
             value: null,
-            affectedUnits: [stableUnits.paladin],
+            affectedUnits: [stableUnits.paladin, lithuaniansUniqueUnits.eliteLeitis],
             affectedUpgrades: []
         },
         {
@@ -115,6 +146,7 @@ export const lithuaniansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([lithuaniansUniqueUnits.leitis, lithuaniansUniqueUnits.eliteLeitis]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,6 +16,37 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/goths.png'
 import { EffectType } from "../../models/bonus.model";
 
+export const gothsUniqueUnits: { huskarl: Unit, eliteHuskarl: Unit } = {
+    huskarl: new Unit({
+        id: 'huskarl',
+        name: 'Huskarl',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 80,
+            gold: 40,
+            stone: 0
+        },
+        duration: 16
+    }),
+    eliteHuskarl: new Unit({
+        id: 'eliteHuskarl',
+        name: 'Elite Huskarl',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 80,
+            gold: 40,
+            stone: 0
+        },
+        duration: 16
+    })
+}
+
 export const gothsTechTree: CivTechTree = {
     id: 'goths',
     name: 'Goths',
@@ -26,7 +57,7 @@ export const gothsTechTree: CivTechTree = {
             description: 'Infantry are 20%/25%/30%/35% cheaper in the Dark/Feudal/Castle/Imperial Age',
             effectType: EffectType.discount,
             value: { age1: 20, age2: 25, age3: 30, age4: 35 },
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, gothsUniqueUnits.eliteHuskarl],
             affectedUpgrades: []
         },
         {
@@ -34,7 +65,7 @@ export const gothsTechTree: CivTechTree = {
             description: 'Infantry have +1/+2/+3 attack bonus against standard buildings in the Feudal/Castle/Imperial Age',
             effectType: EffectType.miscallenous,
             value: { age2: 1, age3: 2, age4: 3 },
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, gothsUniqueUnits.eliteHuskarl],
             affectedUpgrades: []
         },
         {
@@ -66,7 +97,7 @@ export const gothsTechTree: CivTechTree = {
             description: 'Barracks work 20% faster',
             effectType: EffectType.creationSpeed,
             value: 20,
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, gothsUniqueUnits.eliteHuskarl],
             affectedUpgrades: [barracksUpgrade.squires],
             team: true
         }
@@ -80,7 +111,7 @@ export const gothsTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 450, gold: 250, stone: 0 },
             duration: 40,
-            affectedUnits: [],
+            affectedUnits: [gothsUniqueUnits.eliteHuskarl],
             affectedUpgrades: []
         },
         {
@@ -91,7 +122,7 @@ export const gothsTechTree: CivTechTree = {
             value: 40,
             cost: { wood: 400, food: 0, gold: 600, stone: 0 },
             duration: 40,
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, gothsUniqueUnits.eliteHuskarl],
             affectedUpgrades: []
         }
     ],
@@ -131,6 +162,7 @@ export const gothsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([gothsUniqueUnits.huskarl, gothsUniqueUnits.eliteHuskarl]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

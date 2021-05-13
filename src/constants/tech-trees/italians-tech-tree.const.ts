@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,51 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/italians.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossbowman: Unit, condottiero: Unit } = {
+    genoeseCrossbowman: new Unit({
+        id: 'genoeseCrossbowman',
+        name: 'Genoese Crossbowman',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 45,
+            food: 0,
+            gold: 40,
+            stone: 0
+        },
+        duration: 18
+    }),
+    eliteGenoeseCrossbowman: new Unit({
+        id: 'eliteGenoeseCrossbowman',
+        name: 'Elite Genoese Crossbowman',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 45,
+            food: 0,
+            gold: 40,
+            stone: 0
+        },
+        duration: 14
+    }),
+    condottiero: new Unit({
+        id: 'condottiero',
+        name: 'Condottiero',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 50,
+            gold: 35,
+            stone: 0
+        },
+        duration: 18
+    })
+}
 
 export const italiansTechTree: CivTechTree = {
     id: 'italians',
@@ -58,7 +103,7 @@ export const italiansTechTree: CivTechTree = {
             description: 'Condottiero available at the Barracks',
             effectType: EffectType.uniqueUnit,
             value: null,
-            affectedUnits: [],
+            affectedUnits: [italiansUniqueUnits.condottiero],
             affectedUpgrades: [],
             team: true
         },
@@ -72,7 +117,7 @@ export const italiansTechTree: CivTechTree = {
             value: 1,
             cost: { wood: 0, food: 300, gold: 150, stone: 0 },
             duration: 40,
-            affectedUnits: [archeryUnits.arbalester],
+            affectedUnits: [archeryUnits.arbalester, italiansUniqueUnits.condottiero],
             affectedUpgrades: []
         },
         {
@@ -91,6 +136,7 @@ export const italiansTechTree: CivTechTree = {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman]),
+            new UnitLine([italiansUniqueUnits.condottiero])
         ],
         upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
     },
@@ -123,6 +169,7 @@ export const italiansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([italiansUniqueUnits.genoeseCrossbowman, italiansUniqueUnits.eliteGenoeseCrossbowman]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malians.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
+    gbeto: new Unit({
+        id: 'gbeto',
+        name: 'Gbeto',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 50,
+            gold: 40,
+            stone: 0
+        },
+        duration: 17
+    }),
+    eliteGbeto: new Unit({
+        id: 'eliteGbeto',
+        name: 'Elite Gbeto',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 50,
+            gold: 40,
+            stone: 0
+        },
+        duration: 17
+    })
+}
 
 export const maliansTechTree: CivTechTree = {
     id: 'malians',
@@ -116,6 +147,7 @@ export const maliansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([maliansUniqueUnits.gbeto, maliansUniqueUnits.eliteGbeto]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
