@@ -8,11 +8,11 @@ const spearLine = new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, b
 const eagleLine = new UnitLine([barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior])
 
 const infantryUpgrades = [
-    barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson,
+    barracksUpgrade.squires, barracksUpgrade.arson,
     blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
     blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor
 ]
-setAffectingUpgrades(militiaLine, infantryUpgrades)
+setAffectingUpgrades(militiaLine, [barracksUpgrade.supplies, ...infantryUpgrades])
 setAffectingUpgrades(spearLine, infantryUpgrades)
 setAffectingUpgrades(eagleLine, infantryUpgrades)
 
