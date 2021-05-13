@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/britons.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
+    longbowman: new Unit({
+        id: 'longbowman',
+        name: 'Longbowman',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 35,
+            food: 0,
+            gold: 40,
+            stone: 0
+        },
+        duration: 18
+    }),
+    eliteLongbowman: new Unit({
+        id: 'eliteLongbowman',
+        name: 'Elite Longbowman',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 35,
+            food: 0,
+            gold: 40,
+            stone: 0
+        },
+        duration: 18
+    })
+}
 
 export const britonsTechTree: CivTechTree = {
     id: 'britons',
@@ -34,7 +65,7 @@ export const britonsTechTree: CivTechTree = {
             description: 'Foot archers (except Skirmishers) have +1/+2 range in the Castle/Imperial Age',
             effectType: EffectType.range,
             value: { age3: 1, age4: 2 },
-            affectedUnits: [archeryUnits.arbalester],
+            affectedUnits: [archeryUnits.arbalester, britonsUniqueUnits.eliteLongbowman],
             affectedUpgrades: []
         },
         {
@@ -64,7 +95,7 @@ export const britonsTechTree: CivTechTree = {
             value: 1,
             cost: { wood: 750, food: 0, gold: 450, stone: 0 },
             duration: 60,
-            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher],
+            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher, britonsUniqueUnits.eliteLongbowman],
             affectedUpgrades: []
         },
         {
@@ -113,6 +144,7 @@ export const britonsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([britonsUniqueUnits.longbowman, britonsUniqueUnits.eliteLongbowman]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

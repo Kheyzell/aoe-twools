@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,65 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/koreans.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleShip: Unit, eliteTurtleShip: Unit } = {
+    warWagon: new Unit({
+        id: 'warWagon',
+        name: 'War Wagon',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 115,
+            gold: 60,
+            stone: 0
+        },
+        duration: 21
+    }),
+    eliteWarWagon: new Unit({
+        id: 'eliteWarWagon',
+        name: 'Elite War Wagon',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 115,
+            gold: 60,
+            stone: 0
+        },
+        duration: 21
+    }),
+    turtleShip: new Unit({
+        id: 'turtleShip',
+        name: 'Turtle Ship',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 190,
+            food: 0,
+            gold: 180,
+            stone: 0
+        },
+        duration: 50
+    }),
+    eliteTurtleShip: new Unit({
+        id: 'eliteTurtleShip',
+        name: 'Elite Turtle Ship',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 190,
+            food: 0,
+            gold: 180,
+            stone: 0
+        },
+        duration: 50
+    })
+}
 
 export const koreansTechTree: CivTechTree = {
     id: 'koreans',
@@ -58,7 +117,7 @@ export const koreansTechTree: CivTechTree = {
             description: 'Military units cost –20% less wood (except siege weapons)',
             effectType: EffectType.discoutWood,
             value: 20,
-            affectedUnits: [barracksUnits.halberdier, archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.heavyCavalryArcher, dockUnits.fastFireShip, dockUnits.galleon, dockUnits.eliteCannonGalleon],
+            affectedUnits: [barracksUnits.halberdier, archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.heavyCavalryArcher, dockUnits.fastFireShip, dockUnits.galleon, dockUnits.eliteCannonGalleon, koreansUniqueUnits.eliteWarWagon, koreansUniqueUnits.eliteTurtleShip],
             affectedUpgrades: []
         },
         {
@@ -131,6 +190,7 @@ export const koreansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([koreansUniqueUnits.warWagon, koreansUniqueUnits.eliteWarWagon]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -228,6 +288,7 @@ export const koreansTechTree: CivTechTree = {
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip]),
             new UnitLine([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon]),
+            new UnitLine([koreansUniqueUnits.turtleShip, koreansUniqueUnits.eliteTurtleShip]),
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,

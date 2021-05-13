@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,6 +16,65 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/vikings.png'
 import { EffectType } from "../../models/bonus.model";
 
+export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: Unit, eliteLongboat: Unit } = {
+    berserk: new Unit({
+        id: 'berserk',
+        name: 'Berserk',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 65,
+            gold: 25,
+            stone: 0
+        },
+        duration: 14
+    }),
+    eliteBerserk: new Unit({
+        id: 'eliteBerserk',
+        name: 'Elite Berserk',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 65,
+            gold: 25,
+            stone: 0
+        },
+        duration: 14
+    }),
+    longboat: new Unit({
+        id: 'longboat',
+        name: 'Longboat',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 100,
+            gold: 50,
+            stone: 0
+        },
+        duration: 25
+    }),
+    eliteLongboat: new Unit({
+        id: 'eliteLongboat',
+        name: 'Elite Longboat',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 100,
+            gold: 50,
+            stone: 0
+        },
+        duration: 25
+    })
+}
+
 export const vikingsTechTree: CivTechTree = {
     id: 'vikings',
     name: 'Vikings',
@@ -26,7 +85,7 @@ export const vikingsTechTree: CivTechTree = {
             description: 'Warships are 15%/15%/20% cheaper in the Feudal/Castle/Imperial Age',
             effectType: EffectType.discount,
             value: { age2: 15, age3: 15, age4: 20 },
-            affectedUnits: [dockUnits.galleon, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            affectedUnits: [dockUnits.galleon, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, vikingsUniqueUnits.eliteLongboat],
             affectedUpgrades: []
         },
         {
@@ -34,7 +93,7 @@ export const vikingsTechTree: CivTechTree = {
             description: 'Infantry have +10%/+15%/+20% HP in the Feudal/Castle/Imperial Age',
             effectType: EffectType.healthPercent,
             value: { age2: 10, age3: 15, age4: 20 },
-            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman],
+            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, vikingsUniqueUnits.eliteBerserk],
             affectedUpgrades: []
         },
         {
@@ -64,7 +123,7 @@ export const vikingsTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 700, gold: 500, stone: 0 },
             duration: 40,
-            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman],
+            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, vikingsUniqueUnits.eliteBerserk],
             affectedUpgrades: []
         },
         {
@@ -75,7 +134,7 @@ export const vikingsTechTree: CivTechTree = {
             value: 40,
             cost: { wood: 0, food: 850, gold: 400, stone: 0 },
             duration: 40,
-            affectedUnits: [],
+            affectedUnits: [vikingsUniqueUnits.eliteBerserk],
             affectedUpgrades: []
         }
     ],
@@ -113,6 +172,7 @@ export const vikingsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -206,6 +266,7 @@ export const vikingsTechTree: CivTechTree = {
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
             new UnitLine([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon]),
+            new UnitLine([vikingsUniqueUnits.longboat, vikingsUniqueUnits.eliteLongboat]),
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,

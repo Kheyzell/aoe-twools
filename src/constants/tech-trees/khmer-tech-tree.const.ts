@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/khmer.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: Unit } = {
+    ballistaElephant: new Unit({
+        id: 'ballistaElephant',
+        name: 'Ballista Elephant',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 100,
+            gold: 80,
+            stone: 0
+        },
+        duration: 25
+    }),
+    eliteBallistaElephant: new Unit({
+        id: 'eliteBallistaElephant',
+        name: 'Elite Ballista Elephant',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 100,
+            gold: 80,
+            stone: 0
+        },
+        duration: 25
+    })
+}
 
 export const khmerTechTree: CivTechTree = {
     id: 'khmer',
@@ -83,7 +114,7 @@ export const khmerTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 700, gold: 400, stone: 0 },
             duration: 40,
-            affectedUnits: [siegeUnits.heavyScorpion],
+            affectedUnits: [siegeUnits.heavyScorpion, khmerUniqueUnits.eliteBallistaElephant],
             affectedUpgrades: []
         }
     ],
@@ -123,6 +154,7 @@ export const khmerTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([khmerUniqueUnits.ballistaElephant, khmerUniqueUnits.eliteBallistaElephant]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

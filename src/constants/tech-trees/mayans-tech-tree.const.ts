@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/mayans.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const mayansUniqueUnits: { plumedArcher: Unit, elitePlumedArcher: Unit } = {
+    plumedArcher: new Unit({
+        id: 'plumedArcher',
+        name: 'Plumed Archer',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 55,
+            gold: 55,
+            stone: 0
+        },
+        duration: 16
+    }),
+    elitePlumedArcher: new Unit({
+        id: 'elitePlumedArcher',
+        name: 'Elite Plumed Archer',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 55,
+            gold: 55,
+            stone: 0
+        },
+        duration: 16
+    })
+}
 
 export const mayansTechTree: CivTechTree = {
     id: 'mayans',
@@ -42,7 +73,7 @@ export const mayansTechTree: CivTechTree = {
             description: 'Foot archers are 10%/20%/30% cheaper in the Feudal/Castle/Imperial Age',
             effectType: EffectType.discount,
             value: { age2: 10, age3: 20, age4: 30 },
-            affectedUnits: [archeryUnits.arbalester],
+            affectedUnits: [archeryUnits.arbalester, mayansUniqueUnits.elitePlumedArcher],
             affectedUpgrades: []
         },
         {
@@ -110,6 +141,7 @@ export const mayansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([mayansUniqueUnits.plumedArcher, mayansUniqueUnits.elitePlumedArcher]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

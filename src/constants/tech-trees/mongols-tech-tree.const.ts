@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,6 +16,37 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/mongols.png'
 import { EffectType } from "../../models/bonus.model";
 
+export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
+    mangudai: new Unit({
+        id: 'mangudai',
+        name: 'Mangudai',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 55,
+            food: 0,
+            gold: 65,
+            stone: 0
+        },
+        duration: 26
+    }),
+    eliteMangudai: new Unit({
+        id: 'eliteMangudai',
+        name: 'Elite Mangudai',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 55,
+            food: 0,
+            gold: 65,
+            stone: 0
+        },
+        duration: 26
+    })
+}
+
 export const mongolsTechTree: CivTechTree = {
     id: 'mongols',
     name: 'Mongols',
@@ -26,7 +57,7 @@ export const mongolsTechTree: CivTechTree = {
             description: 'Cavalry archers fire 25% faster',
             effectType: EffectType.fireRate,
             value: 25,
-            affectedUnits: [archeryUnits.heavyCavalryArcher],
+            affectedUnits: [archeryUnits.heavyCavalryArcher, mongolsUniqueUnits.eliteMangudai],
             affectedUpgrades: []
         },
         {
@@ -115,6 +146,7 @@ export const mongolsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([mongolsUniqueUnits.mangudai, mongolsUniqueUnits.eliteMangudai]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

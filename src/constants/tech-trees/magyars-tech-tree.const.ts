@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/magyars.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit } = {
+    magyarHuszar: new Unit({
+        id: 'magyarHuszar',
+        name: 'Magyar Huszar',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 80,
+            gold: 10,
+            stone: 0
+        },
+        duration: 16
+    }),
+    eliteMagyarHuszar: new Unit({
+        id: 'eliteMagyarHuszar',
+        name: 'Elite Magyar Huszar',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 80,
+            gold: 10,
+            stone: 0
+        },
+        duration: 16
+    })
+}
 
 export const magyarsTechTree: CivTechTree = {
     id: 'magyars',
@@ -64,7 +95,7 @@ export const magyarsTechTree: CivTechTree = {
             value: 100,
             cost: { wood: 0, food: 200, gold: 300, stone: 0 },
             duration: 40,
-            affectedUnits: [],
+            affectedUnits: [magyarsUniqueUnits.eliteMagyarHuszar],
             affectedUpgrades: []
         },
         {
@@ -113,6 +144,7 @@ export const magyarsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([magyarsUniqueUnits.magyarHuszar, magyarsUniqueUnits.eliteMagyarHuszar]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

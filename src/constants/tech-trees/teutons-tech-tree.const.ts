@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,6 +16,37 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/teutons.png'
 import { EffectType } from "../../models/bonus.model";
 import { getAllCivUnits } from "../../utils/techs.utils";
+
+export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Unit } = {
+    teutonicKnight: new Unit({
+        id: 'teutonicKnight',
+        name: 'TeutonicKnight',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 85,
+            gold: 40,
+            stone: 0
+        },
+        duration: 12
+    }),
+    eliteTeutonicKnight: new Unit({
+        id: 'eliteTeutonic Knight',
+        name: 'Elite Teutonic Knight',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 85,
+            gold: 40,
+            stone: 0
+        },
+        duration: 12
+    })
+}
 
 export const teutonsTechTree: CivTechTree = {
     id: 'teutons',
@@ -82,6 +113,7 @@ export const teutonsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([teutonsUniqueUnits.teutonicKnight, teutonsUniqueUnits.eliteTeutonicKnight]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

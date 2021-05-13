@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/byzantines.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const byzantinesUniqueUnits: { cataphract: Unit, eliteCataphract: Unit } = {
+    cataphract: new Unit({
+        id: 'cataphract',
+        name: 'Cataphract',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 70,
+            gold: 75,
+            stone: 0
+        },
+        duration: 20
+    }),
+    eliteCataphract: new Unit({
+        id: 'eliteCataphract',
+        name: 'Elite Cataphract',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 70,
+            gold: 75,
+            stone: 0
+        },
+        duration: 20
+    })
+}
 
 export const byzantinesTechTree: CivTechTree = {
     id: 'byzantines',
@@ -91,7 +122,7 @@ export const byzantinesTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 800, gold: 600, stone: 0 },
             duration: 50,
-            affectedUnits: [],
+            affectedUnits: [byzantinesUniqueUnits.eliteCataphract],
             affectedUpgrades: []
         }
     ],
@@ -132,6 +163,7 @@ export const byzantinesTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([byzantinesUniqueUnits.cataphract, byzantinesUniqueUnits.eliteCataphract]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,51 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/incas.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Unit } = {
+    kamayuk: new Unit({
+        id: 'kamayuk',
+        name: 'Kamayuk',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 30,
+            stone: 0
+        },
+        duration: 10
+    }),
+    eliteKamayuk: new Unit({
+        id: 'eliteKamayuk',
+        name: 'Elite Kamayuk',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 30,
+            stone: 0
+        },
+        duration: 10
+    }),
+    slinger: new Unit({
+        id: 'slinger',
+        name: 'Slinger',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 30,
+            gold: 40,
+            stone: 0
+        },
+        duration: 25
+    })
+}
 
 export const incasTechTree: CivTechTree = {
     id: 'incas',
@@ -71,7 +116,7 @@ export const incasTechTree: CivTechTree = {
             value: 0,
             cost: { wood: 0, food: 200, gold: 300, stone: 0 },
             duration: 40,
-            affectedUnits: [archeryUnits.eliteSkirmisher],
+            affectedUnits: [archeryUnits.eliteSkirmisher, incasUniqueUnits.slinger],
             affectedUpgrades: []
         },
         {
@@ -82,7 +127,7 @@ export const incasTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 600, gold: 600, stone: 0 },
             duration: 60,
-            affectedUnits: [barracksUnits.eliteEagleWarrior],
+            affectedUnits: [barracksUnits.eliteEagleWarrior, incasUniqueUnits.eliteKamayuk, incasUniqueUnits.slinger],
             affectedUpgrades: []
         }
     ],
@@ -98,6 +143,7 @@ export const incasTechTree: CivTechTree = {
         units: [
             new UnitLine([archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester]),
             new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
+            new UnitLine([incasUniqueUnits.slinger]),
         ],
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
     },
@@ -117,6 +163,7 @@ export const incasTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([incasUniqueUnits.kamayuk, incasUniqueUnits.eliteKamayuk]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,51 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/burgundians.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit, flemishMilitia: Unit } = {
+    coustillier: new Unit({
+        id: 'coustillier',
+        name: 'Coustillier',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 55,
+            gold: 55,
+            stone: 0
+        },
+        duration: 15
+    }),
+    eliteCoustillier: new Unit({
+        id: 'eliteCoustillier',
+        name: 'Elite Coustillier',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 55,
+            gold: 55,
+            stone: 0
+        },
+        duration: 14
+    }),
+    flemishMilitia: new Unit({
+        id: 'flemishMilitia',
+        name: 'Flemish Militia',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 25,
+            stone: 0
+        },
+        duration: 14
+    })
+}
 
 export const burgundiansTechTree: CivTechTree = {
     id: 'burgundians',
@@ -90,7 +135,7 @@ export const burgundiansTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 800, gold: 450, stone: 0 },
             duration: 10,
-            affectedUnits: [townCenterUnits.villager],
+            affectedUnits: [townCenterUnits.villager, burgundiansUniqueUnits.flemishMilitia],
             affectedUpgrades: []
         }
     ],
@@ -130,6 +175,7 @@ export const burgundiansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([burgundiansUniqueUnits.coustillier, burgundiansUniqueUnits.eliteCoustillier]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -175,7 +221,7 @@ export const burgundiansTechTree: CivTechTree = {
         ])
     },
     townCenter: {
-        units: [new UnitLine([townCenterUnits.villager])],
+        units: [new UnitLine([townCenterUnits.villager]), new UnitLine([burgundiansUniqueUnits.flemishMilitia])],
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,

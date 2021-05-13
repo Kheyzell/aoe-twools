@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/saracens.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
+    mameluke: new Unit({
+        id: 'mameluke',
+        name: 'Mameluke',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 55,
+            gold: 85,
+            stone: 0
+        },
+        duration: 23
+    }),
+    eliteMameluke: new Unit({
+        id: 'eliteMameluke',
+        name: 'Elite Mameluke',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 55,
+            gold: 85,
+            stone: 0
+        },
+        duration: 23
+    })
+}
 
 export const saracensTechTree: CivTechTree = {
     id: 'saracens',
@@ -58,7 +89,7 @@ export const saracensTechTree: CivTechTree = {
             description: 'Camel units +10 HP',
             effectType: EffectType.health,
             value: 10,
-            affectedUnits: [stableUnits.heavyCamelRider],
+            affectedUnits: [stableUnits.heavyCamelRider, saracensUniqueUnits.eliteMameluke],
             affectedUpgrades: []
         },
         {
@@ -91,7 +122,7 @@ export const saracensTechTree: CivTechTree = {
             value: 20,
             cost: { wood: 0, food: 500, gold: 450, stone: 0 },
             duration: 50,
-            affectedUnits: [stableUnits.heavyCamelRider],
+            affectedUnits: [stableUnits.heavyCamelRider, saracensUniqueUnits.eliteMameluke],
             affectedUpgrades: []
         }
     ],
@@ -132,6 +163,7 @@ export const saracensTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,6 +16,37 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/turks.png'
 import { EffectType } from "../../models/bonus.model";
 
+export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
+    janissary: new Unit({
+        id: 'janissary',
+        name: 'Janissary',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 55,
+            stone: 0
+        },
+        duration: 21
+    }),
+    eliteJanissary: new Unit({
+        id: 'eliteJanissary',
+        name: 'Elite Janissary',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 55,
+            stone: 0
+        },
+        duration: 21
+    })
+}
+
 export const turksTechTree: CivTechTree = {
     id: 'turks',
     name: 'Turks',
@@ -26,7 +57,7 @@ export const turksTechTree: CivTechTree = {
             description: 'Gunpowder units have +25% HP',
             effectType: EffectType.healthPercent,
             value: 25,
-            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, turksUniqueUnits.eliteJanissary],
             affectedUpgrades: []
         },
         {
@@ -74,7 +105,7 @@ export const turksTechTree: CivTechTree = {
             description: 'Gunpowder units are created 25% faster',
             effectType: EffectType.creationSpeed,
             value: 25,
-            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, turksUniqueUnits.eliteJanissary],
             affectedUpgrades: [],
             team: true
         }
@@ -140,6 +171,7 @@ export const turksTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([turksUniqueUnits.janissary, turksUniqueUnits.eliteJanissary]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

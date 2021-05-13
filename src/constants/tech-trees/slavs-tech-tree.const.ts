@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/slavs.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
+    boyar: new Unit({
+        id: 'boyar',
+        name: 'Boyar',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 50,
+            gold: 80,
+            stone: 0
+        },
+        duration: 15
+    }),
+    eliteBoyar: new Unit({
+        id: 'eliteBoyar',
+        name: 'Elite Boyar',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 50,
+            gold: 80,
+            stone: 0
+        },
+        duration: 15
+    })
+}
 
 export const slavsTechTree: CivTechTree = {
     id: 'slavs',
@@ -113,6 +144,7 @@ export const slavsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([slavsUniqueUnits.boyar, slavsUniqueUnits.eliteBoyar]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

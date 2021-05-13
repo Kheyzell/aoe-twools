@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,65 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/portuguese.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, caravel: Unit, eliteCaravel: Unit } = {
+    organGun: new Unit({
+        id: 'organGun',
+        name: 'Organ Gun',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 80,
+            food: 0,
+            gold: 70,
+            stone: 0
+        },
+        duration: 21
+    }),
+    eliteOrganGun: new Unit({
+        id: 'eliteOrganGun',
+        name: 'Elite Organ Gun',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 80,
+            food: 0,
+            gold: 70,
+            stone: 0
+        },
+        duration: 21
+    }),
+    caravel: new Unit({
+        id: 'caravel',
+        name: 'Caravel',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 90,
+            food: 0,
+            gold: 43,
+            stone: 0
+        },
+        duration: 36
+    }),
+    eliteCaravel: new Unit({
+        id: 'eliteCaravel',
+        name: 'Elite Caravel',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 90,
+            food: 0,
+            gold: 43,
+            stone: 0
+        },
+        duration: 36
+    })
+}
 
 export const portugueseTechTree: CivTechTree = {
     id: 'portuguese',
@@ -34,7 +93,8 @@ export const portugueseTechTree: CivTechTree = {
                 castleUnits.petard, castleUnits.trebuchet,
                 monasteryUnits.monk,
                 marketUnits.tradeCart,
-                dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon
+                dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon,
+                portugeseUniqueUnits.eliteOrganGun, portugeseUniqueUnits.eliteCaravel
             ],
             affectedUpgrades: [],
             hideInUnitRecap: true
@@ -44,7 +104,7 @@ export const portugueseTechTree: CivTechTree = {
             description: 'All ships have +10% HP',
             effectType: EffectType.discount,
             value: 20,
-            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteCaravel],
             affectedUpgrades: []
         },
         {
@@ -100,7 +160,7 @@ export const portugueseTechTree: CivTechTree = {
             value: 1,
             cost: { wood: 200, food: 0, gold: 300, stone: 0 },
             duration: 40,
-            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteCaravel],
             affectedUpgrades: []
         },
         {
@@ -111,7 +171,7 @@ export const portugueseTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 700, gold: 400, stone: 0 },
             duration: 40,
-            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteOrganGun],
             affectedUpgrades: []
         }
     ],
@@ -151,6 +211,7 @@ export const portugueseTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([portugeseUniqueUnits.organGun, portugeseUniqueUnits.eliteOrganGun]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -251,6 +312,7 @@ export const portugueseTechTree: CivTechTree = {
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
             new UnitLine([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon]),
+            new UnitLine([portugeseUniqueUnits.caravel, portugeseUniqueUnits.eliteCaravel]),
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,

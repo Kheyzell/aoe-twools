@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/cumans.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
+    kipchak: new Unit({
+        id: 'kipchak',
+        name: 'Kipchak',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 60,
+            food: 0,
+            gold: 35,
+            stone: 0
+        },
+        duration: 20
+    }),
+    eliteKipchak: new Unit({
+        id: 'eliteKipchak',
+        name: 'Elite Kipchak',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 60,
+            food: 0,
+            gold: 35,
+            stone: 0
+        },
+        duration: 20
+    })
+}
 
 export const cumansTechTree: CivTechTree = {
     id: 'cumans',
@@ -42,7 +73,7 @@ export const cumansTechTree: CivTechTree = {
             description: 'Mounted units move 5%/10%/15% faster in the Feudal/Castle/Imperial Age',
             effectType: EffectType.movementSpeed,
             value: { age2: 5, age3: 10, age4: 15 },
-            affectedUnits: [stableUnits.hussar, stableUnits.paladin, stableUnits.camelRider, stableUnits.eliteSteppeLancer],
+            affectedUnits: [stableUnits.hussar, stableUnits.paladin, stableUnits.camelRider, stableUnits.eliteSteppeLancer, cumansUniqueUnits.eliteKipchak],
             affectedUpgrades: []
         },
         {
@@ -75,7 +106,7 @@ export const cumansTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 650, gold: 400, stone: 0 },
             duration: 40,
-            affectedUnits: [],
+            affectedUnits: [cumansUniqueUnits.eliteKipchak],
             affectedUpgrades: []
         }
     ],
@@ -115,6 +146,7 @@ export const cumansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([cumansUniqueUnits.kipchak, cumansUniqueUnits.eliteKipchak]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

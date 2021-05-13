@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/sicilians.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
+    serjeant: new Unit({
+        id: 'serjeant',
+        name: 'Serjeant',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 35,
+            stone: 0
+        },
+        duration: 12
+    }),
+    eliteSerjeant: new Unit({
+        id: 'eliteSerjeant',
+        name: 'Elite Serjeant',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 35,
+            stone: 0
+        },
+        duration: 12
+    })
+}
 
 export const siciliansTechTree: CivTechTree = {
     id: 'sicilians',
@@ -34,7 +65,7 @@ export const siciliansTechTree: CivTechTree = {
             description: 'Land military units (except Siege weapons) absorb 50% of all incoming bonus damage',
             effectType: EffectType.miscallenous,
             value: 50,
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.cavalryArcher, stableUnits.lightCavalry, stableUnits.cavalier],
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.cavalryArcher, stableUnits.lightCavalry, stableUnits.cavalier, siciliansUniqueUnits.eliteSerjeant],
             affectedUpgrades: []
         },
         {
@@ -72,7 +103,7 @@ export const siciliansTechTree: CivTechTree = {
             value: null,
             cost: { wood: 0, food: 300, gold: 600, stone: 0 },
             duration: 60,
-            affectedUnits: [],
+            affectedUnits: [siciliansUniqueUnits.eliteSerjeant],
             affectedUpgrades: []
         },
         {
@@ -121,6 +152,7 @@ export const siciliansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([siciliansUniqueUnits.serjeant, siciliansUniqueUnits.eliteSerjeant]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

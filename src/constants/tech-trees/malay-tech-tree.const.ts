@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malay.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Unit } = {
+    karambitWarrior: new Unit({
+        id: 'karambitWarrior',
+        name: 'Karambit Warrior',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 25,
+            gold: 15,
+            stone: 0
+        },
+        duration: 6
+    }),
+    eliteKarambitWarrior: new Unit({
+        id: 'eliteKarambitWarrior',
+        name: 'Elite Karambit Warrior',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 25,
+            gold: 15,
+            stone: 0
+        },
+        duration: 6
+    })
+}
 
 export const malayTechTree: CivTechTree = {
     id: 'malay',
@@ -123,6 +154,7 @@ export const malayTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([malayUniqueUnits.karambitWarrior, malayUniqueUnits.eliteKarambitWarrior]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

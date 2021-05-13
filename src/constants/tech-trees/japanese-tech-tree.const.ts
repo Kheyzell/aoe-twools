@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/japanese.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
+    samurai: new Unit({
+        id: 'samurai',
+        name: 'Samurai',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 30,
+            stone: 0
+        },
+        duration: 9
+    }),
+    eliteSamurai: new Unit({
+        id: 'eliteSamurai',
+        name: 'Elite Samurai',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 30,
+            stone: 0
+        },
+        duration: 9
+    })
+}
 
 export const japaneseTechTree: CivTechTree = {
     id: 'japanese',
@@ -42,7 +73,7 @@ export const japaneseTechTree: CivTechTree = {
             description: 'Infantry attack 33% faster starting in the Feudal Age',
             effectType: EffectType.fireRate,
             value: 33,
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, japaneseUniqueUnits.eliteSamurai],
             affectedUpgrades: []
         },
         {
@@ -114,6 +145,7 @@ export const japaneseTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([japaneseUniqueUnits.samurai, japaneseUniqueUnits.eliteSamurai]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

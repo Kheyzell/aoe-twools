@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,37 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/ethiopians.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: Unit } = {
+    shotelWarrior: new Unit({
+        id: 'shotelWarrior',
+        name: 'Shotel Warrior',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 50,
+            gold: 30,
+            stone: 0
+        },
+        duration: 8
+    }),
+    eliteShotelWarrior: new Unit({
+        id: 'eliteShotelWarrior',
+        name: 'Elite Shotel Warrior',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 50,
+            gold: 30,
+            stone: 0
+        },
+        duration: 8
+    })
+}
 
 export const ethiopiansTechTree: CivTechTree = {
     id: 'ethiopians',
@@ -64,7 +95,7 @@ export const ethiopiansTechTree: CivTechTree = {
             value: 100,
             cost: { wood: 0, food: 300, gold: 300, stone: 0 },
             duration: 40,
-            affectedUnits: [],
+            affectedUnits: [ethiopiansUniqueUnits.eliteShotelWarrior],
             affectedUpgrades: []
         },
         {
@@ -115,6 +146,7 @@ export const ethiopiansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([ethiopiansUniqueUnits.shotelWarrior, ethiopiansUniqueUnits.eliteShotelWarrior]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

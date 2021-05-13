@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,6 +16,37 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/celts.png'
 import { EffectType } from "../../models/bonus.model";
 
+export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
+    woadRaider: new Unit({
+        id: 'woadRaider',
+        name: 'Woad Raider',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 65,
+            gold: 25,
+            stone: 0
+        },
+        duration: 10
+    }),
+    eliteWoadRaider: new Unit({
+        id: 'eliteWoadRaider',
+        name: 'Elite Woad Raider',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 65,
+            gold: 25,
+            stone: 0
+        },
+        duration: 10
+    })
+}
+
 export const celtsTechTree: CivTechTree = {
     id: 'celts',
     name: 'Celts',
@@ -26,7 +57,7 @@ export const celtsTechTree: CivTechTree = {
             description: 'Infantry units move 15% faster starting from the Feudal Age',
             effectType: EffectType.movementSpeed,
             value: { age2: 15, age3: 15, age4: 15 },
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, celtsUniqueUnits.eliteWoadRaider],
             affectedUpgrades: []
         },
         {
@@ -121,6 +152,7 @@ export const celtsTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([celtsUniqueUnits.woadRaider, celtsUniqueUnits.eliteWoadRaider]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

@@ -1,4 +1,4 @@
-import { CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,51 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/indians.png'
 import { EffectType } from "../../models/bonus.model";
+
+export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Unit, imperialCamelRider: Unit } = {
+    elephantArcher: new Unit({
+        id: 'elephantArcher',
+        name: 'Elephant Archer',
+        unique: true,
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 100,
+            gold: 70,
+            stone: 0
+        },
+        duration: 25
+    }),
+    eliteElephantArcher: new Unit({
+        id: 'eliteElephantArcher',
+        name: 'Elite Elephant Archer',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 100,
+            gold: 70,
+            stone: 0
+        },
+        duration: 25
+    }),
+    imperialCamelRider: new Unit({
+        id: 'imperialCamelRider',
+        name: 'Imperial Camel Rider',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 55,
+            gold: 60,
+            stone: 0
+        },
+        duration: 20
+    })
+}
 
 export const indiansTechTree: CivTechTree = {
     id: 'indians',
@@ -42,7 +87,7 @@ export const indiansTechTree: CivTechTree = {
             description: 'All Stable units have +1 pierce armor in the Castle Age and +1 in the Imperial Age',
             effectType: EffectType.pierceArmor,
             value: { age3: 1, age4: 2 },
-            affectedUnits: [stableUnits.hussar, stableUnits.heavyCamelRider],
+            affectedUnits: [stableUnits.hussar, indiansUniqueUnits.imperialCamelRider],
             affectedUpgrades: []
         },
         {
@@ -50,7 +95,7 @@ export const indiansTechTree: CivTechTree = {
             description: 'Camel units have +4 attack against standard buildings',
             effectType: EffectType.miscallenous,
             value: 4,
-            affectedUnits: [stableUnits.heavyCamelRider],
+            affectedUnits: [indiansUniqueUnits.imperialCamelRider],
             affectedUpgrades: [],
             team: true
         }
@@ -98,7 +143,7 @@ export const indiansTechTree: CivTechTree = {
     stable: {
         units: [
             new UnitLine([stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar]),
-            new UnitLine([stableUnits.camelRider, stableUnits.heavyCamelRider]),
+            new UnitLine([stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider]),
         ],
         upgrades: new UpgradePerAgeGroup([stableUpgrades.bloodlines, stableUpgrades.husbandry])
     },
@@ -115,6 +160,7 @@ export const indiansTechTree: CivTechTree = {
     castle: {
         units: [
             new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
+            new UnitLine([indiansUniqueUnits.elephantArcher, indiansUniqueUnits.eliteElephantArcher]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
