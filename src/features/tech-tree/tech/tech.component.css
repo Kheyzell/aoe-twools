@@ -17,6 +17,12 @@
     border-radius: 2px;
 }
 
+.Tech.Mini {
+    width: 36px;
+    height: 36px;
+    border-width: 2px;
+}
+
 .Tech.UnitTech {
     background-color: #016288;
 }
@@ -34,6 +40,11 @@
     width: 88px;
     height: 88px;
 }
+.Tech.Mini.Selected {
+    border-width: 2px;
+    width: 32px;
+    height: 32px;
+}
 
 .Tech > .Name {
     position: absolute;
@@ -46,8 +57,16 @@
     outline: none;
     user-select: none;
 }
+.Tech.Mini > .Name {
+    display: none;
+}
+
 
 .Tech > img {
     height: 76px;
     width: 76px;
+}
+.Tech.Mini > img {
+    width: 32px;
+    height: 32px;
 }

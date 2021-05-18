@@ -1,8 +1,8 @@
 import React, { useRef } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import GroupTechTreeComponent from "./group-tech-tree/group-tech-tree"
-import { resetSelection } from "./techSlice"
+import { resetSelection, selectedTechsSelector } from "./techSlice"
 import './tech-tree.css'
 import { barracksTechs } from "../../constants/GroupTechTree/barracks-tech-tree.const"
 import { archeryTechs } from "../../constants/GroupTechTree/archery-tech-tree.const"
@@ -24,6 +24,8 @@ import darkAge from "../../resources/images/darkAge.png"
 import feudalAge from "../../resources/images/feudalAge.png"
 import castleAge from "../../resources/images/castleAge.png"
 import imperialAge from "../../resources/images/imperialAge.png"
+import { Tech } from "../../models/techs.model"
+import TechComponent, { BoxSize } from "./tech/tech.component"
 
 type Props = {}
 type State = {}
@@ -31,6 +33,7 @@ type State = {}
 const TechTreeComponent: React.FC<Props> = (props, state: State) => {
   const dispatch = useDispatch();
   const scrollRef = useRef<HTMLElement>(null);
+  const selectedTechs = useSelector(selectedTechsSelector)
 
   const wheelSpeed = 3;
 
@@ -51,10 +54,23 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
     dispatch(resetSelection())
   }
 
+  const toolsSelectedTechs = selectedTechs.filter(tech => {
+    if (tech.nextLineTech) {
+      const nextTechId = tech.nextLineTech.id
+      return !selectedTechs.find(selectedTech => selectedTech.id === nextTechId)
+    }
+    return true
+  })
+
   return (
     <div className="TechTree" ref={scrollRef as React.RefObject<HTMLDivElement>} onWheel={onWheel}>
       <div className="Tools">
         <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> Reset </button>
+        <div className="SelectedTechs">
+          { toolsSelectedTechs.map((tech: Tech, index: number) => {
+            return (<TechComponent key={index} tech={tech} size={BoxSize.mini}></TechComponent>)
+          }) }
+        </div>
       </div>
       <div className="LeftPanel" style={{ background: `url(${woodenBackground})` }}>
         <div className="AgeRow">
