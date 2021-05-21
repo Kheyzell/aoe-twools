@@ -15,6 +15,15 @@
     user-select: none;
     background-size: cover !important;
 }
+.CivPanel::before {
+    content: '';
+    height: 63px;
+    width: 100%;
+    display: block;
+    position: absolute;
+    margin-left: -8px;
+    top: -20px;
+}
 
 .Title {
     font-size: 1.2em;
