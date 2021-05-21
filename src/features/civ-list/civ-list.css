@@ -1,9 +1,27 @@
 .CivList {
     display: flex;
-    justify-content: center;
     padding: 8px;
     border-bottom: 3px solid black;
     height: 46px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.CivList::before , 
+.CivList::after {
+  content:'';
+  flex:1;
+}
+
+.CivList::-webkit-scrollbar {
+  height: 4px;              /* height of horizontal scrollbar ← You're missing this */
+  width: 4px;               /* width of vertical scrollbar */
+  background-color: #d5d5d5;
+}
+/* .CivList::-webkit-scrollbar-track {
+    background-color: #aaaaaa;
+} */
+.CivList::-webkit-scrollbar-thumb {
+    background-color: #808080
 }
 
 .CivTree {
