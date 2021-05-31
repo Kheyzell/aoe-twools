@@ -51,6 +51,7 @@ export const byzantinesTechTree: CivTechTree = {
     id: 'byzantines',
     name: 'Byzantines',
     crest,
+    wikiUrl: 'Byzantines',
     bonuses: [
         {
             id: 'byzantines1',

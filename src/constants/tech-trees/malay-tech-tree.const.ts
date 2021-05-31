@@ -51,6 +51,7 @@ export const malayTechTree: CivTechTree = {
     id: 'malay',
     name: 'Malay',
     crest,
+    wikiUrl: 'Malay',
     bonuses: [
         {
             id: 'malay1',

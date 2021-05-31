@@ -83,6 +83,7 @@ export interface CivTechTree {
     id: string;
     name: string;
     crest?: string;
+    wikiUrl?: string;
     bonuses: Bonus[]
     uniqueTechs: UniqueTech[]
     barracks: GroupTechTree,

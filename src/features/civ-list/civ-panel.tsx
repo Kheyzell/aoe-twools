@@ -72,9 +72,11 @@ const CivPanel: React.FC<Props> = (props) => {
     const bonuses = props.civ.bonuses
     const uniqueTechs = props.civ.uniqueTechs
 
+    const wikiBaseUrl = 'https://ageofempires.fandom.com/wiki'
+
     return (
         <div className="CivPanel" ref={myRef} style={{ background: `url(${woodenBackground})`, visibility: props.show ? 'visible' : 'hidden' }}>
-            <div className="Title"> {props.civ.name} </div>
+            <div className="Title"> {props.civ.name} • <a href={`${wikiBaseUrl}/${props.civ.wikiUrl}/Tree`} target="_blank"> wiki </a></div>
 
             <div className="Section">
                 <div className="SubTitle"> Bonuses </div>

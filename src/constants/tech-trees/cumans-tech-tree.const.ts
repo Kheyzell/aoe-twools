@@ -50,6 +50,7 @@ export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
 export const cumansTechTree: CivTechTree = {
     id: 'cumans',
     name: 'Cumans',
+    wikiUrl: 'Cumans',
     crest,
     bonuses: [
         {

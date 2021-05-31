@@ -52,6 +52,7 @@ export const chineseTechTree: CivTechTree = {
     id: 'chinese',
     name: 'Chinese',
     crest,
+    wikiUrl: 'Chinese_(Age_of_Empires_II)',
     bonuses: [],
     uniqueTechs: [
         {

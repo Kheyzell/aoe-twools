@@ -65,6 +65,7 @@ export const indiansTechTree: CivTechTree = {
     id: 'indians',
     name: 'Indians',
     crest,
+    wikiUrl: 'Indians_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'indians1',

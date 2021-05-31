@@ -52,6 +52,7 @@ export const teutonsTechTree: CivTechTree = {
     id: 'teutons',
     name: 'Teutons',
     crest,
+    wikiUrl: 'Teutons',
     bonuses: [],
     uniqueTechs: [
         {

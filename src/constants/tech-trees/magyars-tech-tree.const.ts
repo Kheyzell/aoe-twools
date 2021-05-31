@@ -51,6 +51,7 @@ export const magyarsTechTree: CivTechTree = {
     id: 'magyars',
     name: 'Magyars',
     crest,
+    wikiUrl: 'Magyars',
     bonuses: [
         {
             id: 'magyars1',

@@ -51,6 +51,7 @@ export const persiansTechTree: CivTechTree = {
     id: 'persians',
     name: 'Persians',
     crest,
+    wikiUrl: 'Persians_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'persians1',

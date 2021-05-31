@@ -51,6 +51,7 @@ export const aztecsTechTree: CivTechTree = {
     id: 'aztecs',
     name: 'Aztecs',
     crest,
+    wikiUrl: 'Aztecs_(Age_of_Empires_II)',
     bonuses: [],
     uniqueTechs: [
         {
