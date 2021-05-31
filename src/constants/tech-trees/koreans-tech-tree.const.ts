@@ -79,6 +79,7 @@ export const koreansTechTree: CivTechTree = {
     id: 'koreans',
     name: 'Koreans',
     crest,
+    wikiUrl: 'Koreans',
     bonuses: [
         {
             id: 'koreans1',

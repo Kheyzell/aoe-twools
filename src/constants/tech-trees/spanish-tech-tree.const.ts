@@ -65,6 +65,7 @@ export const spanishTechTree: CivTechTree = {
     id: 'spanish',
     name: 'Spanish',
     crest,
+    wikiUrl: 'Spanish_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'spanish1',

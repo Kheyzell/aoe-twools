@@ -79,6 +79,7 @@ export const berbersTechTree: CivTechTree = {
     id: 'berbers',
     name: 'Berbers',
     crest,
+    wikiUrl: 'Berbers',
     bonuses: [
         {
             id: 'berbers1',
@@ -152,6 +153,7 @@ export const berbersTechTree: CivTechTree = {
             new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
             new UnitLine([archeryUnits.handCannoneer]),
             new UnitLine([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher]),
+            new UnitLine([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour]),
         ],
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
     },

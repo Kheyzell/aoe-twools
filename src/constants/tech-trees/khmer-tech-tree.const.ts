@@ -51,6 +51,7 @@ export const khmerTechTree: CivTechTree = {
     id: 'khmer',
     name: 'Khmer',
     crest,
+    wikiUrl: 'Khmer',
     bonuses: [
         {
             id: 'khmer1',

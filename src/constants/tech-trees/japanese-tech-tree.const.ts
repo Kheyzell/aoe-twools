@@ -51,6 +51,7 @@ export const japaneseTechTree: CivTechTree = {
     id: 'japanese',
     name: 'Japanese',
     crest,
+    wikiUrl: 'Japanese_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'japanese1',

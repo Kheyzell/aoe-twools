@@ -50,6 +50,7 @@ export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
 export const britonsTechTree: CivTechTree = {
     id: 'britons',
     name: 'Britons',
+    wikiUrl: 'Britons',
     crest,
     bonuses: [
         {

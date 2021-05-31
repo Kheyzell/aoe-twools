@@ -65,6 +65,7 @@ export const incasTechTree: CivTechTree = {
     id: 'incas',
     name: 'Incas',
     crest,
+    wikiUrl: 'Incas_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'incas1',
