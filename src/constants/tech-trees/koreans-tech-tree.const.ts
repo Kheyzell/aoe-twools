@@ -14,7 +14,8 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/koreans.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleShip: Unit, eliteTurtleShip: Unit } = {
     warWagon: new Unit({
@@ -75,6 +76,35 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
     })
 }
 
+chainTechs([koreansUniqueUnits.turtleShip, koreansUniqueUnits.eliteTurtleShip])
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'eupseong',
+        name: 'Eupseong',
+        age: 3,
+        description: 'Towers (except Bombard Towers) have +2 range',
+        effectType: EffectType.range,
+        value: 2,
+        cost: { wood: 300, food: 300, gold: 0, stone: 0 },
+        duration: 40,
+        affectedUnits: [],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'shinkichon',
+        name: 'Shinkichon',
+        age: 4,
+        description: 'Gives the Mangonel line +1 range',
+        effectType: EffectType.range,
+        value: 1,
+        cost: { wood: 800, food: 0, gold: 500, stone: 0 },
+        duration: 60,
+        affectedUnits: [siegeUnits.siegeOnager],
+        affectedUpgrades: []
+    })
+]
+
 export const koreansTechTree: CivTechTree = {
     id: 'koreans',
     name: 'Koreans',
@@ -131,30 +161,7 @@ export const koreansTechTree: CivTechTree = {
             team: true
         },
     ],
-    uniqueTechs: [
-        {
-            id: 'eupseong',
-            name: 'Eupseong',
-            description: 'Towers (except Bombard Towers) have +2 range',
-            effectType: EffectType.range,
-            value: 2,
-            cost: { wood: 300, food: 300, gold: 0, stone: 0 },
-            duration: 40,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'shinkichon',
-            name: 'Shinkichon',
-            description: 'Gives the Mangonel line +1 range',
-            effectType: EffectType.range,
-            value: 1,
-            cost: { wood: 800, food: 0, gold: 500, stone: 0 },
-            duration: 60,
-            affectedUnits: [siegeUnits.siegeOnager],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -190,12 +197,11 @@ export const koreansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([koreansUniqueUnits.warWagon, koreansUniqueUnits.eliteWarWagon]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

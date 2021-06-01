@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/byzantines.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const byzantinesUniqueUnits: { cataphract: Unit, eliteCataphract: Unit } = {
     cataphract: new Unit({
@@ -46,6 +46,33 @@ export const byzantinesUniqueUnits: { cataphract: Unit, eliteCataphract: Unit } 
         duration: 20
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'greekFire',
+        name: 'Greek Fire',
+        age: 3,
+        description: 'Fire Ships +1 range',
+        effectType: EffectType.range,
+        value: 1,
+        cost: { wood: 0, food: 250, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [dockUnits.fastFireShip],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'logistica',
+        name: 'Logistica',
+        age: 4,
+        description: 'Cataphracts deal trample damage and +6 attack against infantry',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 800, gold: 600, stone: 0 },
+        duration: 50,
+        affectedUnits: [byzantinesUniqueUnits.eliteCataphract],
+        affectedUpgrades: []
+    })
+]
 
 export const byzantinesTechTree: CivTechTree = {
     id: 'byzantines',
@@ -103,30 +130,7 @@ export const byzantinesTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'greekFire',
-            name: 'Greek Fire',
-            description: 'Fire Ships +1 range',
-            effectType: EffectType.range,
-            value: 1,
-            cost: { wood: 0, food: 250, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [dockUnits.fastFireShip],
-            affectedUpgrades: []
-        },
-        {
-            id: 'logistica',
-            name: 'Logistica',
-            description: 'Cataphracts deal trample damage and +6 attack against infantry',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 800, gold: 600, stone: 0 },
-            duration: 50,
-            affectedUnits: [byzantinesUniqueUnits.eliteCataphract],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -163,12 +167,11 @@ export const byzantinesTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([byzantinesUniqueUnits.cataphract, byzantinesUniqueUnits.eliteCataphract]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

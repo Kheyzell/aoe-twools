@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/britons.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
     longbowman: new Unit({
@@ -46,6 +46,33 @@ export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
         duration: 18
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'yeomen',
+        name: 'Yeomen',
+        age: 3,
+        description: '+1 range for foot archers and +2 attack for towers',
+        effectType: EffectType.range,
+        value: 1,
+        cost: { wood: 750, food: 0, gold: 450, stone: 0 },
+        duration: 60,
+        affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher, britonsUniqueUnits.eliteLongbowman],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'warwolf',
+        name: 'Warwolf',
+        age: 4,
+        description: 'Trebuchets do blast damage and have 100% accuracy',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 800, food: 0, gold: 400, stone: 0 },
+        duration: 40,
+        affectedUnits: [castleUnits.trebuchet],
+        affectedUpgrades: []
+    })
+]
 
 export const britonsTechTree: CivTechTree = {
     id: 'britons',
@@ -87,30 +114,7 @@ export const britonsTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'yeomen',
-            name: 'Yeomen',
-            description: '+1 range for foot archers and +2 attack for towers',
-            effectType: EffectType.range,
-            value: 1,
-            cost: { wood: 750, food: 0, gold: 450, stone: 0 },
-            duration: 60,
-            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher, britonsUniqueUnits.eliteLongbowman],
-            affectedUpgrades: []
-        },
-        {
-            id: 'warwolf',
-            name: 'Warwolf',
-            description: 'Trebuchets do blast damage and have 100% accuracy',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 800, food: 0, gold: 400, stone: 0 },
-            duration: 40,
-            affectedUnits: [castleUnits.trebuchet],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -144,12 +148,11 @@ export const britonsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([britonsUniqueUnits.longbowman, britonsUniqueUnits.eliteLongbowman]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/slavs.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
     boyar: new Unit({
@@ -46,6 +46,33 @@ export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
         duration: 15
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'orthodoxy',
+        name: 'Orthodoxy',
+        age: 3,
+        description: '+3/+3 armor for Monks',
+        effectType: EffectType.armor,
+        value: 3,
+        cost: { wood: 0, food: 200, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [monasteryUnits.monk],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'druzhina',
+        name: 'Druzhina',
+        age: 4,
+        description: 'infantry damage adjacent units',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 1200, gold: 500, stone: 0 },
+        duration: 40,
+        affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+        affectedUpgrades: []
+    })
+]
 
 export const slavsTechTree: CivTechTree = {
     id: 'slavs',
@@ -87,30 +114,7 @@ export const slavsTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'orthodoxy',
-            name: 'Orthodoxy',
-            description: '+3/+3 armor for Monks',
-            effectType: EffectType.armor,
-            value: 3,
-            cost: { wood: 0, food: 200, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [monasteryUnits.monk],
-            affectedUpgrades: []
-        },
-        {
-            id: 'druzhina',
-            name: 'Druzhina',
-            description: 'infantry damage adjacent units',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 1200, gold: 500, stone: 0 },
-            duration: 40,
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -144,12 +148,11 @@ export const slavsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([slavsUniqueUnits.boyar, slavsUniqueUnits.eliteBoyar]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

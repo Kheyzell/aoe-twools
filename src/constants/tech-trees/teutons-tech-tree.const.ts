@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/teutons.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { getAllCivUnits } from "../../utils/techs.utils";
 
 export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Unit } = {
@@ -33,7 +33,7 @@ export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Un
         duration: 12
     }),
     eliteTeutonicKnight: new Unit({
-        id: 'eliteTeutonic Knight',
+        id: 'eliteTeutonicKnight',
         name: 'Elite Teutonic Knight',
         unique: true,
         age: 4,
@@ -48,36 +48,40 @@ export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Un
     })
 }
 
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'ironclad',
+        name: 'Ironclad',
+        age: 3,
+        description: 'siege weapons +4 melee armor',
+        effectType: EffectType.meleeArmor,
+        value: 4,
+        cost: { wood: 400, food: 0, gold: 350, stone: 0 },
+        duration: 60,
+        affectedUnits: [siegeUnits.cappedRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower, siegeUnits.bombardCannon],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'crenellations',
+        name: 'Crenellations',
+        age: 4,
+        description: 'Castles +3 range; garrisoned infantry fires arrows',
+        effectType: EffectType.range,
+        value: 3,
+        cost: { wood: 0, food: 600, gold: 0, stone: 400 },
+        duration: 60,
+        affectedUnits: [],
+        affectedUpgrades: []
+    })
+]
+
 export const teutonsTechTree: CivTechTree = {
     id: 'teutons',
     name: 'Teutons',
     crest,
     wikiUrl: 'Teutons',
     bonuses: [],
-    uniqueTechs: [
-        {
-            id: 'ironclad',
-            name: 'Ironclad',
-            description: 'siege weapons +4 melee armor',
-            effectType: EffectType.meleeArmor,
-            value: 4,
-            cost: { wood: 400, food: 0, gold: 350, stone: 0 },
-            duration: 60,
-            affectedUnits: [siegeUnits.cappedRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower, siegeUnits.bombardCannon],
-            affectedUpgrades: []
-        },
-        {
-            id: 'crenellations',
-            name: 'Crenellations',
-            description: 'Castles +3 range; garrisoned infantry fires arrows',
-            effectType: EffectType.range,
-            value: 3,
-            cost: { wood: 0, food: 600, gold: 0, stone: 400 },
-            duration: 60,
-            affectedUnits: [],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -113,12 +117,11 @@ export const teutonsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([teutonsUniqueUnits.teutonicKnight, teutonsUniqueUnits.eliteTeutonicKnight]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

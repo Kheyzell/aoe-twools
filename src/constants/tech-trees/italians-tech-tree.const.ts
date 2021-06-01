@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/italians.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossbowman: Unit, condottiero: Unit } = {
     genoeseCrossbowman: new Unit({
@@ -60,6 +60,33 @@ export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossb
         duration: 18
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'pavise',
+        name: 'Pavise',
+        age: 3,
+        description: 'foot archers (except Skirmishers) and Condottieri +1/+1 armor',
+        effectType: EffectType.armor,
+        value: 1,
+        cost: { wood: 0, food: 300, gold: 150, stone: 0 },
+        duration: 40,
+        affectedUnits: [archeryUnits.arbalester, italiansUniqueUnits.condottiero],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'silkRoad',
+        name: 'Silk Road',
+        age: 4,
+        description: 'trade units cost -50%',
+        effectType: EffectType.discount,
+        value: 50,
+        cost: { wood: 0, food: 500, gold: 250, stone: 0 },
+        duration: 60,
+        affectedUnits: [marketUnits.tradeCart],
+        affectedUpgrades: []
+    })
+]
 
 export const italiansTechTree: CivTechTree = {
     id: 'italians',
@@ -109,30 +136,7 @@ export const italiansTechTree: CivTechTree = {
             team: true
         },
     ],
-    uniqueTechs: [
-        {
-            id: 'pavise',
-            name: 'Pavise',
-            description: 'foot archers (except Skirmishers) and Condottieri +1/+1 armor',
-            effectType: EffectType.armor,
-            value: 1,
-            cost: { wood: 0, food: 300, gold: 150, stone: 0 },
-            duration: 40,
-            affectedUnits: [archeryUnits.arbalester, italiansUniqueUnits.condottiero],
-            affectedUpgrades: []
-        },
-        {
-            id: 'silkRoad',
-            name: 'Silk Road',
-            description: 'trade units cost -50%',
-            effectType: EffectType.discount,
-            value: 50,
-            cost: { wood: 0, food: 500, gold: 250, stone: 0 },
-            duration: 60,
-            affectedUnits: [marketUnits.tradeCart],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -169,12 +173,11 @@ export const italiansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([italiansUniqueUnits.genoeseCrossbowman, italiansUniqueUnits.eliteGenoeseCrossbowman]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

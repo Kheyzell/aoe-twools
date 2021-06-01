@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/mongols.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
     mangudai: new Unit({
@@ -46,6 +46,33 @@ export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
         duration: 26
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'nomads',
+        name: 'Nomads',
+        age: 3,
+        description: 'Houses retain population when destroyed',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 300, food: 0, gold: 150, stone: 0 },
+        duration: 40,
+        affectedUnits: [],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'drill',
+        name: 'Drill',
+        age: 4,
+        description: 'Siege Workshop units move +50% faster',
+        effectType: EffectType.movementSpeed,
+        value: 50,
+        cost: { wood: 500, food: 0, gold: 450, stone: 0 },
+        duration: 60,
+        affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
+        affectedUpgrades: []
+    })
+]
 
 export const mongolsTechTree: CivTechTree = {
     id: 'mongols',
@@ -87,30 +114,7 @@ export const mongolsTechTree: CivTechTree = {
             team: true
         },
     ],
-    uniqueTechs: [
-        {
-            id: 'nomads',
-            name: 'Nomads',
-            description: 'Houses retain population when destroyed',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 300, food: 0, gold: 150, stone: 0 },
-            duration: 40,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'drill',
-            name: 'Drill',
-            description: 'Siege Workshop units move +50% faster',
-            effectType: EffectType.movementSpeed,
-            value: 50,
-            cost: { wood: 500, food: 0, gold: 450, stone: 0 },
-            duration: 60,
-            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -146,12 +150,11 @@ export const mongolsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([mongolsUniqueUnits.mangudai, mongolsUniqueUnits.eliteMangudai]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

@@ -6,6 +6,7 @@ import TechComponent from "../tech-tree/tech/tech.component"
 import woodenBackground from "../../resources/images/backgrounds/parchment2.jpg"
 import './civ-panel.css'
 import { Bonus } from "../../models/bonus.model"
+import { stopEventPropagation } from "../../utils/utils"
 
 
 type Props = {
@@ -73,10 +74,15 @@ const CivPanel: React.FC<Props> = (props) => {
     const uniqueTechs = props.civ.uniqueTechs
 
     const wikiBaseUrl = 'https://ageofempires.fandom.com/wiki'
+    const wikiUrl = `${wikiBaseUrl}/${props.civ.wikiUrl}/Tree`
+
+    const openWiki = () => {
+        window.open(wikiUrl)
+    }
 
     return (
-        <div className="CivPanel" ref={myRef} style={{ background: `url(${woodenBackground})`, visibility: props.show ? 'visible' : 'hidden' }}>
-            <div className="Title"> {props.civ.name} • <a href={`${wikiBaseUrl}/${props.civ.wikiUrl}/Tree`} target="_blank"> wiki </a></div>
+        <div className="CivPanel" ref={myRef} style={{ background: `url(${woodenBackground})`, visibility: props.show ? 'visible' : 'hidden' }} onClick={stopEventPropagation}>
+            <div className="Title"> {props.civ.name} • <a href={wikiUrl} target="_blank" onClick={openWiki}> wiki </a></div>
 
             <div className="Section">
                 <div className="SubTitle"> Bonuses </div>

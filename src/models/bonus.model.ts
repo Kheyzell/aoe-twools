@@ -1,4 +1,4 @@
-import { Cost, Unit, Upgrade } from "./techs.model";
+import { Cost, TechType, Unit, Upgrade } from "./techs.model";
 
 export enum EffectType {
     miscallenous,
@@ -44,8 +44,32 @@ export interface Bonus {
     team?: boolean
 }
 
-export interface UniqueTech extends Bonus {
-    name: string,
-    cost: Cost,
+export class UniqueTech implements Bonus, Upgrade {
+    id: string
+    name: string
+    age: number
+    cost: Cost
     duration: number
+    type: TechType
+    unique?: boolean
+    description: string
+    effectType: EffectType
+    value: number | { age1?: number, age2?: number, age3?: number, age4?: number } | null
+    affectedUnits: Unit[]
+    affectedUpgrades: Upgrade[]
+
+    constructor(data: any) {
+        this.type = TechType.uniqueTech
+        this.id = data.id
+        this.name = data.name
+        this.age = data.age
+        this.cost = data.cost
+        this.duration = data.duration
+        this.unique = true
+        this.description = data.description
+        this.effectType = data.effectType
+        this.value = data.value
+        this.affectedUnits = data.affectedUnits
+        this.affectedUpgrades = data.affectedUpgrades
+    }
 }

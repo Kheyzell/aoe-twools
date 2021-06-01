@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/cumans.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
     kipchak: new Unit({
@@ -46,6 +46,33 @@ export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
         duration: 20
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'steppeHusbandry',
+        name: 'Steppe Husbandry',
+        age: 3,
+        description: 'Scout Cavalry line, Steppe Lancers and Cavalry Archers are trained 100% faster',
+        effectType: EffectType.creationSpeed,
+        value: 100,
+        cost: { wood: 300, food: 200, gold: 0, stone: 0 },
+        duration: 40,
+        affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer, archeryUnits.heavyCavalryArcher],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'cumanMercenaries',
+        name: 'Cuman Mercenaries',
+        age: 4,
+        description: 'team members can create 10 free Elite Kipchaks at the Castle',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 650, gold: 400, stone: 0 },
+        duration: 40,
+        affectedUnits: [cumansUniqueUnits.eliteKipchak],
+        affectedUpgrades: []
+    })
+]
 
 export const cumansTechTree: CivTechTree = {
     id: 'cumans',
@@ -87,30 +114,7 @@ export const cumansTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'steppeHusbandry',
-            name: 'Steppe Husbandry',
-            description: 'Scout Cavalry line, Steppe Lancers and Cavalry Archers are trained 100% faster',
-            effectType: EffectType.creationSpeed,
-            value: 100,
-            cost: { wood: 300, food: 200, gold: 0, stone: 0 },
-            duration: 40,
-            affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer, archeryUnits.heavyCavalryArcher],
-            affectedUpgrades: []
-        },
-        {
-            id: 'cumanMercenaries',
-            name: 'Cuman Mercenaries',
-            description: 'team members can create 10 free Elite Kipchaks at the Castle',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 650, gold: 400, stone: 0 },
-            duration: 40,
-            affectedUnits: [cumansUniqueUnits.eliteKipchak],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -146,12 +150,11 @@ export const cumansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([cumansUniqueUnits.kipchak, cumansUniqueUnits.eliteKipchak]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

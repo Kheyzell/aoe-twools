@@ -14,7 +14,8 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/vikings.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: Unit, eliteLongboat: Unit } = {
     berserk: new Unit({
@@ -75,6 +76,35 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
     })
 }
 
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'chieftains',
+        name: 'Chieftains',
+        age: 3,
+        description: 'Infantry +5 attack against cavalry and +4 attack against camels',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 700, gold: 500, stone: 0 },
+        duration: 40,
+        affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, vikingsUniqueUnits.eliteBerserk],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'berserkergang',
+        name: 'Berserkergang',
+        age: 4,
+        description: 'Berserks regenerate faster (40HP/min)',
+        effectType: EffectType.regen,
+        value: 40,
+        cost: { wood: 0, food: 850, gold: 400, stone: 0 },
+        duration: 40,
+        affectedUnits: [vikingsUniqueUnits.eliteBerserk],
+        affectedUpgrades: []
+    })
+]
+
+chainTechs([vikingsUniqueUnits.longboat, vikingsUniqueUnits.eliteLongboat])
+
 export const vikingsTechTree: CivTechTree = {
     id: 'vikings',
     name: 'Vikings',
@@ -115,30 +145,7 @@ export const vikingsTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'chieftains',
-            name: 'Chieftains',
-            description: 'Infantry +5 attack against cavalry and +4 attack against camels',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 700, gold: 500, stone: 0 },
-            duration: 40,
-            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, vikingsUniqueUnits.eliteBerserk],
-            affectedUpgrades: []
-        },
-        {
-            id: 'berserkergang',
-            name: 'Berserkergang',
-            description: 'Berserks regenerate faster (40HP/min)',
-            effectType: EffectType.regen,
-            value: 40,
-            cost: { wood: 0, food: 850, gold: 400, stone: 0 },
-            duration: 40,
-            affectedUnits: [vikingsUniqueUnits.eliteBerserk],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -172,12 +179,11 @@ export const vikingsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

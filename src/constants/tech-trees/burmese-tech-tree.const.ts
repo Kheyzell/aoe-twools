@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/burmese.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
     arambai: new Unit({
@@ -46,6 +46,33 @@ export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
         duration: 21
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'howdah',
+        name: 'Howdah',
+        age: 3,
+        description: 'Battle Elephants +1/+1 armor',
+        effectType: EffectType.armor,
+        value: 1,
+        cost: { wood: 300, food: 400, gold: 0, stone: 0 },
+        duration: 40,
+        affectedUnits: [stableUnits.eliteBattleElephant],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'manipurCavalry',
+        name: 'Manipur Cavalry',
+        age: 4,
+        description: 'cavalry and Arambai +6 attack against standard buildings',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 650, gold: 400, stone: 0 },
+        duration: 40,
+        affectedUnits: [stableUnits.hussar, stableUnits.cavalier, stableUnits.eliteBattleElephant, burmeseUniqueUnits.eliteArambai],
+        affectedUpgrades: []
+    })
+]
 
 export const burmeseTechTree: CivTechTree = {
     id: 'burmese',
@@ -87,30 +114,7 @@ export const burmeseTechTree: CivTechTree = {
             team: true
         },
     ],
-    uniqueTechs: [
-        {
-            id: 'howdah',
-            name: 'Howdah',
-            description: 'Battle Elephants +1/+1 armor',
-            effectType: EffectType.armor,
-            value: 1,
-            cost: { wood: 300, food: 400, gold: 0, stone: 0 },
-            duration: 40,
-            affectedUnits: [stableUnits.eliteBattleElephant],
-            affectedUpgrades: []
-        },
-        {
-            id: 'manipurCavalry',
-            name: 'Manipur Cavalry',
-            description: 'cavalry and Arambai +6 attack against standard buildings',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 650, gold: 400, stone: 0 },
-            duration: 40,
-            affectedUnits: [stableUnits.hussar, stableUnits.cavalier, stableUnits.eliteBattleElephant, burmeseUniqueUnits.eliteArambai],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -146,12 +150,11 @@ export const burmeseTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([burmeseUniqueUnits.arambai, burmeseUniqueUnits.eliteArambai]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

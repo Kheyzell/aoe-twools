@@ -2,7 +2,8 @@ import { Bonus, UniqueTech } from "./bonus.model"
 
 export enum TechType {
     unit = 'unit',
-    upgrade = 'upgrade'
+    upgrade = 'upgrade',
+    uniqueTech = 'uniqueTech'
 }
 
 export enum UnitType { civilian, military }

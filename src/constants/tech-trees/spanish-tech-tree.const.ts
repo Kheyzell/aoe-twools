@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/spanish.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, missionary: Unit } = {
     conquistador: new Unit({
@@ -60,6 +60,33 @@ export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, 
         duration: 51
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'inquisition',
+        name: 'Inquisition',
+        age: 3,
+        description: 'conversion rate improved',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 100, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [monasteryUnits.monk, spanishUniqueUnits.missionary],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'supremacy',
+        name: 'Supremacy',
+        age: 4,
+        description: 'increased attack (+6), armor (+2/+2), and HP (+40) for Villagers',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 400, gold: 250, stone: 0 },
+        duration: 60,
+        affectedUnits: [townCenterUnits.villager],
+        affectedUpgrades: []
+    })
+]
 
 export const spanishTechTree: CivTechTree = {
     id: 'spanish',
@@ -115,30 +142,7 @@ export const spanishTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'inquisition',
-            name: 'Inquisition',
-            description: 'conversion rate improved',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 100, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [monasteryUnits.monk, spanishUniqueUnits.missionary],
-            affectedUpgrades: []
-        },
-        {
-            id: 'supremacy',
-            name: 'Supremacy',
-            description: 'increased attack (+6), armor (+2/+2), and HP (+40) for Villagers',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 400, gold: 250, stone: 0 },
-            duration: 60,
-            affectedUnits: [townCenterUnits.villager],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -174,12 +178,11 @@ export const spanishTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([spanishUniqueUnits.conquistador, spanishUniqueUnits.eliteConquistador]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

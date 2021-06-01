@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/magyars.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit } = {
     magyarHuszar: new Unit({
@@ -46,6 +46,33 @@ export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit }
         duration: 16
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'corvinianArmy',
+        name: 'Corvinian Army',
+        age: 3,
+        description: 'Magyar Huszars cost no gold',
+        effectType: EffectType.discoutGold,
+        value: 100,
+        cost: { wood: 0, food: 200, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [magyarsUniqueUnits.eliteMagyarHuszar],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'recurveBow',
+        name: 'Recurve Bow',
+        age: 4,
+        description: 'Cavalry Archers + 1 range and attack',
+        effectType: EffectType.miscallenous,
+        value: 1,
+        cost: { wood: 600, food: 0, gold: 400, stone: 0 },
+        duration: 40,
+        affectedUnits: [archeryUnits.heavyCavalryArcher],
+        affectedUpgrades: []
+    })
+]
 
 export const magyarsTechTree: CivTechTree = {
     id: 'magyars',
@@ -87,30 +114,7 @@ export const magyarsTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'corvinianArmy',
-            name: 'Corvinian Army',
-            description: 'Magyar Huszars cost no gold',
-            effectType: EffectType.discoutGold,
-            value: 100,
-            cost: { wood: 0, food: 200, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [magyarsUniqueUnits.eliteMagyarHuszar],
-            affectedUpgrades: []
-        },
-        {
-            id: 'recurveBow',
-            name: 'Recurve Bow',
-            description: 'Cavalry Archers + 1 range and attack',
-            effectType: EffectType.miscallenous,
-            value: 1,
-            cost: { wood: 600, food: 0, gold: 400, stone: 0 },
-            duration: 40,
-            affectedUnits: [archeryUnits.heavyCavalryArcher],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -144,12 +148,11 @@ export const magyarsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([magyarsUniqueUnits.magyarHuszar, magyarsUniqueUnits.eliteMagyarHuszar]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malians.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
     gbeto: new Unit({
@@ -46,6 +46,33 @@ export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
         duration: 17
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'tigui',
+        name: 'Tigui',
+        age: 3,
+        description: 'Town Centers fire arrows even without garrison',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 300, food: 200, gold: 0, stone: 0 },
+        duration: 40,
+        affectedUnits: [],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'farimba',
+        name: 'Farimba',
+        age: 4,
+        description: 'Stable units +5 attack',
+        effectType: EffectType.damage,
+        value: 5,
+        cost: { wood: 0, food: 650, gold: 400, stone: 0 },
+        duration: 40,
+        affectedUnits: [stableUnits.lightCavalry, stableUnits.cavalier, stableUnits.heavyCamelRider],
+        affectedUpgrades: []
+    })
+]
 
 export const maliansTechTree: CivTechTree = {
     id: 'malians',
@@ -87,30 +114,7 @@ export const maliansTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'tigui',
-            name: 'Tigui',
-            description: 'Town Centers fire arrows even without garrison',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 300, food: 200, gold: 0, stone: 0 },
-            duration: 40,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'farimba',
-            name: 'Farimba',
-            description: 'Stable units +5 attack',
-            effectType: EffectType.damage,
-            value: 5,
-            cost: { wood: 0, food: 650, gold: 400, stone: 0 },
-            duration: 40,
-            affectedUnits: [stableUnits.lightCavalry, stableUnits.cavalier, stableUnits.heavyCamelRider],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -147,12 +151,11 @@ export const maliansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([maliansUniqueUnits.gbeto, maliansUniqueUnits.eliteGbeto]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

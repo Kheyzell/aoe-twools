@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/turks.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
     janissary: new Unit({
@@ -46,6 +46,33 @@ export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
         duration: 21
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'sipahi',
+        name: 'Sipahi',
+        age: 3,
+        description: 'Cavalry Archer units +20 hit points',
+        effectType: EffectType.health,
+        value: 20,
+        cost: { wood: 0, food: 350, gold: 150, stone: 0 },
+        duration: 60,
+        affectedUnits: [archeryUnits.heavyCavalryArcher],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'artillery',
+        name: 'Artillery',
+        age: 4,
+        description: '+2 range for Bombard Towers, Bombard Cannons, Cannon Galleons',
+        effectType: EffectType.range,
+        value: 2,
+        cost: { wood: 0, food: 0, gold: 500, stone: 450 },
+        duration: 40,
+        affectedUnits: [siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+        affectedUpgrades: []
+    })
+]
 
 export const turksTechTree: CivTechTree = {
     id: 'turks',
@@ -111,30 +138,7 @@ export const turksTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'sipahi',
-            name: 'Sipahi',
-            description: 'Cavalry Archer units +20 hit points',
-            effectType: EffectType.health,
-            value: 20,
-            cost: { wood: 0, food: 350, gold: 150, stone: 0 },
-            duration: 60,
-            affectedUnits: [archeryUnits.heavyCavalryArcher],
-            affectedUpgrades: []
-        },
-        {
-            id: 'artillery',
-            name: 'Artillery',
-            description: '+2 range for Bombard Towers, Bombard Cannons, Cannon Galleons',
-            effectType: EffectType.range,
-            value: 2,
-            cost: { wood: 0, food: 0, gold: 500, stone: 450 },
-            duration: 40,
-            affectedUnits: [siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -171,12 +175,11 @@ export const turksTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([turksUniqueUnits.janissary, turksUniqueUnits.eliteJanissary]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

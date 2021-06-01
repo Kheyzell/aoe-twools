@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/sicilians.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
     serjeant: new Unit({
@@ -46,6 +46,33 @@ export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
         duration: 12
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'firstCrusade',
+        name: 'First Crusade',
+        age: 3,
+        description: 'Upon researching, each Town Center (up to 5) spawns a one-time group of 7 Serjeants; units become more resistant to conversion (+3)',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 300, gold: 600, stone: 0 },
+        duration: 60,
+        affectedUnits: [siciliansUniqueUnits.eliteSerjeant],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'scutage',
+        name: 'Scutage',
+        age: 4,
+        description: 'Upon researching, each team member receives a one-time payment of 15 gold for each military unit that they own',
+        effectType: EffectType.miscallenous,
+        value: 15,
+        cost: { wood: 0, food: 500, gold: 400, stone: 0 },
+        duration: 45,
+        affectedUnits: [],
+        affectedUpgrades: []
+    })
+]
 
 export const siciliansTechTree: CivTechTree = {
     id: 'sicilians',
@@ -95,30 +122,7 @@ export const siciliansTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'firstCrusade',
-            name: 'First Crusade',
-            description: 'Upon researching, each Town Center (up to 5) spawns a one-time group of 7 Serjeants; units become more resistant to conversion (+3)',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 300, gold: 600, stone: 0 },
-            duration: 60,
-            affectedUnits: [siciliansUniqueUnits.eliteSerjeant],
-            affectedUpgrades: []
-        },
-        {
-            id: 'scutage',
-            name: 'Scutage',
-            description: 'Upon researching, each team member receives a one-time payment of 15 gold for each military unit that they own',
-            effectType: EffectType.miscallenous,
-            value: 15,
-            cost: { wood: 0, food: 500, gold: 400, stone: 0 },
-            duration: 45,
-            affectedUnits: [],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -152,12 +156,11 @@ export const siciliansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([siciliansUniqueUnits.serjeant, siciliansUniqueUnits.eliteSerjeant]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

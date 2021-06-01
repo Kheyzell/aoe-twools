@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malay.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Unit } = {
     karambitWarrior: new Unit({
@@ -46,6 +46,33 @@ export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Un
         duration: 6
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'thalassocracy',
+        name: 'Thalassocracy',
+        age: 3,
+        description: 'upgrades Docks to Harbors, which shoot arrows',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'forcedLevy',
+        name: 'Forced Levy',
+        age: 4,
+        description: 'Turns Militia line gold cost to food cost',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 850, gold: 500, stone: 0 },
+        duration: 40,
+        affectedUnits: [barracksUnits.twoHandedSwordsman],
+        affectedUpgrades: []
+    })
+]
 
 export const malayTechTree: CivTechTree = {
     id: 'malay',
@@ -95,30 +122,7 @@ export const malayTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'thalassocracy',
-            name: 'Thalassocracy',
-            description: 'upgrades Docks to Harbors, which shoot arrows',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 300, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'forcedLevy',
-            name: 'Forced Levy',
-            description: 'Turns Militia line gold cost to food cost',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 850, gold: 500, stone: 0 },
-            duration: 40,
-            affectedUnits: [barracksUnits.twoHandedSwordsman],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
@@ -154,12 +158,11 @@ export const malayTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([malayUniqueUnits.karambitWarrior, malayUniqueUnits.eliteKarambitWarrior]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

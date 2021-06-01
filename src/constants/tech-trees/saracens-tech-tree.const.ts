@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/saracens.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
     mameluke: new Unit({
@@ -46,6 +46,33 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
         duration: 23
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'madrasah',
+        name: 'Madrasah',
+        age: 3,
+        description: `33% of a Monk's gold cost are returned if the Monk gets killed`,
+        effectType: EffectType.miscallenous,
+        value: 33,
+        cost: { wood: 0, food: 200, gold: 100, stone: 0 },
+        duration: 30,
+        affectedUnits: [monasteryUnits.monk],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'zealotry',
+        name: 'Zealotry',
+        age: 4,
+        description: 'Camel Riders and Mamelukes +20 hit points',
+        effectType: EffectType.health,
+        value: 20,
+        cost: { wood: 0, food: 500, gold: 450, stone: 0 },
+        duration: 50,
+        affectedUnits: [stableUnits.heavyCamelRider, saracensUniqueUnits.eliteMameluke],
+        affectedUpgrades: []
+    })
+]
 
 export const saracensTechTree: CivTechTree = {
     id: 'saracens',
@@ -103,30 +130,7 @@ export const saracensTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'madrasah',
-            name: 'Madrasah',
-            description: `33% of a Monk's gold cost are returned if the Monk gets killed`,
-            effectType: EffectType.miscallenous,
-            value: 33,
-            cost: { wood: 0, food: 200, gold: 100, stone: 0 },
-            duration: 30,
-            affectedUnits: [monasteryUnits.monk],
-            affectedUpgrades: []
-        },
-        {
-            id: 'zealotry',
-            name: 'Zealotry',
-            description: 'Camel Riders and Mamelukes +20 hit points',
-            effectType: EffectType.health,
-            value: 20,
-            cost: { wood: 0, food: 500, gold: 450, stone: 0 },
-            duration: 50,
-            affectedUnits: [stableUnits.heavyCamelRider, saracensUniqueUnits.eliteMameluke],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -163,12 +167,11 @@ export const saracensTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

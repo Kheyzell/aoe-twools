@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/lithuanians.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
     leitis: new Unit({
@@ -46,6 +46,33 @@ export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
         duration: 18
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'hillForts',
+        name: 'Hill Forts',
+        age: 3,
+        description: 'Town Centers +3 range',
+        effectType: EffectType.range,
+        value: 3,
+        cost: { wood: 0, food: 250, gold: 250, stone: 0 },
+        duration: 40,
+        affectedUnits: [],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'towerShields',
+        name: 'Tower Shields',
+        age: 4,
+        description: 'Spearman line and Skirmishers +2 pierce armor',
+        effectType: EffectType.pierceArmor,
+        value: 2,
+        cost: { wood: 0, food: 500, gold: 200, stone: 0 },
+        duration: 40,
+        affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher],
+        affectedUpgrades: []
+    })
+]
 
 export const lithuaniansTechTree: CivTechTree = {
     id: 'lithuanians',
@@ -87,30 +114,7 @@ export const lithuaniansTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'hillForts',
-            name: 'Hill Forts',
-            description: 'Town Centers +3 range',
-            effectType: EffectType.range,
-            value: 3,
-            cost: { wood: 0, food: 250, gold: 250, stone: 0 },
-            duration: 40,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'towerShields',
-            name: 'Tower Shields',
-            description: 'Spearman line and Skirmishers +2 pierce armor',
-            effectType: EffectType.pierceArmor,
-            value: 2,
-            cost: { wood: 0, food: 500, gold: 200, stone: 0 },
-            duration: 40,
-            affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -146,12 +150,11 @@ export const lithuaniansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([lithuaniansUniqueUnits.leitis, lithuaniansUniqueUnits.eliteLeitis]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

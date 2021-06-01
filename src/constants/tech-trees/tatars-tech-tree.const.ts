@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/tatars.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel: Unit } = {
     keshik: new Unit({
@@ -60,6 +60,33 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
         duration: 20
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'silkArmor',
+        name: 'Silk Armor',
+        age: 3,
+        description: 'Scout Cavalry line, Steppe Lancers and Cavalry Archers have +1/+1 armor',
+        effectType: EffectType.armor,
+        value: 1,
+        cost: { wood: 400, food: 0, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer, archeryUnits.heavyCavalryArcher],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'timuridSiegecraft',
+        name: 'Timurid Siegecraft',
+        age: 4,
+        description: 'Trebuchets +2 range, enables Flaming Camels at the Castle',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 400, food: 0, gold: 500, stone: 0 },
+        duration: 50,
+        affectedUnits: [castleUnits.trebuchet, tatarsUniqueUnits.flamingCamel],
+        affectedUpgrades: []
+    })
+]
 
 export const tatarsTechTree: CivTechTree = {
     id: 'tatars',
@@ -109,30 +136,7 @@ export const tatarsTechTree: CivTechTree = {
             team: true
         },
     ],
-    uniqueTechs: [
-        {
-            id: 'silkArmor',
-            name: 'Silk Armor',
-            description: 'Scout Cavalry line, Steppe Lancers and Cavalry Archers have +1/+1 armor',
-            effectType: EffectType.armor,
-            value: 1,
-            cost: { wood: 400, food: 0, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer, archeryUnits.heavyCavalryArcher],
-            affectedUpgrades: []
-        },
-        {
-            id: 'timuridSiegecraft',
-            name: 'Timurid Siegecraft',
-            description: 'Trebuchets +2 range, enables Flaming Camels at the Castle',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 400, food: 0, gold: 500, stone: 0 },
-            duration: 50,
-            affectedUnits: [castleUnits.trebuchet, tatarsUniqueUnits.flamingCamel],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
@@ -169,13 +173,12 @@ export const tatarsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([tatarsUniqueUnits.keshik, tatarsUniqueUnits.eliteKeshik]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([tatarsUniqueUnits.flamingCamel]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

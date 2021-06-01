@@ -176,7 +176,6 @@ export const barracksUpgrade: BarracksUpgrades = {
         id: 'supplies',
         name: 'supplies',
         age: 2,
-        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 150,
@@ -189,7 +188,6 @@ export const barracksUpgrade: BarracksUpgrades = {
         id: 'squires',
         name: 'squires',
         age: 3,
-        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 100,
@@ -202,7 +200,6 @@ export const barracksUpgrade: BarracksUpgrades = {
         id: 'arson',
         name: 'arson',
         age: 3,
-        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 150,

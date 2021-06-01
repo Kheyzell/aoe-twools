@@ -14,7 +14,8 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/portuguese.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, caravel: Unit, eliteCaravel: Unit } = {
     organGun: new Unit({
@@ -74,6 +75,35 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
         duration: 36
     })
 }
+
+chainTechs([portugeseUniqueUnits.caravel, portugeseUniqueUnits.eliteCaravel])
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'carrack',
+        name: 'Carrack',
+        age: 3,
+        description: 'ships +1/+1 armor',
+        effectType: EffectType.armor,
+        value: 1,
+        cost: { wood: 200, food: 0, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteCaravel],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'arquebus',
+        name: 'Arquebus',
+        age: 4,
+        description: 'gunpowder units fire more accurately at moving targets',
+        effectType: EffectType.accuracy,
+        value: null,
+        cost: { wood: 0, food: 700, gold: 400, stone: 0 },
+        duration: 40,
+        affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteOrganGun],
+        affectedUpgrades: []
+    })
+]
 
 export const portugueseTechTree: CivTechTree = {
     id: 'portuguese',
@@ -152,30 +182,7 @@ export const portugueseTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'carrack',
-            name: 'Carrack',
-            description: 'ships +1/+1 armor',
-            effectType: EffectType.armor,
-            value: 1,
-            cost: { wood: 200, food: 0, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteCaravel],
-            affectedUpgrades: []
-        },
-        {
-            id: 'arquebus',
-            name: 'Arquebus',
-            description: 'gunpowder units fire more accurately at moving targets',
-            effectType: EffectType.accuracy,
-            value: null,
-            cost: { wood: 0, food: 700, gold: 400, stone: 0 },
-            duration: 40,
-            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteOrganGun],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -211,12 +218,11 @@ export const portugueseTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([portugeseUniqueUnits.organGun, portugeseUniqueUnits.eliteOrganGun]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],
