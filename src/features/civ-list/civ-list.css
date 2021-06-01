@@ -33,9 +33,14 @@
     cursor: pointer;
 }
 
-.CivTree.Selected {
-    border: 2px solid yellow;
+.CivTree.Selected1, .CivTree.Selected2 {
     margin: 0 -2px;
+}
+.CivTree.Selected1 {
+    border: 2px solid #00dde9;
+}
+.CivTree.Selected2 {
+    border: 2px solid #ff006a;
 }
 
 .CivTree > span {

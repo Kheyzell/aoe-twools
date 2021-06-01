@@ -1,25 +1,24 @@
 import { CivTechTree, GroupTechTree, Tech, TechType, Unit, UnitLine, Upgrade, UpgradePerAgeGroup } from "../models/techs.model"
-import { fullTechTree } from '../constants/tech-trees/_full-tech-tree.const'
 import { castleUnits } from "../constants/techs/castle-techs.const"
 import { chainTechs } from "./techs.utils"
 
-export const generateTechTreeToDisplayFrom = (civTechs: CivTechTree): CivTechTree => {
+export const generateTechTreeToDisplayFrom = (baseCivTechTree: CivTechTree, civTechTree: CivTechTree): CivTechTree => {
     return {
-        ...civTechs,
-        blacksmith: mergeGroupTechTrees(fullTechTree.blacksmith, civTechs.blacksmith),
-        barracks: mergeGroupTechTrees(fullTechTree.barracks, civTechs.barracks),
-        archery: mergeGroupTechTrees(fullTechTree.archery, civTechs.archery),
-        stable: mergeGroupTechTrees(fullTechTree.stable, civTechs.stable),
-        siege: mergeGroupTechTrees(fullTechTree.siege, civTechs.siege),
-        castle: castleReplaceAndMergeGroupTechTrees(fullTechTree.castle, civTechs.castle),
-        monastery: mergeGroupTechTrees(fullTechTree.monastery, civTechs.monastery),
-        university: mergeGroupTechTrees(fullTechTree.university, civTechs.university),
-        townCenter: mergeGroupTechTrees(fullTechTree.townCenter, civTechs.townCenter),
-        lumberCamp: mergeGroupTechTrees(fullTechTree.lumberCamp, civTechs.lumberCamp),
-        mill: mergeGroupTechTrees(fullTechTree.mill, civTechs.mill),
-        miningCamp: mergeGroupTechTrees(fullTechTree.miningCamp, civTechs.miningCamp),
-        market: mergeGroupTechTrees(fullTechTree.market, civTechs.market),
-        dock: mergeGroupTechTrees(fullTechTree.dock, civTechs.dock)
+        ...civTechTree,
+        blacksmith: mergeGroupTechTrees(baseCivTechTree.blacksmith, civTechTree.blacksmith),
+        barracks: mergeGroupTechTrees(baseCivTechTree.barracks, civTechTree.barracks),
+        archery: mergeGroupTechTrees(baseCivTechTree.archery, civTechTree.archery),
+        stable: mergeGroupTechTrees(baseCivTechTree.stable, civTechTree.stable),
+        siege: mergeGroupTechTrees(baseCivTechTree.siege, civTechTree.siege),
+        castle: castleReplaceAndMergeGroupTechTrees(baseCivTechTree.castle, civTechTree.castle),
+        monastery: mergeGroupTechTrees(baseCivTechTree.monastery, civTechTree.monastery),
+        university: mergeGroupTechTrees(baseCivTechTree.university, civTechTree.university),
+        townCenter: mergeGroupTechTrees(baseCivTechTree.townCenter, civTechTree.townCenter),
+        lumberCamp: mergeGroupTechTrees(baseCivTechTree.lumberCamp, civTechTree.lumberCamp),
+        mill: mergeGroupTechTrees(baseCivTechTree.mill, civTechTree.mill),
+        miningCamp: mergeGroupTechTrees(baseCivTechTree.miningCamp, civTechTree.miningCamp),
+        market: mergeGroupTechTrees(baseCivTechTree.market, civTechTree.market),
+        dock: mergeGroupTechTrees(baseCivTechTree.dock, civTechTree.dock)
     }
 }
 
