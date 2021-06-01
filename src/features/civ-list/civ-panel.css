@@ -1,5 +1,5 @@
 .CivPanel {
-    position: absolute;
+    position: fixed;
     z-index: 1002;
     padding: 16px;
     top: 72px;

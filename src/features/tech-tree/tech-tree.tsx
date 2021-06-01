@@ -14,6 +14,7 @@ import { CivTechTree, Tech } from "../../models/techs.model"
 import TechComponent, { BoxSize } from "./tech/tech.component"
 import { fullTechTree } from "../../constants/tech-trees/_full-tech-tree.const"
 import { generateTechTreeToDisplayFrom } from "../../utils/tech-tree.utils"
+import { scrollHorizontally } from "../../utils/utils"
 
 type Props = {}
 type State = {}
@@ -21,24 +22,10 @@ type State = {}
 const TechTreeComponent: React.FC<Props> = (props, state: State) => {
   const dispatch = useDispatch()
   const scrollRef = useRef<HTMLElement>(null)
+  
   const selectedCiv = useSelector(selectedCivSelector)
   const selectedTechs = useSelector(selectedTechsSelector)
   const techTreeToDisplay = selectedCiv ? generateTechTreeToDisplayFrom(selectedCiv) : fullTechTree
-
-  const wheelSpeed = 3;
-
-  const onWheel = (e: any) => {
-    e.preventDefault();
-    if (scrollRef && scrollRef.current) {
-      const container = scrollRef.current
-      const containerScrollPosition = scrollRef.current.scrollLeft
-
-      container.scrollTo({
-        top: 0,
-        left: containerScrollPosition + e.deltaY * wheelSpeed,
-      })
-    }
-  }
 
   const onResetClick = () => {
     dispatch(unselectCiv())
@@ -66,7 +53,7 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
   })
 
   return (
-    <div className="TechTree" ref={scrollRef as React.RefObject<HTMLDivElement>} onWheel={onWheel}>
+    <div className="TechTree" ref={scrollRef as React.RefObject<HTMLDivElement>} onWheel={(e) => scrollHorizontally(e, scrollRef)}>
       <div className="Tools">
         <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> Reset </button>
 
