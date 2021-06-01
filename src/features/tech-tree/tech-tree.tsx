@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import GroupTechTreeComponent from "./group-tech-tree/group-tech-tree"
-import { resetTechSelection, selectedCivSelector, selectedTechsSelector, toggleCivSelection, unselectCiv } from "./civFilterSlice"
+import { resetTechSelection, selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCivSelection, unselectCivs } from "./civFilterSlice"
 import './tech-tree.css'
 import refreshIcon from "../../resources/icons/refresh.png"
 import woodenBackground from "../../resources/images/backgrounds/wood2.jpg"
@@ -24,11 +24,14 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
   const scrollRef = useRef<HTMLElement>(null)
   
   const selectedCiv = useSelector(selectedCivSelector)
+  const selectedCiv2 = useSelector(selectedCiv2Selector)
   const selectedTechs = useSelector(selectedTechsSelector)
-  const techTreeToDisplay = selectedCiv ? generateTechTreeToDisplayFrom(selectedCiv) : fullTechTree
+  const techTreeToDisplay = selectedCiv ?
+    (selectedCiv2 ? generateTechTreeToDisplayFrom(generateTechTreeToDisplayFrom(fullTechTree, selectedCiv), selectedCiv2) : generateTechTreeToDisplayFrom(fullTechTree, selectedCiv))
+    : fullTechTree
 
   const onResetClick = () => {
-    dispatch(unselectCiv())
+    dispatch(unselectCivs())
     dispatch(resetTechSelection())
   }
 
@@ -37,9 +40,10 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
   }
 
   const displaySelectedCivs = () => {
-    if (!!selectedCiv) {
+    if (!!selectedCiv || !!selectedCiv2) {
       return (<div className="SelectedCivs">
-        <img src={selectedCiv?.crest} alt="Crest" onClick={() => onCivClick(selectedCiv)} />
+        { selectedCiv ? (<img src={selectedCiv?.crest} alt="Crest" onClick={() => onCivClick(selectedCiv)} />) : '' }
+        { selectedCiv2 ? (<img src={selectedCiv2?.crest} alt="Crest" onClick={() => onCivClick(selectedCiv2)} />) : '' }
       </div>)
     }
   }

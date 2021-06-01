@@ -5,11 +5,13 @@ import { CivTechTree, Tech } from '../../models/techs.model'
 
 interface TechState {
   selectedCiv?: CivTechTree | null
+  selectedCiv2?: CivTechTree | null
   selectedTechs: Tech[]
 }
 
 const initialState: TechState = {
   selectedCiv: null,
+  selectedCiv2: null,
   selectedTechs: []
 }
 
@@ -21,15 +23,30 @@ export const civFilterSlice = createSlice({
       state.selectedCiv = action.payload
     },
 
-    unselectCiv: (state, action: PayloadAction<void>) => {
+    unselectCivs: (state, action: PayloadAction<void>) => {
       state.selectedCiv = null
+      state.selectedCiv2 = null
     },
 
     toggleCivSelection: (state, action: PayloadAction<CivTechTree>) => {
-      if (state.selectedCiv && state.selectedCiv.id === action.payload.id) {
-        state.selectedCiv = null  
+      const toggledCiv = action.payload
+      if (toggledCiv.id === state.selectedCiv?.id) {
+        state.selectedCiv = null
+        state.selectedCiv2 = null
       } else {
-        state.selectedCiv = action.payload || null
+        state.selectedCiv = toggledCiv
+        if (toggledCiv.id === state.selectedCiv2?.id) {
+          state.selectedCiv2 = null
+        }
+      }
+    },
+
+    toggleCiv2Selection: (state, action: PayloadAction<CivTechTree>) => {
+      const toggledCiv = action.payload
+      if (toggledCiv.id === state.selectedCiv2?.id) {
+        state.selectedCiv2 = null
+      } else {
+        state.selectedCiv2 = toggledCiv
       }
     },
 
@@ -77,9 +94,10 @@ export const civFilterSlice = createSlice({
   },
 })
 
-export const { toggleCivSelection, unselectCiv, selectTech, unselectTech, toggleTechsSelelection, resetTechSelection } = civFilterSlice.actions
+export const { toggleCivSelection, toggleCiv2Selection, unselectCivs, selectTech, unselectTech, toggleTechsSelelection, resetTechSelection } = civFilterSlice.actions
 
 export const selectedCivSelector = (state: RootState) => state.civFilter.selectedCiv
+export const selectedCiv2Selector = (state: RootState) => state.civFilter.selectedCiv2
 export const selectedTechsSelector = (state: RootState) => state.civFilter.selectedTechs
 
 export default civFilterSlice.reducer
