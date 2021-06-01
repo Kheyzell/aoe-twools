@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/bulgarians.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
     konnik: new Unit({
@@ -46,6 +46,33 @@ export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
         duration: 19
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'stirrups',
+        name: 'Stirrups',
+        age: 3,
+        description: 'Light Cavalry, Knight line and Konniks attack 33% faster',
+        effectType: EffectType.fireRate,
+        value: 33,
+        cost: { wood: 0, food: 400, gold: 200, stone: 0 },
+        duration: 35,
+        affectedUnits: [stableUnits.hussar, stableUnits.cavalier, bulgariansUniqueUnits.eliteKonnik],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'bagains',
+        name: 'Bagains',
+        age: 4,
+        description: 'Militia line +5 melee armor',
+        effectType: EffectType.meleeArmor,
+        value: 5,
+        cost: { wood: 0, food: 900, gold: 450, stone: 0 },
+        duration: 40,
+        affectedUnits: [barracksUnits.twoHandedSwordsman],
+        affectedUpgrades: []
+    })
+]
 
 export const bulgariansTechTree: CivTechTree = {
     id: 'bulgarians',
@@ -95,30 +122,7 @@ export const bulgariansTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'stirrups',
-            name: 'Stirrups',
-            description: 'Light Cavalry, Knight line and Konniks attack 33% faster',
-            effectType: EffectType.fireRate,
-            value: 33,
-            cost: { wood: 0, food: 400, gold: 200, stone: 0 },
-            duration: 35,
-            affectedUnits: [stableUnits.hussar, stableUnits.cavalier, bulgariansUniqueUnits.eliteKonnik],
-            affectedUpgrades: []
-        },
-        {
-            id: 'bagains',
-            name: 'Bagains',
-            description: 'Militia line +5 melee armor',
-            effectType: EffectType.meleeArmor,
-            value: 5,
-            cost: { wood: 0, food: 900, gold: 450, stone: 0 },
-            duration: 40,
-            affectedUnits: [barracksUnits.twoHandedSwordsman],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
@@ -152,12 +156,11 @@ export const bulgariansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([bulgariansUniqueUnits.konnik, bulgariansUniqueUnits.eliteKonnik]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

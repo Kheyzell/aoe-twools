@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/khmer.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: Unit } = {
     ballistaElephant: new Unit({
@@ -46,6 +46,33 @@ export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: 
         duration: 25
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'tuskSwords',
+        name: 'Tusk Swords',
+        age: 3,
+        description: 'Battle Elephants +3 attack',
+        effectType: EffectType.damage,
+        value: 3,
+        cost: { wood: 300, food: 0, gold: 450, stone: 0 },
+        duration: 40,
+        affectedUnits: [stableUnits.eliteBattleElephant],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'doubleCrossbow',
+        name: 'Double Crossbow',
+        age: 4,
+        description: 'Ballista Elephants and Scorpions shoot two projectiles',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 700, gold: 400, stone: 0 },
+        duration: 40,
+        affectedUnits: [siegeUnits.heavyScorpion, khmerUniqueUnits.eliteBallistaElephant],
+        affectedUpgrades: []
+    })
+]
 
 export const khmerTechTree: CivTechTree = {
     id: 'khmer',
@@ -95,30 +122,7 @@ export const khmerTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'tuskSwords',
-            name: 'Tusk Swords',
-            description: 'Battle Elephants +3 attack',
-            effectType: EffectType.damage,
-            value: 3,
-            cost: { wood: 300, food: 0, gold: 450, stone: 0 },
-            duration: 40,
-            affectedUnits: [stableUnits.eliteBattleElephant],
-            affectedUpgrades: []
-        },
-        {
-            id: 'doubleCrossbow',
-            name: 'Double Crossbow',
-            description: 'Ballista Elephants and Scorpions shoot two projectiles',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 700, gold: 400, stone: 0 },
-            duration: 40,
-            affectedUnits: [siegeUnits.heavyScorpion, khmerUniqueUnits.eliteBallistaElephant],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
@@ -154,12 +158,11 @@ export const khmerTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([khmerUniqueUnits.ballistaElephant, khmerUniqueUnits.eliteBallistaElephant]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

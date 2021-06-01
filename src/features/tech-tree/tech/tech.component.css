@@ -27,12 +27,12 @@
     background-color: #016288;
 }
 
-.Tech.UnitTech.Unique {
-    background-color: #7a3d83;
-}
-
 .Tech.UpgradeTech {
     background-color: #357738;
+}
+
+.Tech.UnitTech.Unique {
+    background-color: #7a3d83;
 }
 
 .Tech.Selected {
@@ -44,6 +44,17 @@
     border-width: 2px;
     width: 32px;
     height: 32px;
+}
+
+.Gray-Overlay {
+    position: absolute;
+    display: none;
+    background-color: #000000cc;
+    width: 100%;
+    height: 100%;
+}
+.Tech.Unavailable .Gray-Overlay {
+    display: block;
 }
 
 .Tech > .Name {

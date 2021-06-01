@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/mayans.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const mayansUniqueUnits: { plumedArcher: Unit, elitePlumedArcher: Unit } = {
     plumedArcher: new Unit({
@@ -46,6 +46,33 @@ export const mayansUniqueUnits: { plumedArcher: Unit, elitePlumedArcher: Unit } 
         duration: 16
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: `hulcheJavelineers`,
+        name: `Hul'che Javelineers`,
+        age: 3,
+        description: 'Skirmishers throw a second projectile',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [archeryUnits.eliteSkirmisher],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'elDorado',
+        name: 'El Dorado',
+        age: 4,
+        description: '+40 hit points for Eagle Warriors',
+        effectType: EffectType.health,
+        value: 40,
+        cost: { wood: 0, food: 750, gold: 450, stone: 0 },
+        duration: 70,
+        affectedUnits: [barracksUnits.eliteEagleWarrior],
+        affectedUpgrades: []
+    })
+]
 
 export const mayansTechTree: CivTechTree = {
     id: 'mayans',
@@ -87,30 +114,7 @@ export const mayansTechTree: CivTechTree = {
             team: true
         },
     ],
-    uniqueTechs: [
-        {
-            id: `hulcheJavelineers`,
-            name: `Hul'che Javelineers`,
-            description: 'Skirmishers throw a second projectile',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 300, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [archeryUnits.eliteSkirmisher],
-            affectedUpgrades: []
-        },
-        {
-            id: 'elDorado',
-            name: 'El Dorado',
-            description: '+40 hit points for Eagle Warriors',
-            effectType: EffectType.health,
-            value: 40,
-            cost: { wood: 0, food: 750, gold: 450, stone: 0 },
-            duration: 70,
-            affectedUnits: [barracksUnits.eliteEagleWarrior],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
@@ -141,12 +145,11 @@ export const mayansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([mayansUniqueUnits.plumedArcher, mayansUniqueUnits.elitePlumedArcher]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

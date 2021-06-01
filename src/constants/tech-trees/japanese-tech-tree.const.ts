@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/japanese.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
     samurai: new Unit({
@@ -46,6 +46,33 @@ export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
         duration: 9
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'yasama',
+        name: 'Yasama',
+        age: 3,
+        description: 'towers fire 2 extra arrows',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 300, food: 300, gold: 0, stone: 0 },
+        duration: 40,
+        affectedUnits: [],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'kataparuto',
+        name: 'Kataparuto',
+        age: 4,
+        description: 'Trebuchets fire 33% and pack 4x faster',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 750, food: 0, gold: 400, stone: 0 },
+        duration: 60,
+        affectedUnits: [castleUnits.trebuchet],
+        affectedUpgrades: []
+    })
+]
 
 export const japaneseTechTree: CivTechTree = {
     id: 'japanese',
@@ -87,30 +114,7 @@ export const japaneseTechTree: CivTechTree = {
             team: true
         },
     ],
-    uniqueTechs: [
-        {
-            id: 'yasama',
-            name: 'Yasama',
-            description: 'towers fire 2 extra arrows',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 300, food: 300, gold: 0, stone: 0 },
-            duration: 40,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'kataparuto',
-            name: 'Kataparuto',
-            description: 'Trebuchets fire 33% and pack 4x faster',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 750, food: 0, gold: 400, stone: 0 },
-            duration: 60,
-            affectedUnits: [castleUnits.trebuchet],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -145,12 +149,11 @@ export const japaneseTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([japaneseUniqueUnits.samurai, japaneseUniqueUnits.eliteSamurai]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

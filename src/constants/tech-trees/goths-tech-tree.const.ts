@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/goths.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const gothsUniqueUnits: { huskarl: Unit, eliteHuskarl: Unit } = {
     huskarl: new Unit({
@@ -46,6 +46,33 @@ export const gothsUniqueUnits: { huskarl: Unit, eliteHuskarl: Unit } = {
         duration: 16
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'anarchy',
+        name: 'Anarchy',
+        age: 3,
+        description: 'Huskarls can be created at Barracks',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 450, gold: 250, stone: 0 },
+        duration: 40,
+        affectedUnits: [gothsUniqueUnits.eliteHuskarl],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'perfusion',
+        name: 'Perfusion',
+        age: 4,
+        description: `Barracks create units 100% faster`,
+        effectType: EffectType.creationSpeed,
+        value: 40,
+        cost: { wood: 400, food: 0, gold: 600, stone: 0 },
+        duration: 40,
+        affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, gothsUniqueUnits.eliteHuskarl],
+        affectedUpgrades: []
+    })
+]
 
 export const gothsTechTree: CivTechTree = {
     id: 'goths',
@@ -103,30 +130,7 @@ export const gothsTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'anarchy',
-            name: 'Anarchy',
-            description: 'Huskarls can be created at Barracks',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 450, gold: 250, stone: 0 },
-            duration: 40,
-            affectedUnits: [gothsUniqueUnits.eliteHuskarl],
-            affectedUpgrades: []
-        },
-        {
-            id: 'perfusion',
-            name: 'Perfusion',
-            description: `Barracks create units 100% faster`,
-            effectType: EffectType.creationSpeed,
-            value: 40,
-            cost: { wood: 400, food: 0, gold: 600, stone: 0 },
-            duration: 40,
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, gothsUniqueUnits.eliteHuskarl],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -162,12 +166,11 @@ export const gothsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([gothsUniqueUnits.huskarl, gothsUniqueUnits.eliteHuskarl]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

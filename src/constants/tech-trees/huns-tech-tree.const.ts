@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/huns.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
     tarkan: new Unit({
@@ -46,6 +46,33 @@ export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
         duration: 14
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'marauders',
+        name: 'Marauders',
+        age: 3,
+        description: 'create Tarkans at Stables',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 300, food: 0, gold: 200, stone: 0 },
+        duration: 40,
+        affectedUnits: [hunsUniqueUnits.eliteTarkan],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'atheism',
+        name: 'Atheism',
+        age: 4,
+        description: '+100 years for Relic/Wonder victories; enemy Relic gold generation reduced by 50%',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 500, gold: 500, stone: 0 },
+        duration: 60,
+        affectedUnits: [],
+        affectedUpgrades: []
+    })
+]
 
 export const hunsTechTree: CivTechTree = {
     id: 'huns',
@@ -87,30 +114,7 @@ export const hunsTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'marauders',
-            name: 'Marauders',
-            description: 'create Tarkans at Stables',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 300, food: 0, gold: 200, stone: 0 },
-            duration: 40,
-            affectedUnits: [hunsUniqueUnits.eliteTarkan],
-            affectedUpgrades: []
-        },
-        {
-            id: 'atheism',
-            name: 'Atheism',
-            description: '+100 years for Relic/Wonder victories; enemy Relic gold generation reduced by 50%',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 500, gold: 500, stone: 0 },
-            duration: 60,
-            affectedUnits: [],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
@@ -144,12 +148,11 @@ export const hunsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([hunsUniqueUnits.tarkan, hunsUniqueUnits.eliteTarkan]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

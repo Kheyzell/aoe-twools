@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/ethiopians.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: Unit } = {
     shotelWarrior: new Unit({
@@ -46,6 +46,33 @@ export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: U
         duration: 8
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'royalHeirs',
+        name: 'Royal Heirs',
+        age: 3,
+        description: 'halves Shotel Warrior training time',
+        effectType: EffectType.creationSpeed,
+        value: 100,
+        cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [ethiopiansUniqueUnits.eliteShotelWarrior],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'torsionEngines',
+        name: 'Torsion Engines',
+        age: 4,
+        description: `Siege Workshop units' blast radius increased`,
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 1000, gold: 600, stone: 0 },
+        duration: 40,
+        affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.bombardCannon],
+        affectedUpgrades: []
+    })
+]
 
 export const ethiopiansTechTree: CivTechTree = {
     id: 'ethiopians',
@@ -87,30 +114,7 @@ export const ethiopiansTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'royalHeirs',
-            name: 'Royal Heirs',
-            description: 'halves Shotel Warrior training time',
-            effectType: EffectType.creationSpeed,
-            value: 100,
-            cost: { wood: 0, food: 300, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [ethiopiansUniqueUnits.eliteShotelWarrior],
-            affectedUpgrades: []
-        },
-        {
-            id: 'torsionEngines',
-            name: 'Torsion Engines',
-            description: `Siege Workshop units' blast radius increased`,
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 1000, gold: 600, stone: 0 },
-            duration: 40,
-            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.bombardCannon],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
@@ -146,12 +150,11 @@ export const ethiopiansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([ethiopiansUniqueUnits.shotelWarrior, ethiopiansUniqueUnits.eliteShotelWarrior]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

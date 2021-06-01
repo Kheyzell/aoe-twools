@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/burgundians.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit, flemishMilitia: Unit } = {
     coustillier: new Unit({
@@ -60,6 +60,33 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
         duration: 14
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'burgundianVineyards',
+        name: 'Burgundian Vineyards',
+        age: 3,
+        description: `Transforms half of the player's food into gold at a 2:1 ratio. Farmers slowly produce gold (about 0.012 gold/s)`,
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 400, gold: 300, stone: 0 },
+        duration: 45,
+        affectedUnits: [townCenterUnits.villager],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'flemishRevolution',
+        name: 'Flemish Revolution',
+        age: 4,
+        description: `Transforms player's Villagers into Flemish Militia. Flemish Militia becomes trainable at the Town Center`,
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 800, gold: 450, stone: 0 },
+        duration: 10,
+        affectedUnits: [townCenterUnits.villager, burgundiansUniqueUnits.flemishMilitia],
+        affectedUpgrades: []
+    })
+]
 
 export const burgundiansTechTree: CivTechTree = {
     id: 'burgundians',
@@ -116,30 +143,7 @@ export const burgundiansTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'burgundianVineyards',
-            name: 'Burgundian Vineyards',
-            description: `Transforms half of the player's food into gold at a 2:1 ratio. Farmers slowly produce gold (about 0.012 gold/s)`,
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 400, gold: 300, stone: 0 },
-            duration: 45,
-            affectedUnits: [townCenterUnits.villager],
-            affectedUpgrades: []
-        },
-        {
-            id: 'flemishRevolution',
-            name: 'Flemish Revolution',
-            description: `Transforms player's Villagers into Flemish Militia. Flemish Militia becomes trainable at the Town Center`,
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 800, gold: 450, stone: 0 },
-            duration: 10,
-            affectedUnits: [townCenterUnits.villager, burgundiansUniqueUnits.flemishMilitia],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -175,12 +179,11 @@ export const burgundiansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([burgundiansUniqueUnits.coustillier, burgundiansUniqueUnits.eliteCoustillier]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

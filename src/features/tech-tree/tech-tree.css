@@ -29,6 +29,17 @@
     margin-right: 8px;
 }
 
+.Tools > .SelectedCivs {
+    margin-left: 8px;
+    height: 36px;
+}
+
+.Tools > .SelectedCivs > img {
+    height: 36px;
+    width: 36px;
+    cursor: pointer;
+}
+
 .Tools > .SelectedTechs {
     display: flex;
 }

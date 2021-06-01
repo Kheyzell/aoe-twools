@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/incas.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Unit } = {
     kamayuk: new Unit({
@@ -49,7 +49,7 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
         id: 'slinger',
         name: 'Slinger',
         unique: true,
-        age: 4,
+        age: 3,
         unitType: UnitType.military,
         cost: {
             wood: 0,
@@ -60,6 +60,33 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
         duration: 25
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'andeanSling',
+        name: 'Andean Sling',
+        age: 3,
+        description: 'Slingers and Skirmisher have no minimum range',
+        effectType: EffectType.minimumRange,
+        value: 0,
+        cost: { wood: 0, food: 200, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [archeryUnits.eliteSkirmisher, incasUniqueUnits.slinger],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'fabricShields',
+        name: 'Fabric Shields',
+        age: 4,
+        description: 'Kamayuks, Slingers, and Eagle Warriors +1/+2 armor',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 600, gold: 600, stone: 0 },
+        duration: 60,
+        affectedUnits: [barracksUnits.eliteEagleWarrior, incasUniqueUnits.eliteKamayuk, incasUniqueUnits.slinger],
+        affectedUpgrades: []
+    })
+]
 
 export const incasTechTree: CivTechTree = {
     id: 'incas',
@@ -108,30 +135,7 @@ export const incasTechTree: CivTechTree = {
             affectedUpgrades: []
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'andeanSling',
-            name: 'Andean Sling',
-            description: 'Slingers and Skirmisher have no minimum range',
-            effectType: EffectType.minimumRange,
-            value: 0,
-            cost: { wood: 0, food: 200, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [archeryUnits.eliteSkirmisher, incasUniqueUnits.slinger],
-            affectedUpgrades: []
-        },
-        {
-            id: 'fabricShields',
-            name: 'Fabric Shields',
-            description: 'Kamayuks, Slingers, and Eagle Warriors +1/+2 armor',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 600, gold: 600, stone: 0 },
-            duration: 60,
-            affectedUnits: [barracksUnits.eliteEagleWarrior, incasUniqueUnits.eliteKamayuk, incasUniqueUnits.slinger],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -163,12 +167,11 @@ export const incasTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([incasUniqueUnits.kamayuk, incasUniqueUnits.eliteKamayuk]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

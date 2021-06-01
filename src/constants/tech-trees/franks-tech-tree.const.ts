@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/franks.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const franksUniqueUnits: { throwingAxeman: Unit, eliteThrowingAxeman: Unit } = {
     throwingAxeman: new Unit({
@@ -46,6 +46,33 @@ export const franksUniqueUnits: { throwingAxeman: Unit, eliteThrowingAxeman: Uni
         duration: 17
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'beardedAxe',
+        name: 'Bearded Axes',
+        age: 3,
+        description: 'Throwing Axeman +1 range',
+        effectType: EffectType.range,
+        value: 1,
+        cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        duration: 60,
+        affectedUnits: [franksUniqueUnits.eliteThrowingAxeman],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'chivalry',
+        name: 'Chivalry',
+        age: 4,
+        description: `Stables work 40% faster`,
+        effectType: EffectType.creationSpeed,
+        value: 40,
+        cost: { wood: 600, food: 0, gold: 500, stone: 0 },
+        duration: 40,
+        affectedUnits: [stableUnits.lightCavalry, stableUnits.paladin],
+        affectedUpgrades: []
+    })
+]
 
 export const franksTechTree: CivTechTree = {
     id: 'franks',
@@ -95,30 +122,7 @@ export const franksTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'beardedAxe',
-            name: 'Bearded Axes',
-            description: 'Throwing Axeman +1 range',
-            effectType: EffectType.range,
-            value: 1,
-            cost: { wood: 0, food: 300, gold: 300, stone: 0 },
-            duration: 60,
-            affectedUnits: [franksUniqueUnits.eliteThrowingAxeman],
-            affectedUpgrades: []
-        },
-        {
-            id: 'chivalry',
-            name: 'Chivalry',
-            description: `Stables work 40% faster`,
-            effectType: EffectType.creationSpeed,
-            value: 40,
-            cost: { wood: 600, food: 0, gold: 500, stone: 0 },
-            duration: 40,
-            affectedUnits: [stableUnits.lightCavalry, stableUnits.paladin],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -154,12 +158,11 @@ export const franksTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([franksUniqueUnits.throwingAxeman, franksUniqueUnits.eliteThrowingAxeman]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

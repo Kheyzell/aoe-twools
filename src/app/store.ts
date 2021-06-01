@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import techsReducer from '../features/tech-tree/techSlice';
+import civFilterReducer from '../features/tech-tree/civFilterSlice';
 
 export const store = configureStore({
   reducer: {
-    techs: techsReducer,
+    civFilter: civFilterReducer
   },
 });
 

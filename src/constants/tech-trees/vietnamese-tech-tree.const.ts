@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/vietnamese.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Unit, imperialSkirmisher: Unit } = {
     rattanArcher: new Unit({
@@ -60,6 +60,33 @@ export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Uni
         duration: 16
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'chatras',
+        name: 'Chatras',
+        age: 3,
+        description: 'Battle Elephants +50 hit points',
+        effectType: EffectType.health,
+        value: 50,
+        cost: { wood: 0, food: 250, gold: 250, stone: 0 },
+        duration: 40,
+        affectedUnits: [stableUnits.eliteBattleElephant],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'paperMoney',
+        name: 'Paper Money',
+        age: 4,
+        description: 'tributes 500 gold to each ally',
+        effectType: EffectType.miscallenous,
+        value: 500,
+        cost: { wood: 500, food: 500, gold: 0, stone: 0 },
+        duration: 60,
+        affectedUnits: [],
+        affectedUpgrades: []
+    })
+]
 
 export const vietnameseTechTree: CivTechTree = {
     id: 'vietnamese',
@@ -116,30 +143,7 @@ export const vietnameseTechTree: CivTechTree = {
             team: true
         },
     ],
-    uniqueTechs: [
-        {
-            id: 'chatras',
-            name: 'Chatras',
-            description: 'Battle Elephants +50 hit points',
-            effectType: EffectType.health,
-            value: 50,
-            cost: { wood: 0, food: 250, gold: 250, stone: 0 },
-            duration: 40,
-            affectedUnits: [stableUnits.eliteBattleElephant],
-            affectedUpgrades: []
-        },
-        {
-            id: 'paperMoney',
-            name: 'Paper Money',
-            description: 'tributes 500 gold to each ally',
-            effectType: EffectType.miscallenous,
-            value: 500,
-            cost: { wood: 500, food: 500, gold: 0, stone: 0 },
-            duration: 60,
-            affectedUnits: [],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -175,12 +179,11 @@ export const vietnameseTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([vietnameseUniqueUnits.rattanArcher, vietnameseUniqueUnits.eliteRattanArcher]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

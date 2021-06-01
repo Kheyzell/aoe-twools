@@ -22,6 +22,7 @@ export const castleUnits: CastleUnits = {
         id: 'uniqueUnit',
         name: 'Unique Unit',
         age: 3,
+        unique: true,
         unitType: UnitType.military,
         cost: {
             wood: 0,
@@ -35,6 +36,7 @@ export const castleUnits: CastleUnits = {
         id: 'eliteUniqueUnit',
         name: 'Elite Unique Unit',
         age: 4,
+        unique: true,
         unitType: UnitType.military,
         cost: {
             wood: 0,

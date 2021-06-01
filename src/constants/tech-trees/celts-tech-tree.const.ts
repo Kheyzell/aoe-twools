@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/celts.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
     woadRaider: new Unit({
@@ -46,6 +46,33 @@ export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
         duration: 10
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'stronghold',
+        name: 'Stronghold',
+        age: 3,
+        description: 'Castles and towers fire 25% faster',
+        effectType: EffectType.fireRate,
+        value: 25,
+        cost: { wood: 0, food: 250, gold: 200, stone: 0 },
+        duration: 30,
+        affectedUnits: [],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'furorCeltica',
+        name: 'Furor Celtica',
+        age: 4,
+        description: 'Siege Workshop units have +40% HP',
+        effectType: EffectType.healthPercent,
+        value: 40,
+        cost: { wood: 0, food: 750, gold: 450, stone: 0 },
+        duration: 50,
+        affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
+        affectedUpgrades: []
+    })
+]
 
 export const celtsTechTree: CivTechTree = {
     id: 'celts',
@@ -95,30 +122,7 @@ export const celtsTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'stronghold',
-            name: 'Stronghold',
-            description: 'Castles and towers fire 25% faster',
-            effectType: EffectType.fireRate,
-            value: 25,
-            cost: { wood: 0, food: 250, gold: 200, stone: 0 },
-            duration: 30,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'furorCeltica',
-            name: 'Furor Celtica',
-            description: 'Siege Workshop units have +40% HP',
-            effectType: EffectType.healthPercent,
-            value: 40,
-            cost: { wood: 0, food: 750, gold: 450, stone: 0 },
-            duration: 50,
-            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -152,12 +156,11 @@ export const celtsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([celtsUniqueUnits.woadRaider, celtsUniqueUnits.eliteWoadRaider]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

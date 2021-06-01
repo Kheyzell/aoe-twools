@@ -29,6 +29,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.CivTree.Selected {
+    border: 2px solid yellow;
+    margin: 0 -2px;
 }
 
 .CivTree > span {
@@ -39,7 +45,6 @@
     font-size: 1.1rem;
     font-weight: 600;
     padding: 4px;
-    cursor: default;
     outline: none;
     user-select: none;
 }

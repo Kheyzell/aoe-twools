@@ -1,20 +1,38 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
 
-import { Tech } from '../../models/techs.model'
+import { CivTechTree, Tech } from '../../models/techs.model'
 
 interface TechState {
+  selectedCiv?: CivTechTree | null
   selectedTechs: Tech[]
 }
 
 const initialState: TechState = {
-  selectedTechs: [],
+  selectedCiv: null,
+  selectedTechs: []
 }
 
-export const counterSlice = createSlice({
-  name: 'techs',
+export const civFilterSlice = createSlice({
+  name: 'civFilter',
   initialState,
   reducers: {
+    selectCiv: (state, action: PayloadAction<CivTechTree>) => {
+      state.selectedCiv = action.payload
+    },
+
+    unselectCiv: (state, action: PayloadAction<void>) => {
+      state.selectedCiv = null
+    },
+
+    toggleCivSelection: (state, action: PayloadAction<CivTechTree>) => {
+      if (state.selectedCiv && state.selectedCiv.id === action.payload.id) {
+        state.selectedCiv = null  
+      } else {
+        state.selectedCiv = action.payload || null
+      }
+    },
+
     selectTech: (state, action: PayloadAction<Tech>) => {
       const isAlreadySelected = !!state.selectedTechs.find(tech => tech.name === action.payload.name)
       if (!isAlreadySelected) {
@@ -53,14 +71,15 @@ export const counterSlice = createSlice({
       }
     },
 
-    resetSelection: (state) => {
+    resetTechSelection: (state) => {
       state.selectedTechs = [];
     }
   },
 })
 
-export const { selectTech, unselectTech, toggleTechsSelelection, resetSelection } = counterSlice.actions
+export const { toggleCivSelection, unselectCiv, selectTech, unselectTech, toggleTechsSelelection, resetTechSelection } = civFilterSlice.actions
 
-export const selectedTechsSelector = (state: RootState) => state.techs.selectedTechs
+export const selectedCivSelector = (state: RootState) => state.civFilter.selectedCiv
+export const selectedTechsSelector = (state: RootState) => state.civFilter.selectedTechs
 
-export default counterSlice.reducer
+export default civFilterSlice.reducer

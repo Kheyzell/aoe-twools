@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/chinese.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { getAllCivUpgrades } from "../../utils/techs.utils";
 
 export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
@@ -48,36 +48,40 @@ export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
     })
 }
 
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'greatWall',
+        name: 'Great Wall',
+        age: 3,
+        description: 'Walls and towers +30% HP',
+        effectType: EffectType.healthPercent,
+        value: 30,
+        cost: { wood: 400, food: 0, gold: 0, stone: 200 },
+        duration: 40,
+        affectedUnits: [],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'rocketry',
+        name: 'Rocketry',
+        age: 4,
+        description: 'Chu Ko Nu +2, Scorpions +4 attack',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 600, food: 0, gold: 600, stone: 0 },
+        duration: 60,
+        affectedUnits: [siegeUnits.heavyScorpion, chineseUniqueUnits.eliteChukonu],
+        affectedUpgrades: []
+    })
+]
+
 export const chineseTechTree: CivTechTree = {
     id: 'chinese',
     name: 'Chinese',
     crest,
     wikiUrl: 'Chinese_(Age_of_Empires_II)',
     bonuses: [],
-    uniqueTechs: [
-        {
-            id: 'greatWall',
-            name: 'Great Wall',
-            description: 'Walls and towers +30% HP',
-            effectType: EffectType.healthPercent,
-            value: 30,
-            cost: { wood: 400, food: 0, gold: 0, stone: 200 },
-            duration: 40,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'rocketry',
-            name: 'Rocketry',
-            description: 'Chu Ko Nu +2, Scorpions +4 attack',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 600, food: 0, gold: 600, stone: 0 },
-            duration: 60,
-            affectedUnits: [siegeUnits.heavyScorpion, chineseUniqueUnits.eliteChukonu],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -112,12 +116,11 @@ export const chineseTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([chineseUniqueUnits.chukonu, chineseUniqueUnits.eliteChukonu]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

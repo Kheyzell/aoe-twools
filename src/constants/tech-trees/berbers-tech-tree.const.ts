@@ -14,7 +14,8 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/berbers.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { chainTechs } from "../../utils/techs.utils";
 
 export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, genitour: Unit, eliteGenitour: Unit } = {
     camelArcher: new Unit({
@@ -75,6 +76,36 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
     })
 }
 
+chainTechs([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour])
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'kasbah',
+        name: 'Kasbah',
+        age: 3,
+        description: 'team Castles work +25% faster',
+        effectType: EffectType.creationSpeed,
+        value: 25,
+        cost: { wood: 0, food: 250, gold: 250, stone: 0 },
+        duration: 40,
+        affectedUnits: [berbersUniqueUnits.eliteCamelArcher],
+        affectedUpgrades: [castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies],
+        team: true
+    }),
+    new UniqueTech({
+        id: 'maghrebiCamels',
+        name: 'Maghrebi Camels',
+        age: 4,
+        description: 'camel troops regenerate (15HP/min)',
+        effectType: EffectType.regen,
+        value: 15,
+        cost: { wood: 0, food: 700, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [stableUnits.heavyCamelRider, berbersUniqueUnits.eliteCamelArcher],
+        affectedUpgrades: []
+    })
+]
+
 export const berbersTechTree: CivTechTree = {
     id: 'berbers',
     name: 'Berbers',
@@ -115,31 +146,7 @@ export const berbersTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'kasbah',
-            name: 'Kasbah',
-            description: 'team Castles work +25% faster',
-            effectType: EffectType.creationSpeed,
-            value: 25,
-            cost: { wood: 0, food: 250, gold: 250, stone: 0 },
-            duration: 40,
-            affectedUnits: [berbersUniqueUnits.eliteCamelArcher],
-            affectedUpgrades: [castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies],
-            team: true
-        },
-        {
-            id: 'maghrebiCamels',
-            name: 'Maghrebi Camels',
-            description: 'camel troops regenerate (15HP/min)',
-            effectType: EffectType.regen,
-            value: 15,
-            cost: { wood: 0, food: 700, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [stableUnits.heavyCamelRider, berbersUniqueUnits.eliteCamelArcher],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -177,12 +184,11 @@ export const berbersTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

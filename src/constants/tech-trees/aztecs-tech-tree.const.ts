@@ -1,4 +1,4 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, TechType, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -13,7 +13,7 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/aztecs.png'
-import { Bonus, EffectType } from "../../models/bonus.model";
+import { Bonus, EffectType, UniqueTech } from "../../models/bonus.model";
 import { getAllCivMilitaryUnits } from "../../utils/techs.utils";
 
 export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit } = {
@@ -47,36 +47,40 @@ export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit 
     })
 }
 
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'atlatl',
+        name: 'Atlatl',
+        age: 3,
+        description: 'Skirmishers +1 attack, +1 range',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 400, gold: 350, stone: 0 },
+        duration: 40,
+        affectedUnits: [archeryUnits.eliteSkirmisher],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'garlandWars',
+        name: 'Garland Wars',
+        age: 4,
+        description: '+4 infantry attack',
+        effectType: EffectType.damage,
+        value: 4,
+        cost: { wood: 0, food: 450, gold: 750, stone: 0 },
+        duration: 60,
+        affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, barracksUnits.eliteEagleWarrior, aztecsUniqueUnits.eliteJaguarWarrior],
+        affectedUpgrades: []
+    })
+]
+
 export const aztecsTechTree: CivTechTree = {
     id: 'aztecs',
     name: 'Aztecs',
     crest,
     wikiUrl: 'Aztecs_(Age_of_Empires_II)',
     bonuses: [],
-    uniqueTechs: [
-        {
-            id: 'atlatl',
-            name: 'Atlatl',
-            description: 'Skirmishers +1 attack, +1 range',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 400, gold: 350, stone: 0 },
-            duration: 40,
-            affectedUnits: [archeryUnits.eliteSkirmisher],
-            affectedUpgrades: []
-        },
-        {
-            id: 'garlandWars',
-            name: 'Garland Wars',
-            description: '+4 infantry attack',
-            effectType: EffectType.damage,
-            value: 4,
-            cost: { wood: 0, food: 450, gold: 750, stone: 0 },
-            duration: 60,
-            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, barracksUnits.eliteEagleWarrior, aztecsUniqueUnits.eliteJaguarWarrior],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
@@ -104,12 +108,11 @@ export const aztecsTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([aztecsUniqueUnits.jaguarWarrior, aztecsUniqueUnits.eliteJaguarWarrior]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],

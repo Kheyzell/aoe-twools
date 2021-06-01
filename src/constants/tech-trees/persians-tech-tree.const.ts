@@ -14,7 +14,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/persians.png'
-import { EffectType } from "../../models/bonus.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } = {
     warElephant: new Unit({
@@ -46,6 +46,33 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } 
         duration: 31
     })
 }
+
+const uniqueTechs = [
+    new UniqueTech({
+        id: 'kamandaran',
+        name: 'Kamandaran',
+        age: 3,
+        description: 'turns Archer gold cost into wood cost',
+        effectType: EffectType.miscallenous,
+        value: null,
+        cost: { wood: 0, food: 400, gold: 300, stone: 0 },
+        duration: 40,
+        affectedUnits: [archeryUnits.crossbowman],
+        affectedUpgrades: []
+    }),
+    new UniqueTech({
+        id: 'mahouts',
+        name: 'Mahouts',
+        age: 4,
+        description: 'War Elephants move +30% faster',
+        effectType: EffectType.movementSpeed,
+        value: 30,
+        cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        duration: 50,
+        affectedUnits: [persiansUniqueUnits.eliteWarElephant],
+        affectedUpgrades: []
+    })
+]
 
 export const persiansTechTree: CivTechTree = {
     id: 'persians',
@@ -79,30 +106,7 @@ export const persiansTechTree: CivTechTree = {
             team: true
         }
     ],
-    uniqueTechs: [
-        {
-            id: 'kamandaran',
-            name: 'Kamandaran',
-            description: 'turns Archer gold cost into wood cost',
-            effectType: EffectType.miscallenous,
-            value: null,
-            cost: { wood: 0, food: 400, gold: 300, stone: 0 },
-            duration: 40,
-            affectedUnits: [archeryUnits.crossbowman],
-            affectedUpgrades: []
-        },
-        {
-            id: 'mahouts',
-            name: 'Mahouts',
-            description: 'War Elephants move +30% faster',
-            effectType: EffectType.movementSpeed,
-            value: 30,
-            cost: { wood: 0, food: 300, gold: 300, stone: 0 },
-            duration: 50,
-            affectedUnits: [persiansUniqueUnits.eliteWarElephant],
-            affectedUpgrades: []
-        }
-    ],
+    uniqueTechs,
     barracks: {
         units: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman]),
@@ -139,12 +143,11 @@ export const persiansTechTree: CivTechTree = {
     },
     castle: {
         units: [
-            new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
             new UnitLine([persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         units: [],
