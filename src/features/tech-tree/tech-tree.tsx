@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import GroupTechTreeComponent from "./group-tech-tree/group-tech-tree"
-import { resetTechSelection, selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCivSelection, unselectCivs } from "./civFilterSlice"
+import { isInComparisonModeSelector, resetTechSelection, selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCivSelection, unselectCivs } from "./civFilterSlice"
 import './tech-tree.css'
 import refreshIcon from "../../resources/icons/refresh.png"
 import woodenBackground from "../../resources/images/backgrounds/wood2.jpg"
@@ -25,6 +25,7 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
   
   const selectedCiv = useSelector(selectedCivSelector)
   const selectedCiv2 = useSelector(selectedCiv2Selector)
+  const isInComparisonMode = useSelector(isInComparisonModeSelector)
   const selectedTechs = useSelector(selectedTechsSelector)
   const techTreeToDisplay = selectedCiv ?
     (selectedCiv2 ? generateTechTreeToDisplayFrom(generateTechTreeToDisplayFrom(fullTechTree, selectedCiv), selectedCiv2) : generateTechTreeToDisplayFrom(fullTechTree, selectedCiv))
@@ -56,6 +57,24 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
     return true
   })
 
+  const LegendDisplay = () => {
+    if (isInComparisonMode) {
+      return (
+        <div className="Legend">
+          <div className="Civ1"> <div className="ColorBox"></div> {selectedCiv?.name} <img src={selectedCiv?.crest} alt="Crest" /> </div>
+          <div className="Civ2"> <div className="ColorBox"></div> {selectedCiv2?.name} <img src={selectedCiv2?.crest} alt="Crest" /> </div>
+        </div>
+      )
+    }
+    return (
+      <div className="Legend">
+        <div className="Unit"> <div className="ColorBox"></div> Unit </div>
+        <div className="Upgrade"> <div className="ColorBox"></div> Upgrade </div>
+        <div className="Unique"> <div className="ColorBox"></div> Unique </div>
+      </div>
+    )
+  }
+
   return (
     <div className="TechTree" ref={scrollRef as React.RefObject<HTMLDivElement>} onWheel={(e) => scrollHorizontally(e, scrollRef)}>
       <div className="Tools">
@@ -69,6 +88,7 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
           }) }
         </div>
       </div>
+
       <div className="LeftPanel" style={{ background: `url(${woodenBackground})` }}>
         <div className="AgeRow">
           <img src={darkAge} alt="Dark Age" />
@@ -83,12 +103,14 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
           <img src={imperialAge} alt="Imperial Age" />
         </div>
       </div>
+
       <div className="AgePanels">
         <div className="Panel"></div>
         <div className="Panel"></div>
         <div className="Panel"></div>
         <div className="Panel"></div>
       </div>
+
       <GroupTechTreeComponent groupTechTree={techTreeToDisplay.blacksmith}></GroupTechTreeComponent>
       <GroupTechTreeComponent groupTechTree={techTreeToDisplay.barracks}></GroupTechTreeComponent>
       <GroupTechTreeComponent groupTechTree={techTreeToDisplay.archery}></GroupTechTreeComponent>
@@ -103,6 +125,8 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
       <GroupTechTreeComponent groupTechTree={techTreeToDisplay.miningCamp}></GroupTechTreeComponent>
       <GroupTechTreeComponent groupTechTree={techTreeToDisplay.market}></GroupTechTreeComponent>
       <GroupTechTreeComponent groupTechTree={techTreeToDisplay.dock}></GroupTechTreeComponent>
+      
+      <LegendDisplay></LegendDisplay>
     </div>
   );
 }

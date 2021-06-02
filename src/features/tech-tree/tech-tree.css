@@ -104,3 +104,42 @@
 .AgePanels .Panel:nth-child(2n+1) {
     /* background-color: red; */
 }
+
+.Legend {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    bottom: 32px;
+    color: white;
+}
+
+.Legend .ColorBox {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+}
+.Legend > div {
+    display: flex;
+    margin-right: 16px;
+    line-height: 16px;
+}
+.Legend > .Unit > .ColorBox {
+    background-color: #016288;
+}
+.Legend > .Upgrade > .ColorBox {
+    background-color: #357738;
+}
+.Legend > .Unique > .ColorBox {
+    background-color: #7a3d83;
+}
+.Legend > .Civ1 > .ColorBox {
+    background-color: #00dde9;
+}
+.Legend > .Civ2 > .ColorBox {
+    background-color: #ff006a;
+}
+.Legend img {
+    height: 36px;
+    width: 36px;
+    margin-top: -7px;
+}

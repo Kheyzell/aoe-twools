@@ -98,6 +98,7 @@ export const { toggleCivSelection, toggleCiv2Selection, unselectCivs, selectTech
 
 export const selectedCivSelector = (state: RootState) => state.civFilter.selectedCiv
 export const selectedCiv2Selector = (state: RootState) => state.civFilter.selectedCiv2
+export const isInComparisonModeSelector = (state: RootState) => !!state.civFilter.selectedCiv && !!state.civFilter.selectedCiv2
 export const selectedTechsSelector = (state: RootState) => state.civFilter.selectedTechs
 
 export default civFilterSlice.reducer
