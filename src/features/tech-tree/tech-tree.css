@@ -5,51 +5,32 @@
     height: 100%;
 }
 
-.Tools {
-    position: fixed;
-    z-index: 1001;
-    padding: 0 2px;
-    margin-top: -10px;
-    color: white;
-    border: 1px solid white;
-    display: flex;
-    background-color: #bbada1;
-}
-
-.Tools > button {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 4px 8px;
-    font-size: 1.1em;
-}
-
-.Tools > button > img {
+.TechTree .Tools > button > img {
     width: 24px;
     margin-right: 8px;
 }
 
-.Tools > .SelectedCivs {
+.TechTree .Tools > .SelectedCivs {
     margin-left: 8px;
     height: 36px;
 }
 
-.Tools > .SelectedCivs > img {
+.TechTree .Tools > .SelectedCivs > img {
     height: 36px;
     width: 36px;
     cursor: pointer;
 }
 
-.Tools > .SelectedTechs {
+.TechTree .Tools > .SelectedTechs {
     display: flex;
 }
-.Tools > .SelectedTechs > .Tech:first-child {
+.TechTree .Tools > .SelectedTechs > .Tech:first-child {
     margin-left: 8px;
 }
-.Tools > .SelectedTechs > .Tech:not(:first-child) {
+.TechTree .Tools > .SelectedTechs > .Tech:not(:first-child) {
     margin-left: 4px;
 }
-.Tools > .SelectedTechs > .Tech:last-child {
+.TechTree .Tools > .SelectedTechs > .Tech:last-child {
     margin-right: 8px;
 }
 
