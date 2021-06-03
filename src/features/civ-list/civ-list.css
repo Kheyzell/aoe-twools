@@ -1,26 +1,47 @@
-.CivList {
+.CivList .Tools {
+    margin-top: 4px;
+    margin-left: 4px;
+}
+.CivList .Tools > button {
+    padding: 0px 4px;
+    font-size: 1em;
+}
+.CivList .Tools > label {
+    cursor: pointer;
+}
+
+.List {
     display: flex;
     padding: 8px;
     border-bottom: 3px solid black;
     height: 46px;
     overflow-x: auto;
     overflow-y: hidden;
+    z-index: 1000;
 }
-.CivList::before , 
-.CivList::after {
+.List.Excluded {
+    background-color: #00000080;
+}
+
+.List.Excluded .CivPanel {
+    top: 142px;
+}
+
+.List::before , 
+.List::after {
   content:'';
   flex:1;
 }
 
-.CivList::-webkit-scrollbar {
+.List::-webkit-scrollbar {
   height: 4px;              /* height of horizontal scrollbar ← You're missing this */
   width: 4px;               /* width of vertical scrollbar */
   background-color: #d5d5d5;
 }
-/* .CivList::-webkit-scrollbar-track {
+/* .List::-webkit-scrollbar-track {
     background-color: #aaaaaa;
 } */
-.CivList::-webkit-scrollbar-thumb {
+.List::-webkit-scrollbar-thumb {
     background-color: #808080
 }
 

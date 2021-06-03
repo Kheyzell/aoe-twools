@@ -3,11 +3,29 @@
 }
 
 .Header {
-  height: 64px;
   background-size: cover;
 }
 
 .Body {
   height: calc(100vh - 80px);
   background-size: 100vw;
+}
+
+.Tools {
+  position: fixed;
+  z-index: 1001;
+  padding: 0 2px;
+  margin-top: -10px;
+  color: white;
+  border: 1px solid white;
+  display: flex;
+  background-color: #bbada1;
+}
+
+.Tools > button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 1.1em;
 }
