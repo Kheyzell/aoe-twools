@@ -1,13 +1,27 @@
 .CivList .Tools {
+    /* margin-top: 4px;
+    margin-left: 4px; */
+    right: 4px;
     margin-top: 4px;
-    margin-left: 4px;
+
 }
 .CivList .Tools > button {
     padding: 0px 4px;
     font-size: 1em;
 }
-.CivList .Tools > label {
+.CivList .Tools > div > label {
     cursor: pointer;
+    margin: 8px;
+}
+.CivList .Tools > div > label:hover {
+    color: black;
+    background-color: white;
+}
+.CivList .Tools > div > label:first-child {
+    margin-left: 0;
+}
+.CivList .Tools > div > label:last-child {
+    margin-right: 0;
 }
 
 .List {
