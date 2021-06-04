@@ -22,16 +22,16 @@ export const generateTechTreeToDisplayFrom = (baseCivTechTree: CivTechTree, civT
     }
 }
 
-export const civHasTech = (civTechs: CivTechTree, tech: Tech): boolean => {
+export const civHasTech = (civTechTree: CivTechTree, tech: Tech): boolean => {
     if (tech.type === TechType.unit) {
-        return hasUnit(civTechs, tech as Unit)
+        return civHasUnit(civTechTree, tech as Unit)
     } else {
-        return hasUpgrade(civTechs, tech as Upgrade)
+        return civHasUpgrade(civTechTree, tech as Upgrade)
     }
 }
 
-export const hasUnit = (civTechs: CivTechTree, unit: Unit): boolean => {
-    return hasBarracksUnit(civTechs, unit) || hasArcheryUnit(civTechs, unit) || hasStableUnit(civTechs, unit) || hasSiegeUnit(civTechs, unit) || hasCastleUnit(civTechs, unit) || hasMonasteryUnit(civTechs, unit) || hasTownCenterUnit(civTechs, unit) || hasMarketUnit(civTechs, unit) || hasDockUnit(civTechs, unit)
+export const civHasUnit = (civTechTree: CivTechTree, unit: Unit): boolean => {
+    return hasBarracksUnit(civTechTree, unit) || hasArcheryUnit(civTechTree, unit) || hasStableUnit(civTechTree, unit) || hasSiegeUnit(civTechTree, unit) || hasCastleUnit(civTechTree, unit) || hasMonasteryUnit(civTechTree, unit) || hasTownCenterUnit(civTechTree, unit) || hasMarketUnit(civTechTree, unit) || hasDockUnit(civTechTree, unit)
 }
 
 export const hasBarracksUnit = (civTechs: CivTechTree, unit: Unit): boolean => {
@@ -118,8 +118,8 @@ export const hasDockUnit = (civTechs: CivTechTree, unit: Unit): boolean => {
     })
 }
 
-export const hasUpgrade = (civTechs: CivTechTree, upgrade: Upgrade) => {
-    return hasBarracksUpgrade(civTechs, upgrade) || hasArcheryUpgrade(civTechs, upgrade) || hasStableUpgrade(civTechs, upgrade) || hasCastleUpgrade(civTechs, upgrade) || hasBlacksmithUpgrade(civTechs, upgrade) || hasMonasteryUpgrade(civTechs, upgrade) || hasUniversityUpgrade(civTechs, upgrade) || hasTownCenterUpgrade(civTechs, upgrade) || hasLumberCampUpgrade(civTechs, upgrade) || hasMillUpgrade(civTechs, upgrade) || hasMiningCampUpgrade(civTechs, upgrade) || hasMarketUpgrade(civTechs, upgrade) || hasDockUpgrade(civTechs, upgrade)
+export const civHasUpgrade = (civTechTree: CivTechTree, upgrade: Upgrade) => {
+    return hasBarracksUpgrade(civTechTree, upgrade) || hasArcheryUpgrade(civTechTree, upgrade) || hasStableUpgrade(civTechTree, upgrade) || hasCastleUpgrade(civTechTree, upgrade) || hasBlacksmithUpgrade(civTechTree, upgrade) || hasMonasteryUpgrade(civTechTree, upgrade) || hasUniversityUpgrade(civTechTree, upgrade) || hasTownCenterUpgrade(civTechTree, upgrade) || hasLumberCampUpgrade(civTechTree, upgrade) || hasMillUpgrade(civTechTree, upgrade) || hasMiningCampUpgrade(civTechTree, upgrade) || hasMarketUpgrade(civTechTree, upgrade) || hasDockUpgrade(civTechTree, upgrade)
 }
 
 export const hasBarracksUpgrade = (civTechs: CivTechTree, upgrade: Upgrade): boolean => {
