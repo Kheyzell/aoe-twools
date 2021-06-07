@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
     arambai: new Unit({
         id: 'arambai',
-        name: 'Arambai',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
     }),
     eliteArambai: new Unit({
         id: 'eliteArambai',
-        name: 'Elite Arambai',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'howdah',
-        name: 'Howdah',
         age: 3,
-        description: 'Battle Elephants +1/+1 armor',
         effectType: EffectType.armor,
         value: 1,
         cost: { wood: 300, food: 400, gold: 0, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'manipurCavalry',
-        name: 'Manipur Cavalry',
         age: 4,
-        description: 'cavalry and Arambai +6 attack against standard buildings',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 650, gold: 400, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const burmeseTechTree: CivTechTree = {
     id: 'burmese',
-    name: 'Burmese',
     crest,
     wikiUrl: 'Burmese',
     bonuses: [
         {
             id: 'burmese1',
-            description: 'Lumber Camp upgrades are free',
             effectType: EffectType.freeUpgrade,
             value: 50,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const burmeseTechTree: CivTechTree = {
         },
         {
             id: 'burmese2',
-            description: 'Infantry units have +1/+2/+3 attack in the Feudal/Castle/Imperial Age',
             effectType: EffectType.damage,
             value: { age2: 1, age3: 2, age4: 3 },
             affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
@@ -98,7 +89,6 @@ export const burmeseTechTree: CivTechTree = {
         },
         {
             id: 'burmese3',
-            description: 'Monastery technologies are 50% cheaper',
             effectType: EffectType.discount,
             value: 50,
             affectedUnits: [],
@@ -106,7 +96,6 @@ export const burmeseTechTree: CivTechTree = {
         },
         {
             id: 'burmese4',
-            description: 'Relics are visible on the map at game start',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],

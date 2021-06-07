@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
     tarkan: new Unit({
         id: 'tarkan',
-        name: 'Tarkan',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
     }),
     eliteTarkan: new Unit({
         id: 'eliteTarkan',
-        name: 'Elite Tarkan',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'marauders',
-        name: 'Marauders',
         age: 3,
-        description: 'create Tarkans at Stables',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 300, food: 0, gold: 200, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'atheism',
-        name: 'Atheism',
         age: 4,
-        description: '+100 years for Relic/Wonder victories; enemy Relic gold generation reduced by 50%',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 500, gold: 500, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const hunsTechTree: CivTechTree = {
     id: 'huns',
-    name: 'Huns',
     crest,
     wikiUrl: 'Huns',
     bonuses: [
         {
             id: 'huns1',
-            description: 'Do not need Houses, but start game with -100 wood',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const hunsTechTree: CivTechTree = {
         },
         {
             id: 'huns2',
-            description: 'Cavalry Archers are 10%/20% cheaper in the Castle/Imperial Age',
             effectType: EffectType.discount,
             value: { age3: 10, age4: 20 },
             affectedUnits: [archeryUnits.heavyCavalryArcher],
@@ -98,7 +89,6 @@ export const hunsTechTree: CivTechTree = {
         },
         {
             id: 'huns3',
-            description: 'Trebuchets are 30% more accurate',
             effectType: EffectType.accuracy,
             value: 30,
             affectedUnits: [castleUnits.trebuchet],
@@ -106,7 +96,6 @@ export const hunsTechTree: CivTechTree = {
         },
         {
             id: 'huns4',
-            description: 'Stables work 20% faster',
             effectType: EffectType.creationSpeed,
             value: 20,
             affectedUnits: [stableUnits.hussar, stableUnits.paladin, hunsUniqueUnits.eliteTarkan],

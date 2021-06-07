@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel: Unit } = {
     keshik: new Unit({
         id: 'keshik',
-        name: 'Keshik',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
     }),
     eliteKeshik: new Unit({
         id: 'eliteKeshik',
-        name: 'Elite Keshik',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -47,7 +45,6 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
     }),
     flamingCamel: new Unit({
         id: 'flamingCamel',
-        name: 'Flaming Camel',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -64,9 +61,7 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
 const uniqueTechs = [
     new UniqueTech({
         id: 'silkArmor',
-        name: 'Silk Armor',
         age: 3,
-        description: 'Scout Cavalry line, Steppe Lancers and Cavalry Archers have +1/+1 armor',
         effectType: EffectType.armor,
         value: 1,
         cost: { wood: 400, food: 0, gold: 300, stone: 0 },
@@ -76,9 +71,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'timuridSiegecraft',
-        name: 'Timurid Siegecraft',
         age: 4,
-        description: 'Trebuchets +2 range, enables Flaming Camels at the Castle',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 400, food: 0, gold: 500, stone: 0 },
@@ -90,13 +83,11 @@ const uniqueTechs = [
 
 export const tatarsTechTree: CivTechTree = {
     id: 'tatars',
-    name: 'Tatars',
     crest,
     wikiUrl: 'Tatars',
     bonuses: [
         {
             id: 'tatars1',
-            description: 'Herdables contain +50% food',
             effectType: EffectType.miscallenous,
             value: 50,
             affectedUnits: [townCenterUnits.villager],
@@ -104,7 +95,6 @@ export const tatarsTechTree: CivTechTree = {
         },
         {
             id: 'tatars2',
-            description: 'Units deal +25% damage when attacking from higher elevation',
             effectType: EffectType.miscallenous,
             value: 25,
             affectedUnits: [],
@@ -112,7 +102,6 @@ export const tatarsTechTree: CivTechTree = {
         },
         {
             id: 'tatars3',
-            description: 'Parthian Tactics and Thumb Ring are free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [],
@@ -120,7 +109,6 @@ export const tatarsTechTree: CivTechTree = {
         },
         {
             id: 'tatars4',
-            description: 'Two Sheep spawn near newly-constructed Town Centers after advancing to the Castle Age',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -128,7 +116,6 @@ export const tatarsTechTree: CivTechTree = {
         },
         {
             id: 'tatars5',
-            description: 'Cavalry archers have +2 Line of Sight',
             effectType: EffectType.lineOfSight,
             value: 2,
             affectedUnits: [archeryUnits.heavyCavalryArcher],

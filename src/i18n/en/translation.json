@@ -1,0 +1,1717 @@
+{
+    "Bonuses": "Bonuses",
+    "Unique technologies": "Unique technologies",
+    "Units affected by bonuses or technologies": "Units affected by bonuses or technologies",
+    "No unit affected by bonuses": "No unit affected by bonuses",
+    "Fully upgraded units": "Fully upgraded units",
+    "No fully upgraded unit": "No fully upgraded unit",
+    "Unit": "Unit",
+    "Technology": "Technology",
+    "Unique": "Unique",
+    "Show Fully upgraded": "Show Fully upgraded",
+    "Show the list of civilisations having the selected units fully upgraded": "Show the list of civilisations having the selected units fully upgraded",
+    "Show Excluded": "Show Excluded",
+    "Show the list of civilisations that do not satisfy the filters": "Show the list of civilisations that do not satisfy the filters",
+    "Filtered": "Filtered:",
+    "Fully upgraded": "Fully upgraded:",
+    "Excluded": "Excluded",
+    "civ": {
+        "aztecs": {
+            "name": "Aztecs",
+            "bonus": {
+                "aztecs1": {
+                    "description": "Villagers carry +3 extra resources"
+                },
+                "aztecs2": {
+                    "description": "All military units are created 11% faster"
+                },
+                "aztecs3": {
+                    "description": "Monks gain 5 HP for every researched Monastery technology"
+                },
+                "aztecs4": {
+                    "description": "Start with +50 gold"
+                },
+                "aztecs5": {
+                    "description": "Relics generate +33% gol"
+                }
+            }
+        },
+        "berbers": {
+            "name": "Berbers",
+            "bonus": {
+                "berbers1": {
+                    "description": "Villagers move +10% faster"
+                },
+                "berbers2": {
+                    "description": "Stable units are 15%/20% cheaper in the Castle/Imperial Age"
+                },
+                "berbers3": {
+                    "description": "Ships move +10% faster"
+                },
+                "berbers4": {
+                    "description": "Genitour available at the Archery Range"
+                }
+            }
+        },
+        "britons": {
+            "name": "Britons",
+            "bonus": {
+                "britons1": {
+                    "description": "Town Centers cost -50% wood once the Castle Age is reached"
+                },
+                "britons2": {
+                    "description": "Foot archers (except Skirmishers) have +1/+2 range in the Castle/Imperial Age"
+                },
+                "britons3": {
+                    "description": "Shepherds work 25% faster"
+                },
+                "britons4": {
+                    "description": "Archery Ranges work 20% faster"
+                }
+            }
+        },
+        "bulgarians": {
+            "name": "Bulgarians",
+            "bonus": {
+                "bulgarians1": {
+                    "description": "Militia line upgrades are free"
+                },
+                "bulgarians2": {
+                    "description": "Town Centers cost -50% stone"
+                },
+                "bulgarians3": {
+                    "description": "The Krepost becomes available for construction in the Castle Age"
+                },
+                "bulgarians4": {
+                    "description": "Blacksmith and Siege Workshop upgrades cost -50% food"
+                },
+                "bulgarians5": {
+                    "description": "Blacksmiths work 80% faster"
+                }
+            }
+        },
+        "burgundians": {
+            "name": "Burgundians",
+            "bonus": {
+                "burgundians1": {
+                    "description": "Economic upgrades cost -50% food and are available one Age earlier than other civilizations"
+                },
+                "burgundians2": {
+                    "description": "Stable technologies are 50% cheaper"
+                },
+                "burgundians3": {
+                    "description": "Gunpowder units gain a +25% bonus to their attack"
+                },
+                "burgundians4": {
+                    "description": "Cavalier upgrade available in the Castle Age"
+                },
+                "burgundians5": {
+                    "description": "Relics generate both gold and food at the same rate"
+                }
+            }
+        },
+        "burmese": {
+            "name": "Burmese",
+            "bonus": {
+                "burmese1": {
+                    "description": "Lumber Camp upgrades are free"
+                },
+                "burmese2": {
+                    "description": "Infantry units have +1/+2/+3 attack in the Feudal/Castle/Imperial Age"
+                },
+                "burmese3": {
+                    "description": "Monastery technologies are 50% cheaper"
+                },
+                "burmese4": {
+                    "description": "Relics are visible on the map at game start"
+                }
+            }
+        },
+        "byzantines": {
+            "name": "Byzantines",
+            "bonus": {
+                "byzantines1": {
+                    "description": "Buildings have +10%/+20%/+30%/+40% HP in the Dark/Feudal/Castle/Imperial Age"
+                },
+                "byzantines2": {
+                    "description": "Camel Riders, Skirmishers, and Spearmen are 25% cheaper"
+                },
+                "byzantines3": {
+                    "description": "Fire Ships fire 25% faster"
+                },
+                "byzantines4": {
+                    "description": "Advancing to the Imperial Age is 33% cheaper"
+                },
+                "byzantines5": {
+                    "description": "Town Watch is free"
+                },
+                "byzantines6": {
+                    "description": "Monks heal 50% faster"
+                }
+            }
+        },
+        "celts": {
+            "name": "Celts",
+            "bonus": {
+                "celts1": {
+                    "description": "Infantry units move 15% faster starting from the Feudal Age"
+                },
+                "celts2": {
+                    "description": "Lumberjacks work 15% faster"
+                },
+                "celts3": {
+                    "description": "Siege weapons fire 25% faster"
+                },
+                "celts4": {
+                    "description": "Enemy herdables can be converted regardless of enemy units next to them"
+                },
+                "celts5": {
+                    "description": "Siege Workshops work 20% faster"
+                }
+            }
+        },
+        "chinese": {
+            "name": "Chinese",
+            "bonus": {
+                "chinese1": {
+                    "description": "Start game with three extra Villagers, but with -200 food and -50 wood"
+                },
+                "chinese2": {
+                    "description": "Town Centers support ten population and have +5 LOS"
+                },
+                "chinese3": {
+                    "description": "Technologies are 10%/15%/20% cheaper in the Feudal/Castle/Imperial Age"
+                },
+                "chinese4": {
+                    "description": "Demolition Ships have +50% HP"
+                },
+                "chinese5": {
+                    "description": "Farms provide +45 food"
+                }
+            }
+        },
+        "cumans": {
+            "name": "Cumans",
+            "bonus": {
+                "cumans1": {
+                    "description": "Can build one additional Town Center in the Feudal Age"
+                },
+                "cumans2": {
+                    "description": "Siege Workshops and Battering Rams are available in the Feudal Age and Capped Ram upgrade available in the Castle Age"
+                },
+                "cumans3": {
+                    "description": "Mounted units move 5%/10%/15% faster in the Feudal/Castle/Imperial Age"
+                },
+                "cumans4": {
+                    "description": "Palisade Walls have +33% HP"
+                }
+            }
+        },
+        "ethiopians": {
+            "name": "Ethiopians",
+            "bonus": {
+                "ethiopians1": {
+                    "description": "The Archer line fires 18% faster"
+                },
+                "ethiopians2": {
+                    "description": "Receive 100 gold and 100 food when advancing to the next Age"
+                },
+                "ethiopians3": {
+                    "description": "The Pikeman upgrade is free"
+                },
+                "ethiopians4": {
+                    "description": "Towers and Outposts have +3 LOS"
+                }
+            }
+        },
+        "franks": {
+            "name": "Franks",
+            "bonus": {
+                "franks1": {
+                    "description": "Farm upgrades are free"
+                },
+                "franks2": {
+                    "description": "Castles are 25% cheaper"
+                },
+                "franks3": {
+                    "description": "Mounted units +20% HP (starting in the Feudal Age)"
+                },
+                "franks4": {
+                    "description": "Foragers work 15% faster"
+                },
+                "franks5": {
+                    "description": "Knights have +2 Line of Sight"
+                }
+            }
+        },
+        "goths": {
+            "name": "Goths",
+            "bonus": {
+                "goths1": {
+                    "description": "Infantry are 20%/25%/30%/35% cheaper in the Dark/Feudal/Castle/Imperial Age"
+                },
+                "goths2": {
+                    "description": "Infantry have +1/+2/+3 attack bonus against standard buildings in the Feudal/Castle/Imperial Age"
+                },
+                "goths3": {
+                    "description": "Villagers have +5 attack against aggressive huntables (Wild Boar, Javelina, Elephant, Rhinoceros) and carry +15 food from hunting"
+                },
+                "goths4": {
+                    "description": "+10 population cap in the Imperial Age"
+                },
+                "goths5": {
+                    "description": "Loom is researched instantly"
+                },
+                "goths6": {
+                    "description": "Barracks work 20% faster"
+                }
+            }
+        },
+        "huns": {
+            "name": "Huns",
+            "bonus": {
+                "huns1": {
+                    "description": "Do not need Houses, but start game with -100 wood"
+                },
+                "huns2": {
+                    "description": "Cavalry Archers are 10%/20% cheaper in the Castle/Imperial Age"
+                },
+                "huns3": {
+                    "description": "Trebuchets are 30% more accurate"
+                },
+                "huns4": {
+                    "description": "Stables work 20% faster"
+                }
+            }
+        },
+        "incas": {
+            "name": "Incas",
+            "bonus": {
+                "incas1": {
+                    "description": "Start with a free Llama"
+                },
+                "incas2": {
+                    "description": "Villagers benefit from Blacksmith infantry upgrades starting in the Castle Age"
+                },
+                "incas3": {
+                    "description": "Houses support 10 population"
+                },
+                "incas4": {
+                    "description": "Buildings cost -15% stone"
+                },
+                "incas5": {
+                    "description": "Farms are built 100% faster"
+                }
+            }
+        },
+        "indians": {
+            "name": "Indians",
+            "bonus": {
+                "indians1": {
+                    "description": "Fishermen work 10% faster"
+                },
+                "indians2": {
+                    "description": "Villagers are 10%/15%/20%/25% cheaper in the Dark/Feudal/Castle/Imperial Age"
+                },
+                "indians3": {
+                    "description": "All Stable units have +1 pierce armor in the Castle Age and +1 in the Imperial Age"
+                },
+                "indians4": {
+                    "description": "Camel units have +4 attack against standard buildings"
+                }
+            }
+        },
+        "italians": {
+            "name": "Italians",
+            "bonus": {
+                "italians1": {
+                    "description": "Dock and University technologies are 33% cheaper"
+                },
+                "italians2": {
+                    "description": "Fishing Ships are 15% cheaper"
+                },
+                "italians3": {
+                    "description": "Gunpowder units are 20% cheaper"
+                },
+                "italians4": {
+                    "description": "Advancing to the next Age is 15% cheaper"
+                },
+                "italians5": {
+                    "description": "Condottiero available at the Barracks"
+                }
+            }
+        },
+        "japanese": {
+            "name": "Japanese",
+            "bonus": {
+                "japanese1": {
+                    "description": "Fishing Ships have double HP, +2 pierce armor, and work 5%/10%/15%/20% faster in the Dark/Feudal/Castle/Imperial Age"
+                },
+                "japanese2": {
+                    "description": "Mills, Lumber Camps, and Mining Camps are 50% cheaper"
+                },
+                "japanese3": {
+                    "description": "Infantry attack 33% faster starting in the Feudal Age"
+                },
+                "japanese4": {
+                    "description": "Galleys have +50% Line of Sight"
+                }
+            }
+        },
+        "khmer": {
+            "name": "Khmer",
+            "bonus": {
+                "khmer1": {
+                    "description": "No buildings are required to advance to the next Age or to unlock other buildings"
+                },
+                "khmer2": {
+                    "description": "Battle Elephants move +10% faster"
+                },
+                "khmer3": {
+                    "description": "Farmers do not require Mills or Town Centers to drop off food but work 5% slower"
+                },
+                "khmer4": {
+                    "description": "Villagers can garrison in Houses"
+                },
+                "khmer5": {
+                    "description": "Scorpions have +1 range"
+                }
+            }
+        },
+        "koreans": {
+            "name": "Koreans",
+            "bonus": {
+                "koreans1": {
+                    "description": "Villagers have +3 Line of Sight"
+                },
+                "koreans2": {
+                    "description": "Stone Miners work 20% faster"
+                },
+                "koreans3": {
+                    "description": "Tower upgrades are free (Bombard Tower requires Chemistry)"
+                },
+                "koreans4": {
+                    "description": "Archer Armor upgrades are free"
+                },
+                "koreans5": {
+                    "description": "Military units cost –20% less wood (except siege weapons)"
+                },
+                "koreans6": {
+                    "description": "Mangonel line minimum range reduced"
+                }
+            }
+        },
+        "lithuanians": {
+            "name": "Lithuanians",
+            "bonus": {
+                "lithuanians1": {
+                    "description": "Start the game with +150 food"
+                },
+                "lithuanians2": {
+                    "description": "Spearman and Skirmisher lines move 10% faster"
+                },
+                "lithuanians3": {
+                    "description": "Each garrisoned Relic gives +1 attack to Knights and Leitis (maximum +4)"
+                },
+                "lithuanians4": {
+                    "description": "Monasteries work 20% faster"
+                }
+            }
+        },
+        "magyars": {
+            "name": "Magyars",
+            "bonus": {
+                "magyars1": {
+                    "description": "Forging, Iron Casting, and Blast Furnace are free"
+                },
+                "magyars2": {
+                    "description": "The Scout Cavalry line is 15% cheaper"
+                },
+                "magyars3": {
+                    "description": "Villagers kill wild animals in one strike"
+                },
+                "magyars4": {
+                    "description": "Foot archers have +2 Line of Sight"
+                }
+            }
+        },
+        "malay": {
+            "name": "Malay",
+            "bonus": {
+                "malay1": {
+                    "description": "Advancing in Age is 66% faster"
+                },
+                "malay2": {
+                    "description": "Fish Traps are 33% cheaper"
+                },
+                "malay3": {
+                    "description": "Fish Traps provide 3 times more food"
+                },
+                "malay4": {
+                    "description": "Battle Elephants are 30% cheaper in the Castle Age, 40% cheaper in the Imperial Age"
+                },
+                "malay5": {
+                    "description": "Docks have double Line of Sight"
+                }
+            }
+        },
+        "malians": {
+            "name": "Malians",
+            "bonus": {
+                "malians1": {
+                    "description": "Buildings cost -15% wood (except Farms)"
+                },
+                "malians2": {
+                    "description": "Barracks units have +1/+2/+3 pierce armor in the Feudal/Castle/Imperial Age"
+                },
+                "malians3": {
+                    "description": "Gold Mining is free"
+                },
+                "malians4": {
+                    "description": "Universities research +80% faster"
+                }
+            }
+        },
+        "mayans": {
+            "name": "Mayans",
+            "bonus": {
+                "mayans1": {
+                    "description": "Start the game with +1 Villager, but with -50 food"
+                },
+                "mayans2": {
+                    "description": "Resources last 15% longer"
+                },
+                "mayans3": {
+                    "description": "Foot archers are 10%/20%/30% cheaper in the Feudal/Castle/Imperial Age"
+                },
+                "mayans4": {
+                    "description": "Walls are 50% cheaper"
+                }
+            }
+        },
+        "mongols": {
+            "name": "Mongols",
+            "bonus": {
+                "mongols1": {
+                    "description": "Cavalry archers fire 25% faster"
+                },
+                "mongols2": {
+                    "description": "Light Cavalry, Hussars, and Steppe Lancers have +30% HP"
+                },
+                "mongols3": {
+                    "description": "Hunters work +40% faster"
+                },
+                "mongols4": {
+                    "description": "The Scout Cavalry line has +2 Line of Sight"
+                }
+            }
+        },
+        "persians": {
+            "name": "Persians",
+            "bonus": {
+                "persians1": {
+                    "description": "Start the game with +50 food and +50 wood"
+                },
+                "persians2": {
+                    "description": "Town Centers and Docks have double HP and work 10%/15%/20% faster in the Feudal/Castle/Imperial Age"
+                },
+                "persians3": {
+                    "description": "Knights have +2 attack against archers"
+                }
+            }
+        },
+        "portuguese": {
+            "name": "Portuguese",
+            "bonus": {
+                "portuguese1": {
+                    "description": "All units cost -20% gold"
+                },
+                "portuguese2": {
+                    "description": "All ships have +10% HP"
+                },
+                "portuguese3": {
+                    "description": "The Feitoria becomes available for building in the Imperial Age"
+                },
+                "portuguese4": {
+                    "description": "All technologies (excluding advancing ages) are researched 30% faster"
+                },
+                "portuguese5": {
+                    "description": "The Line of Sight is shared with the team from the beginning of the game"
+                }
+            }
+        },
+        "saracens": {
+            "name": "Saracens",
+            "bonus": {
+                "saracens1": {
+                    "description": "The commodity trading fee is 5%"
+                },
+                "saracens2": {
+                    "description": "Markets cost -100 wood"
+                },
+                "saracens3": {
+                    "description": "Transport Ships have double HP and +5 carry capacity"
+                },
+                "saracens4": {
+                    "description": "Galleys attack 25% faster"
+                },
+                "saracens5": {
+                    "description": "Camel units +10 HP"
+                },
+                "saracens6": {
+                    "description": "Foot archers have +2 attack against standard buildings"
+                }
+            }
+        },
+        "sicilians": {
+            "name": "Sicilians",
+            "bonus": {
+                "sicilians1": {
+                    "description": "Castles and Town Centers are constructed 100% faster"
+                },
+                "sicilians2": {
+                    "description": "Land military units (except Siege weapons) absorb 50% of all incoming bonus damage"
+                },
+                "sicilians3": {
+                    "description": "Farm upgrades provide +100% additional food to Farms before they need to be reseeded"
+                },
+                "sicilians4": {
+                    "description": "Can build Donjons, which replace the regular Watch Tower line"
+                },
+                "sicilians5": {
+                    "description": "Transport Ships +5 carry capacity and +10 armor versus anti-ship bonus damage"
+                }
+            }
+        },
+        "slavs": {
+            "name": "Slavs",
+            "bonus": {
+                "slavs1": {
+                    "description": "Farmers work 10% faster"
+                },
+                "slavs2": {
+                    "description": "Supplies is free"
+                },
+                "slavs3": {
+                    "description": "Siege Workshop units are 15% cheaper"
+                },
+                "slavs4": {
+                    "description": "Military buildings (excluding Castles and Docks) provide +5 population"
+                }
+            }
+        },
+        "spanish": {
+            "name": "Spanish",
+            "bonus": {
+                "spanish1": {
+                    "description": "Builders work 30% faster"
+                },
+                "spanish2": {
+                    "description": "Blacksmith upgrades cost no gold"
+                },
+                "spanish3": {
+                    "description": "Cannon Galleons have better accuracy and faster cannonballs"
+                },
+                "spanish4": {
+                    "description": "Hand Cannoneers and Bombard Cannons fire 18% faster"
+                },
+                "spanish5": {
+                    "description": "Trade units generate +25% gold"
+                }
+            }
+        },
+        "tatars": {
+            "name": "Tatars",
+            "bonus": {
+                "tatars1": {
+                    "description": "Herdables contain +50% food"
+                },
+                "tatars2": {
+                    "description": "Units deal +25% damage when attacking from higher elevation"
+                },
+                "tatars3": {
+                    "description": "Parthian Tactics and Thumb Ring are free"
+                },
+                "tatars4": {
+                    "description": "Two Sheep spawn near newly-constructed Town Centers after advancing to the Castle Age"
+                },
+                "tatars5": {
+                    "description": "Cavalry archers have +2 Line of Sight"
+                }
+            }
+        },
+        "teutons": {
+            "name": "Teutons",
+            "bonus": {
+                "teutons1": {
+                    "description": "Monks have double healing range"
+                },
+                "teutons2": {
+                    "description": "Towers garrison twice as many units"
+                },
+                "teutons3": {
+                    "description": "Murder Holes and Herbal Medicine are free"
+                },
+                "teutons4": {
+                    "description": "Farms are 40% cheaper"
+                },
+                "teutons5": {
+                    "description": "Barracks and Stable units receive +1/+2 melee armor in the Castle/Imperial Age"
+                },
+                "teutons6": {
+                    "description": "Town Centers can garrison +10 units"
+                },
+                "teutons7": {
+                    "description": "Units resist conversion (+2)"
+                }
+            }
+        },
+        "turks": {
+            "name": "Turks",
+            "bonus": {
+                "turks1": {
+                    "description": "Gunpowder units have +25% HP"
+                },
+                "turks2": {
+                    "description": "Gunpowder technologies are 50% cheaper"
+                },
+                "turks3": {
+                    "description": "Chemistry is free"
+                },
+                "turks4": {
+                    "description": "Gold Miners work 20% faster"
+                },
+                "turks5": {
+                    "description": "Light Cavalry and Hussar upgrades are free"
+                },
+                "turks6": {
+                    "description": "Scout Cavalry line gain +1 pierce armor"
+                },
+                "turks7": {
+                    "description": "Gunpowder units are created 25% faster"
+                }
+            }
+        },
+        "vietnamese": {
+            "name": "Vietnamese",
+            "bonus": {
+                "vietnamese1": {
+                    "description": "Reveal enemy positions at game start"
+                },
+                "vietnamese2": {
+                    "description": "Archery Range units have +20% HP"
+                },
+                "vietnamese3": {
+                    "description": "Conscription is free"
+                },
+                "vietnamese4": {
+                    "description": "Economic upgrades cost no wood"
+                },
+                "vietnamese5": {
+                    "description": " Imperial Skirmisher available at the Archery Range"
+                }
+            }
+        },
+        "vikings": {
+            "name": "Vikings",
+            "bonus": {
+                "vikings1": {
+                    "description": "Warships are 15%/15%/20% cheaper in the Feudal/Castle/Imperial Age"
+                },
+                "vikings2": {
+                    "description": "Infantry have +10%/+15%/+20% HP in the Feudal/Castle/Imperial Age"
+                },
+                "vikings3": {
+                    "description": "Wheelbarrow and Hand Cart are free"
+                },
+                "vikings4": {
+                    "description": "Docks are 15% cheaper"
+                }
+            }
+        }
+    },
+    "unit": {
+        "militia": {
+            "name": "Militia"
+        },
+        "manAtArms": {
+            "name": "Man-At-Arms"
+        },
+        "longSwordsman": {
+            "name": "Long Swordsman"
+        },
+        "twoHandedSwordsman": {
+            "name": "Two Handed Swordsman"
+        },
+        "champion": {
+            "name": "Champion"
+        },
+        "spearman": {
+            "name": "Spearman"
+        },
+        "pikeman": {
+            "name": "Pikeman"
+        },
+        "halberdier": {
+            "name": "Halberdier"
+        },
+        "eagleScout": {
+            "name": "Eagle Scout"
+        },
+        "eagleWarrior": {
+            "name": "Eagle Warrior"
+        },
+        "eliteEagleWarrior": {
+            "name": "Elite Eagle Warrior"
+        },
+        "archer": {
+            "name": "Archer"
+        },
+        "crossbowman": {
+            "name": "Crossbowman"
+        },
+        "arbalester": {
+            "name": "Arbalester"
+        },
+        "skirmisher": {
+            "name": "Skirmisher"
+        },
+        "eliteSkirmisher": {
+            "name": "Elite Skirmisher"
+        },
+        "handCannoneer": {
+            "name": "Hand Cannoneer"
+        },
+        "cavalryArcher": {
+            "name": "Cavalry Archer"
+        },
+        "heavyCavalryArcher": {
+            "name": "Heavy Cavalry Archer"
+        },
+        "scoutCavalry": {
+            "name": "Scout Cavalry"
+        },
+        "lightCavalry": {
+            "name": "Light Cavalry"
+        },
+        "hussar": {
+            "name": "Hussar"
+        },
+        "knight": {
+            "name": "Knight"
+        },
+        "cavalier": {
+            "name": "Cavalier"
+        },
+        "paladin": {
+            "name": "Paladin"
+        },
+        "camelRider": {
+            "name": "Camel Rider"
+        },
+        "heavyCamelRider": {
+            "name": "Heavy Camel Rider"
+        },
+        "battleElephant": {
+            "name": "Battle Elephant"
+        },
+        "eliteBattleElephant": {
+            "name": "Elite Battle Elephant"
+        },
+        "steppeLancer": {
+            "name": "Steppe Lancer"
+        },
+        "eliteSteppeLancer": {
+            "name": "Elite Steppe Lancer"
+        },
+        "batteringRam": {
+            "name": "Battering Ram"
+        },
+        "cappedRam": {
+            "name": "Capped Ram"
+        },
+        "siegeRam": {
+            "name": "Siege Ram"
+        },
+        "mangonel": {
+            "name": "Mangonel"
+        },
+        "onager": {
+            "name": "Onager"
+        },
+        "siegeOnager": {
+            "name": "Siege Onager"
+        },
+        "scorpion": {
+            "name": "Scorpion"
+        },
+        "heavyScorpion": {
+            "name": "Heavy Scorpion"
+        },
+        "siegeTower": {
+            "name": "Siege Tower"
+        },
+        "bombardCannon": {
+            "name": "Bombard Cannon"
+        },
+        "uniqueUnit": {
+            "name": "Unique Unit"
+        },
+        "eliteUniqueUnit": {
+            "name": "Elite Unique Unit"
+        },
+        "petard": {
+            "name": "Petard"
+        },
+        "trebuchet": {
+            "name": "Trebuchet"
+        },
+        "monk": {
+            "name": "Monk"
+        },
+        "villager": {
+            "name": "Villager"
+        },
+        "tradeCart": {
+            "name": "Trade Cart"
+        },
+        "fishingShip": {
+            "name": "Fishing Ship"
+        },
+        "transportShip": {
+            "name": "Transport Ship"
+        },
+        "tradeCog": {
+            "name": "Trade Cog"
+        },
+        "galley": {
+            "name": "Galley"
+        },
+        "fireGalley": {
+            "name": "Fire Galley"
+        },
+        "demolitionRaft": {
+            "name": "Demolition Raft"
+        },
+        "warGalley": {
+            "name": "War Galley"
+        },
+        "fireShip": {
+            "name": "Fire Ship"
+        },
+        "demolitionShip": {
+            "name": "Demolition Ship"
+        },
+        "galleon": {
+            "name": "Galleon"
+        },
+        "fastFireShip": {
+            "name": "Fast Fire Ship"
+        },
+        "heavyDemolitionShip": {
+            "name": "Heavy Demolition Ship"
+        },
+        "cannonGalleon": {
+            "name": "Cannon Galleon"
+        },
+        "eliteCannonGalleon": {
+            "name": "Elite Cannon Galleon"
+        },
+        "jaguarWarrior": {
+            "name": "Jaguar Warrior"
+        },
+        "eliteJaguarWarrior": {
+            "name": "Elite Jaguar Warrior"
+        },
+        "camelArcher": {
+            "name": "Camel Archer"
+        },
+        "eliteCamelArcher": {
+            "name": "Elite Camel Archer"
+        },
+        "genitour": {
+            "name": "Genitour"
+        },
+        "eliteGenitour": {
+            "name": "Elite Genitour"
+        },
+        "longbowman": {
+            "name": "Longbowman"
+        },
+        "eliteLongbowman": {
+            "name": "Elite Longbowman"
+        },
+        "konnik": {
+            "name": "Konnik"
+        },
+        "eliteKonnik": {
+            "name": "Elite Konnik"
+        },
+        "coustillier": {
+            "name": "Coustillier"
+        },
+        "eliteCoustillier": {
+            "name": "Elite Coustillier"
+        },
+        "flemishMilitia": {
+            "name": "Flemish Militia"
+        },
+        "arambai": {
+            "name": "Arambai"
+        },
+        "eliteArambai": {
+            "name": "Elite Arambai"
+        },
+        "cataphract": {
+            "name": "Cataphract"
+        },
+        "eliteCataphract": {
+            "name": "Elite Cataphract"
+        },
+        "woadRaider": {
+            "name": "Woad Raider"
+        },
+        "eliteWoadRaider": {
+            "name": "Elite Woad Raider"
+        },
+        "chukonu": {
+            "name": "Chu Ko Nu"
+        },
+        "eliteChukonu": {
+            "name": "Elite Chu Ko Nu"
+        },
+        "kipchak": {
+            "name": "Kipchak"
+        },
+        "eliteKipchak": {
+            "name": "Elite Kipchak"
+        },
+        "shotelWarrior": {
+            "name": "Shotel Warrior"
+        },
+        "eliteShotelWarrior": {
+            "name": "Elite Shotel Warrior"
+        },
+        "throwingAxeman": {
+            "name": "Throwing Axeman"
+        },
+        "eliteThrowingAxeman": {
+            "name": "Elite Throwing Axeman"
+        },
+        "huskarl": {
+            "name": "Huskarl"
+        },
+        "eliteHuskarl": {
+            "name": "Elite Huskarl"
+        },
+        "tarkan": {
+            "name": "Tarkan"
+        },
+        "eliteTarkan": {
+            "name": "Elite Tarkan"
+        },
+        "kamayuk": {
+            "name": "Kamayuk"
+        },
+        "eliteKamayuk": {
+            "name": "Elite Kamayuk"
+        },
+        "slinger": {
+            "name": "Slinger"
+        },
+        "elephantArcher": {
+            "name": "Elephant Archer"
+        },
+        "eliteElephantArcher": {
+            "name": "Elite Elephant Archer"
+        },
+        "imperialCamelRider": {
+            "name": "Imperial Camel Rider"
+        },
+        "genoeseCrossbowman": {
+            "name": "Genoese Crossbowman"
+        },
+        "eliteGenoeseCrossbowman": {
+            "name": "Elite Genoese Crossbowman"
+        },
+        "condottiero": {
+            "name": "Condottiero"
+        },
+        "samurai": {
+            "name": "Samurai"
+        },
+        "eliteSamurai": {
+            "name": "Elite Samurai"
+        },
+        "ballistaElephant": {
+            "name": "Ballista Elephant"
+        },
+        "eliteBallistaElephant": {
+            "name": "Elite Ballista Elephant"
+        },
+        "warWagon": {
+            "name": "War Wagon"
+        },
+        "eliteWarWagon": {
+            "name": "Elite War Wagon"
+        },
+        "turtleShip": {
+            "name": "Turtle Ship"
+        },
+        "eliteTurtleShip": {
+            "name": "Elite Turtle Ship"
+        },
+        "leitis": {
+            "name": "Leitis"
+        },
+        "eliteLeitis": {
+            "name": "Elite Leitis"
+        },
+        "magyarHuszar": {
+            "name": "Magyar Huszar"
+        },
+        "eliteMagyarHuszar": {
+            "name": "Elite Magyar Huszar"
+        },
+        "karambitWarrior": {
+            "name": "Karambit Warrior"
+        },
+        "eliteKarambitWarrior": {
+            "name": "Elite Karambit Warrior"
+        },
+        "gbeto": {
+            "name": "Gbeto"
+        },
+        "eliteGbeto": {
+            "name": "Elite Gbeto"
+        },
+        "plumedArcher": {
+            "name": "Plumed Archer"
+        },
+        "elitePlumedArcher": {
+            "name": "Elite Plumed Archer"
+        },
+        "mangudai": {
+            "name": "Mangudai"
+        },
+        "eliteMangudai": {
+            "name": "Elite Mangudai"
+        },
+        "warElephant": {
+            "name": "War Elephant"
+        },
+        "eliteWarElephant": {
+            "name": "Elite War Elephant"
+        },
+        "organGun": {
+            "name": "Organ Gun"
+        },
+        "eliteOrganGun": {
+            "name": "Elite Organ Gun"
+        },
+        "caravel": {
+            "name": "Caravel"
+        },
+        "eliteCaravel": {
+            "name": "Elite Caravel"
+        },
+        "mameluke": {
+            "name": "Mameluke"
+        },
+        "eliteMameluke": {
+            "name": "Elite Mameluke"
+        },
+        "serjeant": {
+            "name": "Serjeant"
+        },
+        "eliteSerjeant": {
+            "name": "Elite Serjeant"
+        },
+        "boyar": {
+            "name": "Boyar"
+        },
+        "eliteBoyar": {
+            "name": "Elite Boyar"
+        },
+        "conquistador": {
+            "name": "Conquistador"
+        },
+        "eliteConquistador": {
+            "name": "Elite Conquistador"
+        },
+        "missionary": {
+            "name": "Missionary"
+        },
+        "keshik": {
+            "name": "Keshik"
+        },
+        "eliteKeshik": {
+            "name": "Elite Keshik"
+        },
+        "flamingCamel": {
+            "name": "Flaming Camel"
+        },
+        "teutonicKnight": {
+            "name": "Teutonic Knight"
+        },
+        "eliteTeutonicKnight": {
+            "name": "Elite Teutonic Knight"
+        },
+        "janissary": {
+            "name": "Janissary"
+        },
+        "eliteJanissary": {
+            "name": "Elite Janissary"
+        },
+        "rattanArcher": {
+            "name": "Rattan Archer"
+        },
+        "eliteRattanArcher": {
+            "name": "Elite Rattan Archer"
+        },
+        "imperialSkirmisher": {
+            "name": "Imperial Skirmisher"
+        },
+        "berserk": {
+            "name": "Berserk"
+        },
+        "eliteBerserk": {
+            "name": "Elite Berserk"
+        },
+        "longboat": {
+            "name": "Longboat"
+        },
+        "eliteLongboat": {
+            "name": "Elite Longboat"
+        }
+    },
+    "upgrade": {
+        "forging": {
+            "name": "Forging"
+        },
+        "ironCasting": {
+            "name": "Iron Casting"
+        },
+        "blastFurnace": {
+            "name": "Blast Furnace"
+        },
+        "scaleMailArmor": {
+            "name": "Scale Mail Armor"
+        },
+        "chainMailArmor": {
+            "name": "Chain Mail Armor"
+        },
+        "plateMailArmor": {
+            "name": "Plate Mail Armor"
+        },
+        "scaleBardingArmor": {
+            "name": "Scale Barding Armor"
+        },
+        "chainBardingArmor": {
+            "name": "Chain Barding Armor"
+        },
+        "plateBardingArmor": {
+            "name": "Plate Barding Armor"
+        },
+        "fletching": {
+            "name": "Fletching"
+        },
+        "bodkinArrow": {
+            "name": "Bodkin Arrow"
+        },
+        "bracer": {
+            "name": "Bracer"
+        },
+        "paddedArcherArmor": {
+            "name": "Padded Archer Armor"
+        },
+        "leatherArcherArmor": {
+            "name": "Leather Archer Armor"
+        },
+        "ringArcherArmor": {
+            "name": "Ring Archer Armor"
+        },
+        "supplies": {
+            "name": "Supplies"
+        },
+        "squires": {
+            "name": "Squires"
+        },
+        "arson": {
+            "name": "Arson"
+        },
+        "thumbRing": {
+            "name": "Thumb Ring"
+        },
+        "parthianTactics": {
+            "name": "Parthian Tactics"
+        },
+        "bloodlines": {
+            "name": "Bloodlines"
+        },
+        "husbandry": {
+            "name": "Husbandry"
+        },
+        "castleUniqueTech": {
+            "name": "Castle Unique Tech"
+        },
+        "imperialUniqueTech": {
+            "name": "Imperial Unique Tech"
+        },
+        "hoardings": {
+            "name": "Hoardings"
+        },
+        "sappers": {
+            "name": "Sappers"
+        },
+        "conscription": {
+            "name": "Conscription"
+        },
+        "spies": {
+            "name": "Spies"
+        },
+        "redemption": {
+            "name": "Redemption"
+        },
+        "atonement": {
+            "name": "Atonement"
+        },
+        "herbalMedicine": {
+            "name": "Herbal Medicine"
+        },
+        "heresy": {
+            "name": "Heresy"
+        },
+        "sanctity": {
+            "name": "Sanctity"
+        },
+        "fervor": {
+            "name": "Fervor"
+        },
+        "faith": {
+            "name": "Faith"
+        },
+        "illumination": {
+            "name": "Illumination"
+        },
+        "blockPrinting": {
+            "name": "Block Printing"
+        },
+        "theocracy": {
+            "name": "Theocracy"
+        },
+        "masonry": {
+            "name": "Masonry"
+        },
+        "fortifiedWall": {
+            "name": "Fortified Wall"
+        },
+        "ballistics": {
+            "name": "Ballistics"
+        },
+        "guardTower": {
+            "name": "Guard Tower"
+        },
+        "heatedShot": {
+            "name": "Heated Shot"
+        },
+        "murderHoles": {
+            "name": "Murder Holes"
+        },
+        "treadmillCrane": {
+            "name": "Treadmill Crane"
+        },
+        "architecture": {
+            "name": "Architecture"
+        },
+        "chemistry": {
+            "name": "Chemistry"
+        },
+        "bombardTower": {
+            "name": "Bombard Tower"
+        },
+        "siegeEngineers": {
+            "name": "Siege Engineers"
+        },
+        "keep": {
+            "name": "Keep"
+        },
+        "arrowslits": {
+            "name": "Arrowslits"
+        },
+        "feudalAge": {
+            "name": "Feudal Age"
+        },
+        "loom": {
+            "name": "Loom"
+        },
+        "castleAge": {
+            "name": "Castle Age"
+        },
+        "wheelbarrow": {
+            "name": "Wheelbarrow"
+        },
+        "townWatch": {
+            "name": "Town Watch"
+        },
+        "imperialAge": {
+            "name": "Imperial Age"
+        },
+        "handCart": {
+            "name": "Hand Cart"
+        },
+        "townPatrol": {
+            "name": "Town Patrol"
+        },
+        "doubleBitAxe": {
+            "name": "Double-Bit Axe"
+        },
+        "bowSaw": {
+            "name": "Bow Saw"
+        },
+        "twoManSaw": {
+            "name": "Two-Man Saw"
+        },
+        "horseCollar": {
+            "name": "Horse Collar"
+        },
+        "heavyPlow": {
+            "name": "Heavy Plow"
+        },
+        "cropRotation": {
+            "name": "Crop Rotation"
+        },
+        "goldMining": {
+            "name": "Gold Mining"
+        },
+        "stoneMining": {
+            "name": "Stone Mining"
+        },
+        "goldShaftMining": {
+            "name": "Gold Shaft Mining"
+        },
+        "stoneShaftMining": {
+            "name": "Stone Shaft Mining"
+        },
+        "coinage": {
+            "name": "Coinage"
+        },
+        "caravan": {
+            "name": "Caravan"
+        },
+        "banking": {
+            "name": "Banking"
+        },
+        "guilds": {
+            "name": "Guilds"
+        },
+        "gillnets": {
+            "name": "Gillnets"
+        },
+        "careening": {
+            "name": "Careening"
+        },
+        "shipwright": {
+            "name": "Shipwright"
+        },
+        "dryDock": {
+            "name": "Dry Dock"
+        },
+        "atlatl": {
+            "name": "Atlatl",
+            "description": "Skirmishers +1 attack, +1 range"
+        },
+        "garlandWars": {
+            "name": "Garland Wars",
+            "description": "+4 infantry attack"
+        },
+        "kasbah": {
+            "name": "Kasbah",
+            "description": "team Castles work +25% faster"
+        },
+        "maghrebiCamels": {
+            "name": "Maghrebi Camels",
+            "description": "camel troops regenerate (15HP/min)"
+        },
+        "yeomen": {
+            "name": "Yeomen",
+            "description": "+1 range for foot archers and +2 attack for towers"
+        },
+        "warwolf": {
+            "name": "Warwolf",
+            "description": "Trebuchets do blast damage and have 100% accuracy"
+        },
+        "stirrups": {
+            "name": "Stirrups",
+            "description": "Light Cavalry, Knight line and Konniks attack 33% faster"
+        },
+        "bagains": {
+            "name": "Bagains",
+            "description": "Militia line +5 melee armor"
+        },
+        "burgundianVineyards": {
+            "name": "Burgundian Vineyards",
+            "description": "Transforms half of the player's food into gold at a 2:1 ratio. Farmers slowly produce gold (about 0.012 gold/s)"
+        },
+        "flemishRevolution": {
+            "name": "Flemish Revolution",
+            "description": "Transforms player's Villagers into Flemish Militia. Flemish Militia becomes trainable at the Town Center"
+        },
+        "howdah": {
+            "name": "Howdah",
+            "description": "Battle Elephants +1/+1 armor"
+        },
+        "manipurCavalry": {
+            "name": "Manipur Cavalry",
+            "description": "cavalry and Arambai +6 attack against standard buildings"
+        },
+        "greekFire": {
+            "name": "Greek Fire",
+            "description": "Fire Ships +1 range"
+        },
+        "logistica": {
+            "name": "Logistica",
+            "description": "Cataphracts deal trample damage and +6 attack against infantry"
+        },
+        "stronghold": {
+            "name": "Stronghold",
+            "description": "Castles and towers fire 25% faster"
+        },
+        "furorCeltica": {
+            "name": "Furor Celtica",
+            "description": "Siege Workshop units have +40% HP"
+        },
+        "greatWall": {
+            "name": "Great Wall",
+            "description": "Walls and towers +30% HP"
+        },
+        "rocketry": {
+            "name": "Rocketry",
+            "description": "Chu Ko Nu +2, Scorpions +4 attack"
+        },
+        "steppeHusbandry": {
+            "name": "Steppe Husbandry",
+            "description": "Scout Cavalry line, Steppe Lancers and Cavalry Archers are trained 100% faster"
+        },
+        "cumanMercenaries": {
+            "name": "Cuman Mercenaries",
+            "description": "team members can create 10 free Elite Kipchaks at the Castle"
+        },
+        "royalHeirs": {
+            "name": "Royal Heirs",
+            "description": "halves Shotel Warrior training time"
+        },
+        "torsionEngines": {
+            "name": "Torsion Engines",
+            "description": "Siege Workshop units' blast radius increased"
+        },
+        "beardedAxe": {
+            "name": "Bearded Axes",
+            "description": "Throwing Axeman +1 range"
+        },
+        "chivalry": {
+            "name": "Chivalry",
+            "description": "Stables work 40% faster"
+        },
+        "anarchy": {
+            "name": "Anarchy",
+            "description": "Huskarls can be created at Barracks"
+        },
+        "perfusion": {
+            "name": "Perfusion",
+            "description": "Barracks create units 100% faster"
+        },
+        "marauders": {
+            "name": "Marauders",
+            "description": "create Tarkans at Stables"
+        },
+        "atheism": {
+            "name": "Atheism",
+            "description": "+100 years for Relic/Wonder victories; enemy Relic gold generation reduced by 50%"
+        },
+        "andeanSling": {
+            "name": "Andean Sling",
+            "description": "Slingers and Skirmisher have no minimum range"
+        },
+        "fabricShields": {
+            "name": "Fabric Shields",
+            "description": "Kamayuks, Slingers, and Eagle Warriors +1/+2 armor"
+        },
+        "sultans": {
+            "name": "Sultans",
+            "description": "all gold production +10% faster"
+        },
+        "shatagni": {
+            "name": "Shatagni",
+            "description": "Hand Cannoneers +1 range"
+        },
+        "pavise": {
+            "name": "Pavise",
+            "description": "foot archers (except Skirmishers) and Condottieri +1/+1 armor"
+        },
+        "silkRoad": {
+            "name": "Silk Road",
+            "description": "trade units cost -50%"
+        },
+        "yasama": {
+            "name": "Yasama",
+            "description": "towers fire 2 extra arrows"
+        },
+        "kataparuto": {
+            "name": "Kataparuto",
+            "description": "Trebuchets fire 33% and pack 4x faster"
+        },
+        "tuskSwords": {
+            "name": "Tusk Swords",
+            "description": "Battle Elephants +3 attack"
+        },
+        "doubleCrossbow": {
+            "name": "Double Crossbow",
+            "description": "Ballista Elephants and Scorpions shoot two projectiles"
+        },
+        "eupseong": {
+            "name": "Eupseong",
+            "description": "Towers (except Bombard Towers) have +2 range"
+        },
+        "shinkichon": {
+            "name": "Shinkichon",
+            "description": "Gives the Mangonel line +1 range"
+        },
+        "hillForts": {
+            "name": "Hill Forts",
+            "description": "Town Centers +3 range"
+        },
+        "towerShields": {
+            "name": "Tower Shields",
+            "description": "Spearman line and Skirmishers +2 pierce armor"
+        },
+        "corvinianArmy": {
+            "name": "Corvinian Army",
+            "description": "Magyar Huszars cost no gold"
+        },
+        "recurveBow": {
+            "name": "Recurve Bow",
+            "description": "Cavalry Archers + 1 range and attack"
+        },
+        "thalassocracy": {
+            "name": "Thalassocracy",
+            "description": "upgrades Docks to Harbors, which shoot arrows"
+        },
+        "forcedLevy": {
+            "name": "Forced Levy",
+            "description": "Turns Militia line gold cost to food cost"
+        },
+        "tigui": {
+            "name": "Tigui",
+            "description": "Town Centers fire arrows even without garrison"
+        },
+        "farimba": {
+            "name": "Farimba",
+            "description": "Stable units +5 attack"
+        },
+        "hulcheJavelineers": {
+            "name": "Hul'che Javelineers",
+            "description": "Skirmishers throw a second projectile"
+        },
+        "elDorado": {
+            "name": "El Dorado",
+            "description": "+40 hit points for Eagle Warriors"
+        },
+        "nomads": {
+            "name": "Nomads",
+            "description": "Houses retain population when destroyed"
+        },
+        "drill": {
+            "name": "Drill",
+            "description": "Siege Workshop units move +50% faster"
+        },
+        "kamandaran": {
+            "name": "Kamandaran",
+            "description": "turns Archer gold cost into wood cost"
+        },
+        "mahouts": {
+            "name": "Mahouts",
+            "description": "War Elephants move +30% faster"
+        },
+        "carrack": {
+            "name": "Carrack",
+            "description": "ships +1/+1 armor"
+        },
+        "arquebus": {
+            "name": "Arquebus",
+            "description": "gunpowder units fire more accurately at moving targets"
+        },
+        "madrasah": {
+            "name": "Madrasah",
+            "description": "33% of a Monk's gold cost are returned if the Monk gets killed"
+        },
+        "zealotry": {
+            "name": "Zealotry",
+            "description": "Camel Riders and Mamelukes +20 hit points"
+        },
+        "firstCrusade": {
+            "name": "First Crusade",
+            "description": "Upon researching, each Town Center (up to 5) spawns a one-time group of 7 Serjeants; units become more resistant to conversion (+3)"
+        },
+        "scutage": {
+            "name": "Scutage",
+            "description": "Upon researching, each team member receives a one-time payment of 15 gold for each military unit that they own"
+        },
+        "orthodoxy": {
+            "name": "Orthodoxy",
+            "description": "+3/+3 armor for Monks"
+        },
+        "druzhina": {
+            "name": "Druzhina",
+            "description": "infantry damage adjacent units"
+        },
+        "inquisition": {
+            "name": "Inquisition",
+            "description": "conversion rate improved"
+        },
+        "supremacy": {
+            "name": "Supremacy",
+            "description": "increased attack (+6), armor (+2/+2), and HP (+40) for Villagers"
+        },
+        "silkArmor": {
+            "name": "Silk Armor",
+            "description": "Scout Cavalry line, Steppe Lancers and Cavalry Archers have +1/+1 armor"
+        },
+        "timuridSiegecraft": {
+            "name": "Timurid Siegecraft",
+            "description": "Trebuchets +2 range, enables Flaming Camels at the Castle"
+        },
+        "ironclad": {
+            "name": "Ironclad",
+            "description": "siege weapons +4 melee armor"
+        },
+        "crenellations": {
+            "name": "Crenellations",
+            "description": "Castles +3 range; garrisoned infantry fires arrows"
+        },
+        "sipahi": {
+            "name": "Sipahi",
+            "description": "Cavalry Archer units +20 hit points"
+        },
+        "artillery": {
+            "name": "Artillery",
+            "description": "+2 range for Bombard Towers, Bombard Cannons, Cannon Galleons"
+        },
+        "chatras": {
+            "name": "Chatras",
+            "description": "Battle Elephants +50 hit points"
+        },
+        "paperMoney": {
+            "name": "Paper Money",
+            "description": "tributes 500 gold to each ally"
+        },
+        "chieftains": {
+            "name": "Chieftains",
+            "description": "Infantry +5 attack against cavalry and +4 attack against camels"
+        },
+        "berserkergang": {
+            "name": "Berserkergang",
+            "description": "Berserks regenerate faster (40HP/min)"
+        }
+    }
+}

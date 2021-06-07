@@ -11,7 +11,6 @@ interface MiningCampUpgrades {
 export const miningCampUpgrades: MiningCampUpgrades = {
     goldMining: new Upgrade({
         id: 'goldMining',
-        name: 'Gold Mining',
         age: 2,
         cost: {
             wood: 75,
@@ -23,7 +22,6 @@ export const miningCampUpgrades: MiningCampUpgrades = {
     }),
     stoneMining: new Upgrade({
         id: 'stoneMining',
-        name: 'Stone Mining',
         age: 2,
         cost: {
             wood: 75,
@@ -35,7 +33,6 @@ export const miningCampUpgrades: MiningCampUpgrades = {
     }),
     goldShaftMining: new Upgrade({
         id: 'goldShaftMining',
-        name: 'Gold Shaft Mining',
         age: 3,
         cost: {
             wood: 150,
@@ -47,7 +44,6 @@ export const miningCampUpgrades: MiningCampUpgrades = {
     }),
     stoneShaftMining: new Upgrade({
         id: 'stoneShaftMining',
-        name: 'Stone Shaft Mining',
         age: 3,
         cost: {
             wood: 150,

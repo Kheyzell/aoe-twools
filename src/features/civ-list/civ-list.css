@@ -24,6 +24,15 @@
     margin-right: 0;
 }
 
+.CivList > div > .Title {
+    position: absolute;
+    z-index: 100;
+    margin-top: -8px;
+    color: white;
+    text-decoration: underline;
+    font-size: .9rem;
+}
+
 .List {
     display: flex;
     padding: 8px;

@@ -15,6 +15,7 @@ import TechComponent, { BoxSize } from "./tech/tech.component"
 import { fullTechTree } from "../../constants/tech-trees/_full-tech-tree.const"
 import { generateTechTreeToDisplayFrom } from "../../utils/tech-tree.utils"
 import { scrollHorizontally } from "../../utils/utils"
+import { useTranslation } from "react-i18next"
 
 type Props = {}
 type State = {}
@@ -61,24 +62,26 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
     if (isInComparisonMode) {
       return (
         <div className="Legend">
-          <div className="Civ1"> <div className="ColorBox"></div> {selectedCiv?.name} <img src={selectedCiv?.crest} alt="Crest" /> </div>
-          <div className="Civ2"> <div className="ColorBox"></div> {selectedCiv2?.name} <img src={selectedCiv2?.crest} alt="Crest" /> </div>
+          <div className="Civ1"> <div className="ColorBox"></div> { t(`civ.${selectedCiv?.id}.name`) } <img src={selectedCiv?.crest} alt="Crest" /> </div>
+          <div className="Civ2"> <div className="ColorBox"></div> { t(`civ.${selectedCiv2?.id}.name`) } <img src={selectedCiv2?.crest} alt="Crest" /> </div>
         </div>
       )
     }
     return (
       <div className="Legend">
-        <div className="Unit"> <div className="ColorBox"></div> Unit </div>
-        <div className="Upgrade"> <div className="ColorBox"></div> Upgrade </div>
-        <div className="Unique"> <div className="ColorBox"></div> Unique </div>
+        <div className="Unit"> <div className="ColorBox"></div> { t('Unit') } </div>
+        <div className="Upgrade"> <div className="ColorBox"></div> { t('Technology') } </div>
+        <div className="Unique"> <div className="ColorBox"></div> { t('Unique') } </div>
       </div>
     )
   }
 
+  const { t } = useTranslation();
+
   return (
     <div className="TechTree" ref={scrollRef as React.RefObject<HTMLDivElement>} onWheel={(e) => scrollHorizontally(e, scrollRef)}>
       <div className="Tools">
-        <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> Reset </button>
+        <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> </button>
 
         {displaySelectedCivs()}
 

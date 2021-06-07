@@ -35,7 +35,6 @@ export enum EffectType {
 
 export interface Bonus {
     id: string
-    description: string
     effectType: EffectType
     value: number | { age1?: number, age2?: number, age3?: number, age4?: number } | null
     affectedUnits: Unit[]
@@ -46,7 +45,6 @@ export interface Bonus {
 
 export class UniqueTech implements Bonus, Upgrade {
     id: string
-    name: string
     age: number
     cost: Cost
     duration: number
@@ -59,9 +57,8 @@ export class UniqueTech implements Bonus, Upgrade {
     affectedUpgrades: Upgrade[]
 
     constructor(data: any) {
-        this.type = TechType.uniqueTech
+        this.type = TechType.upgrade
         this.id = data.id
-        this.name = data.name
         this.age = data.age
         this.cost = data.cost
         this.duration = data.duration

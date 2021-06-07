@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
     serjeant: new Unit({
         id: 'serjeant',
-        name: 'Serjeant',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
     }),
     eliteSerjeant: new Unit({
         id: 'eliteSerjeant',
-        name: 'Elite Serjeant',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'firstCrusade',
-        name: 'First Crusade',
         age: 3,
-        description: 'Upon researching, each Town Center (up to 5) spawns a one-time group of 7 Serjeants; units become more resistant to conversion (+3)',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 300, gold: 600, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'scutage',
-        name: 'Scutage',
         age: 4,
-        description: 'Upon researching, each team member receives a one-time payment of 15 gold for each military unit that they own',
         effectType: EffectType.miscallenous,
         value: 15,
         cost: { wood: 0, food: 500, gold: 400, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const siciliansTechTree: CivTechTree = {
     id: 'sicilians',
-    name: 'Sicilians',
     crest,
     wikiUrl: 'Sicilians',
     bonuses: [
         {
             id: 'sicilians1',
-            description: 'Castles and Town Centers are constructed 100% faster',
             effectType: EffectType.constructionSpeed,
             value: 100,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const siciliansTechTree: CivTechTree = {
         },
         {
             id: 'sicilians2',
-            description: 'Land military units (except Siege weapons) absorb 50% of all incoming bonus damage',
             effectType: EffectType.miscallenous,
             value: 50,
             affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.cavalryArcher, stableUnits.lightCavalry, stableUnits.cavalier, siciliansUniqueUnits.eliteSerjeant],
@@ -98,7 +89,6 @@ export const siciliansTechTree: CivTechTree = {
         },
         {
             id: 'sicilians3',
-            description: 'Farm upgrades provide +100% additional food to Farms before they need to be reseeded',
             effectType: EffectType.miscallenous,
             value: 100,
             affectedUnits: [],
@@ -106,7 +96,6 @@ export const siciliansTechTree: CivTechTree = {
         },
         {
             id: 'sicilians4',
-            description: 'Can build Donjons, which replace the regular Watch Tower line',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -114,7 +103,6 @@ export const siciliansTechTree: CivTechTree = {
         },
         {
             id: 'sicilians5',
-            description: 'Transport Ships +5 carry capacity and +10 armor versus anti-ship bonus damage',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [dockUnits.transportShip],

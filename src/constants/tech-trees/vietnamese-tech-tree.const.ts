@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Unit, imperialSkirmisher: Unit } = {
     rattanArcher: new Unit({
         id: 'rattanArcher',
-        name: 'Rattan Archer',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Uni
     }),
     eliteRattanArcher: new Unit({
         id: 'eliteRattanArcher',
-        name: 'Elite Rattan Archer',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -47,7 +45,6 @@ export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Uni
     }),
     imperialSkirmisher: new Unit({
         id: 'imperialSkirmisher',
-        name: 'Imperial Skirmisher',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -64,9 +61,7 @@ export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Uni
 const uniqueTechs = [
     new UniqueTech({
         id: 'chatras',
-        name: 'Chatras',
         age: 3,
-        description: 'Battle Elephants +50 hit points',
         effectType: EffectType.health,
         value: 50,
         cost: { wood: 0, food: 250, gold: 250, stone: 0 },
@@ -76,9 +71,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'paperMoney',
-        name: 'Paper Money',
         age: 4,
-        description: 'tributes 500 gold to each ally',
         effectType: EffectType.miscallenous,
         value: 500,
         cost: { wood: 500, food: 500, gold: 0, stone: 0 },
@@ -90,13 +83,11 @@ const uniqueTechs = [
 
 export const vietnameseTechTree: CivTechTree = {
     id: 'vietnamese',
-    name: 'Vietnamese',
     crest,
     wikiUrl: 'Vietnamese',
     bonuses: [
         {
             id: 'vietnamese1',
-            description: 'Reveal enemy positions at game start',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -104,7 +95,6 @@ export const vietnameseTechTree: CivTechTree = {
         },
         {
             id: 'vietnamese2',
-            description: 'Archery Range units have +20% HP',
             effectType: EffectType.healthPercent,
             value: 20,
             affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.heavyCavalryArcher],
@@ -112,7 +102,6 @@ export const vietnameseTechTree: CivTechTree = {
         },
         {
             id: 'vietnamese3',
-            description: 'Conscription is free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [],
@@ -120,7 +109,6 @@ export const vietnameseTechTree: CivTechTree = {
         },
         {
             id: 'vietnamese4',
-            description: 'Economic upgrades cost no wood',
             effectType: EffectType.discoutWood,
             value: 100,
             affectedUnits: [],
@@ -135,7 +123,6 @@ export const vietnameseTechTree: CivTechTree = {
         },
         {
             id: 'vietnamese5',
-            description: ' Imperial Skirmisher available at the Archery Range',
             effectType: EffectType.uniqueUnit,
             value: null,
             affectedUnits: [vietnameseUniqueUnits.imperialSkirmisher],

@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const mayansUniqueUnits: { plumedArcher: Unit, elitePlumedArcher: Unit } = {
     plumedArcher: new Unit({
         id: 'plumedArcher',
-        name: 'Plumed Archer',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const mayansUniqueUnits: { plumedArcher: Unit, elitePlumedArcher: Unit } 
     }),
     elitePlumedArcher: new Unit({
         id: 'elitePlumedArcher',
-        name: 'Elite Plumed Archer',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const mayansUniqueUnits: { plumedArcher: Unit, elitePlumedArcher: Unit } 
 const uniqueTechs = [
     new UniqueTech({
         id: `hulcheJavelineers`,
-        name: `Hul'che Javelineers`,
         age: 3,
-        description: 'Skirmishers throw a second projectile',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'elDorado',
-        name: 'El Dorado',
         age: 4,
-        description: '+40 hit points for Eagle Warriors',
         effectType: EffectType.health,
         value: 40,
         cost: { wood: 0, food: 750, gold: 450, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const mayansTechTree: CivTechTree = {
     id: 'mayans',
-    name: 'Mayans',
     crest,
     wikiUrl: 'Mayans',
     bonuses: [
         {
             id: 'mayans1',
-            description: 'Start the game with +1 Villager, but with -50 food',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [townCenterUnits.villager],
@@ -90,7 +82,6 @@ export const mayansTechTree: CivTechTree = {
         },
         {
             id: 'mayans2',
-            description: 'Resources last 15% longer',
             effectType: EffectType.miscallenous,
             value: 15,
             affectedUnits: [townCenterUnits.villager],
@@ -98,7 +89,6 @@ export const mayansTechTree: CivTechTree = {
         },
         {
             id: 'mayans3',
-            description: 'Foot archers are 10%/20%/30% cheaper in the Feudal/Castle/Imperial Age',
             effectType: EffectType.discount,
             value: { age2: 10, age3: 20, age4: 30 },
             affectedUnits: [archeryUnits.arbalester, mayansUniqueUnits.elitePlumedArcher],
@@ -106,7 +96,6 @@ export const mayansTechTree: CivTechTree = {
         },
         {
             id: 'mayans4',
-            description: 'Walls are 50% cheaper',
             effectType: EffectType.discount,
             value: 50,
             affectedUnits: [],

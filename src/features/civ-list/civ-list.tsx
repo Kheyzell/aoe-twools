@@ -1,4 +1,5 @@
 import React, { useRef } from "react"
+import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 
 import { allCivTechTrees } from "../../constants"
@@ -15,6 +16,7 @@ type Props = {}
 type State = {}
 
 const CivList: React.FC<Props> = (props) => {
+    const { t } = useTranslation()
     const dispatch = useDispatch()
     const filteredListRef = useRef<HTMLElement>(null)
     const fullyUpgradedListRef = useRef<HTMLElement>(null)
@@ -81,11 +83,11 @@ const CivList: React.FC<Props> = (props) => {
                 {
                     showTools ?
                         (<div>
-                            <label htmlFor="FullyUpgraded" onClick={() => { setShowCivsFullyUpgraded(!showCivsFullyUpgraded) }} title="Show the list of civilisations having the selected units fully upgraded">
-                                <input name="FullyUpgraded" type="checkbox" checked={showCivsFullyUpgraded} /> Show Fully upgraded
+                            <label htmlFor="FullyUpgraded" onClick={() => { setShowCivsFullyUpgraded(!showCivsFullyUpgraded) }} title={ t('Show the list of civilisations having the selected units fully upgraded') }>
+                                <input name="FullyUpgraded" type="checkbox" checked={showCivsFullyUpgraded} /> { t('Show Fully upgraded') }
                             </label>
-                            <label htmlFor="Excluded" onClick={() => { setShowCivsExcluded(!showCivsExcluded) }} title="Show the list of civilisations that do not satisfy the filters">
-                                <input name="Excluded" type="checkbox" checked={showCivsExcluded} /> Show Excluded
+                            <label htmlFor="Excluded" onClick={() => { setShowCivsExcluded(!showCivsExcluded) }} title={ t('Show the list of civilisations that do not satisfy the filters') }>
+                                <input name="Excluded" type="checkbox" checked={showCivsExcluded} /> { t('Show Excluded') }
                             </label>
                         </div>)
                         :
@@ -95,6 +97,7 @@ const CivList: React.FC<Props> = (props) => {
             </div>
 
             <div className="List Filtered" ref={filteredListRef as React.RefObject<HTMLDivElement>} onWheel={e => scrollHorizontally(e, filteredListRef)}>
+                { showCivsFullyUpgraded || showCivsExcluded ? <div className="Title"> { t('Filtered') } </div> : '' }
                 {filteredTechTrees.map(civ => {
                     const isSelected1 = !!selectedCiv && selectedCiv.id === civ.id
                     const isSelected2 = !!selectedCiv2 && selectedCiv2.id === civ.id
@@ -105,8 +108,8 @@ const CivList: React.FC<Props> = (props) => {
                             onContextMenu={e => onCiv2Click(e, civ)}
                             onMouseEnter={() => onEnterCivCrest(civ)}
                             onMouseLeave={() => onLeaveCivCrest()}>
-                            <span> {civ.name} </span>
-                            <img src={civ.crest} alt={civ.name} />
+                            <span> { t(`civ.${civ.id}.name`) } </span>
+                            <img src={civ.crest} alt={ t(`civ.${civ.id}.name`) } />
                             <CivPanel civ={civ} show={showCivPanels[civ.id]}></CivPanel>
                         </div>
                     )
@@ -116,6 +119,7 @@ const CivList: React.FC<Props> = (props) => {
             { showCivsFullyUpgraded ?
                 (
                     <div className="List FullyUpgraded" ref={fullyUpgradedListRef as React.RefObject<HTMLDivElement>} onWheel={e => scrollHorizontally(e, fullyUpgradedListRef)}>
+                        <div className="Title"> { t('Fully upgraded') } </div>
                         {fullyUpgradedFilteredUnitsTechTrees.map(civ => {
                             const isSelected1 = !!selectedCiv && selectedCiv.id === civ.id
                             const isSelected2 = !!selectedCiv2 && selectedCiv2.id === civ.id
@@ -126,8 +130,8 @@ const CivList: React.FC<Props> = (props) => {
                                     onContextMenu={e => onCiv2Click(e, civ)}
                                     onMouseEnter={() => onEnterCivCrest(civ)}
                                     onMouseLeave={() => onLeaveCivCrest()}>
-                                    <span> {civ.name} </span>
-                                    <img src={civ.crest} alt={civ.name} />
+                                    <span> {t(`civ.${civ.id}.name`)} </span>
+                                    <img src={civ.crest} alt={t(`civ.${civ.id}.name`)} />
                                     <CivPanel civ={civ} show={showCivPanels[civ.id]}></CivPanel>
                                 </div>
                             )
@@ -139,6 +143,7 @@ const CivList: React.FC<Props> = (props) => {
             { showCivsExcluded ?
                 (
                     <div className="List Excluded" ref={excludedListRef as React.RefObject<HTMLDivElement>} onWheel={e => scrollHorizontally(e, excludedListRef)}>
+                        <div className="Title"> { t('Excluded') } </div>
                         {excludedTechTrees.map(civ => {
                             const isSelected1 = !!selectedCiv && selectedCiv.id === civ.id
                             const isSelected2 = !!selectedCiv2 && selectedCiv2.id === civ.id
@@ -149,8 +154,8 @@ const CivList: React.FC<Props> = (props) => {
                                     onContextMenu={e => onCiv2Click(e, civ)}
                                     onMouseEnter={() => onEnterCivCrest(civ)}
                                     onMouseLeave={() => onLeaveCivCrest()}>
-                                    <span> {civ.name} </span>
-                                    <img src={civ.crest} alt={civ.name} />
+                                    <span> {t(`civ.${civ.id}.name`)} </span>
+                                    <img src={civ.crest} alt={t(`civ.${civ.id}.name`)} />
                                     <CivPanel civ={civ} show={showCivPanels[civ.id]}></CivPanel>
                                 </div>
                             )

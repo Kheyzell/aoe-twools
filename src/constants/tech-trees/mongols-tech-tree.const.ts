@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
     mangudai: new Unit({
         id: 'mangudai',
-        name: 'Mangudai',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
     }),
     eliteMangudai: new Unit({
         id: 'eliteMangudai',
-        name: 'Elite Mangudai',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'nomads',
-        name: 'Nomads',
         age: 3,
-        description: 'Houses retain population when destroyed',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 300, food: 0, gold: 150, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'drill',
-        name: 'Drill',
         age: 4,
-        description: 'Siege Workshop units move +50% faster',
         effectType: EffectType.movementSpeed,
         value: 50,
         cost: { wood: 500, food: 0, gold: 450, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const mongolsTechTree: CivTechTree = {
     id: 'mongols',
-    name: 'Mongols',
     crest,
     wikiUrl: 'Mongols',
     bonuses: [
         {
             id: 'mongols1',
-            description: 'Cavalry archers fire 25% faster',
             effectType: EffectType.fireRate,
             value: 25,
             affectedUnits: [archeryUnits.heavyCavalryArcher, mongolsUniqueUnits.eliteMangudai],
@@ -90,7 +82,6 @@ export const mongolsTechTree: CivTechTree = {
         },
         {
             id: 'mongols2',
-            description: 'Light Cavalry, Hussars, and Steppe Lancers have +30% HP',
             effectType: EffectType.healthPercent,
             value: 30,
             affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer],
@@ -98,7 +89,6 @@ export const mongolsTechTree: CivTechTree = {
         },
         {
             id: 'mongols3',
-            description: 'Hunters work +40% faster',
             effectType: EffectType.miscallenous,
             value: 40,
             affectedUnits: [townCenterUnits.villager],
@@ -106,7 +96,6 @@ export const mongolsTechTree: CivTechTree = {
         },
         {
             id: 'mongols4',
-            description: 'The Scout Cavalry line has +2 Line of Sight',
             effectType: EffectType.lineOfSight,
             value: 2,
             affectedUnits: [stableUnits.hussar],

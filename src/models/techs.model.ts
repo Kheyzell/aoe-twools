@@ -2,15 +2,13 @@ import { Bonus, UniqueTech } from "./bonus.model"
 
 export enum TechType {
     unit = 'unit',
-    upgrade = 'upgrade',
-    uniqueTech = 'uniqueTech'
+    upgrade = 'upgrade'
 }
 
 export enum UnitType { civilian, military }
 
 export interface Tech {
     id: string
-    name: string
     age: number
     cost: Cost
     unique?: boolean
@@ -29,7 +27,6 @@ export interface Cost {
 
 export class Unit implements Tech {
     id: string
-    name: string
     age: number
     cost: Cost
     duration: number
@@ -44,7 +41,6 @@ export class Unit implements Tech {
     constructor(data: any) {
         this.type = TechType.unit
         this.id = data.id
-        this.name = data.name
         this.age = data.age
         this.cost = data.cost
         this.duration = data.duration
@@ -58,7 +54,6 @@ export class Unit implements Tech {
 
 export class Upgrade implements Tech {
     id: string
-    name: string
     age: number
     cost: Cost
     duration: number
@@ -71,7 +66,6 @@ export class Upgrade implements Tech {
     constructor(data: any) {
         this.type = TechType.upgrade
         this.id = data.id
-        this.name = data.name
         this.age = data.age
         this.cost = data.cost
         this.duration = data.duration
@@ -82,7 +76,6 @@ export class Upgrade implements Tech {
 
 export interface CivTechTree {
     id: string;
-    name: string;
     crest?: string;
     wikiUrl?: string;
     bonuses: Bonus[]

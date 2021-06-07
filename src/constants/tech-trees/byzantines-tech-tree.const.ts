@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const byzantinesUniqueUnits: { cataphract: Unit, eliteCataphract: Unit } = {
     cataphract: new Unit({
         id: 'cataphract',
-        name: 'Cataphract',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const byzantinesUniqueUnits: { cataphract: Unit, eliteCataphract: Unit } 
     }),
     eliteCataphract: new Unit({
         id: 'eliteCataphract',
-        name: 'Elite Cataphract',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const byzantinesUniqueUnits: { cataphract: Unit, eliteCataphract: Unit } 
 const uniqueTechs = [
     new UniqueTech({
         id: 'greekFire',
-        name: 'Greek Fire',
         age: 3,
-        description: 'Fire Ships +1 range',
         effectType: EffectType.range,
         value: 1,
         cost: { wood: 0, food: 250, gold: 300, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'logistica',
-        name: 'Logistica',
         age: 4,
-        description: 'Cataphracts deal trample damage and +6 attack against infantry',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 800, gold: 600, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const byzantinesTechTree: CivTechTree = {
     id: 'byzantines',
-    name: 'Byzantines',
     crest,
     wikiUrl: 'Byzantines',
     bonuses: [
         {
             id: 'byzantines1',
-            description: 'Buildings have +10%/+20%/+30%/+40% HP in the Dark/Feudal/Castle/Imperial Age',
             effectType: EffectType.healthPercent,
             value: { age1: 10, age2: 20, age3: 30, age4: 40 },
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const byzantinesTechTree: CivTechTree = {
         },
         {
             id: 'byzantines2',
-            description: 'Camel Riders, Skirmishers, and Spearmen are 25% cheaper',
             effectType: EffectType.discount,
             value: 25,
             affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher, stableUnits.heavyCamelRider],
@@ -98,7 +89,6 @@ export const byzantinesTechTree: CivTechTree = {
         },
         {
             id: 'byzantines3',
-            description: 'Fire Ships fire 25% faster',
             effectType: EffectType.fireRate,
             value: 25,
             affectedUnits: [dockUnits.fastFireShip],
@@ -106,7 +96,6 @@ export const byzantinesTechTree: CivTechTree = {
         },
         {
             id: 'byzantines4',
-            description: 'Advancing to the Imperial Age is 33% cheaper',
             effectType: EffectType.discount,
             value: 33,
             affectedUnits: [],
@@ -114,7 +103,6 @@ export const byzantinesTechTree: CivTechTree = {
         },
         {
             id: 'byzantines5',
-            description: 'Town Watch is free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [],
@@ -122,7 +110,6 @@ export const byzantinesTechTree: CivTechTree = {
         },
         {
             id: 'byzantines6',
-            description: 'Monks heal 50% faster',
             effectType: EffectType.miscallenous,
             value: 50,
             affectedUnits: [monasteryUnits.monk],

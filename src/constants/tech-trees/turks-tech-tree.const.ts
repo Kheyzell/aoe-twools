@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
     janissary: new Unit({
         id: 'janissary',
-        name: 'Janissary',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
     }),
     eliteJanissary: new Unit({
         id: 'eliteJanissary',
-        name: 'Elite Janissary',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'sipahi',
-        name: 'Sipahi',
         age: 3,
-        description: 'Cavalry Archer units +20 hit points',
         effectType: EffectType.health,
         value: 20,
         cost: { wood: 0, food: 350, gold: 150, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'artillery',
-        name: 'Artillery',
         age: 4,
-        description: '+2 range for Bombard Towers, Bombard Cannons, Cannon Galleons',
         effectType: EffectType.range,
         value: 2,
         cost: { wood: 0, food: 0, gold: 500, stone: 450 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const turksTechTree: CivTechTree = {
     id: 'turks',
-    name: 'Turks',
     crest,
     wikiUrl: 'Turks',
     bonuses: [
         {
             id: 'turks1',
-            description: 'Gunpowder units have +25% HP',
             effectType: EffectType.healthPercent,
             value: 25,
             affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, turksUniqueUnits.eliteJanissary],
@@ -90,7 +82,6 @@ export const turksTechTree: CivTechTree = {
         },
         {
             id: 'turks2',
-            description: 'Gunpowder technologies are 50% cheaper',
             effectType: EffectType.discount,
             value: 50,
             affectedUnits: [dockUnits.eliteCannonGalleon],
@@ -98,7 +89,6 @@ export const turksTechTree: CivTechTree = {
         },
         {
             id: 'turks3',
-            description: 'Chemistry is free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [],
@@ -106,7 +96,6 @@ export const turksTechTree: CivTechTree = {
         },
         {
             id: 'turks4',
-            description: 'Gold Miners work 20% faster',
             effectType: EffectType.miscallenous,
             value: 20,
             affectedUnits: [townCenterUnits.villager],
@@ -114,7 +103,6 @@ export const turksTechTree: CivTechTree = {
         },
         {
             id: 'turks5',
-            description: 'Light Cavalry and Hussar upgrades are free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [stableUnits.hussar],
@@ -122,7 +110,6 @@ export const turksTechTree: CivTechTree = {
         },
         {
             id: 'turks6',
-            description: 'Scout Cavalry line gain +1 pierce armor',
             effectType: EffectType.pierceArmor,
             value: 1,
             affectedUnits: [stableUnits.hussar],
@@ -130,7 +117,6 @@ export const turksTechTree: CivTechTree = {
         },
         {
             id: 'turks7',
-            description: 'Gunpowder units are created 25% faster',
             effectType: EffectType.creationSpeed,
             value: 25,
             affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, turksUniqueUnits.eliteJanissary],

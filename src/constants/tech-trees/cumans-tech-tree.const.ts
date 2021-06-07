@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
     kipchak: new Unit({
         id: 'kipchak',
-        name: 'Kipchak',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
     }),
     eliteKipchak: new Unit({
         id: 'eliteKipchak',
-        name: 'Elite Kipchak',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'steppeHusbandry',
-        name: 'Steppe Husbandry',
         age: 3,
-        description: 'Scout Cavalry line, Steppe Lancers and Cavalry Archers are trained 100% faster',
         effectType: EffectType.creationSpeed,
         value: 100,
         cost: { wood: 300, food: 200, gold: 0, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'cumanMercenaries',
-        name: 'Cuman Mercenaries',
         age: 4,
-        description: 'team members can create 10 free Elite Kipchaks at the Castle',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 650, gold: 400, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const cumansTechTree: CivTechTree = {
     id: 'cumans',
-    name: 'Cumans',
     wikiUrl: 'Cumans',
     crest,
     bonuses: [
         {
             id: 'cumans1',
-            description: 'Can build one additional Town Center in the Feudal Age',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const cumansTechTree: CivTechTree = {
         },
         {
             id: 'cumans2',
-            description: 'Siege Workshops and Battering Rams are available in the Feudal Age and Capped Ram upgrade available in the Castle Age',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [siegeUnits.siegeRam],
@@ -98,7 +89,6 @@ export const cumansTechTree: CivTechTree = {
         },
         {
             id: 'cumans3',
-            description: 'Mounted units move 5%/10%/15% faster in the Feudal/Castle/Imperial Age',
             effectType: EffectType.movementSpeed,
             value: { age2: 5, age3: 10, age4: 15 },
             affectedUnits: [stableUnits.hussar, stableUnits.paladin, stableUnits.camelRider, stableUnits.eliteSteppeLancer, cumansUniqueUnits.eliteKipchak],
@@ -106,7 +96,6 @@ export const cumansTechTree: CivTechTree = {
         },
         {
             id: 'cumans4',
-            description: 'Palisade Walls have +33% HP',
             effectType: EffectType.healthPercent,
             value: 33,
             affectedUnits: [],

@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: Unit } = {
     ballistaElephant: new Unit({
         id: 'ballistaElephant',
-        name: 'Ballista Elephant',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: 
     }),
     eliteBallistaElephant: new Unit({
         id: 'eliteBallistaElephant',
-        name: 'Elite Ballista Elephant',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: 
 const uniqueTechs = [
     new UniqueTech({
         id: 'tuskSwords',
-        name: 'Tusk Swords',
         age: 3,
-        description: 'Battle Elephants +3 attack',
         effectType: EffectType.damage,
         value: 3,
         cost: { wood: 300, food: 0, gold: 450, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'doubleCrossbow',
-        name: 'Double Crossbow',
         age: 4,
-        description: 'Ballista Elephants and Scorpions shoot two projectiles',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 700, gold: 400, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const khmerTechTree: CivTechTree = {
     id: 'khmer',
-    name: 'Khmer',
     crest,
     wikiUrl: 'Khmer',
     bonuses: [
         {
             id: 'khmer1',
-            description: 'No buildings are required to advance to the next Age or to unlock other buildings',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const khmerTechTree: CivTechTree = {
         },
         {
             id: 'khmer2',
-            description: 'Battle Elephants move +10% faster',
             effectType: EffectType.movementSpeed,
             value: 10,
             affectedUnits: [stableUnits.eliteBattleElephant],
@@ -98,7 +89,6 @@ export const khmerTechTree: CivTechTree = {
         },
         {
             id: 'khmer3',
-            description: 'Farmers do not require Mills or Town Centers to drop off food but work 5% slower',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [townCenterUnits.villager],
@@ -106,7 +96,6 @@ export const khmerTechTree: CivTechTree = {
         },
         {
             id: 'khmer4',
-            description: 'Villagers can garrison in Houses',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [townCenterUnits.villager],
@@ -114,7 +103,6 @@ export const khmerTechTree: CivTechTree = {
         },
         {
             id: 'khmer5',
-            description: 'Scorpions have +1 range',
             effectType: EffectType.range,
             value: 1,
             affectedUnits: [siegeUnits.heavyScorpion],

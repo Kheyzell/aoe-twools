@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossbowman: Unit, condottiero: Unit } = {
     genoeseCrossbowman: new Unit({
         id: 'genoeseCrossbowman',
-        name: 'Genoese Crossbowman',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossb
     }),
     eliteGenoeseCrossbowman: new Unit({
         id: 'eliteGenoeseCrossbowman',
-        name: 'Elite Genoese Crossbowman',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -47,7 +45,6 @@ export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossb
     }),
     condottiero: new Unit({
         id: 'condottiero',
-        name: 'Condottiero',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -64,9 +61,7 @@ export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossb
 const uniqueTechs = [
     new UniqueTech({
         id: 'pavise',
-        name: 'Pavise',
         age: 3,
-        description: 'foot archers (except Skirmishers) and Condottieri +1/+1 armor',
         effectType: EffectType.armor,
         value: 1,
         cost: { wood: 0, food: 300, gold: 150, stone: 0 },
@@ -76,9 +71,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'silkRoad',
-        name: 'Silk Road',
         age: 4,
-        description: 'trade units cost -50%',
         effectType: EffectType.discount,
         value: 50,
         cost: { wood: 0, food: 500, gold: 250, stone: 0 },
@@ -90,13 +83,11 @@ const uniqueTechs = [
 
 export const italiansTechTree: CivTechTree = {
     id: 'italians',
-    name: 'Italians',
     crest,
     wikiUrl: 'Italians',
     bonuses: [
         {
             id: 'italians1',
-            description: 'Dock and University technologies are 33% cheaper',
             effectType: EffectType.discount,
             value: 33,
             affectedUnits: [dockUnits.galleon, dockUnits.fastFireShip, dockUnits.demotionShip, dockUnits.eliteCannonGalleon],
@@ -104,7 +95,6 @@ export const italiansTechTree: CivTechTree = {
         },
         {
             id: 'italians2',
-            description: 'Fishing Ships are 15% cheaper',
             effectType: EffectType.discount,
             value: 15,
             affectedUnits: [dockUnits.fishingShip],
@@ -112,7 +102,6 @@ export const italiansTechTree: CivTechTree = {
         },
         {
             id: 'italians3',
-            description: 'Gunpowder units are 20% cheaper',
             effectType: EffectType.discount,
             value: 20,
             affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
@@ -120,7 +109,6 @@ export const italiansTechTree: CivTechTree = {
         },
         {
             id: 'italians4',
-            description: 'Advancing to the next Age is 15% cheaper',
             effectType: EffectType.discount,
             value: 15,
             affectedUnits: [],
@@ -128,7 +116,6 @@ export const italiansTechTree: CivTechTree = {
         },
         {
             id: 'italians5',
-            description: 'Condottiero available at the Barracks',
             effectType: EffectType.uniqueUnit,
             value: null,
             affectedUnits: [italiansUniqueUnits.condottiero],

@@ -20,7 +20,6 @@ import { chainTechs } from "../../utils/techs.utils";
 export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, genitour: Unit, eliteGenitour: Unit } = {
     camelArcher: new Unit({
         id: 'camelArcher',
-        name: 'Camel Archer',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -34,7 +33,6 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
     }),
     eliteCamelArcher: new Unit({
         id: 'eliteCamelArcher',
-        name: 'Elite Camel Archer',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -48,7 +46,6 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
     }),
     genitour: new Unit({
         id: 'genitour',
-        name: 'Genitour',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -62,7 +59,6 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
     }),
     eliteGenitour: new Unit({
         id: 'eliteGenitour',
-        name: 'Elite Genitour',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -81,9 +77,7 @@ chainTechs([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour])
 const uniqueTechs = [
     new UniqueTech({
         id: 'kasbah',
-        name: 'Kasbah',
         age: 3,
-        description: 'team Castles work +25% faster',
         effectType: EffectType.creationSpeed,
         value: 25,
         cost: { wood: 0, food: 250, gold: 250, stone: 0 },
@@ -94,9 +88,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'maghrebiCamels',
-        name: 'Maghrebi Camels',
         age: 4,
-        description: 'camel troops regenerate (15HP/min)',
         effectType: EffectType.regen,
         value: 15,
         cost: { wood: 0, food: 700, gold: 300, stone: 0 },
@@ -108,13 +100,11 @@ const uniqueTechs = [
 
 export const berbersTechTree: CivTechTree = {
     id: 'berbers',
-    name: 'Berbers',
     crest,
     wikiUrl: 'Berbers',
     bonuses: [
         {
             id: 'berbers1',
-            description: 'Villagers move +10% faster',
             effectType: EffectType.movementSpeed,
             value: 10,
             affectedUnits: [townCenterUnits.villager],
@@ -122,7 +112,6 @@ export const berbersTechTree: CivTechTree = {
         },
         {
             id: 'berbers2',
-            description: 'Stable units are 15%/20% cheaper in the Castle/Imperial Age',
             effectType: EffectType.discount,
             value: { age3: 15, age4: 20 },
             affectedUnits: [stableUnits.hussar, stableUnits.cavalier, stableUnits.heavyCamelRider],
@@ -130,7 +119,6 @@ export const berbersTechTree: CivTechTree = {
         },
         {
             id: 'berbers3',
-            description: 'Ships move +10% faster',
             effectType: EffectType.movementSpeed,
             value: 10,
             affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fastFireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
@@ -138,7 +126,6 @@ export const berbersTechTree: CivTechTree = {
         },
         {
             id: 'berbers4',
-            description: 'Genitour available at the Archery Range',
             effectType: EffectType.uniqueUnit,
             value: null,
             affectedUnits: [berbersUniqueUnits.eliteGenitour],

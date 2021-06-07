@@ -24,7 +24,6 @@ interface BarracksUpgrades {
 export const barracksUnits: BarracksUnits = {
     militia: new Unit({
         id: 'militia',
-        name: 'Militia',
         age: 1,
         unitType: UnitType.military,
         cost: {
@@ -37,7 +36,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     manAtArms: new Unit({
         id: 'manAtArms',
-        name: 'Man-At-Arms',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -50,7 +48,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     longSwordsman: new Unit({
         id: 'longSwordsman',
-        name: 'Long Swordsman',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -63,7 +60,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     twoHandedSwordsman: new Unit({
         id: 'twoHandedSwordsman',
-        name: 'Two Handed Swordsman',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -76,7 +72,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     champion: new Unit({
         id: 'champion',
-        name: 'Champion',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -89,7 +84,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     spearman: new Unit({
         id: 'spearman',
-        name: 'Spearman',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -102,7 +96,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     pikeman: new Unit({
         id: 'pikeman',
-        name: 'Pikeman',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -115,7 +108,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     halberdier: new Unit({
         id: 'halberdier',
-        name: 'Halberdier',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -128,7 +120,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     eagleScout: new Unit({
         id: 'eagleScout',
-        name: 'Eagle Scout',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -141,7 +132,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     eagleWarrior: new Unit({
         id: 'eagleWarrior',
-        name: 'Eagle Warrior',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -154,7 +144,6 @@ export const barracksUnits: BarracksUnits = {
     }),
     eliteEagleWarrior: new Unit({
         id: 'eliteEagleWarrior',
-        name: 'Elite Eagle Warrior',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -174,7 +163,6 @@ chainTechs([barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.
 export const barracksUpgrade: BarracksUpgrades = {
     supplies: new Upgrade({
         id: 'supplies',
-        name: 'supplies',
         age: 2,
         cost: {
             wood: 0,
@@ -186,7 +174,6 @@ export const barracksUpgrade: BarracksUpgrades = {
     }),
     squires: new Upgrade({
         id: 'squires',
-        name: 'squires',
         age: 3,
         cost: {
             wood: 0,
@@ -198,7 +185,6 @@ export const barracksUpgrade: BarracksUpgrades = {
     }),
     arson: new Upgrade({
         id: 'arson',
-        name: 'arson',
         age: 3,
         cost: {
             wood: 0,

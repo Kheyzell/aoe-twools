@@ -51,7 +51,7 @@ export const civFilterSlice = createSlice({
     },
 
     selectTech: (state, action: PayloadAction<Tech>) => {
-      const isAlreadySelected = !!state.selectedTechs.find(tech => tech.name === action.payload.name)
+      const isAlreadySelected = !!state.selectedTechs.find(tech => tech.id === action.payload.id)
       if (!isAlreadySelected) {
         state.selectedTechs.push(action.payload)
       }
@@ -62,7 +62,7 @@ export const civFilterSlice = createSlice({
     },
 
     toggleTechsSelelection: (state, action: PayloadAction<Tech>) => {
-      const isAlreadySelected = !!state.selectedTechs.find(tech => tech.name === action.payload.name)      
+      const isAlreadySelected = !!state.selectedTechs.find(tech => tech.id === action.payload.id)      
       let tech: Tech | void = action.payload
       if (isAlreadySelected) {
         const techsToUnselect: Tech[] = []

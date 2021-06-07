@@ -10,7 +10,6 @@ interface LumberCampUpgrades {
 export const lumberCampUpgrades: LumberCampUpgrades = {
     doubleBitAxe: new Upgrade({
         id: 'doubleBitAxe',
-        name: 'Double-Bit Axe',
         age: 2,
         cost: {
             wood: 50,
@@ -22,7 +21,6 @@ export const lumberCampUpgrades: LumberCampUpgrades = {
     }),
     bowSaw: new Upgrade({
         id: 'bowSaw',
-        name: 'Bow Saw',
         age: 3,
         cost: {
             wood: 100,
@@ -34,7 +32,6 @@ export const lumberCampUpgrades: LumberCampUpgrades = {
     }),
     twoManSaw: new Upgrade({
         id: 'twoManSaw',
-        name: 'Two-Man Saw',
         age: 4,
         cost: {
             wood: 200,

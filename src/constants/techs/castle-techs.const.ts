@@ -20,7 +20,6 @@ interface CastleUpgrades {
 export const castleUnits: CastleUnits = {
     uniqueUnit: new Unit({
         id: 'uniqueUnit',
-        name: 'Unique Unit',
         age: 3,
         unique: true,
         unitType: UnitType.military,
@@ -34,7 +33,6 @@ export const castleUnits: CastleUnits = {
     }),
     eliteUniqueUnit: new Unit({
         id: 'eliteUniqueUnit',
-        name: 'Elite Unique Unit',
         age: 4,
         unique: true,
         unitType: UnitType.military,
@@ -48,7 +46,6 @@ export const castleUnits: CastleUnits = {
     }),
     petard: new Unit({
         id: 'petard',
-        name: 'Petard',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -61,7 +58,6 @@ export const castleUnits: CastleUnits = {
     }),
     trebuchet: new Unit({
         id: 'trebuchet',
-        name: 'Trebuchet',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -79,7 +75,6 @@ chainTechs([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit])
 export const castleUpgrades: CastleUpgrades = {
     castleUniqueTech: new Upgrade({
         id: 'castleUniqueTech',
-        name: 'Castle Unique Tech',
         age: 3,
         cost: {
             wood: 0,
@@ -91,7 +86,6 @@ export const castleUpgrades: CastleUpgrades = {
     }),
     imperialUniqueTech: new Upgrade({
         id: 'imperialUniqueTech',
-        name: 'Imperial Unique Tech',
         age: 4,
         cost: {
             wood: 0,
@@ -103,7 +97,6 @@ export const castleUpgrades: CastleUpgrades = {
     }),
     hoardings: new Upgrade({
         id: 'hoardings',
-        name: 'Hoardings',
         age: 4,
         cost: {
             wood: 400,
@@ -115,7 +108,6 @@ export const castleUpgrades: CastleUpgrades = {
     }),
     sappers: new Upgrade({
         id: 'sappers',
-        name: 'Sappers',
         age: 4,
         cost: {
             wood: 0,
@@ -127,7 +119,6 @@ export const castleUpgrades: CastleUpgrades = {
     }),
     conscription: new Upgrade({
         id: 'conscription',
-        name: 'Conscription',
         age: 4,
         cost: {
             wood: 0,
@@ -139,7 +130,6 @@ export const castleUpgrades: CastleUpgrades = {
     }),
     spies: new Upgrade({
         id: 'spies',
-        name: 'Spies',
         age: 4,
         cost: {
             wood: 0,

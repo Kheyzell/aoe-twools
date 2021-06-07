@@ -20,7 +20,6 @@ interface ArcheryUpgrades {
 export const archeryUnits: ArcheryUnits = {
     archer: new Unit({
         id: 'archer',
-        name: 'Archer',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -33,7 +32,6 @@ export const archeryUnits: ArcheryUnits = {
     }),
     crossbowman: new Unit({
         id: 'crossbowman',
-        name: 'Crossbowman',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -46,7 +44,6 @@ export const archeryUnits: ArcheryUnits = {
     }),
     arbalester: new Unit({
         id: 'arbalester',
-        name: 'Arbalester',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -59,7 +56,6 @@ export const archeryUnits: ArcheryUnits = {
     }),
     skirmisher: new Unit({
         id: 'skirmisher',
-        name: 'Skirmisher',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -72,7 +68,6 @@ export const archeryUnits: ArcheryUnits = {
     }),
     eliteSkirmisher: new Unit({
         id: 'eliteSkirmisher',
-        name: 'Elite Skirmisher',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -85,7 +80,6 @@ export const archeryUnits: ArcheryUnits = {
     }),
     handCannoneer: new Unit({
         id: 'handCannoneer',
-        name: 'Hand Cannoneer',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -98,7 +92,6 @@ export const archeryUnits: ArcheryUnits = {
     }),
     cavalryArcher: new Unit({
         id: 'cavalryArcher',
-        name: 'Cavalry Archer',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -111,7 +104,6 @@ export const archeryUnits: ArcheryUnits = {
     }),
     heavyCavalryArcher: new Unit({
         id: 'heavyCavalryArcher',
-        name: 'Heavy Cavalry Archer',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -132,7 +124,6 @@ chainTechs([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher])
 export const archeryUpgrades: ArcheryUpgrades = {
     thumbRing: new Upgrade({
         id: 'thumbRing',
-        name: 'Thumb Ring',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -145,7 +136,6 @@ export const archeryUpgrades: ArcheryUpgrades = {
     }),
     parthianTactis: new Upgrade({
         id: 'parthianTactics',
-        name: 'Parthian Tactics',
         age: 4,
         unitType: UnitType.military,
         cost: {

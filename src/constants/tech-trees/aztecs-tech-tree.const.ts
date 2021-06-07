@@ -19,7 +19,6 @@ import { getAllCivMilitaryUnits } from "../../utils/techs.utils";
 export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit } = {
     jaguarWarrior: new Unit({
         id: 'jaguarWarrior',
-        name: 'Jaguar Warrior',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit 
     }),
     eliteJaguarWarrior: new Unit({
         id: 'eliteJaguarWarrior',
-        name: 'Elite Jaguar Warrior',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit 
 const uniqueTechs = [
     new UniqueTech({
         id: 'atlatl',
-        name: 'Atlatl',
         age: 3,
-        description: 'Skirmishers +1 attack, +1 range',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 400, gold: 350, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'garlandWars',
-        name: 'Garland Wars',
         age: 4,
-        description: '+4 infantry attack',
         effectType: EffectType.damage,
         value: 4,
         cost: { wood: 0, food: 450, gold: 750, stone: 0 },
@@ -76,7 +70,6 @@ const uniqueTechs = [
 
 export const aztecsTechTree: CivTechTree = {
     id: 'aztecs',
-    name: 'Aztecs',
     crest,
     wikiUrl: 'Aztecs_(Age_of_Empires_II)',
     bonuses: [],
@@ -217,7 +210,6 @@ export const aztecsTechTree: CivTechTree = {
 const bonuses: Bonus[] = [
     {
         id: 'aztecs1',
-        description: 'Villagers carry +3 extra resources',
         effectType: EffectType.miscallenous,
         value: null,
         affectedUnits: [townCenterUnits.villager],
@@ -225,7 +217,6 @@ const bonuses: Bonus[] = [
     },
     {
         id: 'aztecs2',
-        description: 'All military units are created 11% faster',
         effectType: EffectType.creationSpeed,
         value: 11,
         affectedUnits: getAllCivMilitaryUnits(aztecsTechTree),
@@ -234,7 +225,6 @@ const bonuses: Bonus[] = [
     },
     {
         id: 'aztecs3',
-        description: 'Monks gain 5 HP for every researched Monastery technology',
         effectType: EffectType.miscallenous,
         value: 5,
         affectedUnits: [monasteryUnits.monk],
@@ -242,7 +232,6 @@ const bonuses: Bonus[] = [
     },
     {
         id: 'aztecs4',
-        description: 'Start with +50 gold',
         effectType: EffectType.resourceGold,
         value: 50,
         affectedUnits: [],
@@ -250,7 +239,6 @@ const bonuses: Bonus[] = [
     },
     {
         id: 'aztecs5',
-        description: 'Relics generate +33% gold',
         effectType: EffectType.miscallenous,
         value: 33,
         affectedUnits: [],

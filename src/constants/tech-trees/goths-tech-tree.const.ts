@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const gothsUniqueUnits: { huskarl: Unit, eliteHuskarl: Unit } = {
     huskarl: new Unit({
         id: 'huskarl',
-        name: 'Huskarl',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const gothsUniqueUnits: { huskarl: Unit, eliteHuskarl: Unit } = {
     }),
     eliteHuskarl: new Unit({
         id: 'eliteHuskarl',
-        name: 'Elite Huskarl',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const gothsUniqueUnits: { huskarl: Unit, eliteHuskarl: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'anarchy',
-        name: 'Anarchy',
         age: 3,
-        description: 'Huskarls can be created at Barracks',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 450, gold: 250, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'perfusion',
-        name: 'Perfusion',
         age: 4,
-        description: `Barracks create units 100% faster`,
         effectType: EffectType.creationSpeed,
         value: 40,
         cost: { wood: 400, food: 0, gold: 600, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const gothsTechTree: CivTechTree = {
     id: 'goths',
-    name: 'Goths',
     crest,
     wikiUrl: 'Goths',
     bonuses: [
         {
             id: 'goths1',
-            description: 'Infantry are 20%/25%/30%/35% cheaper in the Dark/Feudal/Castle/Imperial Age',
             effectType: EffectType.discount,
             value: { age1: 20, age2: 25, age3: 30, age4: 35 },
             affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, gothsUniqueUnits.eliteHuskarl],
@@ -90,7 +82,6 @@ export const gothsTechTree: CivTechTree = {
         },
         {
             id: 'goths2',
-            description: 'Infantry have +1/+2/+3 attack bonus against standard buildings in the Feudal/Castle/Imperial Age',
             effectType: EffectType.miscallenous,
             value: { age2: 1, age3: 2, age4: 3 },
             affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, gothsUniqueUnits.eliteHuskarl],
@@ -98,7 +89,6 @@ export const gothsTechTree: CivTechTree = {
         },
         {
             id: 'goths3',
-            description: 'Villagers have +5 attack against aggressive huntables (Wild Boar, Javelina, Elephant, Rhinoceros) and carry +15 food from hunting',
             effectType: EffectType.miscallenous,
             value: 15,
             affectedUnits: [townCenterUnits.villager],
@@ -106,7 +96,6 @@ export const gothsTechTree: CivTechTree = {
         },
         {
             id: 'goths4',
-            description: '+10 population cap in the Imperial Age',
             effectType: EffectType.miscallenous,
             value: 10,
             affectedUnits: [],
@@ -114,7 +103,6 @@ export const gothsTechTree: CivTechTree = {
         },
         {
             id: 'goths5',
-            description: 'Loom is researched instantly',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -122,7 +110,6 @@ export const gothsTechTree: CivTechTree = {
         },
         {
             id: 'goths6',
-            description: 'Barracks work 20% faster',
             effectType: EffectType.creationSpeed,
             value: 20,
             affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, gothsUniqueUnits.eliteHuskarl],

@@ -20,7 +20,6 @@ import { getAllCivUnits } from "../../utils/techs.utils";
 export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Unit } = {
     teutonicKnight: new Unit({
         id: 'teutonicKnight',
-        name: 'TeutonicKnight',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -34,7 +33,6 @@ export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Un
     }),
     eliteTeutonicKnight: new Unit({
         id: 'eliteTeutonicKnight',
-        name: 'Elite Teutonic Knight',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -51,9 +49,7 @@ export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Un
 const uniqueTechs = [
     new UniqueTech({
         id: 'ironclad',
-        name: 'Ironclad',
         age: 3,
-        description: 'siege weapons +4 melee armor',
         effectType: EffectType.meleeArmor,
         value: 4,
         cost: { wood: 400, food: 0, gold: 350, stone: 0 },
@@ -63,9 +59,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'crenellations',
-        name: 'Crenellations',
         age: 4,
-        description: 'Castles +3 range; garrisoned infantry fires arrows',
         effectType: EffectType.range,
         value: 3,
         cost: { wood: 0, food: 600, gold: 0, stone: 400 },
@@ -77,7 +71,6 @@ const uniqueTechs = [
 
 export const teutonsTechTree: CivTechTree = {
     id: 'teutons',
-    name: 'Teutons',
     crest,
     wikiUrl: 'Teutons',
     bonuses: [],
@@ -230,7 +223,6 @@ export const teutonsTechTree: CivTechTree = {
 teutonsTechTree.bonuses = [
     {
         id: 'teutons1',
-        description: 'Monks have double healing range',
         effectType: EffectType.miscallenous,
         value: 100,
         affectedUnits: [monasteryUnits.monk],
@@ -238,7 +230,6 @@ teutonsTechTree.bonuses = [
     },
     {
         id: 'teutons2',
-        description: 'Towers garrison twice as many units',
         effectType: EffectType.miscallenous,
         value: null,
         affectedUnits: [],
@@ -246,7 +237,6 @@ teutonsTechTree.bonuses = [
     },
     {
         id: 'teutons3',
-        description: 'Murder Holes and Herbal Medicine are free',
         effectType: EffectType.freeUpgrade,
         value: null,
         affectedUnits: [],
@@ -254,7 +244,6 @@ teutonsTechTree.bonuses = [
     },
     {
         id: 'teutons4',
-        description: 'Farms are 40% cheaper',
         effectType: EffectType.discount,
         value: 40,
         affectedUnits: [],
@@ -262,7 +251,6 @@ teutonsTechTree.bonuses = [
     },
     {
         id: 'teutons5',
-        description: 'Barracks and Stable units receive +1/+2 melee armor in the Castle/Imperial Age',
         effectType: EffectType.meleeArmor,
         value: { age3: 1, age4: 2 },
         affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, stableUnits.scoutCavalry, stableUnits.paladin],
@@ -270,7 +258,6 @@ teutonsTechTree.bonuses = [
     },
     {
         id: 'teutons6',
-        description: 'Town Centers can garrison +10 units',
         effectType: EffectType.miscallenous,
         value: 10,
         affectedUnits: [],
@@ -278,7 +265,6 @@ teutonsTechTree.bonuses = [
     },
     {
         id: 'teutons7',
-        description: 'Units resist conversion (+2)',
         effectType: EffectType.convertionResistance,
         value: 2,
         affectedUnits: getAllCivUnits(teutonsTechTree),

@@ -20,7 +20,6 @@ interface MonasteryUpgrades {
 export const monasteryUnits: MonasteryUnits = {
     monk: new Unit({
         id: 'monk',
-        name: 'Monk',
         age: 3,
         unitType: UnitType.civilian,
         cost: {
@@ -36,7 +35,6 @@ export const monasteryUnits: MonasteryUnits = {
 export const monasteryUpgrade: MonasteryUpgrades = {
     redemption: new Upgrade({
         id: 'redemption',
-        name: 'Redemption',
         age: 3,
         cost: {
             wood: 0,
@@ -48,7 +46,6 @@ export const monasteryUpgrade: MonasteryUpgrades = {
     }),
     atonement: new Upgrade({
         id: 'atonement',
-        name: 'Atonement',
         age: 3,
         cost: {
             wood: 0,
@@ -60,7 +57,6 @@ export const monasteryUpgrade: MonasteryUpgrades = {
     }),
     herbalMedecine: new Upgrade({
         id: 'herbalMedicine',
-        name: 'Herbal Medicine',
         age: 3,
         cost: {
             wood: 0,
@@ -72,7 +68,6 @@ export const monasteryUpgrade: MonasteryUpgrades = {
     }),
     heresy: new Upgrade({
         id: 'heresy',
-        name: 'Heresy',
         age: 3,
         cost: {
             wood: 0,
@@ -84,7 +79,6 @@ export const monasteryUpgrade: MonasteryUpgrades = {
     }),
     sanctity: new Upgrade({
         id: 'sanctity',
-        name: 'Sanctity',
         age: 3,
         cost: {
             wood: 0,
@@ -96,7 +90,6 @@ export const monasteryUpgrade: MonasteryUpgrades = {
     }),
     fervor: new Upgrade({
         id: 'fervor',
-        name: 'Fervor',
         age: 3,
         cost: {
             wood: 0,
@@ -108,7 +101,6 @@ export const monasteryUpgrade: MonasteryUpgrades = {
     }),
     faith: new Upgrade({
         id: 'faith',
-        name: 'Faith',
         age: 4,
         cost: {
             wood: 0,
@@ -120,7 +112,6 @@ export const monasteryUpgrade: MonasteryUpgrades = {
     }),
     illumination: new Upgrade({
         id: 'illumination',
-        name: 'Illumination',
         age: 4,
         cost: {
             wood: 0,
@@ -132,7 +123,6 @@ export const monasteryUpgrade: MonasteryUpgrades = {
     }),
     blockPrinting: new Upgrade({
         id: 'blockPrinting',
-        name: 'Block Printing',
         age: 4,
         cost: {
             wood: 0,
@@ -144,7 +134,6 @@ export const monasteryUpgrade: MonasteryUpgrades = {
     }),
     theocracy: new Upgrade({
         id: 'theocracy',
-        name: 'Theocracy',
         age: 4,
         cost: {
             wood: 0,

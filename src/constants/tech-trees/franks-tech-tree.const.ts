@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const franksUniqueUnits: { throwingAxeman: Unit, eliteThrowingAxeman: Unit } = {
     throwingAxeman: new Unit({
         id: 'throwingAxeman',
-        name: 'Throwing Axeman',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const franksUniqueUnits: { throwingAxeman: Unit, eliteThrowingAxeman: Uni
     }),
     eliteThrowingAxeman: new Unit({
         id: 'eliteThrowingAxeman',
-        name: 'Elite Throwing Axeman',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const franksUniqueUnits: { throwingAxeman: Unit, eliteThrowingAxeman: Uni
 const uniqueTechs = [
     new UniqueTech({
         id: 'beardedAxe',
-        name: 'Bearded Axes',
         age: 3,
-        description: 'Throwing Axeman +1 range',
         effectType: EffectType.range,
         value: 1,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'chivalry',
-        name: 'Chivalry',
         age: 4,
-        description: `Stables work 40% faster`,
         effectType: EffectType.creationSpeed,
         value: 40,
         cost: { wood: 600, food: 0, gold: 500, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const franksTechTree: CivTechTree = {
     id: 'franks',
-    name: 'Franks',
     crest,
     wikiUrl: 'Franks',
     bonuses: [
         {
             id: 'franks1',
-            description: 'Farm upgrades are free',
             effectType: EffectType.freeUpgrade,
             value: 18,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const franksTechTree: CivTechTree = {
         },
         {
             id: 'franks2',
-            description: 'Castles are 25% cheaper',
             effectType: EffectType.discount,
             value: 25,
             affectedUnits: [],
@@ -98,7 +89,6 @@ export const franksTechTree: CivTechTree = {
         },
         {
             id: 'franks3',
-            description: 'Mounted units +20% HP (starting in the Feudal Age)',
             effectType: EffectType.healthPercent,
             value: { age2: 20, age3: 20, age4: 20 },
             affectedUnits: [stableUnits.lightCavalry, stableUnits.paladin, archeryUnits.heavyCavalryArcher],
@@ -106,7 +96,6 @@ export const franksTechTree: CivTechTree = {
         },
         {
             id: 'franks4',
-            description: 'Foragers work 15% faster',
             effectType: EffectType.miscallenous,
             value: 15,
             affectedUnits: [townCenterUnits.villager],
@@ -114,7 +103,6 @@ export const franksTechTree: CivTechTree = {
         },
         {
             id: 'franks5',
-            description: 'Knights have +2 Line of Sight',
             effectType: EffectType.lineOfSight,
             value: 2,
             affectedUnits: [stableUnits.paladin],

@@ -28,7 +28,6 @@ interface DockUpgrades {
 export const dockUnits: DockUnits = {
     fishingShip: new Unit({
         id: 'fishingShip',
-        name: 'Fishing Ship',
         age: 1,
         unitType: UnitType.civilian,
         cost: {
@@ -41,7 +40,6 @@ export const dockUnits: DockUnits = {
     }),
     transportShip: new Unit({
         id: 'transportShip',
-        name: 'Transport Ship',
         age: 1,
         unitType: UnitType.civilian,
         cost: {
@@ -54,7 +52,6 @@ export const dockUnits: DockUnits = {
     }),
     tradeCog: new Unit({
         id: 'tradeCog',
-        name: 'Trade Cog',
         age: 2,
         unitType: UnitType.civilian,
         cost: {
@@ -67,7 +64,6 @@ export const dockUnits: DockUnits = {
     }),
     galley: new Unit({
         id: 'galley',
-        name: 'Galley',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -80,7 +76,6 @@ export const dockUnits: DockUnits = {
     }),
     fireGalley: new Unit({
         id: 'fireGalley',
-        name: 'Fire Galley',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -93,7 +88,6 @@ export const dockUnits: DockUnits = {
     }),
     demolitionRaft: new Unit({
         id: 'demolitionRaft',
-        name: 'Demolition Raft',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -106,7 +100,6 @@ export const dockUnits: DockUnits = {
     }),
     warGalley: new Unit({
         id: 'warGalley',
-        name: 'War Galley',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -119,7 +112,6 @@ export const dockUnits: DockUnits = {
     }),
     fireShip: new Unit({
         id: 'fireShip',
-        name: 'Fire Ship',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -132,7 +124,6 @@ export const dockUnits: DockUnits = {
     }),
     demotionShip: new Unit({
         id: 'demolitionShip',
-        name: 'Demolition Ship',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -145,7 +136,6 @@ export const dockUnits: DockUnits = {
     }),
     galleon: new Unit({
         id: 'galleon',
-        name: 'Galleon',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -158,7 +148,6 @@ export const dockUnits: DockUnits = {
     }),
     fastFireShip: new Unit({
         id: 'fastFireShip',
-        name: 'Fast Fire Ship',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -171,7 +160,6 @@ export const dockUnits: DockUnits = {
     }),
     heavyDemolitionShip: new Unit({
         id: 'heavyDemolitionShip',
-        name: 'Heavy Demolition Ship',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -184,7 +172,6 @@ export const dockUnits: DockUnits = {
     }),
     cannonGalleon: new Unit({
         id: 'cannonGalleon',
-        name: 'Cannon Galleon',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -197,7 +184,6 @@ export const dockUnits: DockUnits = {
     }),
     eliteCannonGalleon: new Unit({
         id: 'eliteCannonGalleon',
-        name: 'Elite Cannon Galleon',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -220,7 +206,6 @@ chainTechs([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon])
 export const dockUpgrades: DockUpgrades = {
     gillnets: new Upgrade({
         id: 'gillnets',
-        name: 'Gillnets',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -233,7 +218,6 @@ export const dockUpgrades: DockUpgrades = {
     }),
     careening: new Upgrade({
         id: 'careening',
-        name: 'Careening',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -246,7 +230,6 @@ export const dockUpgrades: DockUpgrades = {
     }),
     shipwright: new Upgrade({
         id: 'shipwright',
-        name: 'Shipwright',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -259,7 +242,6 @@ export const dockUpgrades: DockUpgrades = {
     }),
     dryDock: new Upgrade({
         id: 'dryDock',
-        name: 'Dry Dock',
         age: 4,
         unitType: UnitType.military,
         cost: {

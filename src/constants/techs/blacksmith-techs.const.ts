@@ -22,7 +22,6 @@ interface BlacksmithUpgrades {
 export const blacksmithUpgrades: BlacksmithUpgrades = {
     forging: new Upgrade({
         id: 'forging',
-        name: 'Forging',
         age: 2,
         cost: {
             wood: 0,
@@ -34,7 +33,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     ironCasting: new Upgrade({
         id: 'ironCasting',
-        name: 'Iron Casting',
         age: 3,
         cost: {
             wood: 0,
@@ -46,7 +44,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     blastFurnace: new Upgrade({
         id: 'blastFurnace',
-        name: 'Blast Furnace',
         age: 4,
         cost: {
             wood: 0,
@@ -58,7 +55,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     scaleMailArmor: new Upgrade({
         id: 'scaleMailArmor',
-        name: 'Scale Mail Armor',
         age: 2,
         cost: {
             wood: 0,
@@ -70,7 +66,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     chainMailArmor: new Upgrade({
         id: 'chainMailArmor',
-        name: 'Chain Mail Armor',
         age: 3,
         cost: {
             wood: 0,
@@ -82,7 +77,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     plateMailArmor: new Upgrade({
         id: 'plateMailArmor',
-        name: 'Plate Mail Armor',
         age: 4,
         cost: {
             wood: 0,
@@ -94,7 +88,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     scaleBardingArmor: new Upgrade({
         id: 'scaleBardingArmor',
-        name: 'Scale Barding Armor',
         age: 2,
         cost: {
             wood: 0,
@@ -106,7 +99,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     chainBardingArmor: new Upgrade({
         id: 'chainBardingArmor',
-        name: 'Chain Barding Armor',
         age: 3,
         cost: {
             wood: 0,
@@ -118,7 +110,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     plateBardingArmor: new Upgrade({
         id: 'plateBardingArmor',
-        name: 'Plate Barding Armor',
         age: 4,
         cost: {
             wood: 0,
@@ -130,7 +121,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     fletching: new Upgrade({
         id: 'fletching',
-        name: 'Fletching',
         age: 2,
         cost: {
             wood: 0,
@@ -142,7 +132,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     bodkinArrow: new Upgrade({
         id: 'bodkinArrow',
-        name: 'Bodkin Arrow',
         age: 3,
         cost: {
             wood: 0,
@@ -154,7 +143,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     bracer: new Upgrade({
         id: 'bracer',
-        name: 'Bracer',
         age: 4,
         cost: {
             wood: 0,
@@ -166,7 +154,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     paddedArcherArmor: new Upgrade({
         id: 'paddedArcherArmor',
-        name: 'Padded Archer Armor',
         age: 2,
         cost: {
             wood: 0,
@@ -178,7 +165,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     leatherArcherArmor: new Upgrade({
         id: 'leatherArcherArmor',
-        name: 'Leather Archer Armor',
         age: 3,
         cost: {
             wood: 0,
@@ -190,7 +176,6 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
     }),
     ringArcherArmor: new Upgrade({
         id: 'ringArcherArmor',
-        name: 'Ring Archer Armor',
         age: 4,
         cost: {
             wood: 0,

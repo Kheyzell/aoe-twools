@@ -16,7 +16,6 @@ import { universityUpgrades } from "../techs/university-techs.const";
 
 export const fullTechTree: CivTechTree = {
     id: 'full',
-    name: 'Full',
     bonuses: [],
     uniqueTechs: [],
     barracks: {

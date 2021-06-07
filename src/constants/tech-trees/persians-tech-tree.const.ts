@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } = {
     warElephant: new Unit({
         id: 'warElephant',
-        name: 'War Elephant',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } 
     }),
     eliteWarElephant: new Unit({
         id: 'eliteWarElephant',
-        name: 'Elite War Elephant',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } 
 const uniqueTechs = [
     new UniqueTech({
         id: 'kamandaran',
-        name: 'Kamandaran',
         age: 3,
-        description: 'turns Archer gold cost into wood cost',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 400, gold: 300, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'mahouts',
-        name: 'Mahouts',
         age: 4,
-        description: 'War Elephants move +30% faster',
         effectType: EffectType.movementSpeed,
         value: 30,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const persiansTechTree: CivTechTree = {
     id: 'persians',
-    name: 'Persians',
     crest,
     wikiUrl: 'Persians_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'persians1',
-            description: 'Start the game with +50 food and +50 wood',
             effectType: EffectType.miscallenous,
             value: 50,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const persiansTechTree: CivTechTree = {
         },
         {
             id: 'persians2',
-            description: 'Town Centers and Docks have double HP and work 10%/15%/20% faster in the Feudal/Castle/Imperial Age',
             effectType: EffectType.creationSpeed,
             value: { age2: 10, age3: 15, age4: 20 },
             affectedUnits: [townCenterUnits.villager, dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fastFireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
@@ -98,7 +89,6 @@ export const persiansTechTree: CivTechTree = {
         },
         {
             id: 'persians3',
-            description: 'Knights have +2 attack against archers',
             effectType: EffectType.miscallenous,
             value: 2,
             affectedUnits: [stableUnits.paladin],
