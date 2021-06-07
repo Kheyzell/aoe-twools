@@ -20,7 +20,6 @@ import { chainTechs } from "../../utils/techs.utils";
 export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Unit, imperialCamelRider: Unit } = {
     elephantArcher: new Unit({
         id: 'elephantArcher',
-        name: 'Elephant Archer',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -34,7 +33,6 @@ export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Un
     }),
     eliteElephantArcher: new Unit({
         id: 'eliteElephantArcher',
-        name: 'Elite Elephant Archer',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -48,7 +46,6 @@ export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Un
     }),
     imperialCamelRider: new Unit({
         id: 'imperialCamelRider',
-        name: 'Imperial Camel Rider',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -65,9 +62,7 @@ export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Un
 const uniqueTechs = [
     new UniqueTech({
         id: 'sultans',
-        name: 'Sultans',
         age: 3,
-        description: 'all gold production +10% faster',
         effectType: EffectType.miscallenous,
         value: 10,
         cost: { wood: 400, food: 400, gold: 0, stone: 0 },
@@ -77,9 +72,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'shatagni',
-        name: 'Shatagni',
         age: 4,
-        description: 'Hand Cannoneers +1 range',
         effectType: EffectType.range,
         value: 1,
         cost: { wood: 0, food: 500, gold: 300, stone: 0 },
@@ -91,13 +84,11 @@ const uniqueTechs = [
 
 export const indiansTechTree: CivTechTree = {
     id: 'indians',
-    name: 'Indians',
     crest,
     wikiUrl: 'Indians_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'indians1',
-            description: 'Fishermen work 10% faster',
             effectType: EffectType.miscallenous,
             value: 10,
             affectedUnits: [townCenterUnits.villager],
@@ -105,7 +96,6 @@ export const indiansTechTree: CivTechTree = {
         },
         {
             id: 'indians2',
-            description: 'Villagers are 10%/15%/20%/25% cheaper in the Dark/Feudal/Castle/Imperial Age',
             effectType: EffectType.discount,
             value: { age1: 10, age2: 15, age3: 20, age4: 25 },
             affectedUnits: [townCenterUnits.villager],
@@ -113,7 +103,6 @@ export const indiansTechTree: CivTechTree = {
         },
         {
             id: 'indians3',
-            description: 'All Stable units have +1 pierce armor in the Castle Age and +1 in the Imperial Age',
             effectType: EffectType.pierceArmor,
             value: { age3: 1, age4: 2 },
             affectedUnits: [stableUnits.hussar, indiansUniqueUnits.imperialCamelRider],
@@ -121,7 +110,6 @@ export const indiansTechTree: CivTechTree = {
         },
         {
             id: 'indians4',
-            description: 'Camel units have +4 attack against standard buildings',
             effectType: EffectType.miscallenous,
             value: 4,
             affectedUnits: [indiansUniqueUnits.imperialCamelRider],

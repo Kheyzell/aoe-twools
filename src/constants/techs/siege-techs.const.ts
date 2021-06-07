@@ -17,7 +17,6 @@ interface SiegeUnits {
 export const siegeUnits: SiegeUnits = {
     batteringRam: new Unit({
         id: 'batteringRam',
-        name: 'Battering Ram',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -30,7 +29,6 @@ export const siegeUnits: SiegeUnits = {
     }),
     cappedRam: new Unit({
         id: 'cappedRam',
-        name: 'Capped Ram',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -43,7 +41,6 @@ export const siegeUnits: SiegeUnits = {
     }),
     siegeRam: new Unit({
         id: 'siegeRam',
-        name: 'Siege Ram',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -56,7 +53,6 @@ export const siegeUnits: SiegeUnits = {
     }),
     mangonel: new Unit({
         id: 'mangonel',
-        name: 'Mangonel',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -69,7 +65,6 @@ export const siegeUnits: SiegeUnits = {
     }),
     onager: new Unit({
         id: 'onager',
-        name: 'Onager',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -82,7 +77,6 @@ export const siegeUnits: SiegeUnits = {
     }),
     siegeOnager: new Unit({
         id: 'siegeOnager',
-        name: 'Siege Onager',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -95,7 +89,6 @@ export const siegeUnits: SiegeUnits = {
     }),
     scorpion: new Unit({
         id: 'scorpion',
-        name: 'Scorpion',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -108,7 +101,6 @@ export const siegeUnits: SiegeUnits = {
     }),
     heavyScorpion: new Unit({
         id: 'heavyScorpion',
-        name: 'Heavy Scorpion',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -121,7 +113,6 @@ export const siegeUnits: SiegeUnits = {
     }),
     siegeTower: new Unit({
         id: 'siegeTower',
-        name: 'Siege Tower',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -134,7 +125,6 @@ export const siegeUnits: SiegeUnits = {
     }),
     bombardCannon: new Unit({
         id: 'bombardCannon',
-        name: 'Bombard Cannon',
         age: 4,
         unitType: UnitType.military,
         cost: {

@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
     boyar: new Unit({
         id: 'boyar',
-        name: 'Boyar',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
     }),
     eliteBoyar: new Unit({
         id: 'eliteBoyar',
-        name: 'Elite Boyar',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'orthodoxy',
-        name: 'Orthodoxy',
         age: 3,
-        description: '+3/+3 armor for Monks',
         effectType: EffectType.armor,
         value: 3,
         cost: { wood: 0, food: 200, gold: 300, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'druzhina',
-        name: 'Druzhina',
         age: 4,
-        description: 'infantry damage adjacent units',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 1200, gold: 500, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const slavsTechTree: CivTechTree = {
     id: 'slavs',
-    name: 'Slavs',
     crest,
     wikiUrl: 'Slavs',
     bonuses: [
         {
             id: 'slavs1',
-            description: 'Farmers work 10% faster',
             effectType: EffectType.miscallenous,
             value: 10,
             affectedUnits: [townCenterUnits.villager],
@@ -90,7 +82,6 @@ export const slavsTechTree: CivTechTree = {
         },
         {
             id: 'slavs2',
-            description: 'Supplies is free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [],
@@ -98,7 +89,6 @@ export const slavsTechTree: CivTechTree = {
         },
         {
             id: 'slavs3',
-            description: 'Siege Workshop units are 15% cheaper',
             effectType: EffectType.discount,
             value: 15,
             affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
@@ -106,7 +96,6 @@ export const slavsTechTree: CivTechTree = {
         },
         {
             id: 'slavs4',
-            description: 'Military buildings (excluding Castles and Docks) provide +5 population',
             effectType: EffectType.miscallenous,
             value: 5,
             affectedUnits: [],

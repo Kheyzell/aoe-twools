@@ -1,6 +1,7 @@
 import React from 'react'
 
 import './App.css'
+import './i18n/config'
 import TechTreeComponent from './features/tech-tree/tech-tree'
 import CivList from './features/civ-list/civ-list'
 import { barracksTechs } from "./constants/GroupTechTree/barracks-tech-tree.const"
@@ -19,12 +20,12 @@ import { marketTechs } from "./constants/GroupTechTree/market-tech-tree.const"
 import { dockTechs } from "./constants/GroupTechTree/dock-tech-tree.const"
 import woodenBackground from "./resources/images/backgrounds/wood.jpg"
 import woodenBackground4 from "./resources/images/backgrounds/wood4.jpg"
+import LangSelector from './components/lang-selector'
 
 // initialise group tech trees
 const allGroupTechs = [barracksTechs, archeryTechs, stableTechs, siegeTechs, castleTechs, blacksmithTechs, monasteryTechs, universityTechs, townCenterTechs, lumberCampTechs, millTechs, miningCampTechs, marketTechs, dockTechs]
 
 function AppComponent() {
-
   return (
     <div className="App">
       <div className="Header" style={{ background: `url(${woodenBackground})` }}>
@@ -32,6 +33,10 @@ function AppComponent() {
       </div>
       <div className="Body" style={{ backgroundImage: `url(${woodenBackground4})` }}>
         <TechTreeComponent></TechTreeComponent>
+      </div>
+
+      <div className="LangSelectorcontainer">
+        <LangSelector></LangSelector>
       </div>
     </div>
   )

@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit } = {
     magyarHuszar: new Unit({
         id: 'magyarHuszar',
-        name: 'Magyar Huszar',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit }
     }),
     eliteMagyarHuszar: new Unit({
         id: 'eliteMagyarHuszar',
-        name: 'Elite Magyar Huszar',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit }
 const uniqueTechs = [
     new UniqueTech({
         id: 'corvinianArmy',
-        name: 'Corvinian Army',
         age: 3,
-        description: 'Magyar Huszars cost no gold',
         effectType: EffectType.discoutGold,
         value: 100,
         cost: { wood: 0, food: 200, gold: 300, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'recurveBow',
-        name: 'Recurve Bow',
         age: 4,
-        description: 'Cavalry Archers + 1 range and attack',
         effectType: EffectType.miscallenous,
         value: 1,
         cost: { wood: 600, food: 0, gold: 400, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const magyarsTechTree: CivTechTree = {
     id: 'magyars',
-    name: 'Magyars',
     crest,
     wikiUrl: 'Magyars',
     bonuses: [
         {
             id: 'magyars1',
-            description: 'Forging, Iron Casting, and Blast Furnace are free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const magyarsTechTree: CivTechTree = {
         },
         {
             id: 'magyars2',
-            description: 'The Scout Cavalry line is 15% cheaper',
             effectType: EffectType.discount,
             value: 15,
             affectedUnits: [stableUnits.hussar],
@@ -98,7 +89,6 @@ export const magyarsTechTree: CivTechTree = {
         },
         {
             id: 'magyars3',
-            description: 'Villagers kill wild animals in one strike',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [townCenterUnits.villager],
@@ -106,7 +96,6 @@ export const magyarsTechTree: CivTechTree = {
         },
         {
             id: 'magyars4',
-            description: 'Foot archers have +2 Line of Sight',
             effectType: EffectType.lineOfSight,
             value: 2,
             affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher],

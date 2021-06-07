@@ -1,4 +1,5 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 
 import { CivTechTree, Unit } from "../../models/techs.model"
 import { getAllCivUnitLines, hasCivUpgrades } from "../../utils/techs.utils"
@@ -51,6 +52,7 @@ const getFullyUpgradedUnits = (civ: CivTechTree): Unit[] => {
 }
 
 const CivPanel: React.FC<Props> = (props) => {
+    const { t } = useTranslation()
     const myRef = React.createRef<HTMLDivElement>();
 
     React.useEffect(() => {
@@ -82,28 +84,28 @@ const CivPanel: React.FC<Props> = (props) => {
 
     return (
         <div className="CivPanel" ref={myRef} style={{ background: `url(${woodenBackground})`, visibility: props.show ? 'visible' : 'hidden' }} onClick={stopEventPropagation}>
-            <div className="Title"> {props.civ.name} • <a href={wikiUrl} target="_blank" onClick={openWiki}> wiki </a></div>
+            <div className="Title"> { t(`civ.${props.civ.id}.name`) } • <a href={wikiUrl} target="_blank" onClick={openWiki}> wiki </a></div>
 
             <div className="Section">
-                <div className="SubTitle"> Bonuses </div>
+                <div className="SubTitle"> { t('Bonuses') } </div>
                 <div className="Bonuses"> {
                     bonuses.map(bonus => {
-                        return (<li> { bonus.team ? (<span className="TeamBonus"> Team bonus: </span>) : "" } { bonus.description } </li>)
+                        return (<li> { bonus.team ? (<span className="TeamBonus"> Team bonus: </span>) : "" } { t(`civ.${props.civ.id}.bonus.${bonus.id}.description`) } </li>)
                     })
                 } </div>
             </div>
             
             <div className="Section">
-                <div className="SubTitle"> Unique technologies </div>
+                <div className="SubTitle"> { t('Unique technologies') } </div>
                 <div className="Bonuses"> {
                     uniqueTechs.map(uniqueTech => {
-                        return (<li> { uniqueTech.name }: { uniqueTech.description } </li>)
+                        return (<li> { t(`upgrade.${uniqueTech.id}.name`) }: { t(`upgrade.${uniqueTech.id}.description`) } </li>)
                     })
                 } </div>
             </div>
 
             <div className="Section">
-                <div className="SubTitle"> {affectedByBonusesUnits.length > 0 ? "Units affected by bonuses or technologies" : "No unit affected by bonuses"} </div>
+                <div className="SubTitle"> { affectedByBonusesUnits.length > 0 ? t("Units affected by bonuses or technologies") : t("No unit affected by bonuses") } </div>
                 <div className="UnitList AffectedByBonusesUnits"> {
                     affectedByBonusesUnits.concat(affectedByUniqueTechsUnits.filter(unit => !affectedByBonusesUnits.find(bonusUnit => bonusUnit.id === unit.id))).map(unit => {
                         return (<TechComponent key={unit.id} tech={unit}></TechComponent>)
@@ -112,7 +114,7 @@ const CivPanel: React.FC<Props> = (props) => {
             </div>
 
             <div className="Section">
-                <div className="SubTitle"> {fullyUpgradedUnits.length > 0 ? "Fully upgraded units" : "No fully upgraded unit"} </div>
+                <div className="SubTitle"> { fullyUpgradedUnits.length > 0 ? t("Fully upgraded units") : t("No fully upgraded unit") } </div>
                 <div className="UnitList FullyUpgradedUnits"> {
                     fullyUpgradedUnits.map(unit => {
                         return (<TechComponent key={unit.id} tech={unit}></TechComponent>)

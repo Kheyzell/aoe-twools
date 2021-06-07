@@ -1,0 +1,1717 @@
+{
+    "Bonuses": "Bonus",
+    "Unique technologies": "Technologies uniques",
+    "Units affected by bonuses or technologies": "Unités affectées par des bonus ou technologies",
+    "No unit affected by bonuses": "Aucune unité n'est affectée par des bonus",
+    "Fully upgraded units": "Unités totalement améliorées",
+    "No fully upgraded unit": "Aucune unité totalement améliorée",
+    "Unit": "Unité",
+    "Technology": "Technologie",
+    "Unique": "Unique",
+    "Show Fully upgraded": "Afficher les totalement améliorés",
+    "Show the list of civilisations having the selected units fully upgraded": "Affiche la liste des civilisations qui ont les unités séléctionnées totalement améliorées",
+    "Show Excluded": "Afficher les exclus",
+    "Show the list of civilisations that do not satisfy the filters": "Affiche la liste des civilisations qui ne correspondent pas aux filtres",
+    "Filtered": "Filtrées:",
+    "Fully upgraded": "Totalement améliorées:",
+    "Excluded": "Exclues",
+    "civ": {
+        "aztecs": {
+            "name": "Aztèques",
+            "bonus": {
+                "aztecs1": {
+                    "description": "Les villageois portent +3"
+                },
+                "aztecs2": {
+                    "description": "Les unités militaires sont créées 11 % plus vite"
+                },
+                "aztecs3": {
+                    "description": "+5 PV pour les moines pour chaque technologie du monastère"
+                },
+                "aztecs4": {
+                    "description": "Commence avec +50 d'or"
+                },
+                "aztecs5": {
+                    "description": "Les reliques génèrent +33 % d'or"
+                }
+            }
+        },
+        "berbers": {
+            "name": "Berbères",
+            "bonus": {
+                "berbers1": {
+                    "description": "Vitesse de déplacement des villageois +10 %"
+                },
+                "berbers2": {
+                    "description": "Coût des unités de l'écurie -15 % à l'âge des châteaux, -20 % à l'âge impérial"
+                },
+                "berbers3": {
+                    "description": "Vitesse de déplacement des navires +10 %"
+                },
+                "berbers4": {
+                    "description": "Jinetes disponibles dans le camp de tir à l'arc à l'âge des châteaux"
+                }
+            }
+        },
+        "britons": {
+            "name": "Britanniques",
+            "bonus": {
+                "britons1": {
+                    "description": "Les forums coûtent -50 % de bois à partir de l'âge des châteaux"
+                },
+                "britons2": {
+                    "description": "Archers à pied (sauf les tirailleurs) +1 de portée à l'âge des châteaux, et à l'âge impérial (+2 au total)"
+                },
+                "britons3": {
+                    "description": "Les bergers travaillent 25 % plus vite"
+                },
+                "britons4": {
+                    "description": "Les camps de tir à l'arc fonctionnent 20 % plus vite"
+                }
+            }
+        },
+        "bulgarians": {
+            "name": "Bulgares",
+            "bonus": {
+                "bulgarians1": {
+                    "description": "Améliorations des unités de type milicien gratuites"
+                },
+                "bulgarians2": {
+                    "description": "Coût en pierre des forums -50 %"
+                },
+                "bulgarians3": {
+                    "description": "Peut construire des kreposts à l'âge des chateaux"
+                },
+                "bulgarians4": {
+                    "description": "Coût en nourriture des technologies associées aux forges et aux atelier de siège -50 %"
+                },
+                "bulgarians5": {
+                    "description": "Les forges fonctionnent 80 % plus rapidement"
+                }
+            }
+        },
+        "burgundians": {
+            "name": "Bourguignons",
+            "bonus": {
+                "burgundians1": {
+                    "description": "Les améliorations économiques sont disponibles un âge plus tôt et coûtent -50 % de nourriture"
+                },
+                "burgundians2": {
+                    "description": "Coût des technologies des écuries -50 %"
+                },
+                "burgundians3": {
+                    "description": "Attaque des unités à poudre à canon +25 %"
+                },
+                "burgundians4": {
+                    "description": "Amélioration Cavalier disponible à l'âge des châteaux"
+                },
+                "burgundians5": {
+                    "description": "Les reliques génèrent de l'or et de la nourriture"
+                }
+            }
+        },
+        "burmese": {
+            "name": "Birmans",
+            "bonus": {
+                "burmese1": {
+                    "description": "Améliorations du camp de bûcheron gratuites"
+                },
+                "burmese2": {
+                    "description": "Attaque +1/+2/+3 à l'âge féodal/châteaux/impérial pour l'infanterie"
+                },
+                "burmese3": {
+                    "description": "Coût des technologies associées aux monastères -50 %"
+                },
+                "burmese4": {
+                    "description": "Reliques visibles sur la carte au début de la partie"
+                }
+            }
+        },
+        "byzantines": {
+            "name": "Byzantins",
+            "bonus": {
+                "byzantines1": {
+                    "description": "PV des bâtiments +10 % à l'âge sombre, +20 % à l'âge féodal, +30 % à l'âge des châteaux, +40 % à l'âge impérial"
+                },
+                "byzantines2": {
+                    "description": "Les chameaux, tirailleurs, piquiers, hallebardiers coûtent -25 %"
+                },
+                "byzantines3": {
+                    "description": "Attaque des navires d'incendie +25 %"
+                },
+                "byzantines4": {
+                    "description": "Coût de progression vers l'âge impérial -33 %"
+                },
+                "byzantines5": {
+                    "description": "Tour de guet gratuite"
+                },
+                "byzantines6": {
+                    "description": "Les moines soignent 50 % plus vite"
+                }
+            }
+        },
+        "celts": {
+            "name": "Celtes",
+            "bonus": {
+                "celts1": {
+                    "description": "Vitesse de déplacement de l'infanterie +15 % (à partir de l'âge féodal)"
+                },
+                "celts2": {
+                    "description": "Cadence de travail +15 % pour les bûcherons"
+                },
+                "celts3": {
+                    "description": "Les armes de siège tirent 25 % plus rapidement"
+                },
+                "celts4": {
+                    "description": "Possibilité de voler les moutons, et les moutons dans la LDM d'une unité celte ne peuvent pas être convertis"
+                },
+                "celts5": {
+                    "description": "Cadence de travail +20 % pour les ateliers de siège"
+                }
+            }
+        },
+        "chinese": {
+            "name": "Chinois",
+            "bonus": {
+                "chinese1": {
+                    "description": "Commence avec +3 villageois, mais -50 de bois, -200 de nourriture"
+                },
+                "chinese2": {
+                    "description": "Les forums acceptent 10 de population et gagnent +5 en ligne de mire"
+                },
+                "chinese3": {
+                    "description": "Les technologies coûtent -10 % à l'âge féodal, -15 % à l'âge des châteaux, -20 % à l'âge impérial"
+                },
+                "chinese4": {
+                    "description": "Navires de démolition +50 % de PV"
+                },
+                "chinese5": {
+                    "description": "Fermes +45 de nourriture"
+                }
+            }
+        },
+        "cumans": {
+            "name": "Coumans",
+            "bonus": {
+                "cumans1": {
+                    "description": "Peut construire un forum supplémentaire à l'âge féodal"
+                },
+                "cumans2": {
+                    "description": "Atelier de siège et bélier disponibles à l'âge féodal ; amélioration Bélier renforcé disponible à partir de l'âge des châteaux"
+                },
+                "cumans3": {
+                    "description": "Vitesse de déplacement de la cavalerie 5 %/10 %/15 % à l'âge féodal/châteaux/impérial"
+                },
+                "cumans4": {
+                    "description": "PV des palissades +33 %"
+                }
+            }
+        },
+        "ethiopians": {
+            "name": "Éthiopiens",
+            "bonus": {
+                "ethiopians1": {
+                    "description": "Les archers tirent 18 % plus rapidement"
+                },
+                "ethiopians2": {
+                    "description": "Reçoit 100 d'or et de nourriture en progressant vers l'âge suivant"
+                },
+                "ethiopians3": {
+                    "description": "Amélioration des piquiers gratuite"
+                },
+                "ethiopians4": {
+                    "description": "Ligne de mire des tours et des postes avancés +3"
+                }
+            }
+        },
+        "franks": {
+            "name": "Francs",
+            "bonus": {
+                "franks1": {
+                    "description": "Amélioration gratuite des fermes (nécessite un moulin)"
+                },
+                "franks2": {
+                    "description": "Les châteaux coûtent -25 %"
+                },
+                "franks3": {
+                    "description": "Cavalerie +20 % de PV à partir de l'âge féodal"
+                },
+                "franks4": {
+                    "description": "Les cueilleurs travaillent 15 % plus vite"
+                },
+                "franks5": {
+                    "description": "Les chevaliers gagnent 2 points de ligne de mire"
+                }
+            }
+        },
+        "goths": {
+            "name": "Goths",
+            "bonus": {
+                "goths1": {
+                    "description": "L'infanterie coûte -20 % à partir de l'âge sombre, -25 % à partir de l'âge féodal, -30 % à partir de l'âge des châteaux et -35 % à partir de l'âge impérial"
+                },
+                "goths2": {
+                    "description": "Infanterie +1/+2/+3 d'attaque contre les bâtiments à l'âge féodal/châteaux/impérial"
+                },
+                "goths3": {
+                    "description": "Villageois +5 d'attaque contre les sangliers ; les chasseurs portent +15 unités de viande"
+                },
+                "goths4": {
+                    "description": "+10 de population à l'âge impérial"
+                },
+                "goths5": {
+                    "description": "Développement de Métier à tisser instantané"
+                },
+                "goths6": {
+                    "description": "Les casernes fonctionnent 20 % plus rapidement"
+                }
+            }
+        },
+        "huns": {
+            "name": "Huns",
+            "bonus": {
+                "huns1": {
+                    "description": "Ne nécessite pas d'habitations, mais démarre avec -100 unités de bois"
+                },
+                "huns2": {
+                    "description": "Les archers de cavalerie coûtent -10 % à l'âge des châteaux, -20 % à l'âge impérial"
+                },
+                "huns3": {
+                    "description": "Les trébuchets ont +30 % de précision"
+                },
+                "huns4": {
+                    "description": "Les écuries travaillent 20 % plus vite"
+                }
+            }
+        },
+        "incas": {
+            "name": "Incas",
+            "bonus": {
+                "incas1": {
+                    "description": "Commence avec un lama gratuit"
+                },
+                "incas2": {
+                    "description": "Les améliorations de la forge s'appliquent aux villageois à l'âge des châteaux"
+                },
+                "incas3": {
+                    "description": "Chaque habitation augmente la population de 10"
+                },
+                "incas4": {
+                    "description": "Coût en pierre des bâtiments -15 %"
+                },
+                "incas5": {
+                    "description": "Vitesse de construction des fermes +100 %"
+                }
+            }
+        },
+        "indians": {
+            "name": "Indiens",
+            "bonus": {
+                "indians1": {
+                    "description": "Cadence de travail +10 % pour les pêcheurs"
+                },
+                "indians2": {
+                    "description": "Coût des villageois -10 % à l'âge sombre, -15 % à l'âge féodal, -20 % à l'âge des châteaux, -25 % à l'âge impérial"
+                },
+                "indians3": {
+                    "description": "+1 protection perçage pour les unités de l'écurie à l'âge des châteaux et l'âge impérial (+2 au total)"
+                },
+                "indians4": {
+                    "description": "Attaque des chameaux +4 contre les bâtiments"
+                }
+            }
+        },
+        "italians": {
+            "name": "Italiens",
+            "bonus": {
+                "italians1": {
+                    "description": "Coût des technologies associées aux ports et aux universités -33 %"
+                },
+                "italians2": {
+                    "description": "Coût des navires de pêche -15 %"
+                },
+                "italians3": {
+                    "description": "Coût des unités à poudre à canon -20 %"
+                },
+                "italians4": {
+                    "description": "Coût de progression vers l'âge suivant -15 %"
+                },
+                "italians5": {
+                    "description": "Condottières disponibles dans les casernes à l'âge impérial"
+                }
+            }
+        },
+        "japanese": {
+            "name": "Japonais",
+            "bonus": {
+                "japanese1": {
+                    "description": "Navires de pêche 2x plus de PV ; +2 pts d'armure perçante, Productivité +5 % âge sombre, +10 % âge féodal, +15 % âge des châteaux, +20 % âge impérial"
+                },
+                "japanese2": {
+                    "description": "Moulins, camps de bûcherons et de mineurs coûtent -50 %"
+                },
+                "japanese3": {
+                    "description": "Attaque de l'infanterie 33 % plus rapide à partir de l'âge féodal"
+                },
+                "japanese4": {
+                    "description": "Galères +50 % de ligne de mire"
+                }
+            }
+        },
+        "khmer": {
+            "name": "Khmers",
+            "bonus": {
+                "khmer1": {
+                    "description": "Aucun bâtiment n'est nécessaire pour progresser vers l'âge suivant ou pour déverrouiller d'autres bâtiments"
+                },
+                "khmer2": {
+                    "description": "Vitesse de déplacement des éléphants de combat +10 %"
+                },
+                "khmer3": {
+                    "description": "Les fermiers n'ont pas besoin de moulins/forums pour déposer de la nourriture mais travaillent 5 % moins vite"
+                },
+                "khmer4": {
+                    "description": "Les villageois peuvent être placés en garnison dans les habitations"
+                },
+                "khmer5": {
+                    "description": "Portée des scorpions +1"
+                }
+            }
+        },
+        "koreans": {
+            "name": "Coréens",
+            "bonus": {
+                "koreans1": {
+                    "description": "Ligne de mire des villageois +3"
+                },
+                "koreans2": {
+                    "description": "Cadence de travail +20 % pour les mineurs de pierre"
+                },
+                "koreans3": {
+                    "description": "Améliorations des tours gratuites (chimie nécessaire pour les tours de bombarde)"
+                },
+                "koreans4": {
+                    "description": "Améliorations d'armure des archers gratuites"
+                },
+                "koreans5": {
+                    "description": "Les unités militaires (sauf les armes de siège) coûtent 20 % de bois en moins"
+                },
+                "koreans6": {
+                    "description": "Portée minimum des mangonneaux réduite"
+                }
+            }
+        },
+        "lithuanians": {
+            "name": "Lithuaniens",
+            "bonus": {
+                "lithuanians1": {
+                    "description": "Commence avec +150 de nourriture"
+                },
+                "lithuanians2": {
+                    "description": "Déplacement des unités de type lancier et des tirailleurs +10 %"
+                },
+                "lithuanians3": {
+                    "description": "Attaque des chevaliers et leitis +1 pour chaque relique en garnison"
+                },
+                "lithuanians4": {
+                    "description": "Les monastères fonctionnent 20 % plus rapidement"
+                }
+            }
+        },
+        "magyars": {
+            "name": "Hongrois",
+            "bonus": {
+                "magyars1": {
+                    "description": "Forge, Fonderie, Haut fourneau gratuits"
+                },
+                "magyars2": {
+                    "description": "Cavalerie d'éclairage, Cavalerie légère, Hussard coûtent -15 %"
+                },
+                "magyars3": {
+                    "description": "Les villageois tuent les loups en un coup"
+                },
+                "magyars4": {
+                    "description": "Archers à pied +2 de ligne de mire"
+                }
+            }
+        },
+        "malay": {
+            "name": "Malais",
+            "bonus": {
+                "malay1": {
+                    "description": "Vitesse de progression vers l'âge suivant +66 %"
+                },
+                "malay2": {
+                    "description": "Coût des pièges à poissons -33 %"
+                },
+                "malay3": {
+                    "description": "Les pièges à poissons produisent trois fois plus de nourriture"
+                },
+                "malay4": {
+                    "description": "Coût des éléphants de combat -30 % à l'âge des châteaux, -40 % à l'âge impérial"
+                },
+                "malay5": {
+                    "description": "Ligne de mire des ports +100 %"
+                }
+            }
+        },
+        "malians": {
+            "name": "Maliens",
+            "bonus": {
+                "malians1": {
+                    "description": "Coût en bois des bâtiments -15 %"
+                },
+                "malians2": {
+                    "description": "Protection perçage +1/+2/+3 par âge pour les unités des casernes à l'âge féodal/châteaux/impérial"
+                },
+                "malians3": {
+                    "description": "Minage d'or gratuit"
+                },
+                "malians4": {
+                    "description": "Cadence de travail +80 % pour les universités"
+                }
+            }
+        },
+        "mayans": {
+            "name": "Mayas",
+            "bonus": {
+                "mayans1": {
+                    "description": "Commence avec +1 villageois, mais -50 de nourriture"
+                },
+                "mayans2": {
+                    "description": "Durée des ressources +15 %"
+                },
+                "mayans3": {
+                    "description": "Coût des archers -10 % à l'âge féodal, -20 % à l'âge des châteaux, -30 % à l'âge impérial"
+                },
+                "mayans4": {
+                    "description": "Coût des murs -50 %"
+                }
+            }
+        },
+        "mongols": {
+            "name": "Mongols",
+            "bonus": {
+                "mongols1": {
+                    "description": "Les archers de cavalerie tirent 25 % plus rapidement"
+                },
+                "mongols2": {
+                    "description": "PV de la cavalerie légère, des hussards et des lanciers des steppes +30 %"
+                },
+                "mongols3": {
+                    "description": "Cadence de travail +40 % pour les chasseurs"
+                },
+                "mongols4": {
+                    "description": "Ligne de mire des cavaliers d'éclairage, de la cavalerie légère et des hussards +2"
+                }
+            }
+        },
+        "persians": {
+            "name": "Perses",
+            "bonus": {
+                "persians1": {
+                    "description": "Commence avec +50 de nourriture et de bois"
+                },
+                "persians2": {
+                    "description": "PV du forum et du port x2, Productivité +10 % à l'âge féodal, +15 % à l'âge des châteaux, +20 % à l'âge impéria"
+                },
+                "persians3": {
+                    "description": "Attaque des chevaliers +2 contre les archers"
+                }
+            }
+        },
+        "portuguese": {
+            "name": "Portugais",
+            "bonus": {
+                "portuguese1": {
+                    "description": "Coût en or de toutes les unités -20 %"
+                },
+                "portuguese2": {
+                    "description": "PV des navires +10 %"
+                },
+                "portuguese3": {
+                    "description": "Construction des feitorias possible à l'âge impérial"
+                },
+                "portuguese4": {
+                    "description": "Technologies développées 30 % plus rapidement (excepté l'avancée d'âge)"
+                },
+                "portuguese5": {
+                    "description": "Ligne de mire partagée avec l'équipe dès l'âge sombre"
+                }
+            }
+        },
+        "saracens": {
+            "name": "Sarrasins",
+            "bonus": {
+                "saracens1": {
+                    "description": "Taxe commerciale plafonnée à 5 %"
+                },
+                "saracens2": {
+                    "description": "Coût en bois des marchés -100"
+                },
+                "saracens3": {
+                    "description": "PV des navires de transport x2 et capacité de transport x2"
+                },
+                "saracens4": {
+                    "description": "Vitesse d'attaque des galères +25 %"
+                },
+                "saracens5": {
+                    "description": "PV des chameaux +10"
+                },
+                "saracens6": {
+                    "description": "Attaque des archers à pied +2 contre les bâtiments"
+                }
+            }
+        },
+        "sicilians": {
+            "name": "Siciliens",
+            "bonus": {
+                "sicilians1": {
+                    "description": "La vitesse de construction des châteaux et des forums est augmentée de 100 %"
+                },
+                "sicilians2": {
+                    "description": "Les unités militaires terrestres (sauf unités de siège) subissent 50 % de bonus de dégâts en moins"
+                },
+                "sicilians3": {
+                    "description": "Les améliorations de ferme confèrent 100 % de nourriture supplémentaire"
+                },
+                "sicilians4": {
+                    "description": "La construction de donjons est possible"
+                },
+                "sicilians5": {
+                    "description": "+5 de capacité de transport et +10 d'armure contre les attaques antinavires pour les navires de transport"
+                }
+            }
+        },
+        "slavs": {
+            "name": "Slaves",
+            "bonus": {
+                "slavs1": {
+                    "description": "Cadence de travail +10 % pour les fermiers"
+                },
+                "slavs2": {
+                    "description": "Ravitaillement gratuit"
+                },
+                "slavs3": {
+                    "description": "Coût des unités de l'atelier de siège -15 %"
+                },
+                "slavs4": {
+                    "description": "Population +5 pour les bâtiments militaires (sauf châteaux et ports)"
+                }
+            }
+        },
+        "spanish": {
+            "name": "Espagnols",
+            "bonus": {
+                "spanish1": {
+                    "description": "Cadence de travail +30 % pour les constructeurs"
+                },
+                "spanish2": {
+                    "description": "Améliorations de la forge ne coûtent pas d'or"
+                },
+                "spanish3": {
+                    "description": "Les galions à canons bénéficient de la balistique (tir plus rapide et précis)"
+                },
+                "spanish4": {
+                    "description": "Les unités à poudre à canon tirent 18 % plus rapidement"
+                },
+                "spanish5": {
+                    "description": "Or généré par les unités de commerce +25 %"
+                }
+            }
+        },
+        "tatars": {
+            "name": "Tatars",
+            "bonus": {
+                "tatars1": {
+                    "description": "Nourriture offerte par les troupeaux +50 %"
+                },
+                "tatars2": {
+                    "description": "Dégâts infligés par les unités +25 % quand elles se battent d'une hauteur supérieure"
+                },
+                "tatars3": {
+                    "description": "Bague de pouce, Tactiques parthes gratuites"
+                },
+                "tatars4": {
+                    "description": "2 moutons apparaissent près des nouveaux forums à partir de l'âge des châteaux"
+                },
+                "tatars5": {
+                    "description": "Ligne de mire des archers de cavalerie +2"
+                }
+            }
+        },
+        "teutons": {
+            "name": "Teutons",
+            "bonus": {
+                "teutons1": {
+                    "description": "Portée de guérison des moines x2"
+                },
+                "teutons2": {
+                    "description": "Les tours abritent deux fois plus d'unités"
+                },
+                "teutons3": {
+                    "description": "Meurtrières et plantes médicinales gratuites"
+                },
+                "teutons4": {
+                    "description": "Les fermes coûtent -40 %"
+                },
+                "teutons5": {
+                    "description": "Les unités des casernes et des écuries ont +1 d'armure à l'âge des châteaux et à l'âge impérial (+2 au total)"
+                },
+                "teutons6": {
+                    "description": "Garnison du forum +10"
+                },
+                "teutons7": {
+                    "description": "Unités résistantes aux conversions (+2)"
+                }
+            }
+        },
+        "turks": {
+            "name": "Turcs",
+            "bonus": {
+                "turks1": {
+                    "description": "Unités de poudre à canon +25 % de PV"
+                },
+                "turks2": {
+                    "description": "développement des technologies de poudre à canon coûte -50 %"
+                },
+                "turks3": {
+                    "description": "Chimie gratuite"
+                },
+                "turks4": {
+                    "description": "Les mineurs d'or travaillent 20 % plus vite"
+                },
+                "turks5": {
+                    "description": "Améliorations de Cavalerie légère et Hussard gratuites"
+                },
+                "turks6": {
+                    "description": "Les cavaliers d'éclairage, cavalerie légère et hussard ont +1 protection perçage"
+                },
+                "turks7": {
+                    "description": "Unités de poudre à canon créées 25 % plus rapidement"
+                }
+            }
+        },
+        "vietnamese": {
+            "name": "Vietnamiens",
+            "bonus": {
+                "vietnamese1": {
+                    "description": "Révèle les positions ennemies au début de la partie"
+                },
+                "vietnamese2": {
+                    "description": "PV des unités du camp de tir à l'arc +20 %"
+                },
+                "vietnamese3": {
+                    "description": "Conscription gratuite"
+                },
+                "vietnamese4": {
+                    "description": "Les améliorations économiques ne consomment pas de bois"
+                },
+                "vietnamese5": {
+                    "description": "Amélioration Tirailleur impérial disponible à l'âge impérial"
+                }
+            }
+        },
+        "vikings": {
+            "name": "Vikings",
+            "bonus": {
+                "vikings1": {
+                    "description": "Coût des navires de guerre -15 % à l'âge féodal, -15 % à l'âge des châteaux, -20 % à l'âge impérial"
+                },
+                "vikings2": {
+                    "description": "PV de l'infanterie +10 % à l'âge féodal, +15 % à l'âge des châteaux, +20 % à l'âge impérial"
+                },
+                "vikings3": {
+                    "description": "Brouette, charrette à bras gratuites"
+                },
+                "vikings4": {
+                    "description": "Coût des ports -15 %"
+                }
+            }
+        }
+    },
+    "unit": {
+        "militia": {
+            "name": "Militien"
+        },
+        "manAtArms": {
+            "name": "Homme d'armes"
+        },
+        "longSwordsman": {
+            "name": "Fantassin à épée longue"
+        },
+        "twoHandedSwordsman": {
+            "name": "Fant. à épée à deux mains"
+        },
+        "champion": {
+            "name": "Champion"
+        },
+        "spearman": {
+            "name": "Lancier"
+        },
+        "pikeman": {
+            "name": "Piquier"
+        },
+        "halberdier": {
+            "name": "Hallebardier"
+        },
+        "eagleScout": {
+            "name": "Eclaireur aigle"
+        },
+        "eagleWarrior": {
+            "name": "Guerrier aigle"
+        },
+        "eliteEagleWarrior": {
+            "name": "Guerrier aigle d'élite"
+        },
+        "archer": {
+            "name": "Archer"
+        },
+        "crossbowman": {
+            "name": "Fantassin à arc"
+        },
+        "arbalester": {
+            "name": "Fantassin à arc lourd"
+        },
+        "skirmisher": {
+            "name": "Tirailleur"
+        },
+        "eliteSkirmisher": {
+            "name": "Tirailleur d'élite"
+        },
+        "handCannoneer": {
+            "name": "Canonier à main"
+        },
+        "cavalryArcher": {
+            "name": "Archer de cavalerie"
+        },
+        "heavyCavalryArcher": {
+            "name": "Archer de cavalerie lourd"
+        },
+        "scoutCavalry": {
+            "name": "Cavalerie d'éclairage"
+        },
+        "lightCavalry": {
+            "name": "Cavalerie légère"
+        },
+        "hussar": {
+            "name": "Hussard"
+        },
+        "knight": {
+            "name": "Chevalier"
+        },
+        "cavalier": {
+            "name": "Cavalier"
+        },
+        "paladin": {
+            "name": "Paladin"
+        },
+        "camelRider": {
+            "name": "Chameau"
+        },
+        "heavyCamelRider": {
+            "name": "Chameau lourd"
+        },
+        "battleElephant": {
+            "name": "Elephant de combat"
+        },
+        "eliteBattleElephant": {
+            "name": "Elephant de combat d'élite"
+        },
+        "steppeLancer": {
+            "name": "Lancier des steppes"
+        },
+        "eliteSteppeLancer": {
+            "name": "Lancier des steppes d'élite"
+        },
+        "batteringRam": {
+            "name": "Bélier"
+        },
+        "cappedRam": {
+            "name": "Bélier renforcé"
+        },
+        "siegeRam": {
+            "name": "Bélier de siège"
+        },
+        "mangonel": {
+            "name": "Mangonneau"
+        },
+        "onager": {
+            "name": "Onagre"
+        },
+        "siegeOnager": {
+            "name": "Onagre de siège"
+        },
+        "scorpion": {
+            "name": "Scorpion"
+        },
+        "heavyScorpion": {
+            "name": "Scorpion lourd"
+        },
+        "siegeTower": {
+            "name": "Tour de siège"
+        },
+        "bombardCannon": {
+            "name": "Canon à bombarde"
+        },
+        "uniqueUnit": {
+            "name": "Unité unique"
+        },
+        "eliteUniqueUnit": {
+            "name": "Unité unique d'élite"
+        },
+        "petard": {
+            "name": "Bombardier"
+        },
+        "trebuchet": {
+            "name": "Trébuchet"
+        },
+        "monk": {
+            "name": "Moine"
+        },
+        "villager": {
+            "name": "Villageois"
+        },
+        "tradeCart": {
+            "name": "Charrette de commerce"
+        },
+        "fishingShip": {
+            "name": "Navire de pêche"
+        },
+        "transportShip": {
+            "name": "Navire de transport"
+        },
+        "tradeCog": {
+            "name": "Navire marchand"
+        },
+        "galley": {
+            "name": "Galère"
+        },
+        "fireGalley": {
+            "name": "Galère d'incendie"
+        },
+        "demolitionRaft": {
+            "name": "Radeau de démolition"
+        },
+        "warGalley": {
+            "name": "Galère de guerre"
+        },
+        "fireShip": {
+            "name": "Navire d'incendie"
+        },
+        "demolitionShip": {
+            "name": "Navire de démolition"
+        },
+        "galleon": {
+            "name": "Galion"
+        },
+        "fastFireShip": {
+            "name": "Nav. incendie rapide"
+        },
+        "heavyDemolitionShip": {
+            "name": "Navire de démolition lourd"
+        },
+        "cannonGalleon": {
+            "name": "Galion à canon"
+        },
+        "eliteCannonGalleon": {
+            "name": "Galion à canon d'élite"
+        },
+        "jaguarWarrior": {
+            "name": "Guerrier jaguar"
+        },
+        "eliteJaguarWarrior": {
+            "name": "Guerrier jaguar d'élite"
+        },
+        "camelArcher": {
+            "name": "Archer de chamellerie d'élite"
+        },
+        "eliteCamelArcher": {
+            "name": "Archer de chamellerie d'élite"
+        },
+        "genitour": {
+            "name": "Jinete"
+        },
+        "eliteGenitour": {
+            "name": "Jinete d'élite"
+        },
+        "longbowman": {
+            "name": "Fantassin à arc long"
+        },
+        "eliteLongbowman": {
+            "name": "Fantassin à arc long d'élite"
+        },
+        "konnik": {
+            "name": "Cavalier bulgar"
+        },
+        "eliteKonnik": {
+            "name": "Cavalier bulgar d'élite"
+        },
+        "coustillier": {
+            "name": "Coutillier"
+        },
+        "eliteCoustillier": {
+            "name": "Coutillier d'élite"
+        },
+        "flemishMilitia": {
+            "name": "Milice flamande"
+        },
+        "arambai": {
+            "name": "Arambai"
+        },
+        "eliteArambai": {
+            "name": "Arambai d'élite"
+        },
+        "cataphract": {
+            "name": "Cataphracte"
+        },
+        "eliteCataphract": {
+            "name": "Cataphracte d'élite"
+        },
+        "woadRaider": {
+            "name": "Guerrier de guède"
+        },
+        "eliteWoadRaider": {
+            "name": "Guerrier de guède d'élite"
+        },
+        "chukonu": {
+            "name": "Chu Ko Nu"
+        },
+        "eliteChukonu": {
+            "name": "Chu Ko Nu d'élite"
+        },
+        "kipchak": {
+            "name": "Kipchak"
+        },
+        "eliteKipchak": {
+            "name": "Kipchak d'élite"
+        },
+        "shotelWarrior": {
+            "name": "Guerrier à shotel"
+        },
+        "eliteShotelWarrior": {
+            "name": "Guerrier à shotel d'élite"
+        },
+        "throwingAxeman": {
+            "name": "Lanceur de hache"
+        },
+        "eliteThrowingAxeman": {
+            "name": "Lanceur de hache d'élite"
+        },
+        "huskarl": {
+            "name": "Huskarl"
+        },
+        "eliteHuskarl": {
+            "name": "Huskarl d'élite"
+        },
+        "tarkan": {
+            "name": "Tarkan"
+        },
+        "eliteTarkan": {
+            "name": "Tarkan d'élite"
+        },
+        "kamayuk": {
+            "name": "Kamayuk"
+        },
+        "eliteKamayuk": {
+            "name": "Kamayuk d'élite"
+        },
+        "slinger": {
+            "name": "Frondeur"
+        },
+        "elephantArcher": {
+            "name": "Éléphant archer"
+        },
+        "eliteElephantArcher": {
+            "name": "Éléphant archer d'élite"
+        },
+        "imperialCamelRider": {
+            "name": "Chameau impérial"
+        },
+        "genoeseCrossbowman": {
+            "name": "Arbalétrier génois"
+        },
+        "eliteGenoeseCrossbowman": {
+            "name": "Arbalétrier génois d'élite"
+        },
+        "condottiero": {
+            "name": "Condottière"
+        },
+        "samurai": {
+            "name": "Samuraï"
+        },
+        "eliteSamurai": {
+            "name": "Samuraï d'élite"
+        },
+        "ballistaElephant": {
+            "name": "Éléphant à baliste"
+        },
+        "eliteBallistaElephant": {
+            "name": "Éléphant à baliste d'élite"
+        },
+        "warWagon": {
+            "name": "Chariot de guerre"
+        },
+        "eliteWarWagon": {
+            "name": "Chariot de guerre d'élite"
+        },
+        "turtleShip": {
+            "name": "Navire tortue"
+        },
+        "eliteTurtleShip": {
+            "name": "Navire tortue d'élite"
+        },
+        "leitis": {
+            "name": "Leitis"
+        },
+        "eliteLeitis": {
+            "name": "Leitis d'élite"
+        },
+        "magyarHuszar": {
+            "name": "Hussard hongrois"
+        },
+        "eliteMagyarHuszar": {
+            "name": "Hussard hongrois d'élite"
+        },
+        "karambitWarrior": {
+            "name": "Guerrier à karambit"
+        },
+        "eliteKarambitWarrior": {
+            "name": "Guerrier à karambit d'élite"
+        },
+        "gbeto": {
+            "name": "Gbeto"
+        },
+        "eliteGbeto": {
+            "name": "Gbeto d'élite"
+        },
+        "plumedArcher": {
+            "name": "Archer à plumes"
+        },
+        "elitePlumedArcher": {
+            "name": "Archer à plumes d'élite"
+        },
+        "mangudai": {
+            "name": "Mangudaï"
+        },
+        "eliteMangudai": {
+            "name": "Mangudaï d'élite"
+        },
+        "warElephant": {
+            "name": "Éléphant de guerre"
+        },
+        "eliteWarElephant": {
+            "name": "Éléphant de guerre d'élite"
+        },
+        "organGun": {
+            "name": "Ribaudequin"
+        },
+        "eliteOrganGun": {
+            "name": "Ribaudequin d'élite"
+        },
+        "caravel": {
+            "name": "Caravelle"
+        },
+        "eliteCaravel": {
+            "name": "Caravelle d'élite"
+        },
+        "mameluke": {
+            "name": "Mamelouke"
+        },
+        "eliteMameluke": {
+            "name": "Mamelouke d'élite"
+        },
+        "serjeant": {
+            "name": "Sergent"
+        },
+        "eliteSerjeant": {
+            "name": "Sergent d'élite"
+        },
+        "boyar": {
+            "name": "Boyard"
+        },
+        "eliteBoyar": {
+            "name": "Boyard d'élite"
+        },
+        "conquistador": {
+            "name": "Conquistador"
+        },
+        "eliteConquistador": {
+            "name": "Conquistador d'élite"
+        },
+        "missionary": {
+            "name": "Missionnaire"
+        },
+        "keshik": {
+            "name": "Keshik"
+        },
+        "eliteKeshik": {
+            "name": "Keshik d'élite"
+        },
+        "flamingCamel": {
+            "name": "Chamelier incendiaire"
+        },
+        "teutonicKnight": {
+            "name": "Chevalier teutonique"
+        },
+        "eliteTeutonicKnight": {
+            "name": "Chevalier teutonique d'élite"
+        },
+        "janissary": {
+            "name": "Janissaire"
+        },
+        "eliteJanissary": {
+            "name": "Janissaire d'élite"
+        },
+        "rattanArcher": {
+            "name": "Fantassin à arc en rottin"
+        },
+        "eliteRattanArcher": {
+            "name": "Fantassin à arc en rottin d'élite"
+        },
+        "imperialSkirmisher": {
+            "name": "Tirailleur impérial"
+        },
+        "berserk": {
+            "name": "Fou de guerre"
+        },
+        "eliteBerserk": {
+            "name": "Fou de guerre d'élite"
+        },
+        "longboat": {
+            "name": "Drakkar"
+        },
+        "eliteLongboat": {
+            "name": "Drakkar d'élite"
+        }
+    },
+    "upgrade": {
+        "forging": {
+            "name": "Forge"
+        },
+        "ironCasting": {
+            "name": "Fonderie"
+        },
+        "blastFurnace": {
+            "name": "Haut fourneau"
+        },
+        "scaleMailArmor": {
+            "name": "Cotte mailles écaillée"
+        },
+        "chainMailArmor": {
+            "name": "Cotte mailles chaînée"
+        },
+        "plateMailArmor": {
+            "name": "Cotte mailles plaquée"
+        },
+        "scaleBardingArmor": {
+            "name": "Barde écaillée"
+        },
+        "chainBardingArmor": {
+            "name": "Barde chaînée"
+        },
+        "plateBardingArmor": {
+            "name": "Barde plaquée"
+        },
+        "fletching": {
+            "name": "Empennage"
+        },
+        "bodkinArrow": {
+            "name": "Flèche à poinçon"
+        },
+        "bracer": {
+            "name": "Brassard"
+        },
+        "paddedArcherArmor": {
+            "name": "Arm. d'armure matelassée"
+        },
+        "leatherArcherArmor": {
+            "name": "Arm. d'archer en cuir"
+        },
+        "ringArcherArmor": {
+            "name": "Arm. d'archer chaînée"
+        },
+        "supplies": {
+            "name": "Ravitaillement"
+        },
+        "squires": {
+            "name": "Écuyers"
+        },
+        "arson": {
+            "name": "Brasier"
+        },
+        "thumbRing": {
+            "name": "Bague de pouce"
+        },
+        "parthianTactics": {
+            "name": "Tactiques parthes"
+        },
+        "bloodlines": {
+            "name": "Lignes de sang"
+        },
+        "husbandry": {
+            "name": "Élevage"
+        },
+        "castleUniqueTech": {
+            "name": "Tech unique château"
+        },
+        "imperialUniqueTech": {
+            "name": "Tech unique impérial"
+        },
+        "hoardings": {
+            "name": "Palissades"
+        },
+        "sappers": {
+            "name": "Artificiers"
+        },
+        "conscription": {
+            "name": "Conscription"
+        },
+        "spies": {
+            "name": "Espion"
+        },
+        "redemption": {
+            "name": "Rédemption"
+        },
+        "atonement": {
+            "name": "Expiation"
+        },
+        "herbalMedicine": {
+            "name": "Médicine aux plantes"
+        },
+        "heresy": {
+            "name": "Hérésie"
+        },
+        "sanctity": {
+            "name": "Sainteté"
+        },
+        "fervor": {
+            "name": "Ferveur"
+        },
+        "faith": {
+            "name": "Foi"
+        },
+        "illumination": {
+            "name": "Illumination"
+        },
+        "blockPrinting": {
+            "name": "Imprimerie"
+        },
+        "theocracy": {
+            "name": "Théocratie"
+        },
+        "masonry": {
+            "name": "Maçonnerie"
+        },
+        "fortifiedWall": {
+            "name": "Mur fortifié"
+        },
+        "ballistics": {
+            "name": "Ballistique"
+        },
+        "guardTower": {
+            "name": "Tour de garde"
+        },
+        "heatedShot": {
+            "name": "Projectile en feu"
+        },
+        "murderHoles": {
+            "name": "Meurtrières"
+        },
+        "treadmillCrane": {
+            "name": "Grue à poulie"
+        },
+        "architecture": {
+            "name": "Architecture"
+        },
+        "chemistry": {
+            "name": "Chimie"
+        },
+        "bombardTower": {
+            "name": "Tour à bombarde"
+        },
+        "siegeEngineers": {
+            "name": "Expert de siège"
+        },
+        "keep": {
+            "name": "Donjon"
+        },
+        "arrowslits": {
+            "name": "Archière"
+        },
+        "feudalAge": {
+            "name": "Age féodal"
+        },
+        "loom": {
+            "name": "Métier à tisser"
+        },
+        "castleAge": {
+            "name": "Age des chateaux"
+        },
+        "wheelbarrow": {
+            "name": "Brouette"
+        },
+        "townWatch": {
+            "name": "Tour de guet"
+        },
+        "imperialAge": {
+            "name": "Age impérial"
+        },
+        "handCart": {
+            "name": "Charrette à bras"
+        },
+        "townPatrol": {
+            "name": "Patrouille de ville"
+        },
+        "doubleBitAxe": {
+            "name": "Hache double tranchant"
+        },
+        "bowSaw": {
+            "name": "Scie à archer"
+        },
+        "twoManSaw": {
+            "name": "Scie à deux bras"
+        },
+        "horseCollar": {
+            "name": "Harnais de cheval"
+        },
+        "heavyPlow": {
+            "name": "Labourage lourd"
+        },
+        "cropRotation": {
+            "name": "Alternance des cultures"
+        },
+        "goldMining": {
+            "name": "Mine d'or"
+        },
+        "stoneMining": {
+            "name": "Carrière"
+        },
+        "goldShaftMining": {
+            "name": "Puits de forage d'or"
+        },
+        "stoneShaftMining": {
+            "name": "Puits de forage de pierre"
+        },
+        "coinage": {
+            "name": "Moinnaie"
+        },
+        "caravan": {
+            "name": "Caravane"
+        },
+        "banking": {
+            "name": "Banques"
+        },
+        "guilds": {
+            "name": "Guildes"
+        },
+        "gillnets": {
+            "name": "Filets"
+        },
+        "careening": {
+            "name": "Carénage"
+        },
+        "shipwright": {
+            "name": "Constructeur de navire"
+        },
+        "dryDock": {
+            "name": "Cale sèche"
+        },
+        "atlatl": {
+            "name": "Atlatl",
+            "description": "Les tirailleurs ont +1 d'attaque et de portée"
+        },
+        "garlandWars": {
+            "name": "Guerres glorieuses ",
+            "description": "+4 d'attaque d'infanterie"
+        },
+        "kasbah": {
+            "name": "Kasbah",
+            "description": "Les châteaux travaillent +25 % plus vite pour votre équipe"
+        },
+        "maghrebiCamels": {
+            "name": "Chameaux du Maghreb",
+            "description": "Les chameaux se regénèrent (15PV/min)"
+        },
+        "yeomen": {
+            "name": "Yeomen",
+            "description": "+1 de portée pour les archers à pied and +2 d'attaque pour les tours"
+        },
+        "warwolf": {
+            "name": "Warwolf",
+            "description": "Les trébuchets font des dégâts de zone et ont 100 % de précision"
+        },
+        "stirrups": {
+            "name": "Étriers",
+            "description": "La cavalerie attaque 33 % plus vite"
+        },
+        "bagains": {
+            "name": "Bagains",
+            "description": "+5 d'amure de mêlée pour les unités de type milicien"
+        },
+        "burgundianVineyards": {
+            "name": "Vignobles bourguignons",
+            "description": "Convertit la moitié de la nourriture en or à un ratio de 2:1. Les fermiers produit lentement de l'or (environ 0.012 or/s)"
+        },
+        "flemishRevolution": {
+            "name": "Révolution flamande",
+            "description": "Transforme les villageois en milice flamande. La milite flamande est disponible dans les forums"
+        },
+        "howdah": {
+            "name": "Howdah",
+            "description": "Les éléphants de combat gagnent +1/+1 d'armure"
+        },
+        "manipurCavalry": {
+            "name": "cavalerie du Manipur",
+            "description": "La cavalerie et les arambais gagnent +6 d'attaque contre les bâtiments"
+        },
+        "greekFire": {
+            "name": "Feu grégeois",
+            "description": "Les navirent d'incendie gagnent +1 de portée"
+        },
+        "logistica": {
+            "name": "Logistique",
+            "description": "Les cataphractes infligent des dégats de piétinement et gagnent +6 d'attaque contre l'infantrie"
+        },
+        "stronghold": {
+            "name": "Citadelle",
+            "description": "Les châteaux et les tours tirent 25 % plus vite"
+        },
+        "furorCeltica": {
+            "name": "Fureur celte",
+            "description": "Les unités des ateliers de siège gagnent +40 % PV"
+        },
+        "greatWall": {
+            "name": "Grande muraille",
+            "description": "Les murs et les tours gagnent +30 % PV"
+        },
+        "rocketry": {
+            "name": "Propulsion",
+            "description": "Les Chu Ko Nu gagnent +2 d'attaque, les scorpions gagnent +4 d'attaque"
+        },
+        "steppeHusbandry": {
+            "name": "Élevage des steppes",
+            "description": "Vitesse de formation de la cavalerie légère, des lanciers des steppes et des archers de cavalerie +100 %"
+        },
+        "cumanMercenaries": {
+            "name": "Mercenaires coumans",
+            "description": "Les membres de l'équipe peuvent créer 10 Kipchaks d'élite gratuits au château"
+        },
+        "royalHeirs": {
+            "name": "Héritiers royaux",
+            "description": "Vitesse de formation des guerriers à shotel divisée par deux"
+        },
+        "torsionEngines": {
+            "name": "Mécanismes à torsion",
+            "description": "Le rayon d'impacte des unités de siège est augmenté"
+        },
+        "beardedAxe": {
+            "name": "Hache francisque",
+            "description": "Les lanceurs de haches gagnent +1 de portée"
+        },
+        "chivalry": {
+            "name": "Chevalerie",
+            "description": "Les écuries produisent 40 % plus vite"
+        },
+        "anarchy": {
+            "name": "Anarchie",
+            "description": "Les huskarls sont disponibles dans les casernes"
+        },
+        "perfusion": {
+            "name": "Perfusion",
+            "description": "Les casernes fonctionnent 100 % plus rapidement"
+        },
+        "marauders": {
+            "name": "Maraudeurs",
+            "description": "Les Tarkans sont disponibles dans les écuries"
+        },
+        "atheism": {
+            "name": "Athéisme",
+            "description": "+100 ans pour les victoires de reliques, merveilles, les reliques ennemies génèrent -50 % de ressources"
+        },
+        "andeanSling": {
+            "name": "Fronde des Andes",
+            "description": "Les frondeurs et les tirailleurs n'ont plus de portée minimale"
+        },
+        "fabricShields": {
+            "name": "Boucliers en tissu",
+            "description": "Les kamayuks, frondeurs, et aigles gagnent +1/+2 d'armure"
+        },
+        "sultans": {
+            "name": "Sultans",
+            "description": "Production d'or accéléré de 10 %"
+        },
+        "shatagni": {
+            "name": "Shatagni",
+            "description": "Les cannoniers à main gagnent +1 de portée"
+        },
+        "pavise": {
+            "name": "Pavois",
+            "description": "Les archers et les condottières gagnent +1/+1 d'armure"
+        },
+        "silkRoad": {
+            "name": "Route de la soie",
+            "description": "Les unités de commerce coûtent -50 %"
+        },
+        "yasama": {
+            "name": "Yasama",
+            "description": "Les tours tirent 2 flèches supplémentaires"
+        },
+        "kataparuto": {
+            "name": "Kataparuto",
+            "description": "Les trébuchets tirent 33 % et se démontent 4x plus vite"
+        },
+        "tuskSwords": {
+            "name": "Épées de défenses",
+            "description": "Les éléphants de combat gagnent +3 d'attaque"
+        },
+        "doubleCrossbow": {
+            "name": "Double arbalète",
+            "description": "Les éléphants à baliste et les scorpions tirent deux projectiles"
+        },
+        "eupseong": {
+            "name": "Eupseong",
+            "description": "Les tours (sauf les tours de bombarde) gagnent +2 de portée"
+        },
+        "shinkichon": {
+            "name": "Shinkichon",
+            "description": "Les mangonneaux gagnent +1 de portée"
+        },
+        "hillForts": {
+            "name": "Collines fortifiées",
+            "description": "Les forums gagnent +3 de portée"
+        },
+        "towerShields": {
+            "name": "Boucliers rectangulaires",
+            "description": "Les lanciers et les tirailleurs gagnent +2 d'amure perçante"
+        },
+        "corvinianArmy": {
+            "name": "Armée corvinienne",
+            "description": "Les hussards hongrois ne coûtent pas d'or"
+        },
+        "recurveBow": {
+            "name": "Arc recourbé",
+            "description": "Les archers de cavalerie gagnent +1  de portée et d'attaque"
+        },
+        "thalassocracy": {
+            "name": "Thalassocratie",
+            "description": "Transforme les ports en capitaineries, qui tirent des flèches"
+        },
+        "forcedLevy": {
+            "name": "Enrôlement de force",
+            "description": "Transforme le coût en or des miliciens en coût en nourriture"
+        },
+        "tigui": {
+            "name": "Tigui",
+            "description": "Les forums tirent des flèches sans être en garnison"
+        },
+        "farimba": {
+            "name": "Farimba",
+            "description": "La cavalerie gagne +5 d'attaque"
+        },
+        "hulcheJavelineers": {
+            "name": "Javeliniers à hul'che",
+            "description": "Les tirailleurs lacent un second projectile"
+        },
+        "elDorado": {
+            "name": "El Dorado",
+            "description": "+40 PV pour les aigles"
+        },
+        "nomads": {
+            "name": "Nomades",
+            "description": "Les habitations perdues n'influent pas sur la limite de population"
+        },
+        "drill": {
+            "name": "Manœuvres",
+            "description": "Les unités de siège se déplacent +50 % plus vite"
+        },
+        "kamandaran": {
+            "name": "Kamandaran",
+            "description": "Transforme le coût en or des archers en coût en bois"
+        },
+        "mahouts": {
+            "name": "Cornacs",
+            "description": "Les éléphants de guerre se déplacent +30 % plus vite"
+        },
+        "carrack": {
+            "name": "Caraque",
+            "description": "Les navires gagnent +1/+1 d'armure"
+        },
+        "arquebus": {
+            "name": "Arquebuse",
+            "description": "Les unités à pourdre à canon sont plus précisent contre les cibles mouvantes"
+        },
+        "madrasah": {
+            "name": "Madrasa",
+            "description": "Les moines rapportent 33 % de leur coût une fois tués"
+        },
+        "zealotry": {
+            "name": "Fanatisme",
+            "description": "Les chameaux gagnent +20 PV"
+        },
+        "firstCrusade": {
+            "name": "Première croisade",
+            "description": "Chaque forum (max 5) produit un groupe de 7 sergents à la fin de la recherche. Les unités sont plus résistantes à la conversion (+3)"
+        },
+        "scutage": {
+            "name": "Écuage",
+            "description": "Chaque membre de l'équipe reçoit un paiement unique de 15 pièces d'or pour chaque unité militaire qu'il possède"
+        },
+        "orthodoxy": {
+            "name": "Orthodoxie",
+            "description": "Les moines gagnent +3/+3 d'armure"
+        },
+        "druzhina": {
+            "name": "Druzhina",
+            "description": "L'infanterie inflige des dégâts aux unités adjacentes"
+        },
+        "inquisition": {
+            "name": "Inquisition",
+            "description": "Les moines convertissent plus rapidement"
+        },
+        "supremacy": {
+            "name": "Suprématie",
+            "description": "Les villageois gagnent +6 d'attaque, +2/+2 d'armure et +40 PV"
+        },
+        "silkArmor": {
+            "name": "Armure de soie",
+            "description": "La cavalerie d'éclairage, les lanciers des steppes et les archers de cavalerie gagnent +1/+1 d'armure"
+        },
+        "timuridSiegecraft": {
+            "name": "Armes de siège timuride",
+            "description": "Les trébuchets gagnent +2 de portée, permet de créer les chameliers incendiaires au château"
+        },
+        "ironclad": {
+            "name": "Cuirasses",
+            "description": "Les unités de siège gagnent +4 d'armure de mêlée"
+        },
+        "crenellations": {
+            "name": "Crénelures",
+            "description": "Les châteaux gagnent +3 de portée. L'infaterie en garrison tire des flèches"
+        },
+        "sipahi": {
+            "name": "Sipahi",
+            "description": "Les archers de cavalerie ont +20 PV"
+        },
+        "artillery": {
+            "name": "Artillerie",
+            "description": "Les tours à bombarde, les canons à bombarde et les galion à canon gagnent +2 de portée"
+        },
+        "chatras": {
+            "name": "Chatras",
+            "description": "Les éléphants de combat gagnent +50 PV"
+        },
+        "paperMoney": {
+            "name": "Monnaie de papier",
+            "description": "Chaque allié reçoit 500 d'or"
+        },
+        "chieftains": {
+            "name": "Chefs de tribu",
+            "description": "L'infanterie gagnent +5 d'attaque contre la cavalerie et +4 d'attaque contre les chameaux"
+        },
+        "berserkergang": {
+            "name": "Gang de fous",
+            "description": "Les fous de guerre se régénèrent plus vite (40 PV/min)"
+        }
+    }
+}

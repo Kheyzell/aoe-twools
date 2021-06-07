@@ -24,7 +24,6 @@ interface StableUpgrades {
 export const stableUnits: StableUnits = {
     scoutCavalry: new Unit({
         id: 'scoutCavalry',
-        name: 'Scout Cavalry',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -37,7 +36,6 @@ export const stableUnits: StableUnits = {
     }),
     lightCavalry: new Unit({
         id: 'lightCavalry',
-        name: 'Light Cavalry',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -50,7 +48,6 @@ export const stableUnits: StableUnits = {
     }),
     hussar: new Unit({
         id: 'hussar',
-        name: 'Hussar',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -63,7 +60,6 @@ export const stableUnits: StableUnits = {
     }),
     knight: new Unit({
         id: 'knight',
-        name: 'Knight',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -76,7 +72,6 @@ export const stableUnits: StableUnits = {
     }),
     cavalier: new Unit({
         id: 'cavalier',
-        name: 'Cavalier',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -89,7 +84,6 @@ export const stableUnits: StableUnits = {
     }),
     paladin: new Unit({
         id: 'paladin',
-        name: 'Paladin',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -102,7 +96,6 @@ export const stableUnits: StableUnits = {
     }),
     camelRider: new Unit({
         id: 'camelRider',
-        name: 'Camel Rider',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -115,7 +108,6 @@ export const stableUnits: StableUnits = {
     }),
     heavyCamelRider: new Unit({
         id: 'heavyCamelRider',
-        name: 'Heavy Camel Rider',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -128,7 +120,6 @@ export const stableUnits: StableUnits = {
     }),
     battleElephant: new Unit({
         id: 'battleElephant',
-        name: 'Battle Elephant',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -141,7 +132,6 @@ export const stableUnits: StableUnits = {
     }),
     eliteBattleElephant: new Unit({
         id: 'eliteBattleElephant',
-        name: 'Elite Battle Elephant',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -154,7 +144,6 @@ export const stableUnits: StableUnits = {
     }),
     steppeLancer: new Unit({
         id: 'steppeLancer',
-        name: 'Steppe Lancer',
         age: 3,
         unitType: UnitType.military,
         cost: {
@@ -167,7 +156,6 @@ export const stableUnits: StableUnits = {
     }),
     eliteSteppeLancer: new Unit({
         id: 'eliteSteppeLancer',
-        name: 'Elite Steppe Lancer',
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -189,7 +177,6 @@ chainTechs([stableUnits.steppeLancer, stableUnits.eliteSteppeLancer])
 export const stableUpgrades: StableUpgrades = {
     bloodlines: new Upgrade({
         id: 'bloodlines',
-        name: 'Bloodlines',
         age: 2,
         unitType: UnitType.military,
         cost: {
@@ -202,7 +189,6 @@ export const stableUpgrades: StableUpgrades = {
     }),
     husbandry: new Upgrade({
         id: 'husbandry',
-        name: 'Husbandry',
         age: 3,
         unitType: UnitType.military,
         cost: {

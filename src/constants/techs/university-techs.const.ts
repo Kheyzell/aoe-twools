@@ -20,7 +20,6 @@ interface UniversityUpgrades {
 export const universityUpgrades: UniversityUpgrades = {
     masonry: new Upgrade({
         id: 'masonry',
-        name: 'Masonry',
         age: 3,
         cost: {
             wood: 175,
@@ -32,7 +31,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     fortifiedWall: new Upgrade({
         id: 'fortifiedWall',
-        name: 'Fortified Wall',
         age: 3,
         cost: {
             wood: 100,
@@ -44,7 +42,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     ballistics: new Upgrade({
         id: 'ballistics',
-        name: 'Ballistics',
         age: 3,
         cost: {
             wood: 300,
@@ -56,7 +53,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     guardTower: new Upgrade({
         id: 'guardTower',
-        name: 'Guard Tower',
         age: 3,
         cost: {
             wood: 250,
@@ -68,7 +64,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     heatedShot: new Upgrade({
         id: 'heatedShot',
-        name: 'Heated Shot',
         age: 3,
         cost: {
             wood: 350,
@@ -80,7 +75,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     murderHoles: new Upgrade({
         id: 'murderHoles',
-        name: 'Murder Holes',
         age: 3,
         cost: {
             wood: 0,
@@ -92,7 +86,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     treadmillCrane: new Upgrade({
         id: 'treadmillCrane',
-        name: 'Treadmill Crane',
         age: 3,
         cost: {
             wood: 200,
@@ -104,7 +97,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     architecture: new Upgrade({
         id: 'architecture',
-        name: 'Architecture',
         age: 4,
         cost: {
             wood: 200,
@@ -116,7 +108,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     chemistry: new Upgrade({
         id: 'chemistry',
-        name: 'Chemistry',
         age: 4,
         cost: {
             wood: 0,
@@ -128,7 +119,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     bombardTower: new Upgrade({
         id: 'bombardTower',
-        name: 'Bombard Tower',
         age: 4,
         cost: {
             wood: 400,
@@ -140,7 +130,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     siegeEngineers: new Upgrade({
         id: 'siegeEngineers',
-        name: 'Siege Engineers',
         age: 4,
         cost: {
             wood: 600,
@@ -152,7 +141,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     keep: new Upgrade({
         id: 'keep',
-        name: 'Keep',
         age: 4,
         cost: {
             wood: 350,
@@ -164,7 +152,6 @@ export const universityUpgrades: UniversityUpgrades = {
     }),
     arrowslits: new Upgrade({
         id: 'arrowslits',
-        name: 'Arrowslits',
         age: 4,
         cost: {
             wood: 250,

@@ -26,7 +26,7 @@
     top: -20px;
 }
 
-.Title {
+.CivPanel .Title {
     font-size: 1.2em;
     font-weight: bold;
     border-bottom: solid 2px white;

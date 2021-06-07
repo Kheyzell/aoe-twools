@@ -15,7 +15,6 @@ interface MarketUpgrades {
 export const marketUnits: MarketUnits = {
     tradeCart: new Unit({
         id: 'tradeCart',
-        name: 'Trade Cart',
         age: 2,
         unitType: UnitType.civilian,
         cost: {
@@ -31,7 +30,6 @@ export const marketUnits: MarketUnits = {
 export const marketUpgrade: MarketUpgrades = {
     coinage: new Upgrade({
         id: 'coinage',
-        name: 'Coinage',
         age: 3,
         cost: {
             wood: 0,
@@ -43,7 +41,6 @@ export const marketUpgrade: MarketUpgrades = {
     }),
     caravan: new Upgrade({
         id: 'caravan',
-        name: 'Caravan',
         age: 3,
         cost: {
             wood: 0,
@@ -55,7 +52,6 @@ export const marketUpgrade: MarketUpgrades = {
     }),
     banking: new Upgrade({
         id: 'banking',
-        name: 'Banking',
         age: 4,
         cost: {
             wood: 0,
@@ -67,7 +63,6 @@ export const marketUpgrade: MarketUpgrades = {
     }),
     guilds: new Upgrade({
         id: 'guilds',
-        name: 'Guilds',
         age: 4,
         cost: {
             wood: 0,

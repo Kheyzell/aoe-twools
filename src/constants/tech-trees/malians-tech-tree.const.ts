@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
     gbeto: new Unit({
         id: 'gbeto',
-        name: 'Gbeto',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
     }),
     eliteGbeto: new Unit({
         id: 'eliteGbeto',
-        name: 'Elite Gbeto',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'tigui',
-        name: 'Tigui',
         age: 3,
-        description: 'Town Centers fire arrows even without garrison',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 300, food: 200, gold: 0, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'farimba',
-        name: 'Farimba',
         age: 4,
-        description: 'Stable units +5 attack',
         effectType: EffectType.damage,
         value: 5,
         cost: { wood: 0, food: 650, gold: 400, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const maliansTechTree: CivTechTree = {
     id: 'malians',
-    name: 'Malians',
     crest,
     wikiUrl: 'Malians',
     bonuses: [
         {
             id: 'malians1',
-            description: 'Buildings cost -15% wood (except Farms)',
             effectType: EffectType.discount,
             value: 15,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const maliansTechTree: CivTechTree = {
         },
         {
             id: 'malians2',
-            description: 'Barracks units have +1/+2/+3 pierce armor in the Feudal/Castle/Imperial Age',
             effectType: EffectType.pierceArmor,
             value: { age2: 1, age3: 2, age4: 3 },
             affectedUnits: [barracksUnits.champion, barracksUnits.pikeman],
@@ -98,7 +89,6 @@ export const maliansTechTree: CivTechTree = {
         },
         {
             id: 'malians3',
-            description: 'Gold Mining is free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [],
@@ -106,7 +96,6 @@ export const maliansTechTree: CivTechTree = {
         },
         {
             id: 'malians4',
-            description: 'Universities research +80% faster',
             effectType: EffectType.creationSpeed,
             value: 80,
             affectedUnits: [],

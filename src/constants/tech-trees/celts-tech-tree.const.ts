@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
     woadRaider: new Unit({
         id: 'woadRaider',
-        name: 'Woad Raider',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
     }),
     eliteWoadRaider: new Unit({
         id: 'eliteWoadRaider',
-        name: 'Elite Woad Raider',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'stronghold',
-        name: 'Stronghold',
         age: 3,
-        description: 'Castles and towers fire 25% faster',
         effectType: EffectType.fireRate,
         value: 25,
         cost: { wood: 0, food: 250, gold: 200, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'furorCeltica',
-        name: 'Furor Celtica',
         age: 4,
-        description: 'Siege Workshop units have +40% HP',
         effectType: EffectType.healthPercent,
         value: 40,
         cost: { wood: 0, food: 750, gold: 450, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const celtsTechTree: CivTechTree = {
     id: 'celts',
-    name: 'Celts',
     crest,
     wikiUrl: 'Celts',
     bonuses: [
         {
             id: 'celts1',
-            description: 'Infantry units move 15% faster starting from the Feudal Age',
             effectType: EffectType.movementSpeed,
             value: { age2: 15, age3: 15, age4: 15 },
             affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, celtsUniqueUnits.eliteWoadRaider],
@@ -90,7 +82,6 @@ export const celtsTechTree: CivTechTree = {
         },
         {
             id: 'celts2',
-            description: 'Lumberjacks work 15% faster',
             effectType: EffectType.miscallenous,
             value: 15,
             affectedUnits: [townCenterUnits.villager],
@@ -98,7 +89,6 @@ export const celtsTechTree: CivTechTree = {
         },
         {
             id: 'celts3',
-            description: 'Siege weapons fire 25% faster',
             effectType: EffectType.fireRate,
             value: 25,
             affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion],
@@ -106,7 +96,6 @@ export const celtsTechTree: CivTechTree = {
         },
         {
             id: 'celts4',
-            description: 'Enemy herdables can be converted regardless of enemy units next to them',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -114,7 +103,6 @@ export const celtsTechTree: CivTechTree = {
         },
         {
             id: 'celts5',
-            description: 'Siege Workshops work 20% faster',
             effectType: EffectType.creationSpeed,
             value: 20,
             affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],

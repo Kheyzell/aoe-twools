@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
     longbowman: new Unit({
         id: 'longbowman',
-        name: 'Longbowman',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
     }),
     eliteLongbowman: new Unit({
         id: 'eliteLongbowman',
-        name: 'Elite Longbowman',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'yeomen',
-        name: 'Yeomen',
         age: 3,
-        description: '+1 range for foot archers and +2 attack for towers',
         effectType: EffectType.range,
         value: 1,
         cost: { wood: 750, food: 0, gold: 450, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'warwolf',
-        name: 'Warwolf',
         age: 4,
-        description: 'Trebuchets do blast damage and have 100% accuracy',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 800, food: 0, gold: 400, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const britonsTechTree: CivTechTree = {
     id: 'britons',
-    name: 'Britons',
     wikiUrl: 'Britons',
     crest,
     bonuses: [
         {
             id: 'britons1',
-            description: 'Town Centers cost -50% wood once the Castle Age is reached',
             effectType: EffectType.discoutWood,
             value: { age3: 50, age4: 50 },
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const britonsTechTree: CivTechTree = {
         },
         {
             id: 'britons2',
-            description: 'Foot archers (except Skirmishers) have +1/+2 range in the Castle/Imperial Age',
             effectType: EffectType.range,
             value: { age3: 1, age4: 2 },
             affectedUnits: [archeryUnits.arbalester, britonsUniqueUnits.eliteLongbowman],
@@ -98,7 +89,6 @@ export const britonsTechTree: CivTechTree = {
         },
         {
             id: 'britons3',
-            description: 'Shepherds work 25% faster',
             effectType: EffectType.miscallenous,
             value: 25,
             affectedUnits: [townCenterUnits.villager],
@@ -106,7 +96,6 @@ export const britonsTechTree: CivTechTree = {
         },
         {
             id: 'britons4',
-            description: 'Archery Ranges work 20% faster',
             effectType: EffectType.creationSpeed,
             value: 20,
             affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.heavyCavalryArcher],

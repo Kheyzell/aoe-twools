@@ -19,7 +19,6 @@ interface TownCenterUpgrades {
 export const townCenterUnits: TownCenterUnits = {
     villager: new Unit({
         id: 'villager',
-        name: 'Villager',
         age: 1,
         unitType: UnitType.civilian,
         cost: {
@@ -35,7 +34,6 @@ export const townCenterUnits: TownCenterUnits = {
 export const townCenterUpgrade: TownCenterUpgrades = {
     feudalAge: new Upgrade({
         id: 'feudalAge',
-        name: 'Feudal Age',
         age: 1,
         cost: {
             wood: 0,
@@ -47,7 +45,6 @@ export const townCenterUpgrade: TownCenterUpgrades = {
     }),
     loom: new Upgrade({
         id: 'loom',
-        name: 'Loom',
         age: 1,
         cost: {
             wood: 0,
@@ -59,7 +56,6 @@ export const townCenterUpgrade: TownCenterUpgrades = {
     }),
     casteAge: new Upgrade({
         id: 'castleAge',
-        name: 'Castle Age',
         age: 2,
         cost: {
             wood: 0,
@@ -71,7 +67,6 @@ export const townCenterUpgrade: TownCenterUpgrades = {
     }),
     wheelbarrow: new Upgrade({
         id: 'wheelbarrow',
-        name: 'Wheelbarrow',
         age: 2,
         cost: {
             wood: 50,
@@ -83,7 +78,6 @@ export const townCenterUpgrade: TownCenterUpgrades = {
     }),
     townWatch: new Upgrade({
         id: 'townWatch',
-        name: 'Town Watch',
         age: 2,
         cost: {
             wood: 0,
@@ -95,7 +89,6 @@ export const townCenterUpgrade: TownCenterUpgrades = {
     }),
     imperialAge: new Upgrade({
         id: 'imperialAge',
-        name: 'Imperial Age',
         age: 3,
         cost: {
             wood: 0,
@@ -107,7 +100,6 @@ export const townCenterUpgrade: TownCenterUpgrades = {
     }),
     handCart: new Upgrade({
         id: 'handCart',
-        name: 'Hand Cart',
         age: 3,
         cost: {
             wood: 200,
@@ -119,7 +111,6 @@ export const townCenterUpgrade: TownCenterUpgrades = {
     }),
     townPatrol: new Upgrade({
         id: 'townPatrol',
-        name: 'Town Patrol',
         age: 3,
         cost: {
             wood: 0,

@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Unit } = {
     karambitWarrior: new Unit({
         id: 'karambitWarrior',
-        name: 'Karambit Warrior',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Un
     }),
     eliteKarambitWarrior: new Unit({
         id: 'eliteKarambitWarrior',
-        name: 'Elite Karambit Warrior',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Un
 const uniqueTechs = [
     new UniqueTech({
         id: 'thalassocracy',
-        name: 'Thalassocracy',
         age: 3,
-        description: 'upgrades Docks to Harbors, which shoot arrows',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'forcedLevy',
-        name: 'Forced Levy',
         age: 4,
-        description: 'Turns Militia line gold cost to food cost',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 850, gold: 500, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const malayTechTree: CivTechTree = {
     id: 'malay',
-    name: 'Malay',
     crest,
     wikiUrl: 'Malay',
     bonuses: [
         {
             id: 'malay1',
-            description: 'Advancing in Age is 66% faster',
             effectType: EffectType.miscallenous,
             value: 66,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const malayTechTree: CivTechTree = {
         },
         {
             id: 'malay2',
-            description: 'Fish Traps are 33% cheaper',
             effectType: EffectType.discount,
             value: 33,
             affectedUnits: [],
@@ -98,7 +89,6 @@ export const malayTechTree: CivTechTree = {
         },
         {
             id: 'malay3',
-            description: 'Fish Traps provide 3 times more food',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -106,7 +96,6 @@ export const malayTechTree: CivTechTree = {
         },
         {
             id: 'malay4',
-            description: 'Battle Elephants are 30% cheaper in the Castle Age, 40% cheaper in the Imperial Age',
             effectType: EffectType.discount,
             value: { age3: 30, age4: 40 },
             affectedUnits: [stableUnits.eliteBattleElephant],
@@ -114,7 +103,6 @@ export const malayTechTree: CivTechTree = {
         },
         {
             id: 'malay5',
-            description: 'Docks have double Line of Sight',
             effectType: EffectType.lineOfSightPercent,
             value: 100,
             affectedUnits: [],

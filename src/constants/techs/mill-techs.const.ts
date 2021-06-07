@@ -10,7 +10,6 @@ interface MillUpgrades {
 export const millUpgrades: MillUpgrades = {
     horseColar: new Upgrade({
         id: 'horseCollar',
-        name: 'Horse Collar',
         age: 2,
         cost: {
             wood: 75,
@@ -22,7 +21,6 @@ export const millUpgrades: MillUpgrades = {
     }),
     heavyPlow: new Upgrade({
         id: 'heavyPlow',
-        name: 'Heavy Plow',
         age: 3,
         cost: {
             wood: 125,
@@ -34,7 +32,6 @@ export const millUpgrades: MillUpgrades = {
     }),
     cropRotation: new Upgrade({
         id: 'cropRotation',
-        name: 'Crop Rotation',
         age: 4,
         cost: {
             wood: 250,

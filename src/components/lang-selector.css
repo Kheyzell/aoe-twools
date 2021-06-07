@@ -1,0 +1,27 @@
+.LangSelector {
+    display: flex;
+    align-items: flex-end;
+}
+
+.LangSelector > img:not(:first-child) {
+    margin-left: 8px;
+}
+
+.LangSelector > img {
+    width: 20px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.LangSelector > img.Selected {
+    width: 28px;
+    height: 21px;
+    border-bottom: 1px solid white;
+    padding-bottom: 4px;
+    margin-bottom: -4px;
+}
+
+.LangSelector > img:hover {
+    width: 28px;
+    height: 21px;
+}

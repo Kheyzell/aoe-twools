@@ -20,7 +20,6 @@ import { chainTechs } from "../../utils/techs.utils";
 export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: Unit, eliteLongboat: Unit } = {
     berserk: new Unit({
         id: 'berserk',
-        name: 'Berserk',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -34,7 +33,6 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
     }),
     eliteBerserk: new Unit({
         id: 'eliteBerserk',
-        name: 'Elite Berserk',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -48,7 +46,6 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
     }),
     longboat: new Unit({
         id: 'longboat',
-        name: 'Longboat',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -62,7 +59,6 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
     }),
     eliteLongboat: new Unit({
         id: 'eliteLongboat',
-        name: 'Elite Longboat',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -79,9 +75,7 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
 const uniqueTechs = [
     new UniqueTech({
         id: 'chieftains',
-        name: 'Chieftains',
         age: 3,
-        description: 'Infantry +5 attack against cavalry and +4 attack against camels',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 700, gold: 500, stone: 0 },
@@ -91,9 +85,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'berserkergang',
-        name: 'Berserkergang',
         age: 4,
-        description: 'Berserks regenerate faster (40HP/min)',
         effectType: EffectType.regen,
         value: 40,
         cost: { wood: 0, food: 850, gold: 400, stone: 0 },
@@ -107,13 +99,11 @@ chainTechs([vikingsUniqueUnits.longboat, vikingsUniqueUnits.eliteLongboat])
 
 export const vikingsTechTree: CivTechTree = {
     id: 'vikings',
-    name: 'Vikings',
     crest,
     wikiUrl: 'Vikings',
     bonuses: [
         {
             id: 'vikings1',
-            description: 'Warships are 15%/15%/20% cheaper in the Feudal/Castle/Imperial Age',
             effectType: EffectType.discount,
             value: { age2: 15, age3: 15, age4: 20 },
             affectedUnits: [dockUnits.galleon, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, vikingsUniqueUnits.eliteLongboat],
@@ -121,7 +111,6 @@ export const vikingsTechTree: CivTechTree = {
         },
         {
             id: 'vikings2',
-            description: 'Infantry have +10%/+15%/+20% HP in the Feudal/Castle/Imperial Age',
             effectType: EffectType.healthPercent,
             value: { age2: 10, age3: 15, age4: 20 },
             affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, vikingsUniqueUnits.eliteBerserk],
@@ -129,7 +118,6 @@ export const vikingsTechTree: CivTechTree = {
         },
         {
             id: 'vikings3',
-            description: 'Wheelbarrow and Hand Cart are free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [],
@@ -137,7 +125,6 @@ export const vikingsTechTree: CivTechTree = {
         },
         {
             id: 'vikings4',
-            description: 'Docks are 15% cheaper',
             effectType: EffectType.discount,
             value: 15,
             affectedUnits: [],

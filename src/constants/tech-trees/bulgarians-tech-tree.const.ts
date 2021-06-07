@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
     konnik: new Unit({
         id: 'konnik',
-        name: 'Konnik',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
     }),
     eliteKonnik: new Unit({
         id: 'eliteKonnik',
-        name: 'Elite Konnik',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'stirrups',
-        name: 'Stirrups',
         age: 3,
-        description: 'Light Cavalry, Knight line and Konniks attack 33% faster',
         effectType: EffectType.fireRate,
         value: 33,
         cost: { wood: 0, food: 400, gold: 200, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'bagains',
-        name: 'Bagains',
         age: 4,
-        description: 'Militia line +5 melee armor',
         effectType: EffectType.meleeArmor,
         value: 5,
         cost: { wood: 0, food: 900, gold: 450, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const bulgariansTechTree: CivTechTree = {
     id: 'bulgarians',
-    name: 'Bulgarians',
     crest,
     wikiUrl: 'Bulgarians',
     bonuses: [
         {
             id: 'bulgarians1',
-            description: 'Militia line upgrades are free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [barracksUnits.twoHandedSwordsman],
@@ -90,7 +82,6 @@ export const bulgariansTechTree: CivTechTree = {
         },
         {
             id: 'bulgarians2',
-            description: 'Town Centers cost -50% stone',
             effectType: EffectType.discoutWood,
             value: 50,
             affectedUnits: [],
@@ -98,7 +89,6 @@ export const bulgariansTechTree: CivTechTree = {
         },
         {
             id: 'bulgarians3',
-            description: 'The Krepost becomes available for construction in the Castle Age',
             effectType: EffectType.uniqueBuilding,
             value: null,
             affectedUnits: [],
@@ -106,7 +96,6 @@ export const bulgariansTechTree: CivTechTree = {
         },
         {
             id: 'bulgarians4',
-            description: 'Blacksmith and Siege Workshop upgrades cost -50% food',
             effectType: EffectType.discoutFood,
             value: 50,
             affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion],
@@ -114,7 +103,6 @@ export const bulgariansTechTree: CivTechTree = {
         },
         {
             id: 'bulgarians5',
-            description: 'Blacksmiths work 80% faster',
             effectType: EffectType.creationSpeed,
             value: 80,
             affectedUnits: [],

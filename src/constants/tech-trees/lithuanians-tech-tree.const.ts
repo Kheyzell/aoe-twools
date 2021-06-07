@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
     leitis: new Unit({
         id: 'leitis',
-        name: 'Leitis',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
     }),
     eliteLeitis: new Unit({
         id: 'eliteLeitis',
-        name: 'Elite Leitis',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'hillForts',
-        name: 'Hill Forts',
         age: 3,
-        description: 'Town Centers +3 range',
         effectType: EffectType.range,
         value: 3,
         cost: { wood: 0, food: 250, gold: 250, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'towerShields',
-        name: 'Tower Shields',
         age: 4,
-        description: 'Spearman line and Skirmishers +2 pierce armor',
         effectType: EffectType.pierceArmor,
         value: 2,
         cost: { wood: 0, food: 500, gold: 200, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const lithuaniansTechTree: CivTechTree = {
     id: 'lithuanians',
-    name: 'Lithuanians',
     crest,
     wikiUrl: 'Lithuanians',
     bonuses: [
         {
             id: 'lithuanians1',
-            description: 'Start the game with +150 food',
             effectType: EffectType.miscallenous,
             value: 150,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const lithuaniansTechTree: CivTechTree = {
         },
         {
             id: 'lithuanians2',
-            description: 'Spearman and Skirmisher lines move 10% faster',
             effectType: EffectType.movementSpeed,
             value: 10,
             affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher],
@@ -98,7 +89,6 @@ export const lithuaniansTechTree: CivTechTree = {
         },
         {
             id: 'lithuanians3',
-            description: 'Each garrisoned Relic gives +1 attack to Knights and Leitis (maximum +4)',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [stableUnits.paladin, lithuaniansUniqueUnits.eliteLeitis],
@@ -106,7 +96,6 @@ export const lithuaniansTechTree: CivTechTree = {
         },
         {
             id: 'lithuanians4',
-            description: 'Monasteries work 20% faster',
             effectType: EffectType.creationSpeed,
             value: 20,
             affectedUnits: [monasteryUnits.monk],

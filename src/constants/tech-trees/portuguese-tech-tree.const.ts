@@ -20,7 +20,6 @@ import { chainTechs } from "../../utils/techs.utils";
 export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, caravel: Unit, eliteCaravel: Unit } = {
     organGun: new Unit({
         id: 'organGun',
-        name: 'Organ Gun',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -34,7 +33,6 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
     }),
     eliteOrganGun: new Unit({
         id: 'eliteOrganGun',
-        name: 'Elite Organ Gun',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -48,7 +46,6 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
     }),
     caravel: new Unit({
         id: 'caravel',
-        name: 'Caravel',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -62,7 +59,6 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
     }),
     eliteCaravel: new Unit({
         id: 'eliteCaravel',
-        name: 'Elite Caravel',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -81,9 +77,7 @@ chainTechs([portugeseUniqueUnits.caravel, portugeseUniqueUnits.eliteCaravel])
 const uniqueTechs = [
     new UniqueTech({
         id: 'carrack',
-        name: 'Carrack',
         age: 3,
-        description: 'ships +1/+1 armor',
         effectType: EffectType.armor,
         value: 1,
         cost: { wood: 200, food: 0, gold: 300, stone: 0 },
@@ -93,9 +87,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'arquebus',
-        name: 'Arquebus',
         age: 4,
-        description: 'gunpowder units fire more accurately at moving targets',
         effectType: EffectType.accuracy,
         value: null,
         cost: { wood: 0, food: 700, gold: 400, stone: 0 },
@@ -107,13 +99,11 @@ const uniqueTechs = [
 
 export const portugueseTechTree: CivTechTree = {
     id: 'portuguese',
-    name: 'Portuguese',
     crest,
     wikiUrl: 'Portuguese_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'portuguese1',
-            description: 'All units cost -20% gold',
             effectType: EffectType.discount,
             value: 20,
             affectedUnits: [
@@ -132,7 +122,6 @@ export const portugueseTechTree: CivTechTree = {
         },
         {
             id: 'portuguese2',
-            description: 'All ships have +10% HP',
             effectType: EffectType.discount,
             value: 20,
             affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteCaravel],
@@ -140,7 +129,6 @@ export const portugueseTechTree: CivTechTree = {
         },
         {
             id: 'portuguese3',
-            description: 'The Feitoria becomes available for building in the Imperial Age',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
@@ -148,7 +136,6 @@ export const portugueseTechTree: CivTechTree = {
         },
         {
             id: 'portuguese4',
-            description: 'All technologies (excluding advancing ages) are researched 30% faster',
             effectType: EffectType.creationSpeed,
             value: 30,
             affectedUnits: [],
@@ -174,7 +161,6 @@ export const portugueseTechTree: CivTechTree = {
         },
         {
             id: 'portuguese5',
-            description: 'The Line of Sight is shared with the team from the beginning of the game',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],

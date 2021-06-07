@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: Unit } = {
     shotelWarrior: new Unit({
         id: 'shotelWarrior',
-        name: 'Shotel Warrior',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: U
     }),
     eliteShotelWarrior: new Unit({
         id: 'eliteShotelWarrior',
-        name: 'Elite Shotel Warrior',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: U
 const uniqueTechs = [
     new UniqueTech({
         id: 'royalHeirs',
-        name: 'Royal Heirs',
         age: 3,
-        description: 'halves Shotel Warrior training time',
         effectType: EffectType.creationSpeed,
         value: 100,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'torsionEngines',
-        name: 'Torsion Engines',
         age: 4,
-        description: `Siege Workshop units' blast radius increased`,
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 1000, gold: 600, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const ethiopiansTechTree: CivTechTree = {
     id: 'ethiopians',
-    name: 'Ethiopians',
     crest,
     wikiUrl: 'Ethiopians',
     bonuses: [
         {
             id: 'ethiopians1',
-            description: 'The Archer line fires 18% faster',
             effectType: EffectType.fireRate,
             value: 18,
             affectedUnits: [archeryUnits.arbalester],
@@ -90,7 +82,6 @@ export const ethiopiansTechTree: CivTechTree = {
         },
         {
             id: 'ethiopians2',
-            description: 'Receive 100 gold and 100 food when advancing to the next Age',
             effectType: EffectType.miscallenous,
             value: 100,
             affectedUnits: [],
@@ -98,7 +89,6 @@ export const ethiopiansTechTree: CivTechTree = {
         },
         {
             id: 'ethiopians3',
-            description: 'The Pikeman upgrade is free',
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [barracksUnits.pikeman],
@@ -106,7 +96,6 @@ export const ethiopiansTechTree: CivTechTree = {
         },
         {
             id: 'ethiopians4',
-            description: 'Towers and Outposts have +3 LOS',
             effectType: EffectType.lineOfSight,
             value: 3,
             affectedUnits: [],

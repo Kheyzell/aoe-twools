@@ -20,7 +20,6 @@ import { getAllCivUpgrades } from "../../utils/techs.utils";
 export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
     chukonu: new Unit({
         id: 'chukonu',
-        name: 'Chu Ko Nu',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -34,7 +33,6 @@ export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
     }),
     eliteChukonu: new Unit({
         id: 'eliteChukonu',
-        name: 'Elite Chu Ko Nu',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -51,9 +49,7 @@ export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'greatWall',
-        name: 'Great Wall',
         age: 3,
-        description: 'Walls and towers +30% HP',
         effectType: EffectType.healthPercent,
         value: 30,
         cost: { wood: 400, food: 0, gold: 0, stone: 200 },
@@ -63,9 +59,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'rocketry',
-        name: 'Rocketry',
         age: 4,
-        description: 'Chu Ko Nu +2, Scorpions +4 attack',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 600, food: 0, gold: 600, stone: 0 },
@@ -77,7 +71,6 @@ const uniqueTechs = [
 
 export const chineseTechTree: CivTechTree = {
     id: 'chinese',
-    name: 'Chinese',
     crest,
     wikiUrl: 'Chinese_(Age_of_Empires_II)',
     bonuses: [],
@@ -227,7 +220,6 @@ export const chineseTechTree: CivTechTree = {
 chineseTechTree.bonuses = [
     {
         id: 'chinese1',
-        description: 'Start game with three extra Villagers, but with -200 food and -50 wood',
         effectType: EffectType.miscallenous,
         value: null,
         affectedUnits: [townCenterUnits.villager],
@@ -235,7 +227,6 @@ chineseTechTree.bonuses = [
     },
     {
         id: 'chinese2',
-        description: 'Town Centers support ten population and have +5 LOS',
         effectType: EffectType.lineOfSight,
         value: 5,
         affectedUnits: [],
@@ -243,7 +234,6 @@ chineseTechTree.bonuses = [
     },
     {
         id: 'chinese3',
-        description: 'Technologies are 10%/15%/20% cheaper in the Feudal/Castle/Imperial Age',
         effectType: EffectType.discount,
         value: { age2: 10, age3: 15, age4: 20 },
         affectedUnits: [],
@@ -251,7 +241,6 @@ chineseTechTree.bonuses = [
     },
     {
         id: 'chinese4',
-        description: 'Demolition Ships have +50% HP',
         effectType: EffectType.healthPercent,
         value: 50,
         affectedUnits: [dockUnits.heavyDemolitionShip],
@@ -259,7 +248,6 @@ chineseTechTree.bonuses = [
     },
     {
         id: 'chinese5',
-        description: 'Farms provide +45 food',
         effectType: EffectType.miscallenous,
         value: 45,
         affectedUnits: [],

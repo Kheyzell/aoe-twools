@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
     mameluke: new Unit({
         id: 'mameluke',
-        name: 'Mameluke',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
     }),
     eliteMameluke: new Unit({
         id: 'eliteMameluke',
-        name: 'Elite Mameluke',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'madrasah',
-        name: 'Madrasah',
         age: 3,
-        description: `33% of a Monk's gold cost are returned if the Monk gets killed`,
         effectType: EffectType.miscallenous,
         value: 33,
         cost: { wood: 0, food: 200, gold: 100, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'zealotry',
-        name: 'Zealotry',
         age: 4,
-        description: 'Camel Riders and Mamelukes +20 hit points',
         effectType: EffectType.health,
         value: 20,
         cost: { wood: 0, food: 500, gold: 450, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const saracensTechTree: CivTechTree = {
     id: 'saracens',
-    name: 'Saracens',
     crest,
     wikiUrl: 'Saracens',
     bonuses: [
         {
             id: 'saracens1',
-            description: 'The commodity trading fee is 5%',
             effectType: EffectType.miscallenous,
             value: 5,
             affectedUnits: [],
@@ -90,7 +82,6 @@ export const saracensTechTree: CivTechTree = {
         },
         {
             id: 'saracens2',
-            description: 'Markets cost -100 wood',
             effectType: EffectType.discoutWoodValue,
             value: 100,
             affectedUnits: [],
@@ -98,7 +89,6 @@ export const saracensTechTree: CivTechTree = {
         },
         {
             id: 'saracens3',
-            description: 'Transport Ships have double HP and +5 carry capacity',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [dockUnits.transportShip],
@@ -106,7 +96,6 @@ export const saracensTechTree: CivTechTree = {
         },
         {
             id: 'saracens4',
-            description: 'Galleys attack 25% faster',
             effectType: EffectType.fireRate,
             value: 25,
             affectedUnits: [dockUnits.galleon],
@@ -114,7 +103,6 @@ export const saracensTechTree: CivTechTree = {
         },
         {
             id: 'saracens5',
-            description: 'Camel units +10 HP',
             effectType: EffectType.health,
             value: 10,
             affectedUnits: [stableUnits.heavyCamelRider, saracensUniqueUnits.eliteMameluke],
@@ -122,7 +110,6 @@ export const saracensTechTree: CivTechTree = {
         },
         {
             id: 'saracens6',
-            description: 'Foot archers have +2 attack against standard buildings',
             effectType: EffectType.miscallenous,
             value: 2,
             affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher],

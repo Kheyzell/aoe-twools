@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
     samurai: new Unit({
         id: 'samurai',
-        name: 'Samurai',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
     }),
     eliteSamurai: new Unit({
         id: 'eliteSamurai',
-        name: 'Elite Samurai',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -50,9 +48,7 @@ export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
 const uniqueTechs = [
     new UniqueTech({
         id: 'yasama',
-        name: 'Yasama',
         age: 3,
-        description: 'towers fire 2 extra arrows',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 300, food: 300, gold: 0, stone: 0 },
@@ -62,9 +58,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'kataparuto',
-        name: 'Kataparuto',
         age: 4,
-        description: 'Trebuchets fire 33% and pack 4x faster',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 750, food: 0, gold: 400, stone: 0 },
@@ -76,13 +70,11 @@ const uniqueTechs = [
 
 export const japaneseTechTree: CivTechTree = {
     id: 'japanese',
-    name: 'Japanese',
     crest,
     wikiUrl: 'Japanese_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'japanese1',
-            description: 'Fishing Ships have double HP, +2 pierce armor, and work 5%/10%/15%/20% faster in the Dark/Feudal/Castle/Imperial Age',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [dockUnits.fishingShip],
@@ -90,7 +82,6 @@ export const japaneseTechTree: CivTechTree = {
         },
         {
             id: 'japanese2',
-            description: 'Mills, Lumber Camps, and Mining Camps are 50% cheaper',
             effectType: EffectType.discount,
             value: 50,
             affectedUnits: [],
@@ -98,7 +89,6 @@ export const japaneseTechTree: CivTechTree = {
         },
         {
             id: 'japanese3',
-            description: 'Infantry attack 33% faster starting in the Feudal Age',
             effectType: EffectType.fireRate,
             value: 33,
             affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, japaneseUniqueUnits.eliteSamurai],
@@ -106,7 +96,6 @@ export const japaneseTechTree: CivTechTree = {
         },
         {
             id: 'japanese4',
-            description: 'Galleys have +50% Line of Sight',
             effectType: EffectType.lineOfSightPercent,
             value: 50,
             affectedUnits: [dockUnits.galleon],

@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, missionary: Unit } = {
     conquistador: new Unit({
         id: 'conquistador',
-        name: 'Conquistador',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, 
     }),
     eliteConquistador: new Unit({
         id: 'eliteConquistador',
-        name: 'Elite Conquistador',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -47,7 +45,6 @@ export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, 
     }),
     missionary: new Unit({
         id: 'missionary',
-        name: 'Missionary',
         unique: true,
         age: 3,
         unitType: UnitType.civilian,
@@ -64,9 +61,7 @@ export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, 
 const uniqueTechs = [
     new UniqueTech({
         id: 'inquisition',
-        name: 'Inquisition',
         age: 3,
-        description: 'conversion rate improved',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 100, gold: 300, stone: 0 },
@@ -76,9 +71,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'supremacy',
-        name: 'Supremacy',
         age: 4,
-        description: 'increased attack (+6), armor (+2/+2), and HP (+40) for Villagers',
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 400, gold: 250, stone: 0 },
@@ -90,13 +83,11 @@ const uniqueTechs = [
 
 export const spanishTechTree: CivTechTree = {
     id: 'spanish',
-    name: 'Spanish',
     crest,
     wikiUrl: 'Spanish_(Age_of_Empires_II)',
     bonuses: [
         {
             id: 'spanish1',
-            description: 'Builders work 30% faster',
             effectType: EffectType.constructionSpeed,
             value: 30,
             affectedUnits: [townCenterUnits.villager],
@@ -104,7 +95,6 @@ export const spanishTechTree: CivTechTree = {
         },
         {
             id: 'spanish2',
-            description: 'Blacksmith upgrades cost no gold',
             effectType: EffectType.discoutGold,
             value: 100,
             affectedUnits: [],
@@ -118,7 +108,6 @@ export const spanishTechTree: CivTechTree = {
         },
         {
             id: 'spanish3',
-            description: 'Cannon Galleons have better accuracy and faster cannonballs',
             effectType: EffectType.accuracy,
             value: null,
             affectedUnits: [dockUnits.eliteCannonGalleon],
@@ -126,7 +115,6 @@ export const spanishTechTree: CivTechTree = {
         },
         {
             id: 'spanish4',
-            description: 'Hand Cannoneers and Bombard Cannons fire 18% faster',
             effectType: EffectType.fireRate,
             value: 18,
             affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon],
@@ -134,7 +122,6 @@ export const spanishTechTree: CivTechTree = {
         },
         {
             id: 'spanish5',
-            description: 'Trade units generate +25% gold',
             effectType: EffectType.miscallenous,
             value: 25,
             affectedUnits: [marketUnits.tradeCart],

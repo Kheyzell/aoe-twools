@@ -19,7 +19,6 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit, flemishMilitia: Unit } = {
     coustillier: new Unit({
         id: 'coustillier',
-        name: 'Coustillier',
         unique: true,
         age: 3,
         unitType: UnitType.military,
@@ -33,7 +32,6 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
     }),
     eliteCoustillier: new Unit({
         id: 'eliteCoustillier',
-        name: 'Elite Coustillier',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -47,7 +45,6 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
     }),
     flemishMilitia: new Unit({
         id: 'flemishMilitia',
-        name: 'Flemish Militia',
         unique: true,
         age: 4,
         unitType: UnitType.military,
@@ -64,9 +61,7 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
 const uniqueTechs = [
     new UniqueTech({
         id: 'burgundianVineyards',
-        name: 'Burgundian Vineyards',
         age: 3,
-        description: `Transforms half of the player's food into gold at a 2:1 ratio. Farmers slowly produce gold (about 0.012 gold/s)`,
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 400, gold: 300, stone: 0 },
@@ -76,9 +71,7 @@ const uniqueTechs = [
     }),
     new UniqueTech({
         id: 'flemishRevolution',
-        name: 'Flemish Revolution',
         age: 4,
-        description: `Transforms player's Villagers into Flemish Militia. Flemish Militia becomes trainable at the Town Center`,
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 800, gold: 450, stone: 0 },
@@ -90,13 +83,11 @@ const uniqueTechs = [
 
 export const burgundiansTechTree: CivTechTree = {
     id: 'burgundians',
-    name: 'Burgundians',
     crest,
     wikiUrl: 'Burgundians',
     bonuses: [
         {
             id: 'burgundians1',
-            description: 'Economic upgrades cost -50% food and are available one Age earlier than other civilizations',
             effectType: EffectType.miscallenous,
             value: 50,
             affectedUnits: [],
@@ -111,7 +102,6 @@ export const burgundiansTechTree: CivTechTree = {
         },
         {
             id: 'burgundians2',
-            description: 'Stable technologies are 50% cheaper',
             effectType: EffectType.discount,
             value: 50,
             affectedUnits: [stableUnits.hussar, stableUnits.paladin],
@@ -119,7 +109,6 @@ export const burgundiansTechTree: CivTechTree = {
         },
         {
             id: 'burgundians3',
-            description: 'Gunpowder units gain a +25% bonus to their attack',
             effectType: EffectType.damagePercent,
             value: 25,
             affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
@@ -127,7 +116,6 @@ export const burgundiansTechTree: CivTechTree = {
         },
         {
             id: 'burgundians4',
-            description: 'Cavalier upgrade available in the Castle Age',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [stableUnits.paladin],
@@ -135,7 +123,6 @@ export const burgundiansTechTree: CivTechTree = {
         },
         {
             id: 'burgundians5',
-            description: 'Relics generate both gold and food at the same rate',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
