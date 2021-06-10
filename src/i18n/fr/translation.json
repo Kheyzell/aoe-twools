@@ -12,8 +12,9 @@
     "Show the list of civilisations having the selected units fully upgraded": "Affiche la liste des civilisations qui ont les unités séléctionnées totalement améliorées",
     "Show Excluded": "Afficher les exclus",
     "Show the list of civilisations that do not satisfy the filters": "Affiche la liste des civilisations qui ne correspondent pas aux filtres",
-    "Filtered": "Filtrées:",
-    "Fully upgraded": "Totalement améliorées:",
+    "Team bonus": "Bonus d'équipe",
+    "Filtered": "Filtrées",
+    "Fully upgraded": "Totalement améliorées",
     "Excluded": "Exclues",
     "civ": {
         "aztecs": {

@@ -12,7 +12,6 @@ import { stopEventPropagation } from "../../utils/utils"
 
 type Props = {
     civ: CivTechTree
-    show: boolean
 }
 type State = {}
 
@@ -55,19 +54,6 @@ const CivPanel: React.FC<Props> = (props) => {
     const { t } = useTranslation()
     const myRef = React.createRef<HTMLDivElement>();
 
-    React.useEffect(() => {
-        if (myRef.current) {
-            myRef.current.style.left = 'initial'
-            myRef.current.style.right = 'initial'
-            const rect = myRef.current.getBoundingClientRect()
-            if (rect.left < 160) {
-                myRef.current.style.left = '120px'
-            } else if (rect.right > document.body.clientWidth) {
-                myRef.current.style.right = '20px'
-            }
-        }
-    })
-
     const fullyUpgradedUnits = getFullyUpgradedUnits(props.civ)
     const affectedByBonusesUnits = getUnitsAffectedByBonuses(props.civ)
     const affectedByUniqueTechsUnits = getUnitsAffectedByUniqueTechs(props.civ)
@@ -83,14 +69,14 @@ const CivPanel: React.FC<Props> = (props) => {
     }
 
     return (
-        <div className="CivPanel" ref={myRef} style={{ background: `url(${woodenBackground})`, visibility: props.show ? 'visible' : 'hidden' }} onClick={stopEventPropagation}>
+        <div className="CivPanel" ref={myRef} style={{ background: `url(${woodenBackground})` }} onClick={stopEventPropagation}>
             <div className="Title"> { t(`civ.${props.civ.id}.name`) } • <a href={wikiUrl} target="_blank" onClick={openWiki}> wiki </a></div>
 
             <div className="Section">
                 <div className="SubTitle"> { t('Bonuses') } </div>
                 <div className="Bonuses"> {
                     bonuses.map(bonus => {
-                        return (<li> { bonus.team ? (<span className="TeamBonus"> Team bonus: </span>) : "" } { t(`civ.${props.civ.id}.bonus.${bonus.id}.description`) } </li>)
+                        return (<li> { bonus.team ? (<span className="TeamBonus"> { t('Team bonus') }: </span>) : "" } { t(`civ.${props.civ.id}.bonus.${bonus.id}.description`) } </li>)
                     })
                 } </div>
             </div>
