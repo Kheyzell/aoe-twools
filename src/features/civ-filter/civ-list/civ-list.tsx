@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux"
 import Tooltip from "@material-ui/core/Tooltip"
 import { withStyles } from "@material-ui/core/styles";
 
-import { allCivTechTrees } from "../../constants"
-import { CivTechTree, TechType, Unit, Upgrade } from "../../models/techs.model"
-import { civHasUnit, civHasUpgrade } from "../../utils/tech-tree.utils"
-import { scrollHorizontally } from "../../utils/utils"
-import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCiv2Selection, toggleCivSelection } from "../tech-tree/civFilterSlice"
+import { allCivTechTrees } from "../../../constants"
+import { CivTechTree, TechType, Unit, Upgrade } from "../../../models/techs.model"
+import { civHasUnit, civHasUpgrade } from "../../../utils/tech-tree.utils"
+import { scrollHorizontally } from "../../../utils/utils"
+import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCiv2Selection, toggleCivSelection } from "../civFilterSlice"
 import './civ-list.css'
-import CivPanel from "./civ-panel"
+import CivPanel from "./civ-panel/civ-panel"
 
 type ShowCivPanel = { [civId: string]: boolean }
 

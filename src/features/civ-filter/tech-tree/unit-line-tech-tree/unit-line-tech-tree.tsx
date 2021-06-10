@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import { Tech, UnitLine } from "../../../models/techs.model"
+import { Tech, UnitLine } from "../../../../models/techs.model"
 import TechComponent from "../tech/tech.component"
 import '../group-tech-tree/group-tech-tree.css'
 
@@ -19,13 +19,7 @@ class UnitLineTechTreeComponent extends Component<UnitLineTechTreeProps, UnitLin
         };
     }
 
-    onTechSelected(tech: Tech) {
-        // console.log(`Tech = [${JSON.stringify(tech)}]`)
-        // const age = tech.age
-        // if (age > 1) {
-        //     this.props.unitLine.age1.forEach(unit => unit.isSelected)
-        // }
-    }
+    onTechSelected(tech: Tech) {}
 
     render() {
         return (

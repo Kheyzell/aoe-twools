@@ -1,11 +1,11 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
-import { castleUpgrades } from "../../../constants/techs/castle-techs.const"
+import { castleUpgrades } from "../../../../constants/techs/castle-techs.const"
 
-import { CivTechTree, Tech, TechType } from "../../../models/techs.model"
-import { civHasTech } from "../../../utils/tech-tree.utils"
-import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleTechsSelelection } from "../civFilterSlice"
+import { CivTechTree, Tech, TechType } from "../../../../models/techs.model"
+import { civHasTech } from "../../../../utils/tech-tree.utils"
+import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleTechsSelelection } from "../../civFilterSlice"
 
 import './tech.component.css'
 
