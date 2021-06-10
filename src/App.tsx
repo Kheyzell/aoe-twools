@@ -1,9 +1,13 @@
 import React from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom"
 
 import './App.css'
 import './i18n/config'
-import TechTreeComponent from './features/tech-tree/tech-tree'
-import CivList from './features/civ-list/civ-list'
 import { barracksTechs } from "./constants/GroupTechTree/barracks-tech-tree.const"
 import { archeryTechs } from "./constants/GroupTechTree/archery-tech-tree.const"
 import { stableTechs } from "./constants/GroupTechTree/stable-tech-tree.const"
@@ -18,24 +22,41 @@ import { millTechs } from "./constants/GroupTechTree/mill-tech-tree.const"
 import { miningCampTechs } from "./constants/GroupTechTree/mining-camp-tech-tree.const"
 import { marketTechs } from "./constants/GroupTechTree/market-tech-tree.const"
 import { dockTechs } from "./constants/GroupTechTree/dock-tech-tree.const"
-import woodenBackground from "./resources/images/backgrounds/wood.jpg"
-import woodenBackground4 from "./resources/images/backgrounds/wood4.jpg"
 import LangSelector from './components/lang-selector'
+import CivFilter from './features/civ-filter/civ-filter'
+import UnitCalculator from './features/unit-calculator/unit-calculator.component'
 
 // initialise group tech trees
 const allGroupTechs = [barracksTechs, archeryTechs, stableTechs, siegeTechs, castleTechs, blacksmithTechs, monasteryTechs, universityTechs, townCenterTechs, lumberCampTechs, millTechs, miningCampTechs, marketTechs, dockTechs]
 
+// const routes = [
+//   {
+//     path: "/sandwiches",
+//     component: null
+//   },
+//   {
+//     path: "/tacos",
+//     component: null
+//   }
+// ]
+
 function AppComponent() {
   return (
     <div className="App">
-      <div className="Header" style={{ background: `url(${woodenBackground})` }}>
-        <CivList></CivList>
-      </div>
-      <div className="Body" style={{ backgroundImage: `url(${woodenBackground4})` }}>
-        <TechTreeComponent></TechTreeComponent>
-      </div>
 
-      <div className="LangSelectorcontainer">
+      <Router>
+        <Switch>
+          <Route exact path="/civ-filter">
+            <CivFilter></CivFilter>
+          </Route>
+          <Route path="/calculator">
+            <UnitCalculator></UnitCalculator>
+          </Route>
+          <Redirect from="/" to="/civ-filter" />
+        </Switch>
+      </Router>
+
+      <div className="LangSelectorContainer">
         <LangSelector></LangSelector>
       </div>
     </div>

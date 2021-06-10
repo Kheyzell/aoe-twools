@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import civFilterReducer from '../features/tech-tree/civFilterSlice';
+import civFilterReducer from '../features/civ-filter/civFilterSlice';
 
 export const store = configureStore({
   reducer: {

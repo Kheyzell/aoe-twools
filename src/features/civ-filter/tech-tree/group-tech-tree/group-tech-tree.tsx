@@ -1,7 +1,6 @@
 import React from "react"
-import { lithuaniansTechTree } from "../../../constants";
 
-import { CivTechTree, GroupTechTree } from "../../../models/techs.model";
+import { GroupTechTree } from "../../../../models/techs.model";
 import TechComponent from "../tech/tech.component"
 import UnitLineTechTreeComponent from "../unit-line-tech-tree/unit-line-tech-tree";
 import './group-tech-tree.css'
