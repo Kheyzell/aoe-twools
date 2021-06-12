@@ -17,6 +17,12 @@
     border-radius: 2px;
 }
 
+.Tech.Small {
+    width: 56px;
+    height: 56px;
+    border-width: 2px;
+}
+
 .Tech.Mini {
     width: 36px;
     height: 36px;
@@ -39,6 +45,11 @@
     border: 3px solid yellow;
     width: 88px;
     height: 88px;
+}
+.Tech.Small.Selected {
+    border-width: 2px;
+    width: 56px;
+    height: 56px;
 }
 .Tech.Mini.Selected {
     border-width: 2px;
@@ -103,14 +114,24 @@
     outline: none;
     user-select: none;
 }
+.Tech.Small > .Name {
+    width: 51px;
+    font-size: .7rem;  
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto; 
+}
 .Tech.Mini > .Name {
     display: none;
 }
 
-
 .Tech > img {
     height: 76px;
     width: 76px;
+}
+.Tech.Small > img {
+    width: 48px;
+    height: 48px;
 }
 .Tech.Mini > img {
     width: 32px;

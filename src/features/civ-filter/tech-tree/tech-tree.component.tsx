@@ -1,10 +1,13 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from "react-i18next"
+import { Tooltip } from "@material-ui/core"
 
 import GroupTechTreeComponent from "./group-tech-tree/group-tech-tree.component"
 import { isInComparisonModeSelector, resetTechSelection, selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCivSelection, unselectCivs } from "../civFilterSlice"
 import './tech-tree.component.css'
+import increaseIcon from "../../../resources/icons/increase.svg"
+import reduceIcon from "../../../resources/icons/reduce.svg"
 import refreshIcon from "../../../resources/icons/refresh.png"
 import woodenBackground from "../../../resources/images/backgrounds/wood2.jpg"
 import darkAge from "../../../resources/images/darkAge.png"
@@ -16,14 +19,16 @@ import TechComponent, { BoxSize } from "./tech/tech.component"
 import { fullTechTree } from "../../../constants/tech-trees/_full-tech-tree.const"
 import { generateTechTreeToDisplayFrom } from "../../../utils/tech-tree.utils"
 import { scrollHorizontally } from "../../../utils/utils"
+import localStorageService from "../../../core/local-storage.service"
 
-type Props = {}
-type State = {}
+type TechTreeProps = {}
 
-const TechTreeComponent: React.FC<Props> = (props, state: State) => {
+const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
   const dispatch = useDispatch()
   const scrollRef = useRef<HTMLElement>(null)
-  
+
+  const [techSize, setTechSize] = useState<BoxSize>(localStorageService.loadCivFilterTechSize() || BoxSize.normal)
+
   const selectedCiv = useSelector(selectedCivSelector)
   const selectedCiv2 = useSelector(selectedCiv2Selector)
   const isInComparisonMode = useSelector(isInComparisonModeSelector)
@@ -31,6 +36,12 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
   const techTreeToDisplay = selectedCiv ?
     (selectedCiv2 ? generateTechTreeToDisplayFrom(generateTechTreeToDisplayFrom(fullTechTree, selectedCiv), selectedCiv2) : generateTechTreeToDisplayFrom(fullTechTree, selectedCiv))
     : fullTechTree
+
+  const onChangeTechSize = () => {
+    const newTechSize = techSize === BoxSize.normal ? BoxSize.small : BoxSize.normal
+    setTechSize(newTechSize)
+    localStorageService.storeCivFilterTechSize(newTechSize)
+  }
 
   const onResetClick = () => {
     dispatch(unselectCivs())
@@ -43,10 +54,20 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
 
   const displaySelectedCivs = () => {
     if (!!selectedCiv || !!selectedCiv2) {
-      return (<div className="SelectedCivs">
-        { selectedCiv ? (<img src={selectedCiv?.crest} alt="Crest" onClick={() => onCivClick(selectedCiv)} />) : '' }
-        { selectedCiv2 ? (<img src={selectedCiv2?.crest} alt="Crest" onClick={() => onCivClick(selectedCiv2)} />) : '' }
-      </div>)
+      return (
+        <div className="SelectedCivs">
+          {selectedCiv ? (
+            <Tooltip title={<span> {t(`civ.${selectedCiv?.id}.name`)} </span>}>
+              <img src={selectedCiv?.crest} alt="Crest" onClick={() => onCivClick(selectedCiv)} />
+            </Tooltip>
+          ) : ''}
+          {selectedCiv2 ? (
+            <Tooltip title={<span> {t(`civ.${selectedCiv2?.id}.name`)} </span>}>
+              <img src={selectedCiv2?.crest} alt="Crest" onClick={() => onCivClick(selectedCiv2)} />
+            </Tooltip>
+          ) : ''}
+        </div>
+      )
     }
   }
 
@@ -62,16 +83,16 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
     if (isInComparisonMode) {
       return (
         <div className="Legend">
-          <div className="Civ1"> <div className="ColorBox"></div> { t(`civ.${selectedCiv?.id}.name`) } <img src={selectedCiv?.crest} alt="Crest" /> </div>
-          <div className="Civ2"> <div className="ColorBox"></div> { t(`civ.${selectedCiv2?.id}.name`) } <img src={selectedCiv2?.crest} alt="Crest" /> </div>
+          <div className="Civ1"> <div className="ColorBox"></div> {t(`civ.${selectedCiv?.id}.name`)} <img src={selectedCiv?.crest} alt="Crest" /> </div>
+          <div className="Civ2"> <div className="ColorBox"></div> {t(`civ.${selectedCiv2?.id}.name`)} <img src={selectedCiv2?.crest} alt="Crest" /> </div>
         </div>
       )
     }
     return (
       <div className="Legend">
-        <div className="Unit"> <div className="ColorBox"></div> { t('Unit') } </div>
-        <div className="Upgrade"> <div className="ColorBox"></div> { t('Technology') } </div>
-        <div className="Unique"> <div className="ColorBox"></div> { t('Unique') } </div>
+        <div className="Unit"> <div className="ColorBox"></div> {t('Unit')} </div>
+        <div className="Upgrade"> <div className="ColorBox"></div> {t('Technology')} </div>
+        <div className="Unique"> <div className="ColorBox"></div> {t('Unique')} </div>
       </div>
     )
   }
@@ -81,14 +102,18 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
   return (
     <div className="TechTree" ref={scrollRef as React.RefObject<HTMLDivElement>} onWheel={(e) => scrollHorizontally(e, scrollRef)}>
       <div className="Tools">
+        <Tooltip title={<span>{techSize === BoxSize.normal ? t('Scale down') : t('Scale up')}</span>}>
+          <button onClick={onChangeTechSize}> <img src={techSize === BoxSize.normal ? reduceIcon : increaseIcon} alt="Size" /> </button>
+        </Tooltip>
+
         <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> </button>
 
         {displaySelectedCivs()}
 
         <div className="SelectedTechs">
-          { toolsSelectedTechs.map((tech: Tech, index: number) => {
+          {toolsSelectedTechs.map((tech: Tech, index: number) => {
             return (<TechComponent key={index} tech={tech} size={BoxSize.mini}></TechComponent>)
-          }) }
+          })}
         </div>
       </div>
 
@@ -114,21 +139,21 @@ const TechTreeComponent: React.FC<Props> = (props, state: State) => {
         <div className="Panel"></div>
       </div>
 
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.blacksmith}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.barracks}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.archery}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.stable}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.siege}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.castle}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.monastery}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.university}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.townCenter}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.lumberCamp}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.mill}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.miningCamp}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.market}></GroupTechTreeComponent>
-      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.dock}></GroupTechTreeComponent>
-      
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.blacksmith} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.barracks} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.archery} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.stable} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.siege} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.castle} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.monastery} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.university} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.townCenter} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.lumberCamp} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.mill} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.miningCamp} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.market} techSize={techSize}></GroupTechTreeComponent>
+      <GroupTechTreeComponent groupTechTree={techTreeToDisplay.dock} techSize={techSize}></GroupTechTreeComponent>
+
       <LegendDisplay></LegendDisplay>
     </div>
   );
