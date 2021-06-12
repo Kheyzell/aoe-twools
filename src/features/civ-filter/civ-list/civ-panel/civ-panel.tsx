@@ -8,6 +8,7 @@ import woodenBackground from "../../../../resources/images/backgrounds/parchment
 import './civ-panel.css'
 import { Bonus } from "../../../../models/bonus.model"
 import { stopEventPropagation } from "../../../../utils/utils"
+import BonusLine from "../../../../components/bonus/bonus-line/bonus-line.component"
 
 
 type Props = {
@@ -76,7 +77,7 @@ const CivPanel: React.FC<Props> = (props) => {
                 <div className="SubTitle"> { t('Bonuses') } </div>
                 <div className="Bonuses"> {
                     bonuses.map(bonus => {
-                        return (<li> { bonus.team ? (<span className="TeamBonus"> { t('Team bonus') }: </span>) : "" } { t(`civ.${props.civ.id}.bonus.${bonus.id}.description`) } </li>)
+                        return (<li> <BonusLine civId={props.civ.id} bonus={bonus}></BonusLine> </li>)
                     })
                 } </div>
             </div>
@@ -85,7 +86,7 @@ const CivPanel: React.FC<Props> = (props) => {
                 <div className="SubTitle"> { t('Unique technologies') } </div>
                 <div className="Bonuses"> {
                     uniqueTechs.map(uniqueTech => {
-                        return (<li> { t(`upgrade.${uniqueTech.id}.name`) }: { t(`upgrade.${uniqueTech.id}.description`) } </li>)
+                        return (<li> <BonusLine civId={props.civ.id} bonus={uniqueTech}></BonusLine> </li>)
                     })
                 } </div>
             </div>

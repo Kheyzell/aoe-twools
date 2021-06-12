@@ -1,0 +1,19 @@
+.BonusPanel {
+    padding: 8px;
+    border: 2px solid #ffffff;
+}
+
+.BonusPanel > .Section > .Title {
+    font-size: 1.1rem;
+    text-decoration: underline;
+}
+
+.BonusPanel > .Section .List {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 4px;
+}
+
+.BonusPanel > .Section .List > div:not(:first-child) {
+    margin-left: 8px;
+}

@@ -1,8 +1,8 @@
 import React from "react";
 
 import "./lang-selector.css"
-import englishFlag from "../resources/icons/gb.png"
-import frenchFlag from "../resources/icons/fr.png"
+import englishFlag from "../../resources/icons/gb.png"
+import frenchFlag from "../../resources/icons/fr.png"
 import { useTranslation } from "react-i18next";
 
 export interface LangSelectorProps { }
