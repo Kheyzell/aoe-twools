@@ -1,3 +1,4 @@
+import { Tooltip } from "@material-ui/core"
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
@@ -11,8 +12,9 @@ import './tech.component.css'
 
 export enum BoxSize {
   mini = 'mini',
+  small = 'small',
   normal = 'normal'
-} 
+}
 
 type Props = {
   tech: Tech
@@ -53,22 +55,24 @@ const TechComponent: React.FC<Props> = (props, state: State) => {
   const isSelected = !!selectedTechs.find(selectedTech => selectedTech.id === props.tech.id)
 
   const techClass = props.tech.type === TechType.unit ? 'UnitTech' : 'UpgradeTech'
-  const sizeClass = size === BoxSize.normal ? 'Normal' : size === BoxSize.mini ? 'Mini' : ''
+  const sizeClass = size === BoxSize.normal ? 'Normal' : size === BoxSize.small ? 'Small' : size === BoxSize.mini ? 'Mini' : ''
   const selectedClass = isSelected ? 'Selected' : ''
   const translationKey = `${(props.tech.type === TechType.unit ? 'unit' : props.tech.type === TechType.upgrade ? 'upgrade' : 'unique')}.${props.tech.id}`
   const isInSelectedCivTree1Class = selectedCiv && selectedCiv2 && isInCivTree(selectedCiv) ? 'SelectedCiv1' : ''
   const isInSelectedCivTree2Class = selectedCiv && selectedCiv2 && isInCivTree(selectedCiv2) ? 'SelectedCiv2' : ''
   const unavailableClass = !selectedCiv || isInCivTree(selectedCiv) || isInCivTree(selectedCiv2) ? '' : 'Unavailable'
   const uniqueClass = props.tech.unique ? 'Unique' : ''
-  
+
   return (
-    <div
-       className={`Tech ${techClass} ${sizeClass} ${selectedClass} ${unavailableClass} ${uniqueClass} ${isInSelectedCivTree1Class} ${isInSelectedCivTree2Class}`}
-       onClick={onTechClick}>
-      <div className="Gray-Overlay"></div>
-      <span className="Name"> { t(`${translationKey}.name`) } </span>
-      <img src={'./' + process.env.PUBLIC_URL + '/images/techs/' + imageId + '.png'} />
-    </div>
+    <Tooltip title={size === BoxSize.mini ? (<span> {t(`${translationKey}.name`)} </span>) : ''} arrow>
+      <div
+        className={`Tech ${techClass} ${sizeClass} ${selectedClass} ${unavailableClass} ${uniqueClass} ${isInSelectedCivTree1Class} ${isInSelectedCivTree2Class}`}
+        onClick={onTechClick}>
+        <div className="Gray-Overlay"></div>
+        <span className="Name"> {t(`${translationKey}.name`)} </span>
+        <img src={'./' + process.env.PUBLIC_URL + '/images/techs/' + imageId + '.png'} />
+      </div>
+    </Tooltip>
   )
 };
 

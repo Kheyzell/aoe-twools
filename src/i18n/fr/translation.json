@@ -18,6 +18,8 @@
     "Excluded": "Exclues",
     "List of affected units": "Liste des unités affectées",
     "List of affected upgrades": "Liste des technologies affectées",
+    "Scale up": "Agrandir",
+    "Scale down": "Réduire",
     "civ": {
         "aztecs": {
             "name": "Aztèques",

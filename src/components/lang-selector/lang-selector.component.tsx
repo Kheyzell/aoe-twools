@@ -4,16 +4,16 @@ import "./lang-selector.component.css"
 import englishFlag from "../../resources/icons/gb.png"
 import frenchFlag from "../../resources/icons/fr.png"
 import { useTranslation } from "react-i18next";
+import localStorageService from "../../core/local-storage.service";
 
 export interface LangSelectorProps { }
-export interface LangSelectorState { }
 
-const LangSelector: React.FC<LangSelectorProps> = (props, state: LangSelectorState) => {
+const LangSelector: React.FC<LangSelectorProps> = (props: LangSelectorProps) => {
     const { i18n } = useTranslation()
     const currentLanguage = i18n.language
 
     const onFlagClick = (lang: string) => {
-        window.localStorage.setItem('lang', lang)
+        localStorageService.storeLanguage(lang)
         i18n.changeLanguage(lang)
     }
 
@@ -25,4 +25,4 @@ const LangSelector: React.FC<LangSelectorProps> = (props, state: LangSelectorSta
     );
 }
 
-export default LangSelector;
+export default LangSelector

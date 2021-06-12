@@ -2,6 +2,7 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import detector from "i18next-browser-languagedetector"
 
+import localStorageService from '../core/local-storage.service'
 import translationEn from './en/translation.json'
 import translationFr from './fr/translation.json'
 
@@ -14,7 +15,7 @@ export const resources = {
   }
 } as const
 
-const lang = window.localStorage.getItem('lang') || undefined
+const lang = localStorageService.loadLanguage() || undefined
 
 i18n
   .use(initReactI18next)
