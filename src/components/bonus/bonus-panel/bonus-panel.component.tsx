@@ -4,6 +4,7 @@ import TechComponent from "../../../features/civ-filter/tech-tree/tech/tech.comp
 
 import { Bonus } from "../../../models/bonus.model"
 import "./bonus-panel.component.css"
+import woodenBackground from "../../../resources/images/backgrounds/parchment2.jpg"
 
 export interface BonusPanelProps {
     bonus: Bonus
@@ -13,7 +14,7 @@ const BonusPanel: React.FC<BonusPanelProps> = (props) => {
     const { t } = useTranslation()
 
     return (
-        <div className="BonusPanel">
+        <div className="BonusPanel" style={{ background: `url(${woodenBackground})` }}>
             {props.bonus.affectedUnits.length > 0 ? (
                 <div className="Section">
                     <span className="Title"> {t('List of affected units')}: </span>

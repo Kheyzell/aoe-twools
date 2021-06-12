@@ -1,6 +1,7 @@
 .BonusPanel {
     padding: 8px;
     border: 2px solid #ffffff;
+    background-size: cover !important;
 }
 
 .BonusPanel > .Section > .Title {
