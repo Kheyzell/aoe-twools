@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 import { Tech, UnitLine } from "../../../../models/techs.model"
 import TechComponent from "../tech/tech.component"
-import '../group-tech-tree/group-tech-tree.css'
+import '../group-tech-tree/group-tech-tree.component.css'
 
 interface UnitLineTechTreeProps {
     unitLine: UnitLine

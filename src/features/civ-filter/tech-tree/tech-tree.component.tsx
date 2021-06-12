@@ -1,9 +1,10 @@
 import React, { useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from "react-i18next"
 
-import GroupTechTreeComponent from "./group-tech-tree/group-tech-tree"
+import GroupTechTreeComponent from "./group-tech-tree/group-tech-tree.component"
 import { isInComparisonModeSelector, resetTechSelection, selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCivSelection, unselectCivs } from "../civFilterSlice"
-import './tech-tree.css'
+import './tech-tree.component.css'
 import refreshIcon from "../../../resources/icons/refresh.png"
 import woodenBackground from "../../../resources/images/backgrounds/wood2.jpg"
 import darkAge from "../../../resources/images/darkAge.png"
@@ -15,7 +16,6 @@ import TechComponent, { BoxSize } from "./tech/tech.component"
 import { fullTechTree } from "../../../constants/tech-trees/_full-tech-tree.const"
 import { generateTechTreeToDisplayFrom } from "../../../utils/tech-tree.utils"
 import { scrollHorizontally } from "../../../utils/utils"
-import { useTranslation } from "react-i18next"
 
 type Props = {}
 type State = {}

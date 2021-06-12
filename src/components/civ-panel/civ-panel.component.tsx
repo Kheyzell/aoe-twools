@@ -1,14 +1,14 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 
-import { CivTechTree, Unit } from "../../../../models/techs.model"
-import { getAllCivUnitLines, hasCivUpgrades } from "../../../../utils/techs.utils"
-import TechComponent from "../../tech-tree/tech/tech.component"
-import woodenBackground from "../../../../resources/images/backgrounds/parchment2.jpg"
-import './civ-panel.css'
-import { Bonus } from "../../../../models/bonus.model"
-import { stopEventPropagation } from "../../../../utils/utils"
-import BonusLine from "../../../../components/bonus/bonus-line/bonus-line.component"
+import { CivTechTree, Unit } from "../../models/techs.model"
+import { getAllCivUnitLines, hasCivUpgrades } from "../../utils/techs.utils"
+import TechComponent from "../../features/civ-filter/tech-tree/tech/tech.component"
+import woodenBackground from "../../resources/images/backgrounds/parchment2.jpg"
+import './civ-panel.component.css'
+import { Bonus } from "../../models/bonus.model"
+import { stopEventPropagation } from "../../utils/utils"
+import BonusLine from "../bonus/bonus-line/bonus-line.component"
 
 
 type Props = {

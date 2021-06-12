@@ -22,8 +22,8 @@ import { millTechs } from "./constants/GroupTechTree/mill-tech-tree.const"
 import { miningCampTechs } from "./constants/GroupTechTree/mining-camp-tech-tree.const"
 import { marketTechs } from "./constants/GroupTechTree/market-tech-tree.const"
 import { dockTechs } from "./constants/GroupTechTree/dock-tech-tree.const"
-import LangSelector from './components/lang-selector/lang-selector'
-import CivFilter from './features/civ-filter/civ-filter'
+import LangSelector from './components/lang-selector/lang-selector.component'
+import CivFilter from './features/civ-filter/civ-filter.component'
 import UnitCalculator from './features/unit-calculator/unit-calculator.component'
 
 // initialise group tech trees

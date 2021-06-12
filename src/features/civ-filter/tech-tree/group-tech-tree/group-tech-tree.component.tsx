@@ -2,8 +2,8 @@ import React from "react"
 
 import { GroupTechTree } from "../../../../models/techs.model";
 import TechComponent from "../tech/tech.component"
-import UnitLineTechTreeComponent from "../unit-line-tech-tree/unit-line-tech-tree";
-import './group-tech-tree.css'
+import UnitLineTechTreeComponent from "../unit-line-tech-tree/unit-line-tech-tree.component";
+import './group-tech-tree.component.css'
 
 type Props = {
   groupTechTree: GroupTechTree
