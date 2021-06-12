@@ -98,7 +98,10 @@ export const incasTechTree: CivTechTree = {
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [townCenterUnits.villager],
-            affectedUpgrades: []
+            affectedUpgrades: [
+                blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+                blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor
+            ]
         },
         {
             id: 'incas3',

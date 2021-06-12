@@ -64,7 +64,7 @@ const uniqueTechs = [
         cost: { wood: 600, food: 0, gold: 500, stone: 0 },
         duration: 40,
         affectedUnits: [stableUnits.lightCavalry, stableUnits.paladin],
-        affectedUpgrades: []
+        affectedUpgrades: [stableUpgrades.husbandry]
     })
 ]
 

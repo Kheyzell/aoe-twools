@@ -33,7 +33,7 @@
     font-size: .9rem;
 }
 
-.List {
+.CivList > .List {
     display: flex;
     padding: 8px;
     border-bottom: 3px solid black;
@@ -42,29 +42,29 @@
     overflow-y: hidden;
     z-index: 1000;
 }
-.List.Excluded {
+.CivList > .List.Excluded {
     background-color: #00000080;
 }
 
-.List.Excluded .CivPanel {
+.CivList > .List.Excluded .CivPanel {
     top: 142px;
 }
 
-.List::before , 
-.List::after {
+.CivList > .List::before , 
+.CivList > .List::after {
   content:'';
   flex:1;
 }
 
-.List::-webkit-scrollbar {
+.CivList > .List::-webkit-scrollbar {
   height: 4px;              /* height of horizontal scrollbar ← You're missing this */
   width: 4px;               /* width of vertical scrollbar */
   background-color: #d5d5d5;
 }
-/* .List::-webkit-scrollbar-track {
+/* .CivList > .List::-webkit-scrollbar-track {
     background-color: #aaaaaa;
 } */
-.List::-webkit-scrollbar-thumb {
+.CivList > .List::-webkit-scrollbar-thumb {
     background-color: #808080
 }
 

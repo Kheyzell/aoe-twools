@@ -16,6 +16,8 @@
     "Filtered": "Filtered",
     "Fully upgraded": "Fully upgraded",
     "Excluded": "Excluded",
+    "List of affected units": "List of affected units",
+    "List of affected upgrades": "List of affected technologies",
     "civ": {
         "aztecs": {
             "name": "Aztecs",

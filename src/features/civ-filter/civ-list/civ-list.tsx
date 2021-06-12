@@ -11,6 +11,7 @@ import { scrollHorizontally } from "../../../utils/utils"
 import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCiv2Selection, toggleCivSelection } from "../civFilterSlice"
 import './civ-list.css'
 import CivPanel from "./civ-panel/civ-panel"
+import WideTooltip from "../../../components/wide-tooltip.component";
 
 type ShowCivPanel = { [civId: string]: boolean }
 
@@ -68,17 +69,6 @@ const CivList: React.FC<Props> = (props) => {
     }) : []
     const excludedTechTrees = showCivsExcluded ? allCivTechs.filter(civ => !filteredTechTrees.find(filteredCiv => filteredCiv.id === civ.id)) : []
 
-    const CivPanelTooltip = withStyles(() => ({
-        arrow: {
-            color: 'white'
-        },
-        tooltip: {
-            font: 'inherit',
-            padding: 0,
-            maxWidth: "none"
-        }
-    }))(Tooltip);
-
     return (
         <div className="CivList">
             <div className="Tools" onMouseEnter={() => onEnterTools()} onMouseLeave={() => onLeaveTools()}>
@@ -104,14 +94,14 @@ const CivList: React.FC<Props> = (props) => {
                     const isSelected1 = !!selectedCiv && selectedCiv.id === civ.id
                     const isSelected2 = !!selectedCiv2 && selectedCiv2.id === civ.id
                     return (
-                        <CivPanelTooltip title={<CivPanel civ={civ}></CivPanel>} interactive arrow key={civ.id}>
+                        <WideTooltip title={<CivPanel civ={civ}></CivPanel>} interactive arrow key={civ.id}>
                             <div className={`CivTree ${isSelected1 ? 'Selected1' : ''} ${isSelected2 ? 'Selected2' : ''}`}
                                 key={civ.id}
                                 onClick={() => onCivClick(civ)}
                                 onContextMenu={e => onCiv2Click(e, civ)}>
                                 <img src={civ.crest} alt={t(`civ.${civ.id}.name`)} />
                             </div>
-                        </CivPanelTooltip>
+                        </WideTooltip>
                     )
                 })}
             </div>
@@ -124,14 +114,14 @@ const CivList: React.FC<Props> = (props) => {
                             const isSelected1 = !!selectedCiv && selectedCiv.id === civ.id
                             const isSelected2 = !!selectedCiv2 && selectedCiv2.id === civ.id
                             return (
-                                <CivPanelTooltip title={<CivPanel civ={civ}></CivPanel>} interactive arrow key={civ.id}>
+                                <WideTooltip title={<CivPanel civ={civ}></CivPanel>} interactive arrow key={civ.id}>
                                     <div className={`CivTree ${isSelected1 ? 'Selected1' : ''} ${isSelected2 ? 'Selected2' : ''}`}
                                         key={civ.id}
                                         onClick={() => onCivClick(civ)}
                                         onContextMenu={e => onCiv2Click(e, civ)}>
                                         <img src={civ.crest} alt={t(`civ.${civ.id}.name`)} />
                                     </div>
-                                </CivPanelTooltip>
+                                </WideTooltip>
                             )
                         })}
                     </div>
@@ -146,14 +136,14 @@ const CivList: React.FC<Props> = (props) => {
                             const isSelected1 = !!selectedCiv && selectedCiv.id === civ.id
                             const isSelected2 = !!selectedCiv2 && selectedCiv2.id === civ.id
                             return (
-                                <CivPanelTooltip title={<CivPanel civ={civ}></CivPanel>} interactive arrow key={civ.id}>
+                                <WideTooltip title={<CivPanel civ={civ}></CivPanel>} interactive arrow key={civ.id}>
                                     <div className={`CivTree ${isSelected1 ? 'Selected1' : ''} ${isSelected2 ? 'Selected2' : ''}`}
                                         key={civ.id}
                                         onClick={() => onCivClick(civ)}
                                         onContextMenu={e => onCiv2Click(e, civ)}>
                                         <img src={civ.crest} alt={t(`civ.${civ.id}.name`)} />
                                     </div>
-                                </CivPanelTooltip>
+                                </WideTooltip>
                             )
                         })}
                     </div>

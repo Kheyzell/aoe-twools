@@ -1,0 +1,11 @@
+.BonusLine {
+    display: contents !important;
+}
+
+.BonusLine > .HasTooltip:hover {
+    color: white;
+}
+
+.BonusLine > span > .TeamBonus {
+    font-weight: bold;
+}
