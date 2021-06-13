@@ -1,17 +1,15 @@
 import React, { useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
-import Tooltip from "@material-ui/core/Tooltip"
-import { withStyles } from "@material-ui/core/styles";
 
 import { allCivTechTrees } from "../../../constants"
 import { CivTechTree, TechType, Unit, Upgrade } from "../../../models/techs.model"
-import { civHasUnit, civHasUpgrade } from "../../../utils/tech-tree.utils"
 import { scrollHorizontally } from "../../../utils/utils"
 import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCiv2Selection, toggleCivSelection } from "../civFilterSlice"
 import './civ-list.component.css'
 import CivPanel from "../../../components/civ-panel/civ-panel.component"
 import WideTooltip from "../../../components/wide-tooltip.component";
+import civFilterService from "../civ-filter.service";
 
 type ShowCivPanel = { [civId: string]: boolean }
 
@@ -49,14 +47,14 @@ const CivList: React.FC<Props> = (props) => {
     const selectedUnits = selectedTechs.filter(tech => tech.type === TechType.unit) as Unit[]
     const civsWithSelectedUnits = allCivTechs.filter(civTechs => {
         return selectedUnits.reduce((hasAllUnits: Boolean, currentUnit: Unit) => {
-            return hasAllUnits && civHasUnit(civTechs, currentUnit)
+            return hasAllUnits && civFilterService.civHasUnit(civTechs, currentUnit)
         }, true)
     })
 
     const filteredTechTrees = civsWithSelectedUnits.filter(civTechs => {
         const selectedUpgrades = selectedTechs.filter(tech => tech.type === TechType.upgrade) as Upgrade[]
         return selectedUpgrades.reduce((hasAllTechs: Boolean, currentUpgrade: Upgrade) => {
-            return hasAllTechs && civHasUpgrade(civTechs, currentUpgrade)
+            return hasAllTechs && civFilterService.civHasUpgrade(civTechs, currentUpgrade)
         }, true)
     })
     const fullyUpgradedFilteredUnitsTechTrees = showCivsFullyUpgraded && selectedUnits.length > 0 ? civsWithSelectedUnits.filter(civ => {
@@ -64,7 +62,7 @@ const CivList: React.FC<Props> = (props) => {
             return neededUpgrades.concat(unitAffectingUpgrades)
         }, [])
         return allNeededUpgrades.reduce((hasAllUpgrades: boolean, upgrade: Upgrade) => {
-            return hasAllUpgrades && civHasUpgrade(civ, upgrade)
+            return hasAllUpgrades && civFilterService.civHasUpgrade(civ, upgrade)
         }, true)
     }) : []
     const excludedTechTrees = showCivsExcluded ? allCivTechs.filter(civ => !filteredTechTrees.find(filteredCiv => filteredCiv.id === civ.id)) : []

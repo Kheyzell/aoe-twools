@@ -17,9 +17,9 @@ import imperialAge from "../../../resources/images/imperialAge.png"
 import { CivTechTree, Tech } from "../../../models/techs.model"
 import TechComponent, { BoxSize } from "./tech/tech.component"
 import { fullTechTree } from "../../../constants/tech-trees/_full-tech-tree.const"
-import { generateTechTreeToDisplayFrom } from "../../../utils/tech-tree.utils"
 import { scrollHorizontally } from "../../../utils/utils"
 import localStorageService from "../../../core/local-storage.service"
+import civFilterService from "../civ-filter.service"
 
 type TechTreeProps = {}
 
@@ -34,7 +34,7 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
   const isInComparisonMode = useSelector(isInComparisonModeSelector)
   const selectedTechs = useSelector(selectedTechsSelector)
   const techTreeToDisplay = selectedCiv ?
-    (selectedCiv2 ? generateTechTreeToDisplayFrom(generateTechTreeToDisplayFrom(fullTechTree, selectedCiv), selectedCiv2) : generateTechTreeToDisplayFrom(fullTechTree, selectedCiv))
+    (selectedCiv2 ? civFilterService.generateTechTreeToDisplayFrom(civFilterService.generateTechTreeToDisplayFrom(fullTechTree, selectedCiv), selectedCiv2) : civFilterService.generateTechTreeToDisplayFrom(fullTechTree, selectedCiv))
     : fullTechTree
 
   const onChangeTechSize = () => {
