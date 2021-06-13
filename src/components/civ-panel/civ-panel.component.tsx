@@ -76,18 +76,14 @@ const CivPanel: React.FC<Props> = (props) => {
             <div className="Section">
                 <div className="SubTitle"> { t('Bonuses') } </div>
                 <div className="Bonuses"> {
-                    bonuses.map(bonus => {
-                        return (<li> <BonusLine civId={props.civ.id} bonus={bonus}></BonusLine> </li>)
-                    })
+                    bonuses.map(bonus => (<li> <BonusLine key={bonus.id} civId={props.civ.id} bonus={bonus}></BonusLine> </li>))
                 } </div>
             </div>
             
             <div className="Section">
                 <div className="SubTitle"> { t('Unique technologies') } </div>
                 <div className="Bonuses"> {
-                    uniqueTechs.map(uniqueTech => {
-                        return (<li> <BonusLine civId={props.civ.id} bonus={uniqueTech}></BonusLine> </li>)
-                    })
+                    uniqueTechs.map(uniqueTech => (<li> <BonusLine key={uniqueTech.id} civId={props.civ.id} bonus={uniqueTech}></BonusLine> </li>))
                 } </div>
             </div>
 
@@ -103,9 +99,7 @@ const CivPanel: React.FC<Props> = (props) => {
             <div className="Section">
                 <div className="SubTitle"> { fullyUpgradedUnits.length > 0 ? t("Fully upgraded units") : t("No fully upgraded unit") } </div>
                 <div className="UnitList FullyUpgradedUnits"> {
-                    fullyUpgradedUnits.map(unit => {
-                        return (<TechComponent key={unit.id} tech={unit}></TechComponent>)
-                    })
+                    fullyUpgradedUnits.map(unit => (<TechComponent key={unit.id} tech={unit}></TechComponent>))
                 } </div>
             </div>
         </div>

@@ -67,7 +67,7 @@ const uniqueTechs = [
         value: 10,
         cost: { wood: 400, food: 400, gold: 0, stone: 0 },
         duration: 40,
-        affectedUnits: [townCenterUnits.villager, marketUnits.tradeCart],
+        affectedUnits: [townCenterUnits.villager, marketUnits.tradeCart, dockUnits.tradeCog],
         affectedUpgrades: []
     }),
     new UniqueTech({

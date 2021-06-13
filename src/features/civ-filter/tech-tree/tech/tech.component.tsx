@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { castleUpgrades } from "../../../../constants/techs/castle-techs.const"
 
 import { CivTechTree, Tech, TechType } from "../../../../models/techs.model"
-import { civHasTech } from "../../../../utils/tech-tree.utils"
+import civFilterService from "../../civ-filter.service"
 import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleTechsSelelection } from "../../civFilterSlice"
 
 import './tech.component.css'
@@ -32,7 +32,7 @@ const TechComponent: React.FC<Props> = (props, state: State) => {
 
   const isInCivTree = (civTree?: CivTechTree | null) => {
     if (civTree) {
-      return civHasTech(civTree, props.tech)
+      return civFilterService.civHasTech(civTree, props.tech)
     }
   }
 

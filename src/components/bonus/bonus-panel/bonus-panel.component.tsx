@@ -20,7 +20,7 @@ const BonusPanel: React.FC<BonusPanelProps> = (props) => {
                     <span className="Title"> {t('List of affected units')}: </span>
                     <div className="List">
                         {props.bonus.affectedUnits.map(unit => {
-                            return (<TechComponent tech={unit}></TechComponent>)
+                            return (<TechComponent key={unit.id} tech={unit}></TechComponent>)
                         })}
                     </div>
                 </div>
@@ -30,7 +30,7 @@ const BonusPanel: React.FC<BonusPanelProps> = (props) => {
                     <span className="Title"> {t('List of affected upgrades')}: </span>
                     <div className="List">
                         {props.bonus.affectedUpgrades.map(upgrade => {
-                            return (<TechComponent tech={upgrade}></TechComponent>)
+                            return (<TechComponent key={upgrade.id} tech={upgrade}></TechComponent>)
                         })}
                     </div>
                 </div>
