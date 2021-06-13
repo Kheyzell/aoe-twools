@@ -52,7 +52,7 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
     dispatch(toggleCivSelection({ ...civ }))
   }
 
-  const displaySelectedCivs = () => {
+  const SelectedCivs = () => {
     if (!!selectedCiv || !!selectedCiv2) {
       return (
         <div className="SelectedCivs">
@@ -69,6 +69,7 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
         </div>
       )
     }
+    return null
   }
 
   const toolsSelectedTechs = selectedTechs.filter(tech => {
@@ -108,7 +109,7 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
 
         <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> </button>
 
-        {displaySelectedCivs()}
+        <SelectedCivs></SelectedCivs>
 
         <div className="SelectedTechs">
           {toolsSelectedTechs.map((tech: Tech, index: number) => {

@@ -1,5 +1,5 @@
 import { CivTechTree, GroupTechTree, Tech, TechType, Unit, UnitLine, Upgrade, UpgradePerAgeGroup } from "../models/techs.model"
-import { castleUnits } from "../constants/techs/castle-techs.const"
+import { castleUnits, castleUpgrades } from "../constants/techs/castle-techs.const"
 import { chainTechs } from "./techs.utils"
 
 export const generateTechTreeToDisplayFrom = (baseCivTechTree: CivTechTree, civTechTree: CivTechTree): CivTechTree => {
@@ -223,10 +223,21 @@ function mergeGroupTechTrees(baseGroup: GroupTechTree, otherGroup: GroupTechTree
 
 function castleReplaceAndMergeGroupTechTrees(baseGroup: GroupTechTree, otherGroup: GroupTechTree) {
     let unitLines = [...baseGroup.units]
-    unitLines[0] = otherGroup.units[0]
+    if (unitLines[0].list[0].id === castleUnits.uniqueUnit.id) { // in the case of the default full tech tree, we replace the Unique Unit
+        unitLines[0] = otherGroup.units[0]
+    } else { // otherwise we add the other unique unit to the group
+        unitLines.unshift(baseGroup.units[0])
+        unitLines[1] = otherGroup.units[0]
+    }
     let upgrades = [...baseGroup.upgrades.list]
-    upgrades[0] = otherGroup.upgrades.list[0]
-    upgrades[1] = otherGroup.upgrades.list[1]
+    if (upgrades[0].id === castleUpgrades.castleUniqueTech.id) { // in the case of the default full tech tree, we replace the Unique Technology
+        upgrades[0] = otherGroup.upgrades.list[0]
+        upgrades[1] = otherGroup.upgrades.list[1]
+    } else { // otherwise we add the other unique technology to the list
+        upgrades.unshift(baseGroup.upgrades.list[0], baseGroup.upgrades.list[1])
+        upgrades[2] = otherGroup.upgrades.list[0]
+        upgrades[3] = otherGroup.upgrades.list[1]
+    }
     const upgradePerAgeGroup = new UpgradePerAgeGroup(upgrades)
     return {
         name: baseGroup.name,
