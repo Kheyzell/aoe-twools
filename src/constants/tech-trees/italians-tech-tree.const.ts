@@ -1,4 +1,4 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/italians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber, addNumber } from "../../utils/utils";
+import { Unit } from "../../models/unit.model";
 
 export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossbowman: Unit, condottiero: Unit } = {
     genoeseCrossbowman: new Unit({
@@ -65,8 +68,15 @@ const uniqueTechs = [
         effectType: EffectType.armor,
         value: 1,
         cost: { wood: 0, food: 300, gold: 150, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(1, ArmorType.melee)
+                unit.addArmorComponent(1, ArmorType.pierce)
+            }
+        }],
         duration: 40,
-        affectedUnits: [archeryUnits.arbalester, italiansUniqueUnits.condottiero],
+        affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester, italiansUniqueUnits.condottiero],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -75,6 +85,15 @@ const uniqueTechs = [
         effectType: EffectType.discount,
         value: 50,
         cost: { wood: 0, food: 500, gold: 250, stone: 0 },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.cost.wood = unit.cost.wood / 2
+                unit.cost.food = unit.cost.food / 2
+                unit.cost.gold = unit.cost.gold / 2
+                unit.cost.stone = unit.cost.stone / 2
+            }
+        }],
         duration: 60,
         affectedUnits: [marketUnits.tradeCart],
         affectedUpgrades: []
@@ -97,6 +116,15 @@ export const italiansTechTree: CivTechTree = {
             id: 'italians2',
             effectType: EffectType.discount,
             value: 15,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.15))
+                    unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.15))
+                    unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.15))
+                    unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.15))
+                }
+            }],
             affectedUnits: [dockUnits.fishingShip],
             affectedUpgrades: []
         },
@@ -104,6 +132,15 @@ export const italiansTechTree: CivTechTree = {
             id: 'italians3',
             effectType: EffectType.discount,
             value: 20,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.2))
+                    unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.2))
+                    unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.2))
+                    unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.2))
+                }
+            }],
             affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
             affectedUpgrades: []
         },
@@ -270,3 +307,6 @@ export const italiansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, italiansTechTree)
+setCivOnUniqueTechs(italiansTechTree.bonuses, italiansTechTree)

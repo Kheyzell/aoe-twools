@@ -1,0 +1,9 @@
+.CivFilterTech .Tech.SelectedCiv1 {
+    background-color: #00dde9 !important;
+}
+.CivFilterTech .Tech.SelectedCiv2 {
+    background-color: #ff006a !important;
+}
+.CivFilterTech .Tech.SelectedCiv1.SelectedCiv2 {
+    background: linear-gradient(112deg, #00dde9 15%, #ff006a 75%) !important;
+}

@@ -53,43 +53,8 @@
 }
 .Tech.Mini.Selected {
     border-width: 2px;
-    width: 32px;
-    height: 32px;
-}
-
-.Tech.SelectedCiv1.UnitTech {
-    /* background: linear-gradient(to bottom right, #00ffff 50%, #016288 50%); */
-}
-.Tech.SelectedCiv1.UpgradeTech {
-    /* background: linear-gradient(to bottom right, #00ffff 50%, #357738 50%); */
-}
-.Tech.SelectedCiv1.Unique {
-    /* background: linear-gradient(to bottom right, #00ffff 50%, #7a3d83 50%); */
-}
-.Tech.SelectedCiv1 {
-    background-color: #00dde9 !important;
-    /* border: 3px solid #00ffff; */
-    /* width: 88px;
-    height: 88px; */
-}
-.Tech.SelectedCiv2.UnitTech {
-    /* background: linear-gradient(to bottom right, #016288 50%, #ff006a 50%); */
-}
-.Tech.SelectedCiv2.UpgradeTech {
-    /* background: linear-gradient(to bottom right, #357738 50%, #ff006a 50%); */
-}
-.Tech.SelectedCiv2.Unique {
-    /* background: linear-gradient(to bottom right, #7a3d83 50%, #ff006a 50%); */
-}
-.Tech.SelectedCiv2 {
-    background-color: #ff006a !important;
-    /* border: 3px solid #ff006a; */
-    /* width: 88px;
-    height: 88px; */
-}
-.Tech.SelectedCiv1.SelectedCiv2 {
-    /* border-color: #00ffff #ff006a #ff006a #00ffff; */
-    background: linear-gradient(112deg, #00dde9 15%, #ff006a 75%) !important;
+    width: 36px;
+    height: 36px;
 }
 
 .Gray-Overlay {
@@ -136,4 +101,8 @@
 .Tech.Mini > img {
     width: 32px;
     height: 32px;
+}
+
+.TooltipName {
+    padding: 4px 8px;
 }

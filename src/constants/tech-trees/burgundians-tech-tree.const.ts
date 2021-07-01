@@ -1,5 +1,10 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/burgundians.png';
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
+import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 import { castleUnits, castleUpgrades } from "../techs/castle-techs.const";
@@ -13,8 +18,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/burgundians.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit, flemishMilitia: Unit } = {
     coustillier: new Unit({
@@ -111,6 +114,12 @@ export const burgundiansTechTree: CivTechTree = {
             id: 'burgundians3',
             effectType: EffectType.damagePercent,
             value: 25,
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.stats.attackComponents.forEach(attack => attack.value = multiplyNumber(attack.value, 1.25))
+                }
+            }],
             affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
             affectedUpgrades: []
         },
@@ -273,3 +282,6 @@ export const burgundiansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, burgundiansTechTree)
+setCivOnUniqueTechs(burgundiansTechTree.bonuses, burgundiansTechTree)

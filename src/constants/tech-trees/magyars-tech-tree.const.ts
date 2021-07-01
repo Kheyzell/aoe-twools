@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/magyars.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber, addNumber } from "../../utils/utils";
 
 export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit } = {
     magyarHuszar: new Unit({
@@ -52,8 +55,14 @@ const uniqueTechs = [
         effectType: EffectType.discoutGold,
         value: 100,
         cost: { wood: 0, food: 200, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.cost.gold = 0
+            }
+        }],
         duration: 40,
-        affectedUnits: [magyarsUniqueUnits.eliteMagyarHuszar],
+        affectedUnits: [magyarsUniqueUnits.magyarHuszar, magyarsUniqueUnits.eliteMagyarHuszar],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -62,8 +71,15 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: 1,
         cost: { wood: 600, food: 0, gold: 400, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(1, ArmorType.pierce)
+                unit.stats.range! += 1
+            }
+        }],
         duration: 40,
-        affectedUnits: [archeryUnits.heavyCavalryArcher],
+        affectedUnits: [archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
         affectedUpgrades: []
     })
 ]
@@ -84,7 +100,13 @@ export const magyarsTechTree: CivTechTree = {
             id: 'magyars2',
             effectType: EffectType.discount,
             value: 15,
-            affectedUnits: [stableUnits.hussar],
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.15))
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar],
             affectedUpgrades: []
         },
         {
@@ -98,7 +120,13 @@ export const magyarsTechTree: CivTechTree = {
             id: 'magyars4',
             effectType: EffectType.lineOfSight,
             value: 2,
-            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.stats.lineOfSight = unit.stats.lineOfSight + 2
+                }
+            }],
+            affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher],
             affectedUpgrades: [],
             team: true
         }
@@ -240,3 +268,6 @@ export const magyarsTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, magyarsTechTree)
+setCivOnUniqueTechs(magyarsTechTree.bonuses, magyarsTechTree)

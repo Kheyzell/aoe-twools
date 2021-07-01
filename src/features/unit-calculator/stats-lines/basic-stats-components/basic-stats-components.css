@@ -1,0 +1,19 @@
+.TitleLine {
+    padding: 0 8px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.5em;
+}
+.TitleLine td {
+    /* border: 1px solid black; */
+}
+.TitleLine td+td {
+    border-left: none;
+}
+.TitleLine td:not(:last-child) {
+    border-right: none;
+}
+
+.SeparatorLine {
+    height: 16px;
+}

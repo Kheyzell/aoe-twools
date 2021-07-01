@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/turks.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 
 export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
     janissary: new Unit({
@@ -52,8 +55,14 @@ const uniqueTechs = [
         effectType: EffectType.health,
         value: 20,
         cost: { wood: 0, food: 350, gold: 150, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.health += 20
+            }
+        }],
         duration: 60,
-        affectedUnits: [archeryUnits.heavyCavalryArcher],
+        affectedUnits: [archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -62,8 +71,14 @@ const uniqueTechs = [
         effectType: EffectType.range,
         value: 2,
         cost: { wood: 0, food: 0, gold: 500, stone: 450 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.range! += 2
+            }
+        }],
         duration: 40,
-        affectedUnits: [siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon],
+        affectedUnits: [siegeUnits.bombardCannon, dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon],
         affectedUpgrades: []
     })
 ]
@@ -77,7 +92,13 @@ export const turksTechTree: CivTechTree = {
             id: 'turks1',
             effectType: EffectType.healthPercent,
             value: 25,
-            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, turksUniqueUnits.eliteJanissary],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.health = multiplyNumber(unit.stats.health, 1.2)
+                }
+            }],
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon, turksUniqueUnits.janissary, turksUniqueUnits.eliteJanissary],
             affectedUpgrades: []
         },
         {
@@ -112,14 +133,26 @@ export const turksTechTree: CivTechTree = {
             id: 'turks6',
             effectType: EffectType.pierceArmor,
             value: 1,
-            affectedUnits: [stableUnits.hussar],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.addArmorComponent(1, ArmorType.pierce)
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar],
             affectedUpgrades: []
         },
         {
             id: 'turks7',
             effectType: EffectType.creationSpeed,
             value: 25,
-            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, turksUniqueUnits.eliteJanissary],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.duration = multiplyNumber(unit.duration, 1/1.25)
+                }
+            }],
+            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon, turksUniqueUnits.janissary, turksUniqueUnits.eliteJanissary],
             affectedUpgrades: [],
             team: true
         }
@@ -268,3 +301,6 @@ export const turksTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, turksTechTree)
+setCivOnUniqueTechs(turksTechTree.bonuses, turksTechTree)

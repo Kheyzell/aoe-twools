@@ -1,4 +1,6 @@
-import { Upgrade } from "../../models/techs.model";
+import { ArmorType, EffectOrder } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import { Upgrade } from "../../models/upgrade.model";
 import { chainTechs } from "../../utils/techs.utils";
 
 interface BlacksmithUpgrades {
@@ -29,6 +31,12 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 0,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.attackComponents.find(attack => attack.type === ArmorType.melee)!.value += 1
+            }
+        }],
         duration: 50
     }),
     ironCasting: new Upgrade({
@@ -40,6 +48,12 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 120,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.attackComponents.find(attack => attack.type === ArmorType.melee)!.value += 1
+            }
+        }],
         duration: 75
     }),
     blastFurnace: new Upgrade({
@@ -51,6 +65,12 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 225,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.attackComponents.find(attack => attack.type === ArmorType.melee)!.value += 2
+            }
+        }],
         duration: 100
     }),
     scaleMailArmor: new Upgrade({
@@ -62,6 +82,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 0,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.melee)!.value += 1
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.pierce)!.value += 1
+            }
+        }],
         duration: 40
     }),
     chainMailArmor: new Upgrade({
@@ -73,6 +100,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 100,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.melee)!.value += 1
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.pierce)!.value += 1
+            }
+        }],
         duration: 55
     }),
     plateMailArmor: new Upgrade({
@@ -84,6 +118,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 150,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.melee)!.value += 1
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.pierce)!.value += 2
+            }
+        }],
         duration: 70
     }),
     scaleBardingArmor: new Upgrade({
@@ -95,6 +136,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 0,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.melee)!.value += 1
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.pierce)!.value += 1
+            }
+        }],
         duration: 45
     }),
     chainBardingArmor: new Upgrade({
@@ -106,6 +154,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 150,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.melee)!.value += 1
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.pierce)!.value += 1
+            }
+        }],
         duration: 60
     }),
     plateBardingArmor: new Upgrade({
@@ -117,6 +172,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 200,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.melee)!.value += 1
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.pierce)!.value += 2
+            }
+        }],
         duration: 75
     }),
     fletching: new Upgrade({
@@ -128,6 +190,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 50,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.attackComponents.find(attack => attack.type === ArmorType.pierce)!.value += 1
+                unit.stats.range! += 1
+            }
+        }],
         duration: 30
     }),
     bodkinArrow: new Upgrade({
@@ -139,6 +208,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 100,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.attackComponents.find(attack => attack.type === ArmorType.pierce)!.value += 1
+                unit.stats.range! += 1
+            }
+        }],
         duration: 35
     }),
     bracer: new Upgrade({
@@ -150,6 +226,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 200,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.attackComponents.find(attack => attack.type === ArmorType.pierce)!.value += 1
+                unit.stats.range! += 1
+            }
+        }],
         duration: 40
     }),
     paddedArcherArmor: new Upgrade({
@@ -161,6 +244,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 0,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.melee)!.value += 1
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.pierce)!.value += 1
+            }
+        }],
         duration: 40
     }),
     leatherArcherArmor: new Upgrade({
@@ -172,6 +262,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 150,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.melee)!.value += 1
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.pierce)!.value += 1
+            }
+        }],
         duration: 55
     }),
     ringArcherArmor: new Upgrade({
@@ -183,6 +280,13 @@ export const blacksmithUpgrades: BlacksmithUpgrades = {
             gold: 250,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.melee)!.value += 1
+                unit.stats.armorComponents.find(armor => armor.type === ArmorType.pierce)!.value += 2
+            }
+        }],
         duration: 70
     }),
 }

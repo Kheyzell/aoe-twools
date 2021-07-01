@@ -11,6 +11,7 @@
 
 .BonusPanel > .Section .List {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     margin-top: 4px;
 }

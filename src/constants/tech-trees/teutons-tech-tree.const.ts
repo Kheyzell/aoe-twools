@@ -1,5 +1,11 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { CapacityId, HealingCapacity } from "../../models/capacity.model";
+import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/teutons.png';
+import { getAllCivUnits, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray } from "../../utils/utils";
+import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 import { castleUnits, castleUpgrades } from "../techs/castle-techs.const";
@@ -13,9 +19,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/teutons.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { getAllCivUnits } from "../../utils/techs.utils";
 
 export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Unit } = {
     teutonicKnight: new Unit({
@@ -53,8 +56,14 @@ const uniqueTechs = [
         effectType: EffectType.meleeArmor,
         value: 4,
         cost: { wood: 400, food: 0, gold: 350, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(4, ArmorType.melee)
+            }
+        }],
         duration: 60,
-        affectedUnits: [siegeUnits.cappedRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower, siegeUnits.bombardCannon],
+        affectedUnits: [siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager, siegeUnits.scorpion, siegeUnits.heavyScorpion, siegeUnits.siegeTower, siegeUnits.bombardCannon],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -225,6 +234,15 @@ teutonsTechTree.bonuses = [
         id: 'teutons1',
         effectType: EffectType.miscallenous,
         value: 100,
+        effects: [{
+            order: EffectOrder.first,
+            apply: unit => {
+                const healingCapacity = unit.getCapacity(CapacityId.healing) as HealingCapacity
+                if (healingCapacity) {
+                    healingCapacity.range = healingCapacity.range * 2
+                }
+            }
+        }],
         affectedUnits: [monasteryUnits.monk],
         affectedUpgrades: []
     },
@@ -253,7 +271,24 @@ teutonsTechTree.bonuses = [
         id: 'teutons5',
         effectType: EffectType.meleeArmor,
         value: { age3: 1, age4: 2 },
-        affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, stableUnits.scoutCavalry, stableUnits.paladin],
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit, upgrades) => {
+                addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                unit.addArmorComponent(1, ArmorType.melee)
+                if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    unit.addArmorComponent(1, ArmorType.melee)
+                }
+                if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                    unit.addArmorComponent(1, ArmorType.melee)
+                }
+            }
+        }],
+        affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion,
+            barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier,
+            stableUnits.scoutCavalry,
+            stableUnits.knight, stableUnits.cavalier, stableUnits.paladin],
         affectedUpgrades: []
     },
     {
@@ -267,9 +302,18 @@ teutonsTechTree.bonuses = [
         id: 'teutons7',
         effectType: EffectType.convertionResistance,
         value: 2,
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.conversionResistance = (unit.stats.conversionResistance || 0) + 2
+            }
+        }],
         affectedUnits: getAllCivUnits(teutonsTechTree),
         affectedUpgrades: [],
         hideInUnitRecap: true,
         team: true
     },
 ]
+
+setCivOnUniqueTechs(uniqueTechs, teutonsTechTree)
+setCivOnUniqueTechs(teutonsTechTree.bonuses, teutonsTechTree)

@@ -1,4 +1,9 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/incas.png';
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -10,11 +15,8 @@ import { millUpgrades } from "../techs/mill-techs.const";
 import { miningCampUpgrades } from "../techs/mining-camp-techs.const";
 import { monasteryUnits, monasteryUpgrade } from "../techs/monastery-techs.const";
 import { siegeUnits } from "../techs/siege-techs.const";
-import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/incas.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Unit } = {
     kamayuk: new Unit({
@@ -66,7 +68,7 @@ const uniqueTechs = [
         value: 0,
         cost: { wood: 0, food: 200, gold: 300, stone: 0 },
         duration: 40,
-        affectedUnits: [archeryUnits.eliteSkirmisher, incasUniqueUnits.slinger],
+        affectedUnits: [archeryUnits.skirmisher, archeryUnits.eliteSkirmisher, incasUniqueUnits.slinger],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -75,8 +77,15 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 600, gold: 600, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(1, ArmorType.melee)
+                unit.addArmorComponent(2, ArmorType.pierce)
+            }
+        }],
         duration: 60,
-        affectedUnits: [barracksUnits.eliteEagleWarrior, incasUniqueUnits.eliteKamayuk, incasUniqueUnits.slinger],
+        affectedUnits: [barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior, incasUniqueUnits.kamayuk, incasUniqueUnits.eliteKamayuk, incasUniqueUnits.slinger],
         affectedUpgrades: []
     })
 ]
@@ -97,6 +106,17 @@ export const incasTechTree: CivTechTree = {
             id: 'incas2',
             effectType: EffectType.miscallenous,
             value: null,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.forging)
+                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.ironCasting)
+                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.blastFurnace)
+                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.scaleMailArmor)
+                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.chainMailArmor)
+                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.plateMailArmor)
+                }
+            }],
             affectedUnits: [townCenterUnits.villager],
             affectedUpgrades: [
                 blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
@@ -263,3 +283,6 @@ export const incasTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, incasTechTree)
+setCivOnUniqueTechs(incasTechTree.bonuses, incasTechTree)

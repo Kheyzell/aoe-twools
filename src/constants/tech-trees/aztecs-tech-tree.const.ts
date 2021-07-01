@@ -1,5 +1,11 @@
-import { CivTechTree, TechType, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
+import { Bonus, EffectType, UniqueTech } from "../../models/bonus.model";
+import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/aztecs.png';
+import { getAllCivMilitaryUnits, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
+import { monasteryTechs } from "../GroupTechTree/monastery-tech-tree.const";
+import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 import { castleUnits, castleUpgrades } from "../techs/castle-techs.const";
@@ -12,9 +18,6 @@ import { monasteryUnits, monasteryUpgrade } from "../techs/monastery-techs.const
 import { siegeUnits } from "../techs/siege-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/aztecs.png'
-import { Bonus, EffectType, UniqueTech } from "../../models/bonus.model";
-import { getAllCivMilitaryUnits } from "../../utils/techs.utils";
 
 export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit } = {
     jaguarWarrior: new Unit({
@@ -52,8 +55,15 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 400, gold: 350, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(1, ArmorType.pierce)
+                unit.stats.range! += 1
+            }
+        }],
         duration: 40,
-        affectedUnits: [archeryUnits.eliteSkirmisher],
+        affectedUnits: [archeryUnits.skirmisher, archeryUnits.eliteSkirmisher],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -62,8 +72,14 @@ const uniqueTechs = [
         effectType: EffectType.damage,
         value: 4,
         cost: { wood: 0, food: 450, gold: 750, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(4, ArmorType.melee)
+            }
+        }],
         duration: 60,
-        affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, barracksUnits.eliteEagleWarrior, aztecsUniqueUnits.eliteJaguarWarrior],
+        affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion, barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior, aztecsUniqueUnits.jaguarWarrior, aztecsUniqueUnits.eliteJaguarWarrior],
         affectedUpgrades: []
     })
 ]
@@ -212,6 +228,12 @@ const bonuses: Bonus[] = [
         id: 'aztecs1',
         effectType: EffectType.miscallenous,
         value: null,
+        effects: [{
+            order: EffectOrder.first,
+            apply: unit => {
+                // unit.carry + 3
+            }
+        }],
         affectedUnits: [townCenterUnits.villager],
         affectedUpgrades: []
     },
@@ -219,6 +241,12 @@ const bonuses: Bonus[] = [
         id: 'aztecs2',
         effectType: EffectType.creationSpeed,
         value: 11,
+        effects: [{
+            order: EffectOrder.last,
+            apply: unit => {
+                unit.duration = multiplyNumber(unit.duration, 1/1.11)
+            }
+        }],
         affectedUnits: getAllCivMilitaryUnits(aztecsTechTree),
         affectedUpgrades: [],
         hideInUnitRecap: true
@@ -227,6 +255,14 @@ const bonuses: Bonus[] = [
         id: 'aztecs3',
         effectType: EffectType.miscallenous,
         value: 5,
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit, upgrades) => {
+                addElementIfNotInArray(unit.affectingUpgrades, monasteryUpgrade.herbalMedecine)
+                const monasteryUpgrades = upgrades?.filter(up => monasteryTechs.upgrades.list.some(monasteryUpgrade => monasteryUpgrade.id === up.id))
+                unit.stats.health += monasteryUpgrades!.length * 5
+            }
+        }],
         affectedUnits: [monasteryUnits.monk],
         affectedUpgrades: []
     },
@@ -248,3 +284,6 @@ const bonuses: Bonus[] = [
 ]
 
 aztecsTechTree.bonuses = bonuses
+
+setCivOnUniqueTechs(uniqueTechs, aztecsTechTree)
+setCivOnUniqueTechs(bonuses, aztecsTechTree)

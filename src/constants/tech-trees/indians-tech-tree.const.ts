@@ -1,4 +1,4 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,7 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/indians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs } from "../../utils/techs.utils";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
+import { Unit } from "../../models/unit.model";
 
 export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Unit, imperialCamelRider: Unit } = {
     elephantArcher: new Unit({
@@ -76,6 +78,12 @@ const uniqueTechs = [
         effectType: EffectType.range,
         value: 1,
         cost: { wood: 0, food: 500, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.range! += 1
+            }
+        }],
         duration: 40,
         affectedUnits: [archeryUnits.handCannoneer],
         affectedUpgrades: []
@@ -98,6 +106,37 @@ export const indiansTechTree: CivTechTree = {
             id: 'indians2',
             effectType: EffectType.discount,
             value: { age1: 10, age2: 15, age3: 20, age4: 25 },
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.25))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.25))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.25))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.25))
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.20))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.20))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.20))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.20))
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.15))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.15))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.15))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.15))
+                    } else {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.10))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.10))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.10))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.10))
+                    }
+                }
+            }],
             affectedUnits: [townCenterUnits.villager],
             affectedUpgrades: []
         },
@@ -105,14 +144,30 @@ export const indiansTechTree: CivTechTree = {
             id: 'indians3',
             effectType: EffectType.pierceArmor,
             value: { age3: 1, age4: 2 },
-            affectedUnits: [stableUnits.hussar, indiansUniqueUnits.imperialCamelRider],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    unit.addArmorComponent(1, ArmorType.pierce)                    
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.addArmorComponent(1, ArmorType.pierce)
+                    }
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar, stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider],
             affectedUpgrades: []
         },
         {
             id: 'indians4',
             effectType: EffectType.miscallenous,
             value: 4,
-            affectedUnits: [indiansUniqueUnits.imperialCamelRider],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.addAttackComponent(4, ArmorType.standardBuilding)
+                }
+            }],
+            affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider],
             affectedUpgrades: [],
             team: true
         }
@@ -257,3 +312,6 @@ export const indiansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, indiansTechTree)
+setCivOnUniqueTechs(indiansTechTree.bonuses, indiansTechTree)

@@ -1,4 +1,10 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { CAPACITIES, RegenCapacity } from "../../models/capacity.model";
+import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/vikings.png';
+import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -10,12 +16,9 @@ import { millUpgrades } from "../techs/mill-techs.const";
 import { miningCampUpgrades } from "../techs/mining-camp-techs.const";
 import { monasteryUnits, monasteryUpgrade } from "../techs/monastery-techs.const";
 import { siegeUnits } from "../techs/siege-techs.const";
-import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
+import { stableUnits } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/vikings.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs } from "../../utils/techs.utils";
 
 export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: Unit, eliteLongboat: Unit } = {
     berserk: new Unit({
@@ -79,8 +82,15 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 700, gold: 500, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(5, ArmorType.cavalry)
+                unit.addAttackComponent(4, ArmorType.camel)
+            }
+        }],
         duration: 40,
-        affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, vikingsUniqueUnits.eliteBerserk],
+        affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion, barracksUnits.spearman, barracksUnits.pikeman, vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -88,9 +98,15 @@ const uniqueTechs = [
         age: 4,
         effectType: EffectType.regen,
         value: 40,
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addCapacity({ ...CAPACITIES.regen, healthPerMinute: 40 } as RegenCapacity)
+            }
+        }],
         cost: { wood: 0, food: 850, gold: 400, stone: 0 },
         duration: 40,
-        affectedUnits: [vikingsUniqueUnits.eliteBerserk],
+        affectedUnits: [vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk],
         affectedUpgrades: []
     })
 ]
@@ -106,14 +122,62 @@ export const vikingsTechTree: CivTechTree = {
             id: 'vikings1',
             effectType: EffectType.discount,
             value: { age2: 15, age3: 15, age4: 20 },
-            affectedUnits: [dockUnits.galleon, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, vikingsUniqueUnits.eliteLongboat],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.2))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.2))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.2))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.2))
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.15))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.15))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.15))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.15))
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.15))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.15))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.15))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.15))
+                    }
+                }
+            }],
+            affectedUnits: [dockUnits.galley, dockUnits.warGalley, dockUnits.galleon,
+                dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip,
+                dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon,
+                vikingsUniqueUnits.longboat, vikingsUniqueUnits.eliteLongboat],
             affectedUpgrades: []
         },
         {
             id: 'vikings2',
             effectType: EffectType.healthPercent,
             value: { age2: 10, age3: 15, age4: 20 },
-            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman, vikingsUniqueUnits.eliteBerserk],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.stats.health = multiplyNumber(unit.stats.health, 1.2)
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.stats.health = multiplyNumber(unit.stats.health, 1.15)
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                        unit.stats.health = multiplyNumber(unit.stats.health, 1.1)
+                    }
+                }
+            }],
+            affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion,
+                barracksUnits.spearman, barracksUnits.pikeman,
+                vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk],
             affectedUpgrades: []
         },
         {
@@ -269,3 +333,6 @@ export const vikingsTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, vikingsTechTree)
+setCivOnUniqueTechs(vikingsTechTree.bonuses, vikingsTechTree)

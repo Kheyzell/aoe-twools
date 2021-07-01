@@ -46,13 +46,13 @@ function AppComponent() {
 
       <Router>
         <Switch>
-          <Route exact path="/civ-filter">
+          <Route exact path="/">
             <CivFilter></CivFilter>
           </Route>
           <Route path="/calculator">
             <UnitCalculator></UnitCalculator>
           </Route>
-          <Redirect from="/" to="/civ-filter" />
+          {/* <Redirect from="/" to="" /> */}
         </Switch>
       </Router>
 

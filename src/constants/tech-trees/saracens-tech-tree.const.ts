@@ -1,4 +1,6 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import { CAPACITIES } from "../../models/capacity.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +17,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/saracens.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber, roundHundredth } from "../../utils/utils";
 
 export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
     mameluke: new Unit({
@@ -52,6 +56,12 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: 33,
         cost: { wood: 0, food: 200, gold: 100, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.capacities.push(CAPACITIES.madrasahRefund)
+            }
+        }],
         duration: 30,
         affectedUnits: [monasteryUnits.monk],
         affectedUpgrades: []
@@ -62,8 +72,14 @@ const uniqueTechs = [
         effectType: EffectType.health,
         value: 20,
         cost: { wood: 0, food: 500, gold: 450, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.health += 20
+            }
+        }],
         duration: 50,
-        affectedUnits: [stableUnits.heavyCamelRider, saracensUniqueUnits.eliteMameluke],
+        affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke],
         affectedUpgrades: []
     })
 ]
@@ -91,6 +107,12 @@ export const saracensTechTree: CivTechTree = {
             id: 'saracens3',
             effectType: EffectType.miscallenous,
             value: null,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.health = unit.stats.health * 2
+                }
+            }],
             affectedUnits: [dockUnits.transportShip],
             affectedUpgrades: []
         },
@@ -98,21 +120,39 @@ export const saracensTechTree: CivTechTree = {
             id: 'saracens4',
             effectType: EffectType.fireRate,
             value: 25,
-            affectedUnits: [dockUnits.galleon],
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.multiplyAttackRate(1.25)
+                }
+            }],
+            affectedUnits: [dockUnits.galley, dockUnits.warGalley, dockUnits.galleon],
             affectedUpgrades: []
         },
         {
             id: 'saracens5',
             effectType: EffectType.health,
             value: 10,
-            affectedUnits: [stableUnits.heavyCamelRider, saracensUniqueUnits.eliteMameluke],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.stats.health += 10
+                }
+            }],
+            affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke],
             affectedUpgrades: []
         },
         {
             id: 'saracens6',
             effectType: EffectType.miscallenous,
             value: 2,
-            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.addAttackComponent(2, ArmorType.standardBuilding)
+                }
+            }],
+            affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher],
             affectedUpgrades: [],
             team: true
         }
@@ -260,3 +300,6 @@ export const saracensTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, saracensTechTree)
+setCivOnUniqueTechs(saracensTechTree.bonuses, saracensTechTree)

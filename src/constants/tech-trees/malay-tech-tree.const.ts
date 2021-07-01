@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malay.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
 
 export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Unit } = {
     karambitWarrior: new Unit({
@@ -62,8 +65,15 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 850, gold: 500, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.cost.food += unit.cost.gold
+                unit.cost.gold = 0
+            }
+        }],
         duration: 40,
-        affectedUnits: [barracksUnits.twoHandedSwordsman],
+        affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman],
         affectedUpgrades: []
     })
 ]
@@ -98,7 +108,26 @@ export const malayTechTree: CivTechTree = {
             id: 'malay4',
             effectType: EffectType.discount,
             value: { age3: 30, age4: 40 },
-            affectedUnits: [stableUnits.eliteBattleElephant],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.40))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.40))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.40))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.40))
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.30))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.30))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.30))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.30))
+                    }
+                }
+            }],
+            affectedUnits: [stableUnits.battleElephant, stableUnits.eliteBattleElephant],
             affectedUpgrades: []
         },
         {
@@ -252,3 +281,6 @@ export const malayTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, malayTechTree)
+setCivOnUniqueTechs(malayTechTree.bonuses, malayTechTree)

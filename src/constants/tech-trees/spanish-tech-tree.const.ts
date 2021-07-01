@@ -1,4 +1,10 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { CapacityId, ConvertionCapacity } from "../../models/capacity.model";
+import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/spanish.png';
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber, roundHundredth } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -13,8 +19,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/spanish.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, missionary: Unit } = {
     conquistador: new Unit({
@@ -65,6 +69,16 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 100, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                const conversion = unit.stats.capacities.find(capacity => capacity.id === CapacityId.conversion) as ConvertionCapacity
+                if (conversion) {
+                    conversion.conversionCyclesMin = conversion.conversionCyclesMin - 1
+                    conversion.conversionCyclesMax = conversion.conversionCyclesMax - 1
+                }
+            }
+        }],
         duration: 40,
         affectedUnits: [monasteryUnits.monk, spanishUniqueUnits.missionary],
         affectedUpgrades: []
@@ -75,6 +89,15 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 400, gold: 250, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(6, ArmorType.melee)
+                unit.addArmorComponent(2, ArmorType.melee)
+                unit.addArmorComponent(2, ArmorType.pierce)
+                unit.stats.health += 40
+            }
+        }],
         duration: 60,
         affectedUnits: [townCenterUnits.villager],
         affectedUpgrades: []
@@ -117,6 +140,12 @@ export const spanishTechTree: CivTechTree = {
             id: 'spanish4',
             effectType: EffectType.fireRate,
             value: 18,
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.multiplyAttackRate(1.18)
+                }
+            }],
             affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon],
             affectedUpgrades: []
         },
@@ -273,3 +302,6 @@ export const spanishTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, spanishTechTree)
+setCivOnUniqueTechs(spanishTechTree.bonuses, spanishTechTree)

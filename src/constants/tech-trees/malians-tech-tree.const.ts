@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray } from "../../utils/utils";
 
 export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
     gbeto: new Unit({
@@ -62,8 +65,14 @@ const uniqueTechs = [
         effectType: EffectType.damage,
         value: 5,
         cost: { wood: 0, food: 650, gold: 400, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(4, ArmorType.melee)
+            }
+        }],
         duration: 40,
-        affectedUnits: [stableUnits.lightCavalry, stableUnits.cavalier, stableUnits.heavyCamelRider],
+        affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.knight, stableUnits.cavalier, stableUnits.camelRider, stableUnits.heavyCamelRider],
         affectedUpgrades: []
     })
 ]
@@ -84,7 +93,24 @@ export const maliansTechTree: CivTechTree = {
             id: 'malians2',
             effectType: EffectType.pierceArmor,
             value: { age2: 1, age3: 2, age4: 3 },
-            affectedUnits: [barracksUnits.champion, barracksUnits.pikeman],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                        unit.addArmorComponent(1, ArmorType.pierce)
+                    }
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.addArmorComponent(1, ArmorType.pierce)
+                    }
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.addArmorComponent(1, ArmorType.pierce)
+                    }
+                }
+            }],
+            affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion, barracksUnits.spearman, barracksUnits.pikeman],
             affectedUpgrades: []
         },
         {
@@ -247,3 +273,6 @@ export const maliansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, maliansTechTree)
+setCivOnUniqueTechs(maliansTechTree.bonuses, maliansTechTree)

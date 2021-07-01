@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/mongols.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber, roundHundredth } from "../../utils/utils";
 
 export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
     mangudai: new Unit({
@@ -62,8 +65,14 @@ const uniqueTechs = [
         effectType: EffectType.movementSpeed,
         value: 50,
         cost: { wood: 500, food: 0, gold: 450, stone: 0 },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.5)
+            }
+        }],
         duration: 60,
-        affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
+        affectedUnits: [siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam, siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager, siegeUnits.scorpion, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
         affectedUpgrades: []
     })
 ]
@@ -77,14 +86,26 @@ export const mongolsTechTree: CivTechTree = {
             id: 'mongols1',
             effectType: EffectType.fireRate,
             value: 25,
-            affectedUnits: [archeryUnits.heavyCavalryArcher, mongolsUniqueUnits.eliteMangudai],
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.multiplyAttackRate(1.25)
+                }
+            }],
+            affectedUnits: [archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher, mongolsUniqueUnits.mangudai, mongolsUniqueUnits.eliteMangudai],
             affectedUpgrades: []
         },
         {
             id: 'mongols2',
             effectType: EffectType.healthPercent,
             value: 30,
-            affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.health = multiplyNumber(unit.stats.health, 1.3)
+                }
+            }],
+            affectedUnits: [stableUnits.lightCavalry, stableUnits.hussar, stableUnits.steppeLancer, stableUnits.eliteSteppeLancer],
             affectedUpgrades: []
         },
         {
@@ -98,7 +119,13 @@ export const mongolsTechTree: CivTechTree = {
             id: 'mongols4',
             effectType: EffectType.lineOfSight,
             value: 2,
-            affectedUnits: [stableUnits.hussar],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.stats.lineOfSight = unit.stats.lineOfSight + 2
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar],
             affectedUpgrades: [],
             team: true
         },
@@ -237,3 +264,6 @@ export const mongolsTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, mongolsTechTree)
+setCivOnUniqueTechs(mongolsTechTree.bonuses, mongolsTechTree)

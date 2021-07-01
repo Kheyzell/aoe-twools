@@ -1,5 +1,9 @@
-import { Upgrade } from "../../models/techs.model";
+import { CAPACITIES } from "../../models/capacity.model";
+import { ArmorType, EffectOrder } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import { Upgrade } from "../../models/upgrade.model";
 import { chainTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 
 interface UniversityUpgrades {
     masonry: Upgrade
@@ -49,6 +53,12 @@ export const universityUpgrades: UniversityUpgrades = {
             gold: 175,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.capacities.push(CAPACITIES.ballistics)
+            }
+        }],
         duration: 60
     }),
     guardTower: new Upgrade({
@@ -115,6 +125,12 @@ export const universityUpgrades: UniversityUpgrades = {
             gold: 200,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(1, ArmorType.pierce)
+            }
+        }],
         duration: 100
     }),
     bombardTower: new Upgrade({
@@ -137,6 +153,25 @@ export const universityUpgrades: UniversityUpgrades = {
             gold: 0,
             stone: 0
         },
+        effects: [
+            {
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    if (!!unit.stats.range) {
+                        unit.stats.range += 1
+                    }
+                }
+            },
+            {
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    const buildingAttack = unit.stats.attackComponents.find(attack => attack.type === ArmorType.building)
+                    if (buildingAttack) {
+                        buildingAttack.value = multiplyNumber(buildingAttack.value, 1.2)
+                    }
+                }
+            }
+        ],
         duration: 45
     }),
     keep: new Upgrade({

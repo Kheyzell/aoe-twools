@@ -1,4 +1,4 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,7 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/chinese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { getAllCivUpgrades } from "../../utils/techs.utils";
+import { getAllCivUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
+import { Unit } from "../../models/unit.model";
 
 export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
     chukonu: new Unit({
@@ -63,8 +65,19 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 600, food: 0, gold: 600, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                if (unit.id === siegeUnits.scorpion.id || unit.id === siegeUnits.heavyScorpion.id) {
+                    unit.addAttackComponent(4, ArmorType.pierce)
+                } else
+                if (unit.id === chineseUniqueUnits.chukonu.id || unit.id === chineseUniqueUnits.eliteChukonu.id) {
+                    unit.addAttackComponent(2, ArmorType.pierce)
+                }
+            }
+        }],
         duration: 60,
-        affectedUnits: [siegeUnits.heavyScorpion, chineseUniqueUnits.eliteChukonu],
+        affectedUnits: [siegeUnits.scorpion, siegeUnits.heavyScorpion, chineseUniqueUnits.chukonu, chineseUniqueUnits.eliteChukonu],
         affectedUpgrades: []
     })
 ]
@@ -243,7 +256,13 @@ chineseTechTree.bonuses = [
         id: 'chinese4',
         effectType: EffectType.healthPercent,
         value: 50,
-        affectedUnits: [dockUnits.heavyDemolitionShip],
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.stats.health = multiplyNumber(unit.stats.health, 1.5)
+            }
+        }],
+        affectedUnits: [dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip],
         affectedUpgrades: []
     },
     {
@@ -255,3 +274,6 @@ chineseTechTree.bonuses = [
         team: true
     }
 ]
+
+setCivOnUniqueTechs(uniqueTechs, chineseTechTree)
+setCivOnUniqueTechs(chineseTechTree.bonuses, chineseTechTree)

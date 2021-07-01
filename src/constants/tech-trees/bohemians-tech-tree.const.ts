@@ -1,5 +1,4 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,7 +14,10 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/bohemians.png'
-import { chainTechs } from "../../utils/techs.utils";
+import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
+import { UnitType, EffectOrder, CivTechTree, ArmorType, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 
 export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit, houfnice: Unit } = {
     hussiteWagon: new Unit({
@@ -69,8 +71,14 @@ const uniqueTechs = [
         effectType: EffectType.movementSpeed,
         value: 15,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.15)
+            }
+        }],
         duration: 45,
-        affectedUnits: [archeryUnits.handCannoneer, bohemiansUniqueUnits.houfnice, bohemiansUniqueUnits.eliteHussiteWagon],
+        affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, bohemiansUniqueUnits.houfnice, bohemiansUniqueUnits.hussiteWagon, bohemiansUniqueUnits.eliteHussiteWagon],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -79,6 +87,13 @@ const uniqueTechs = [
         effectType: EffectType.discoutGold,
         value: null,
         cost: { wood: 0, food: 800, gold: 450, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.cost.food = unit.cost.food + unit.cost.gold
+                unit.cost.gold = 0
+            }
+        }],
         duration: 45,
         affectedUnits: [monasteryUnits.monk],
         affectedUpgrades: [monasteryUpgrade.redemption, monasteryUpgrade.atonement, monasteryUpgrade.herbalMedecine, monasteryUpgrade.heresy, monasteryUpgrade.sanctity, monasteryUpgrade.fervor, monasteryUpgrade.faith, monasteryUpgrade.illumination, monasteryUpgrade.blockPrinting, monasteryUpgrade.theocracy]
@@ -108,7 +123,15 @@ export const bohemiansTechTree: CivTechTree = {
             id: 'bohemians3',
             effectType: EffectType.damagePercent,
             value: 25,
-            affectedUnits: [barracksUnits.halberdier],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit) => {
+                    unit?.stats.attackComponents
+                        .filter(attack => attack.type !== ArmorType.melee && attack.type !== ArmorType.pierce)
+                        .forEach(attack => attack.value = multiplyNumber(attack.value, 1.25))
+                }
+            }],
+            affectedUnits: [barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier],
             affectedUpgrades: []
         },
         {
@@ -129,6 +152,12 @@ export const bohemiansTechTree: CivTechTree = {
             id: 'bohemians6',
             effectType: EffectType.miscallenous,
             value: 80,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.duration = multiplyNumber(unit.duration, 1/1.8)
+                }
+            }],
             affectedUnits: [marketUnits.tradeCart],
             affectedUpgrades: [marketUpgrade.coinage, marketUpgrade.caravan, marketUpgrade.banking, marketUpgrade.guilds],
             team: true
@@ -278,3 +307,6 @@ export const bohemiansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, bohemiansTechTree)
+setCivOnUniqueTechs(bohemiansTechTree.bonuses, bohemiansTechTree)

@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/khmer.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 
 export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: Unit } = {
     ballistaElephant: new Unit({
@@ -52,8 +55,14 @@ const uniqueTechs = [
         effectType: EffectType.damage,
         value: 3,
         cost: { wood: 300, food: 0, gold: 450, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(3, ArmorType.melee)
+            }
+        }],
         duration: 40,
-        affectedUnits: [stableUnits.eliteBattleElephant],
+        affectedUnits: [stableUnits.battleElephant, stableUnits.eliteBattleElephant],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -62,8 +71,17 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 700, gold: 400, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.secondaryAttack = {
+                    count: 0,
+                    components: [{ value: 0, type: ArmorType.pierce }]
+                }
+            }
+        }],
         duration: 40,
-        affectedUnits: [siegeUnits.heavyScorpion, khmerUniqueUnits.eliteBallistaElephant],
+        affectedUnits: [siegeUnits.scorpion, siegeUnits.heavyScorpion, khmerUniqueUnits.ballistaElephant, khmerUniqueUnits.eliteBallistaElephant],
         affectedUpgrades: []
     })
 ]
@@ -84,7 +102,13 @@ export const khmerTechTree: CivTechTree = {
             id: 'khmer2',
             effectType: EffectType.movementSpeed,
             value: 10,
-            affectedUnits: [stableUnits.eliteBattleElephant],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.1)
+                }
+            }],
+            affectedUnits: [stableUnits.battleElephant, stableUnits.eliteBattleElephant],
             affectedUpgrades: []
         },
         {
@@ -105,7 +129,13 @@ export const khmerTechTree: CivTechTree = {
             id: 'khmer5',
             effectType: EffectType.range,
             value: 1,
-            affectedUnits: [siegeUnits.heavyScorpion],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit, upgrades) => {
+                    unit.stats.range! += 1
+                }
+            }],
+            affectedUnits: [siegeUnits.scorpion, siegeUnits.heavyScorpion],
             affectedUpgrades: [],
             team: true
         }
@@ -250,3 +280,6 @@ export const khmerTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, khmerTechTree)
+setCivOnUniqueTechs(khmerTechTree.bonuses, khmerTechTree)

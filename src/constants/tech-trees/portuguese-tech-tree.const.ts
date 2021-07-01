@@ -1,4 +1,6 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import { CAPACITIES } from "../../models/capacity.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,7 +17,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/portuguese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs } from "../../utils/techs.utils";
+import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber, addNumber } from "../../utils/utils";
 
 export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, caravel: Unit, eliteCaravel: Unit } = {
     organGun: new Unit({
@@ -81,8 +84,15 @@ const uniqueTechs = [
         effectType: EffectType.armor,
         value: 1,
         cost: { wood: 200, food: 0, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(1, ArmorType.melee)
+                unit.addArmorComponent(1, ArmorType.pierce)
+            }
+        }],
         duration: 40,
-        affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteCaravel],
+        affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galley, dockUnits.warGalley, dockUnits.galleon, dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fireShip, dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip, dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.caravel, portugeseUniqueUnits.eliteCaravel],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -91,8 +101,14 @@ const uniqueTechs = [
         effectType: EffectType.accuracy,
         value: null,
         cost: { wood: 0, food: 700, gold: 400, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.capacities.push(CAPACITIES.ballistics)
+            }
+        }],
         duration: 40,
-        affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteOrganGun],
+        affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon, dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.organGun, portugeseUniqueUnits.eliteOrganGun],
         affectedUpgrades: []
     })
 ]
@@ -106,25 +122,54 @@ export const portugueseTechTree: CivTechTree = {
             id: 'portuguese1',
             effectType: EffectType.discount,
             value: 20,
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.20))
+                }
+            }],
             affectedUnits: [
-                barracksUnits.champion,
-                archeryUnits.arbalester, archeryUnits.handCannoneer, archeryUnits.cavalryArcher,
-                stableUnits.cavalier,
-                siegeUnits.cappedRam, siegeUnits.onager, siegeUnits.scorpion, siegeUnits.siegeTower, siegeUnits.bombardCannon,
-                castleUnits.petard, castleUnits.trebuchet,
+                barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion,
+                archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester,
+                archeryUnits.handCannoneer,
+                archeryUnits.cavalryArcher,
+                stableUnits.knight, stableUnits.cavalier,
+                siegeUnits.batteringRam, siegeUnits.cappedRam,
+                siegeUnits.mangonel, siegeUnits.onager,
+                siegeUnits.scorpion,
+                siegeUnits.siegeTower,
+                siegeUnits.bombardCannon,
+                castleUnits.petard,
+                castleUnits.trebuchet,
                 monasteryUnits.monk,
                 marketUnits.tradeCart,
-                dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon,
-                portugeseUniqueUnits.eliteOrganGun, portugeseUniqueUnits.eliteCaravel
+                dockUnits.galley, dockUnits.warGalley, dockUnits.galleon,
+                dockUnits.fireGalley, dockUnits.fireShip,
+                dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip,
+                dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon,
+                portugeseUniqueUnits.organGun, portugeseUniqueUnits.eliteOrganGun,
+                portugeseUniqueUnits.caravel, portugeseUniqueUnits.eliteCaravel
             ],
             affectedUpgrades: [],
             hideInUnitRecap: true
         },
         {
             id: 'portuguese2',
-            effectType: EffectType.discount,
-            value: 20,
-            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon, portugeseUniqueUnits.eliteCaravel],
+            effectType: EffectType.healthPercent,
+            value: 10,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.health = multiplyNumber(unit.stats.health, 1.1)
+                }
+            }],
+            affectedUnits: [dockUnits.fishingShip,
+                dockUnits.transportShip,
+                dockUnits.galley, dockUnits.warGalley, dockUnits.galleon,
+                dockUnits.fireGalley, dockUnits.fireShip,
+                dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip,
+                dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon,
+                portugeseUniqueUnits.caravel, portugeseUniqueUnits.eliteCaravel],
             affectedUpgrades: []
         },
         {
@@ -314,3 +359,7 @@ export const portugueseTechTree: CivTechTree = {
         ])
     }
 }
+
+
+setCivOnUniqueTechs(uniqueTechs, portugueseTechTree)
+setCivOnUniqueTechs(portugueseTechTree.bonuses, portugueseTechTree)

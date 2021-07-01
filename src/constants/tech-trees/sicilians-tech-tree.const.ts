@@ -1,5 +1,10 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import { CAPACITIES } from "../../models/capacity.model";
+import crest from '../../resources/images/crests/sicilians.png';
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 import { castleUnits, castleUpgrades } from "../techs/castle-techs.const";
@@ -13,8 +18,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/sicilians.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
     serjeant: new Unit({
@@ -52,8 +55,14 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 300, gold: 600, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.conversionResistance = unit.stats.conversionResistance + 3
+            }
+        }],
         duration: 60,
-        affectedUnits: [siciliansUniqueUnits.eliteSerjeant],
+        affectedUnits: [siciliansUniqueUnits.serjeant, siciliansUniqueUnits.eliteSerjeant],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -84,7 +93,23 @@ export const siciliansTechTree: CivTechTree = {
             id: 'sicilians2',
             effectType: EffectType.miscallenous,
             value: 50,
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.cavalryArcher, stableUnits.lightCavalry, stableUnits.cavalier, siciliansUniqueUnits.eliteSerjeant],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, _, targetedUnit) => {
+                    targetedUnit?.stats.attackComponents
+                        .filter(attack => attack.type !== ArmorType.melee && attack.type !== ArmorType.pierce)
+                        .filter(attack => unit.stats.armorComponents.some(armor => armor.type === attack.type))
+                        .forEach(attack => attack.value = attack.value / 2)
+                }
+            }],
+            affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion,
+                barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier,
+                archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester,
+                archeryUnits.skirmisher, archeryUnits.eliteSkirmisher,
+                archeryUnits.cavalryArcher,
+                stableUnits.scoutCavalry, stableUnits.lightCavalry,
+                stableUnits.knight, stableUnits.cavalier,
+                siciliansUniqueUnits.serjeant, siciliansUniqueUnits.eliteSerjeant],
             affectedUpgrades: []
         },
         {
@@ -252,3 +277,6 @@ export const siciliansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, siciliansTechTree)
+setCivOnUniqueTechs(siciliansTechTree.bonuses, siciliansTechTree)
