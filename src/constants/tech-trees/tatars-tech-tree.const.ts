@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/tatars.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
 
 export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel: Unit } = {
     keshik: new Unit({
@@ -65,8 +67,15 @@ const uniqueTechs = [
         effectType: EffectType.armor,
         value: 1,
         cost: { wood: 400, food: 0, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(1, ArmorType.melee)
+                unit.addArmorComponent(1, ArmorType.pierce)
+            }
+        }],
         duration: 40,
-        affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer, archeryUnits.heavyCavalryArcher],
+        affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar, stableUnits.steppeLancer, stableUnits.eliteSteppeLancer, archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -75,6 +84,14 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 400, food: 0, gold: 500, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                if (unit.id === castleUnits.trebuchet.id) {
+                    unit.stats.range! += 2
+                }
+            }
+        }],
         duration: 50,
         affectedUnits: [castleUnits.trebuchet, tatarsUniqueUnits.flamingCamel],
         affectedUpgrades: []
@@ -118,7 +135,13 @@ export const tatarsTechTree: CivTechTree = {
             id: 'tatars5',
             effectType: EffectType.lineOfSight,
             value: 2,
-            affectedUnits: [archeryUnits.heavyCavalryArcher],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.stats.lineOfSight = unit.stats.lineOfSight + 2
+                }
+            }],
+            affectedUnits: [archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
             affectedUpgrades: [],
             team: true
         },
@@ -263,3 +286,6 @@ export const tatarsTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, tatarsTechTree)
+setCivOnUniqueTechs(tatarsTechTree.bonuses, tatarsTechTree)

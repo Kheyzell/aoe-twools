@@ -1,4 +1,3 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,7 +14,11 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/berbers.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs } from "../../utils/techs.utils";
+import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
+import { CAPACITIES } from "../../models/capacity.model";
+import { UnitType, EffectOrder, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 
 export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, genitour: Unit, eliteGenitour: Unit } = {
     camelArcher: new Unit({
@@ -81,8 +84,14 @@ const uniqueTechs = [
         effectType: EffectType.creationSpeed,
         value: 25,
         cost: { wood: 0, food: 250, gold: 250, stone: 0 },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.duration = multiplyNumber(unit.duration, 1/1.25)
+            }
+        }],
         duration: 40,
-        affectedUnits: [berbersUniqueUnits.eliteCamelArcher],
+        affectedUnits: [berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher, castleUnits.petard, castleUnits.trebuchet],
         affectedUpgrades: [castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies],
         team: true
     }),
@@ -92,8 +101,14 @@ const uniqueTechs = [
         effectType: EffectType.regen,
         value: 15,
         cost: { wood: 0, food: 700, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.capacities.push(CAPACITIES.maghrebiRegen)
+            }
+        }],
         duration: 40,
-        affectedUnits: [stableUnits.heavyCamelRider, berbersUniqueUnits.eliteCamelArcher],
+        affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher],
         affectedUpgrades: []
     })
 ]
@@ -107,6 +122,12 @@ export const berbersTechTree: CivTechTree = {
             id: 'berbers1',
             effectType: EffectType.movementSpeed,
             value: 10,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.1)
+                }
+            }],
             affectedUnits: [townCenterUnits.villager],
             affectedUpgrades: []
         },
@@ -114,14 +135,45 @@ export const berbersTechTree: CivTechTree = {
             id: 'berbers2',
             effectType: EffectType.discount,
             value: { age3: 15, age4: 20 },
-            affectedUnits: [stableUnits.hussar, stableUnits.cavalier, stableUnits.heavyCamelRider],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, 1 - .2)
+                        unit.cost.food = multiplyNumber(unit.cost.food, 1 - .2)
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, 1 - .2)
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, 1 - .2)
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, 1 - .15)
+                        unit.cost.food = multiplyNumber(unit.cost.food, 1 - .15)
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, 1 - .15)
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, 1 - .15)
+                    }
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar, stableUnits.knight, stableUnits.cavalier, stableUnits.camelRider, stableUnits.heavyCamelRider],
             affectedUpgrades: []
         },
         {
             id: 'berbers3',
             effectType: EffectType.movementSpeed,
             value: 10,
-            affectedUnits: [dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fastFireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.1)
+                }
+            }],
+            affectedUnits: [
+                dockUnits.fishingShip, dockUnits.transportShip,
+                dockUnits.galley, dockUnits.warGalley, dockUnits.galleon,
+                dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip,
+                dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip,
+                dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon
+            ],
             affectedUpgrades: []
         },
         {
@@ -277,3 +329,6 @@ export const berbersTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, berbersTechTree)
+setCivOnUniqueTechs(berbersTechTree.bonuses, berbersTechTree)

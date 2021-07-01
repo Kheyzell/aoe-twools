@@ -3,20 +3,19 @@ import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 
 import { allCivTechTrees } from "../../../constants"
-import { CivTechTree, TechType, Unit, Upgrade } from "../../../models/techs.model"
+import { CivTechTree, TechType } from "../../../models/techs.model"
 import { scrollHorizontally } from "../../../utils/utils"
-import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCiv2Selection, toggleCivSelection } from "../civFilterSlice"
+import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCiv2Selection, toggleCivSelection } from "../civ-filter.slice"
 import './civ-list.component.css'
 import CivPanel from "../../../components/civ-panel/civ-panel.component"
 import WideTooltip from "../../../components/wide-tooltip.component";
 import civFilterService from "../civ-filter.service";
+import CivCrest from "../../../components/civ-crest/civ-crest.component"
+import { Unit } from "../../../models/unit.model"
+import { Upgrade } from "../../../models/upgrade.model"
 
-type ShowCivPanel = { [civId: string]: boolean }
 
-type Props = {}
-type State = {}
-
-const CivList: React.FC<Props> = (props) => {
+const CivList: React.FC = () => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const filteredListRef = useRef<HTMLElement>(null)
@@ -29,12 +28,12 @@ const CivList: React.FC<Props> = (props) => {
     const selectedTechs = useSelector(selectedTechsSelector)
 
     const onCivClick = (civ: CivTechTree) => {
-        dispatch(toggleCivSelection({ ...civ }))
+        dispatch(toggleCivSelection(civ.id))
     }
     const onCiv2Click = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, civ: CivTechTree) => {
         e.preventDefault()
         if (!!selectedCiv && civ.id !== selectedCiv.id) {
-            dispatch(toggleCiv2Selection({ ...civ }))
+            dispatch(toggleCiv2Selection(civ.id))
         }
     }
 
@@ -97,7 +96,7 @@ const CivList: React.FC<Props> = (props) => {
                                 key={civ.id}
                                 onClick={() => onCivClick(civ)}
                                 onContextMenu={e => onCiv2Click(e, civ)}>
-                                <img src={civ.crest} alt={t(`civ.${civ.id}.name`)} />
+                                <CivCrest civ={civ}></CivCrest>
                             </div>
                         </WideTooltip>
                     )

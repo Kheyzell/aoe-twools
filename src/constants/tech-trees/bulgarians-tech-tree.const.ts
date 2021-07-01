@@ -1,4 +1,4 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/bulgarians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
+import { Unit } from "../../models/unit.model";
 
 export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
     konnik: new Unit({
@@ -52,8 +55,14 @@ const uniqueTechs = [
         effectType: EffectType.fireRate,
         value: 33,
         cost: { wood: 0, food: 400, gold: 200, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.multiplyAttackRate(1.33)
+            }
+        }],
         duration: 35,
-        affectedUnits: [stableUnits.hussar, stableUnits.cavalier, bulgariansUniqueUnits.eliteKonnik],
+        affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar, stableUnits.knight, stableUnits.cavalier, bulgariansUniqueUnits.konnik, bulgariansUniqueUnits.eliteKonnik],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -62,8 +71,14 @@ const uniqueTechs = [
         effectType: EffectType.meleeArmor,
         value: 5,
         cost: { wood: 0, food: 900, gold: 450, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(5, ArmorType.melee)
+            }
+        }],
         duration: 40,
-        affectedUnits: [barracksUnits.twoHandedSwordsman],
+        affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman],
         affectedUpgrades: []
     })
 ]
@@ -245,3 +260,6 @@ export const bulgariansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, bulgariansTechTree)
+setCivOnUniqueTechs(bulgariansTechTree.bonuses, bulgariansTechTree)

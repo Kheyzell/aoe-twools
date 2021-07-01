@@ -1,4 +1,6 @@
 import { Bonus, UniqueTech } from "./bonus.model"
+import { Unit } from "./unit.model"
+import { Upgrade } from "./upgrade.model"
 
 export enum TechType {
     unit = 'unit',
@@ -7,8 +9,37 @@ export enum TechType {
 
 export enum UnitType { civilian, military }
 
+export enum ArmorType {
+    discarded = 'discarded',
+    melee = 'Melee',
+    pierce = 'Pierce',
+    infantry = 'Infantry',
+    spearman = 'Spearman',
+    cavalry = 'Cavalry',
+    archer = 'Archer',
+    cavalryArcher = 'Cavalry Archer',
+    gunpowderUnit = 'Gunpowder Unit',
+    warElephant = 'War elephant',
+    camel = 'Camel',
+    ship = 'Ship',
+    fishingShip = 'Fishing Ship',
+    turtleShip = 'Turtle Ship',
+    mameluke = 'Mameluke',
+    eagleWarrior = 'Eagle warrior',
+    monk = 'Monk',
+    siegeWeapon = 'Siege Weapon',
+    ram = 'Ram',
+    hussiteWagon = 'Hussite Wagon',
+    standardBuilding = 'Standard building',
+    building = 'Building',
+    castle = 'Castle',
+    stoneDefense = 'Stone Defense',
+    wallAndGate = 'Wall And Gate',
+}
+
 export interface Tech {
     id: string
+    wikiUrl: string
     age: number
     cost: Cost
     unique?: boolean
@@ -23,55 +54,6 @@ export interface Cost {
     food: number
     gold: number
     stone: number
-}
-
-export class Unit implements Tech {
-    id: string
-    age: number
-    cost: Cost
-    duration: number
-    type: TechType
-    unitType: UnitType
-    unique?: boolean
-    previousLineTech?: Unit
-    nextLineTech?: Unit
-    affectingUpgrades?: Tech[]
-    isSelected?: boolean
-
-    constructor(data: any) {
-        this.type = TechType.unit
-        this.id = data.id
-        this.age = data.age
-        this.cost = data.cost
-        this.duration = data.duration
-        this.unitType = data.unitType
-        this.unique = data.unique
-        this.previousLineTech = data.previousLineTech
-        this.nextLineTech = data.nextLineTech
-        this.affectingUpgrades = data.affectingUpgrades
-    }
-}
-
-export class Upgrade implements Tech {
-    id: string
-    age: number
-    cost: Cost
-    duration: number
-    type: TechType
-    unique?: boolean
-    previousLineTech?: Tech
-    nextLineTech?: Tech
-    isSelected?: boolean
-
-    constructor(data: any) {
-        this.type = TechType.upgrade
-        this.id = data.id
-        this.age = data.age
-        this.cost = data.cost
-        this.duration = data.duration
-        this.previousLineTech = data.previousLineTech
-        this.nextLineTech = data.nextLineTech
-    }
 }
 
 export interface CivTechTree {
@@ -165,10 +147,17 @@ export class UpgradePerAgeGroup implements LineTechTree {
     }
 }
 
-// export interface BarrackTechTree extends BuildingTechTree {
-//     units: {
-//         militiaLine: Unit[]
-//         spearLine: Unit[]
-//         eagleLine: Unit[]
-//     }
-// }
+export type Effect = {
+    order: EffectOrder
+    apply: (unit: Unit, upgrades?: Upgrade[], targetedUnit?: Unit, targetUpgrades?: Upgrade[]) => void
+}
+
+export enum EffectOrder { first, last }
+
+export function isUnit(tech: Tech): tech is Unit  {
+    return tech.type === TechType.unit;
+}
+
+export function isUpgrade(tech: Tech): tech is Unit  {
+    return tech.type === TechType.upgrade;
+}

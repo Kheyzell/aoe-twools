@@ -1,0 +1,64 @@
+.TechPanel {
+    color: black;
+    border: 2px solid #ffffff;
+    border-radius: 3px;
+    font-size: .9rem;
+    font-weight: 600;
+    padding: 8px;
+    cursor: default;
+    outline: none;
+    user-select: none;
+    background-size: cover !important;
+}
+
+.TechPanel .Title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-bottom: solid 2px white;
+    margin: -4px -4px 8px -4px;
+    padding: 0 0 4px 0;
+    text-align: center;
+}
+
+.Section:not(:first-child) {
+    margin-top: 8px;
+}
+
+.SubTitle {
+    text-align: left;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    text-decoration: underline;
+}
+
+.TechPanel .Stats {
+    color: black;
+    padding-left: 32px;
+}
+.TechPanel .Stats .StatLabel {
+    font-weight: bold;
+}
+.TechPanel .Stats .StatValue {
+    color: white;
+}
+.TechPanel .Stats .StatValue + .StatValue::before {
+    content: " / ";
+}
+
+.TechPanel .TechList {
+    display: flex;
+}
+
+.TechPanel .TechList > .Tech:not(:first-child) {
+    margin-left: 8px;
+}
+
+.TechPanel .BonusList {
+    display: flex;
+    flex-direction: column;
+    padding-left: 32px;
+}
+
+.TechPanel .BonusList li + li {
+    margin-top: 6px;
+}

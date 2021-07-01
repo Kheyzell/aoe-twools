@@ -1,0 +1,125 @@
+.UnitCalculator {
+    background-size: cover !important;
+    height: 100%;
+    min-height: 100vh;
+    padding: 0 0 16px 0;
+}
+
+.UnitCalculator .UnitList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 16px;
+    padding: 8px 16px;
+}
+.UnitCalculator .UnitList .UnitCalculatorUnit + .UnitCalculatorUnit {
+    margin-left: 8px;
+}
+
+.UnitCalculator .Main {
+    display: flex;
+    justify-content: space-around;
+}
+
+.UnitCalculator .Main .Upgrades {
+    display: flex;
+    flex-direction: column;
+}
+
+.UnitCalculator .Main .Upgrades .UpgradeLine {
+    display: flex;
+}
+.UnitCalculator .Main .Upgrades .UpgradeLine + .UpgradeLine {
+    margin-top: 8px;
+}
+
+.UnitCalculator .Main .Upgrades .UpgradeLine .UnitCalculatorUpgrade + .UnitCalculatorUpgrade {
+    margin-left: 4px;
+}
+
+.UnitCalculator .Main .Upgrades .BonusList {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    text-align: left;
+    width: 400px;
+    color: #333333;
+    user-select: none;
+}
+
+.UnitCalculator .Main .Upgrades .BonusList .BonusLine + .BonusLine {
+    margin-top: 8px;
+}
+
+.UnitCalculator .Main .Upgrades .BonusList .BonusLine:hover {
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.UnitCalculator .Main .Upgrades .BonusList .Selected {
+    color: black;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.UnitCalculator .Stats {
+    padding: 16px 32px;
+    color: white;
+    border-radius: 16px;
+}
+
+.UnitCalculator p {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.UnitCalculator .SelectedUnitsClass td:first-child {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.UnitCalculator .StatsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-spacing: 0;
+}
+
+.UnitCalculator .StatsContainer + .StatsContainer {
+    margin-top: 16px;
+}
+
+.UnitCalculator .StatsContainer .StatLine > td {
+    border: 1px solid white;
+    padding: 0 8px;
+}
+.UnitCalculator .StatsContainer .StatLine > td:first-child {
+    text-align: right;
+}
+.UnitCalculator .StatsContainer .StatLine > td:last-child {
+    text-align: left;
+}
+.UnitCalculator .StatsContainer .StatLine + .StatLine > td {
+    border-top: none;
+}
+.UnitCalculator .StatsContainer .StatLine > td + td {
+    border-left: none;
+} 
+
+.UnitCalculator .StatLine {
+    font-weight: bold;
+}
+
+.UnitCalculator .StatDisplay.Good {
+    color: #65cc58;
+}
+.UnitCalculator .StatDisplay.Bad {
+    color: #ff4d45;
+}
+
+.UnitCalculator .DamagePerHitStat > span + span:not(:last-child)::before {
+    content: " + ";
+}
+.UnitCalculator .DamagePerHitStat > span:last-child::before {
+    content: " = ";
+}

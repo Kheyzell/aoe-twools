@@ -1,0 +1,19 @@
+.CostStat span {
+    line-height: 32px;
+}
+.CostStat span img {
+    margin-left: 4px;
+    width: 32px;
+    margin-bottom: -10px;
+}
+.CostStat span + span::before {
+    content: "•";
+    padding: 0 8px;
+}
+
+.Capacity {
+    font-size: .8rem;
+}
+.Capacity .ShortDescription::before {
+    content: ": "
+}

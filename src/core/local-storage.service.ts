@@ -1,8 +1,10 @@
-import { BoxSize } from "../features/civ-filter/tech-tree/tech/tech.component"
+import { BoxSize } from "../components/tech/tech.component"
+import { TooltipInteractivity } from "../features/civ-filter/civ-filter.slice"
 
 enum LocalStorageKey {
     language = 'language',
-    civFilterTechSize = 'civFilterTechSize'
+    civFilterTechSize = 'civFilterTechSize',
+    civFilterTooltipInteractivity = "civFilterTooltipInteractivity"
 }
 
 class LocalStorageService {
@@ -21,6 +23,14 @@ class LocalStorageService {
     
     loadCivFilterTechSize = (): BoxSize | null => {
         return this.load<BoxSize>(LocalStorageKey.civFilterTechSize)
+    }
+    
+    storeCivFilterTooltipInteractivity = (tooltipInteractivity: TooltipInteractivity) => {
+        this.store(LocalStorageKey.civFilterTooltipInteractivity, tooltipInteractivity)
+    }
+    
+    loadCivFilterTooltipInteractivity = (): TooltipInteractivity | null => {
+        return this.load(LocalStorageKey.civFilterTooltipInteractivity)
     }
 
     private store<T>(key: LocalStorageKey, data: T) {

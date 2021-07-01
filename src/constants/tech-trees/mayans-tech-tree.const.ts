@@ -1,4 +1,9 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/mayans.png';
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, addNumber, multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -10,11 +15,8 @@ import { millUpgrades } from "../techs/mill-techs.const";
 import { miningCampUpgrades } from "../techs/mining-camp-techs.const";
 import { monasteryUnits, monasteryUpgrade } from "../techs/monastery-techs.const";
 import { siegeUnits } from "../techs/siege-techs.const";
-import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/mayans.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const mayansUniqueUnits: { plumedArcher: Unit, elitePlumedArcher: Unit } = {
     plumedArcher: new Unit({
@@ -52,8 +54,17 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.secondaryAttack = {
+                    count: 1,
+                    components: [{ value: 1, type: ArmorType.pierce }]
+                }
+            }
+        }],
         duration: 40,
-        affectedUnits: [archeryUnits.eliteSkirmisher],
+        affectedUnits: [archeryUnits.skirmisher, archeryUnits.eliteSkirmisher],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -62,8 +73,14 @@ const uniqueTechs = [
         effectType: EffectType.health,
         value: 40,
         cost: { wood: 0, food: 750, gold: 450, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.health += 40
+            }
+        }],
         duration: 70,
-        affectedUnits: [barracksUnits.eliteEagleWarrior],
+        affectedUnits: [barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior],
         affectedUpgrades: []
     })
 ]
@@ -91,7 +108,31 @@ export const mayansTechTree: CivTechTree = {
             id: 'mayans3',
             effectType: EffectType.discount,
             value: { age2: 10, age3: 20, age4: 30 },
-            affectedUnits: [archeryUnits.arbalester, mayansUniqueUnits.elitePlumedArcher],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.30))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.30))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.30))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.30))
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.20))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.20))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.20))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.20))
+                    } else {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.10))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.10))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.10))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.10))
+                    }
+                }
+            }],
+            affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester, mayansUniqueUnits.plumedArcher, mayansUniqueUnits.elitePlumedArcher],
             affectedUpgrades: []
         },
         {
@@ -239,3 +280,6 @@ export const mayansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, mayansTechTree)
+setCivOnUniqueTechs(mayansTechTree.bonuses, mayansTechTree)

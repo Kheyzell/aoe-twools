@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/persians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 
 export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } = {
     warElephant: new Unit({
@@ -52,8 +55,15 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 400, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.cost.wood = 60
+                unit.cost.gold = 0
+            }
+        }],
         duration: 40,
-        affectedUnits: [archeryUnits.crossbowman],
+        affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -62,8 +72,14 @@ const uniqueTechs = [
         effectType: EffectType.movementSpeed,
         value: 30,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.3)
+            }
+        }],
         duration: 50,
-        affectedUnits: [persiansUniqueUnits.eliteWarElephant],
+        affectedUnits: [persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant],
         affectedUpgrades: []
     })
 ]
@@ -84,14 +100,41 @@ export const persiansTechTree: CivTechTree = {
             id: 'persians2',
             effectType: EffectType.creationSpeed,
             value: { age2: 10, age3: 15, age4: 20 },
-            affectedUnits: [townCenterUnits.villager, dockUnits.fishingShip, dockUnits.transportShip, dockUnits.galleon, dockUnits.fastFireShip, dockUnits.heavyDemolitionShip, dockUnits.eliteCannonGalleon],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.duration = multiplyNumber(unit.duration, 1/1.2)
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.duration = multiplyNumber(unit.duration, 1/1.15)
+                    } else {
+                        unit.duration = multiplyNumber(unit.duration, 1/1.1)
+                    }
+                }
+            }],
+            affectedUnits: [townCenterUnits.villager,
+                dockUnits.fishingShip,
+                dockUnits.transportShip,
+                dockUnits.galley, dockUnits.warGalley, dockUnits.galleon,
+                dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip,
+                dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip,
+                dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon],
             affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.loom, townCenterUpgrade.casteAge, townCenterUpgrade.wheelbarrow, townCenterUpgrade.townWatch, townCenterUpgrade.imperialAge, townCenterUpgrade.handCart, townCenterUpgrade.townPatrol, dockUpgrades.gillnets, dockUpgrades.careening, dockUpgrades.dryDock]
         },
         {
             id: 'persians3',
             effectType: EffectType.miscallenous,
             value: 2,
-            affectedUnits: [stableUnits.paladin],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit, upgrades) => {
+                    unit.addAttackComponent(2, ArmorType.archer)
+                }
+            }],
+            affectedUnits: [stableUnits.knight, stableUnits.cavalier, stableUnits.paladin],
             affectedUpgrades: [],
             team: true
         }
@@ -234,3 +277,6 @@ export const persiansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, persiansTechTree)
+setCivOnUniqueTechs(persiansTechTree.bonuses, persiansTechTree)

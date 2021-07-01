@@ -1,0 +1,7 @@
+.CivCrest {
+    width: 48px;
+}
+.CivCrest.Mini {
+    width: 24px;
+    margin-bottom: -8px;
+}

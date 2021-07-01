@@ -1,5 +1,5 @@
 import { UniqueTech, EffectType } from "../../models/bonus.model";
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,7 +15,10 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/poles.png'
-import { chainTechs } from "../../utils/techs.utils";
+import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray } from "../../utils/utils";
+import { CAPACITIES, RegenCapacity } from "../../models/capacity.model";
+import { Unit } from "../../models/unit.model";
 
 export const polesUniqueUnits: { obuch: Unit, eliteObuch: Unit } = {
     obuch: new Unit({
@@ -80,6 +83,25 @@ export const polesTechTree: CivTechTree = {
             id: 'poles1',
             effectType: EffectType.regen,
             value: null,
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.addCapacity({ ...CAPACITIES.regen, healthPerMinute: 20 } as RegenCapacity)
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.addCapacity({ ...CAPACITIES.regen, healthPerMinute: 15 } as RegenCapacity)
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                        unit.addCapacity({ ...CAPACITIES.regen, healthPerMinute: 10 } as RegenCapacity)
+                    } else {
+                        unit.addCapacity({ ...CAPACITIES.regen, healthPerMinute: 5 } as RegenCapacity)
+                    }
+                }
+            }],
             affectedUnits: [townCenterUnits.villager],
             affectedUpgrades: []
         },
@@ -101,7 +123,13 @@ export const polesTechTree: CivTechTree = {
             id: 'poles4',
             effectType: EffectType.damage,
             value: 1,
-            affectedUnits: [stableUnits.wingedHussar],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.addAttackComponent(1, ArmorType.archer)
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.wingedHussar],
             affectedUpgrades: [],
             team: true
         },
@@ -244,3 +272,6 @@ export const polesTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, polesTechTree)
+setCivOnUniqueTechs(polesTechTree.bonuses, polesTechTree)

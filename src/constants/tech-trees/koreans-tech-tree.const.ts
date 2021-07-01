@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,7 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/koreans.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs } from "../../utils/techs.utils";
+import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber, addNumber } from "../../utils/utils";
 
 export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleShip: Unit, eliteTurtleShip: Unit } = {
     warWagon: new Unit({
@@ -24,8 +26,8 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
         age: 3,
         unitType: UnitType.military,
         cost: {
-            wood: 0,
-            food: 115,
+            wood: 115,
+            food: 0,
             gold: 60,
             stone: 0
         },
@@ -37,8 +39,8 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
         age: 4,
         unitType: UnitType.military,
         cost: {
-            wood: 0,
-            food: 115,
+            wood: 115,
+            food: 0,
             gold: 60,
             stone: 0
         },
@@ -89,10 +91,16 @@ const uniqueTechs = [
         id: 'shinkichon',
         age: 4,
         effectType: EffectType.range,
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.range! += 1
+            }
+        }],
         value: 1,
         cost: { wood: 800, food: 0, gold: 500, stone: 0 },
         duration: 60,
-        affectedUnits: [siegeUnits.siegeOnager],
+        affectedUnits: [siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager],
         affectedUpgrades: []
     })
 ]
@@ -106,6 +114,12 @@ export const koreansTechTree: CivTechTree = {
             id: 'koreans1',
             effectType: EffectType.lineOfSight,
             value: 3,
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.stats.lineOfSight = unit.stats.lineOfSight + 3
+                }
+            }],
             affectedUnits: [townCenterUnits.villager],
             affectedUpgrades: []
         },
@@ -134,7 +148,20 @@ export const koreansTechTree: CivTechTree = {
             id: 'koreans5',
             effectType: EffectType.discoutWood,
             value: 20,
-            affectedUnits: [barracksUnits.halberdier, archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.heavyCavalryArcher, dockUnits.fastFireShip, dockUnits.galleon, dockUnits.eliteCannonGalleon, koreansUniqueUnits.eliteWarWagon, koreansUniqueUnits.eliteTurtleShip],
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.20))
+                }
+            }],
+            affectedUnits: [barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier,
+                archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester,
+                archeryUnits.skirmisher, archeryUnits.eliteSkirmisher,
+                archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher,
+                dockUnits.galley, dockUnits.warGalley, dockUnits.galleon,
+                dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip,
+                dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon,
+                koreansUniqueUnits.turtleShip, koreansUniqueUnits.eliteTurtleShip],
             affectedUpgrades: []
         },
         {
@@ -290,3 +317,6 @@ export const koreansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, koreansTechTree)
+setCivOnUniqueTechs(koreansTechTree.bonuses, koreansTechTree)

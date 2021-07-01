@@ -6,7 +6,6 @@ const monkLine = new UnitLine([monasteryUnits.monk])
 setAffectingUpgrades(monkLine, [
     monasteryUpgrade.redemption,
     monasteryUpgrade.atonement,
-    monasteryUpgrade.herbalMedecine,
     monasteryUpgrade.sanctity,
     monasteryUpgrade.fervor,
     monasteryUpgrade.illumination,

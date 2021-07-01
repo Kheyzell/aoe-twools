@@ -1,4 +1,4 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/burmese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray } from "../../utils/utils";
+import { Unit } from "../../models/unit.model";
 
 export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
     arambai: new Unit({
@@ -52,8 +55,15 @@ const uniqueTechs = [
         effectType: EffectType.armor,
         value: 1,
         cost: { wood: 300, food: 400, gold: 0, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(1, ArmorType.melee)
+                unit.addArmorComponent(2, ArmorType.pierce)
+            }
+        }],
         duration: 40,
-        affectedUnits: [stableUnits.eliteBattleElephant],
+        affectedUnits: [stableUnits.battleElephant, stableUnits.eliteBattleElephant],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -62,8 +72,14 @@ const uniqueTechs = [
         effectType: EffectType.miscallenous,
         value: null,
         cost: { wood: 0, food: 650, gold: 400, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(6, ArmorType.standardBuilding)
+            }
+        }],
         duration: 40,
-        affectedUnits: [stableUnits.hussar, stableUnits.cavalier, stableUnits.eliteBattleElephant, burmeseUniqueUnits.eliteArambai],
+        affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar, stableUnits.knight, stableUnits.cavalier, stableUnits.battleElephant, stableUnits.eliteBattleElephant, burmeseUniqueUnits.arambai, burmeseUniqueUnits.eliteArambai],
         affectedUpgrades: []
     })
 ]
@@ -84,7 +100,24 @@ export const burmeseTechTree: CivTechTree = {
             id: 'burmese2',
             effectType: EffectType.damage,
             value: { age2: 1, age3: 2, age4: 3 },
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                        unit.addAttackComponent(1, ArmorType.melee)
+                    }
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.addAttackComponent(1, ArmorType.melee)
+                    }
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.addAttackComponent(1, ArmorType.melee)
+                    }
+                }
+            }],
+            affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion, barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier],
             affectedUpgrades: []
         },
         {
@@ -247,3 +280,6 @@ export const burmeseTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, burmeseTechTree)
+setCivOnUniqueTechs(burmeseTechTree.bonuses, burmeseTechTree)

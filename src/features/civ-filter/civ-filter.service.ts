@@ -1,6 +1,8 @@
 import { fullTechTree } from "../../constants/tech-trees/_full-tech-tree.const"
 import { castleUnits, castleUpgrades } from "../../constants/techs/castle-techs.const"
-import { CivTechTree, Tech, TechType, Unit, Upgrade, GroupTechTree, UpgradePerAgeGroup, UnitLine } from "../../models/techs.model"
+import { CivTechTree, Tech, TechType, GroupTechTree, UpgradePerAgeGroup, UnitLine } from "../../models/techs.model"
+import { Unit } from "../../models/unit.model"
+import { Upgrade } from "../../models/upgrade.model"
 import { chainTechs } from "../../utils/techs.utils"
 
 class CivFilterService {

@@ -1,4 +1,4 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/cumans.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
+import { Unit } from "../../models/unit.model";
 
 export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
     kipchak: new Unit({
@@ -52,8 +55,14 @@ const uniqueTechs = [
         effectType: EffectType.creationSpeed,
         value: 100,
         cost: { wood: 300, food: 200, gold: 0, stone: 0 },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.duration = multiplyNumber(unit.duration, 1/2)
+            }
+        }],
         duration: 40,
-        affectedUnits: [stableUnits.hussar, stableUnits.eliteSteppeLancer, archeryUnits.heavyCavalryArcher],
+        affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar, stableUnits.steppeLancer, stableUnits.eliteSteppeLancer, archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -63,7 +72,7 @@ const uniqueTechs = [
         value: null,
         cost: { wood: 0, food: 650, gold: 400, stone: 0 },
         duration: 40,
-        affectedUnits: [cumansUniqueUnits.eliteKipchak],
+        affectedUnits: [cumansUniqueUnits.kipchak, cumansUniqueUnits.eliteKipchak],
         affectedUpgrades: []
     })
 ]
@@ -91,7 +100,29 @@ export const cumansTechTree: CivTechTree = {
             id: 'cumans3',
             effectType: EffectType.movementSpeed,
             value: { age2: 5, age3: 10, age4: 15 },
-            affectedUnits: [stableUnits.hussar, stableUnits.paladin, stableUnits.camelRider, stableUnits.eliteSteppeLancer, cumansUniqueUnits.eliteKipchak],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.15)
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                        unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.1)
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                        unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.05)
+                    }
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar,
+                stableUnits.knight, stableUnits.cavalier, stableUnits.paladin,
+                stableUnits.camelRider,
+                stableUnits.steppeLancer, stableUnits.eliteSteppeLancer,
+                archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher,
+                cumansUniqueUnits.kipchak, cumansUniqueUnits.eliteKipchak],
             affectedUpgrades: []
         },
         {
@@ -243,3 +274,6 @@ export const cumansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, cumansTechTree)
+setCivOnUniqueTechs(cumansTechTree.bonuses, cumansTechTree)

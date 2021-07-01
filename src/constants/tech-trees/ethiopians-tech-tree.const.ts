@@ -1,4 +1,4 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/ethiopians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { Unit } from "../../models/unit.model";
 
 export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: Unit } = {
     shotelWarrior: new Unit({
@@ -53,7 +55,7 @@ const uniqueTechs = [
         value: 100,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
         duration: 40,
-        affectedUnits: [ethiopiansUniqueUnits.eliteShotelWarrior],
+        affectedUnits: [ethiopiansUniqueUnits.shotelWarrior, ethiopiansUniqueUnits.eliteShotelWarrior],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -63,7 +65,7 @@ const uniqueTechs = [
         value: null,
         cost: { wood: 0, food: 1000, gold: 600, stone: 0 },
         duration: 40,
-        affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.bombardCannon],
+        affectedUnits: [siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam, siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager, siegeUnits.scorpion, siegeUnits.heavyScorpion, siegeUnits.bombardCannon],
         affectedUpgrades: []
     })
 ]
@@ -77,7 +79,13 @@ export const ethiopiansTechTree: CivTechTree = {
             id: 'ethiopians1',
             effectType: EffectType.fireRate,
             value: 18,
-            affectedUnits: [archeryUnits.arbalester],
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.multiplyAttackRate(1.25)
+                }
+            }],
+            affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester],
             affectedUpgrades: []
         },
         {
@@ -246,3 +254,6 @@ export const ethiopiansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, ethiopiansTechTree)
+setCivOnUniqueTechs(ethiopiansTechTree.bonuses, ethiopiansTechTree)

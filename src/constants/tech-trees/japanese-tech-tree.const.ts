@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/japanese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber, roundHundredth } from "../../utils/utils";
 
 export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
     samurai: new Unit({
@@ -77,6 +80,20 @@ export const japaneseTechTree: CivTechTree = {
             id: 'japanese1',
             effectType: EffectType.miscallenous,
             value: null,
+            effects: [
+                {
+                    order: EffectOrder.first,
+                    apply: (unit: Unit) => {
+                        unit.addArmorComponent(2, ArmorType.pierce)
+                    }
+                },
+                {
+                    order: EffectOrder.last,
+                    apply: (unit: Unit) => {
+                        unit.stats.health = multiplyNumber(unit.stats.health, 2)
+                    }
+                }
+            ],
             affectedUnits: [dockUnits.fishingShip],
             affectedUpgrades: []
         },
@@ -91,14 +108,28 @@ export const japaneseTechTree: CivTechTree = {
             id: 'japanese3',
             effectType: EffectType.fireRate,
             value: 33,
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, japaneseUniqueUnits.eliteSamurai],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.multiplyAttackRate(1.33)
+                }
+            }],
+            affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion,
+                barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier,
+                japaneseUniqueUnits.samurai, japaneseUniqueUnits.eliteSamurai],
             affectedUpgrades: []
         },
         {
             id: 'japanese4',
             effectType: EffectType.lineOfSightPercent,
             value: 50,
-            affectedUnits: [dockUnits.galleon],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.lineOfSight = multiplyNumber(unit.stats.lineOfSight, 1.5)
+                }
+            }],
+            affectedUnits: [dockUnits.galley, dockUnits.warGalley, dockUnits.galleon],
             affectedUpgrades: [],
             team: true
         },
@@ -244,3 +275,6 @@ export const japaneseTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, japaneseTechTree)
+setCivOnUniqueTechs(japaneseTechTree.bonuses, japaneseTechTree)

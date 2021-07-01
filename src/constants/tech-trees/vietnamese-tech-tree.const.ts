@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,6 +17,8 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/vietnamese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { chainTechs } from "../../utils/techs.utils";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 
 export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Unit, imperialSkirmisher: Unit } = {
     rattanArcher: new Unit({
@@ -69,8 +72,14 @@ const uniqueTechs = [
         effectType: EffectType.health,
         value: 50,
         cost: { wood: 0, food: 250, gold: 250, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.health += 50
+            }
+        }],
         duration: 40,
-        affectedUnits: [stableUnits.eliteBattleElephant],
+        affectedUnits: [stableUnits.battleElephant, stableUnits.eliteBattleElephant],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -101,7 +110,13 @@ export const vietnameseTechTree: CivTechTree = {
             id: 'vietnamese2',
             effectType: EffectType.healthPercent,
             value: 20,
-            affectedUnits: [archeryUnits.arbalester, archeryUnits.eliteSkirmisher, archeryUnits.heavyCavalryArcher],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.health = multiplyNumber(unit.stats.health, 1.2)
+                }
+            }],
+            affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher, archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
             affectedUpgrades: []
         },
         {
@@ -276,3 +291,7 @@ export const vietnameseTechTree: CivTechTree = {
         ])
     }
 }
+
+
+setCivOnUniqueTechs(uniqueTechs, vietnameseTechTree)
+setCivOnUniqueTechs(vietnameseTechTree.bonuses, vietnameseTechTree)

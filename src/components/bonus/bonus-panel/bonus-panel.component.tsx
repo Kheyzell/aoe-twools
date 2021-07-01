@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import TechComponent from "../../../features/civ-filter/tech-tree/tech/tech.component"
+import CivFilterTechComponent from "../../../features/civ-filter/tech-tree/civ-filter-tech/civ-filter-tech.component"
 
 import { Bonus } from "../../../models/bonus.model"
 import "./bonus-panel.component.css"
@@ -20,7 +20,7 @@ const BonusPanel: React.FC<BonusPanelProps> = (props) => {
                     <span className="Title"> {t('List of affected units')}: </span>
                     <div className="List">
                         {props.bonus.affectedUnits.map(unit => {
-                            return (<TechComponent key={unit.id} tech={unit}></TechComponent>)
+                            return (<CivFilterTechComponent key={unit.id} tech={unit}></CivFilterTechComponent>)
                         })}
                     </div>
                 </div>
@@ -30,7 +30,7 @@ const BonusPanel: React.FC<BonusPanelProps> = (props) => {
                     <span className="Title"> {t('List of affected upgrades')}: </span>
                     <div className="List">
                         {props.bonus.affectedUpgrades.map(upgrade => {
-                            return (<TechComponent key={upgrade.id} tech={upgrade}></TechComponent>)
+                            return (<CivFilterTechComponent key={upgrade.id} tech={upgrade}></CivFilterTechComponent>)
                         })}
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Upgrade } from "../../models/techs.model";
+import { Upgrade } from './../../models/upgrade.model'
 import { chainTechs } from "../../utils/techs.utils";
 
 interface MiningCampUpgrades {

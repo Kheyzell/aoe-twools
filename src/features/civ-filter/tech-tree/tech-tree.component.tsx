@@ -1,25 +1,31 @@
-import React, { useRef, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useTranslation } from "react-i18next"
 import { Tooltip } from "@material-ui/core"
+import React, { useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { useDispatch, useSelector } from "react-redux"
 
-import GroupTechTreeComponent from "./group-tech-tree/group-tech-tree.component"
-import { isInComparisonModeSelector, resetTechSelection, selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCivSelection, unselectCivs } from "../civFilterSlice"
-import './tech-tree.component.css'
+import { BoxSize } from "../../../components/tech/tech.component"
+import { fullTechTree } from "../../../constants/tech-trees/_full-tech-tree.const"
+import localStorageService from "../../../core/local-storage.service"
+import { Tech } from "../../../models/techs.model"
 import increaseIcon from "../../../resources/icons/increase.svg"
+import noTooltipIcon from "../../../resources/icons/comment-disactivated.svg"
+import tooltipDisplayIcon from "../../../resources/icons/comment-activated.svg"
+import tooltipLockedIcon from "../../../resources/icons/comment-locked.svg"
 import reduceIcon from "../../../resources/icons/reduce.svg"
 import refreshIcon from "../../../resources/icons/refresh.png"
 import woodenBackground from "../../../resources/images/backgrounds/wood2.jpg"
+import castleAge from "../../../resources/images/castleAge.png"
 import darkAge from "../../../resources/images/darkAge.png"
 import feudalAge from "../../../resources/images/feudalAge.png"
-import castleAge from "../../../resources/images/castleAge.png"
 import imperialAge from "../../../resources/images/imperialAge.png"
-import { CivTechTree, Tech } from "../../../models/techs.model"
-import TechComponent, { BoxSize } from "./tech/tech.component"
-import { fullTechTree } from "../../../constants/tech-trees/_full-tech-tree.const"
 import { scrollHorizontally } from "../../../utils/utils"
-import localStorageService from "../../../core/local-storage.service"
 import civFilterService from "../civ-filter.service"
+import { isInComparisonModeSelector, techTooltipInteractivitySelector, resetTechSelection, selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleTechTooltipInteractivity, unselectCiv1, unselectCiv2, unselectCivs, TooltipInteractivity } from "../civ-filter.slice"
+import CivFilterTechComponent from "./civ-filter-tech/civ-filter-tech.component"
+import GroupTechTreeComponent from "./group-tech-tree/group-tech-tree.component"
+
+import './tech-tree.component.css'
+
 
 type TechTreeProps = {}
 
@@ -33,10 +39,8 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
   const selectedCiv2 = useSelector(selectedCiv2Selector)
   const isInComparisonMode = useSelector(isInComparisonModeSelector)
   const selectedTechs = useSelector(selectedTechsSelector)
+  const techTooltipInteractivity = useSelector(techTooltipInteractivitySelector)
   const techTreeToDisplay = civFilterService.mergeTechTrees([selectedCiv!, selectedCiv2!].filter(civ => !!civ))
-  // selectedCiv ?
-  //   (selectedCiv2 ? civFilterService.generateTechTreeToDisplayFrom(civFilterService.generateTechTreeToDisplayFrom(fullTechTree, selectedCiv), selectedCiv2) : civFilterService.generateTechTreeToDisplayFrom(fullTechTree, selectedCiv))
-  //   : fullTechTree
 
   const onChangeTechSize = () => {
     const newTechSize = techSize === BoxSize.normal ? BoxSize.small : BoxSize.normal
@@ -49,9 +53,20 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
     dispatch(resetTechSelection())
   }
 
-  const onCivClick = (civ: CivTechTree) => {
-    dispatch(toggleCivSelection({ ...civ }))
+  const onToggleTechDescriptionInteractivity = () => {
+    dispatch(toggleTechTooltipInteractivity())
   }
+
+  const onCivClick1 = () => {
+    dispatch(unselectCiv1())
+  }
+  
+  const onCivClick2 = () => {
+    dispatch(unselectCiv2())
+  }
+
+  const tooltipButtonDescription = techTooltipInteractivity === TooltipInteractivity.none ? 'No tooltip' : (techTooltipInteractivity === TooltipInteractivity.display ? 'Show tech tooltip' : 'Lock tech tooltip')
+  const tooltipInteractivityIcon = techTooltipInteractivity === TooltipInteractivity.none ? noTooltipIcon : (techTooltipInteractivity === TooltipInteractivity.display ? tooltipDisplayIcon : tooltipLockedIcon)
 
   const SelectedCivs = () => {
     if (!!selectedCiv || !!selectedCiv2) {
@@ -59,12 +74,12 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
         <div className="SelectedCivs">
           {selectedCiv ? (
             <Tooltip title={<span> {t(`civ.${selectedCiv?.id}.name`)} </span>}>
-              <img src={selectedCiv?.crest} alt="Crest" onClick={() => onCivClick(selectedCiv)} />
+              <img src={selectedCiv?.crest} alt="Crest" onClick={() => onCivClick1()} />
             </Tooltip>
           ) : ''}
           {selectedCiv2 ? (
             <Tooltip title={<span> {t(`civ.${selectedCiv2?.id}.name`)} </span>}>
-              <img src={selectedCiv2?.crest} alt="Crest" onClick={() => onCivClick(selectedCiv2)} />
+              <img src={selectedCiv2?.crest} alt="Crest" onClick={() => onCivClick2()} />
             </Tooltip>
           ) : ''}
         </div>
@@ -108,13 +123,19 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
           <button onClick={onChangeTechSize}> <img src={techSize === BoxSize.normal ? reduceIcon : increaseIcon} alt="Size" /> </button>
         </Tooltip>
 
-        <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> </button>
+        <Tooltip title={<span>{t(tooltipButtonDescription)}</span>}>
+          <button onClick={onToggleTechDescriptionInteractivity}> <img src={tooltipInteractivityIcon} alt="Size" /> </button>
+        </Tooltip>
+
+        <Tooltip title={<span>{t('Reset filters')}</span>}>
+          <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> </button>
+        </Tooltip>
 
         <SelectedCivs></SelectedCivs>
 
         <div className="SelectedTechs">
           {toolsSelectedTechs.map((tech: Tech, index: number) => {
-            return (<TechComponent key={index} tech={tech} size={BoxSize.mini}></TechComponent>)
+            return (<CivFilterTechComponent key={index} tech={tech} size={BoxSize.mini}></CivFilterTechComponent>)
           })}
         </div>
       </div>

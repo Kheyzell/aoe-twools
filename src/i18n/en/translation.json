@@ -1492,7 +1492,7 @@
         },
         "garlandWars": {
             "name": "Garland Wars",
-            "description": "+4 infantry attack"
+            "description": "+4 infantry melee attack"
         },
         "kasbah": {
             "name": "Kasbah",
@@ -1797,6 +1797,49 @@
         "berserkergang": {
             "name": "Berserkergang",
             "description": "Berserks regenerate faster (40HP/min)"
+        }
+    },
+    "capacities": {
+        "selfDestruction": {
+            "title": "self destruction"
+        },
+        "conversion": {
+            "title": "conversion"
+        },
+        "healing": {
+            "title": "healing",
+            "shortDescription": "heal target unit for {{healthPerMinute}} per minute at a range of {{range}}",
+            "description": ""
+        },
+        "redemption": {
+            "title": "redemption"
+        },
+        "atonement": {
+            "title": "atonement"
+        },
+        "theocracy": {
+            "title": "theocracy"
+        },
+        "heresy": {
+            "title": "heresy"
+        },
+        "ballistics": {
+            "title": "ballistics"
+        },
+        "trampleDruzhina": {
+            "title": "trample"
+        },
+        "maghrebiRegen": {
+            "title": "regen"
+        },
+        "madrasahRefund": {
+            "title": "refund on death"
+        },
+        "aztecsMonkHealthBonus": {
+            "title": "health bonus"
+        },
+        "regen": {
+            "title": "regen"
         }
     }
 }

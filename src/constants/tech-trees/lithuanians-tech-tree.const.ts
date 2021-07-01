@@ -1,4 +1,5 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -8,13 +9,15 @@ import { lumberCampUpgrades } from "../techs/lumber-camp-techs.const";
 import { marketUnits, marketUpgrade } from "../techs/market-techs.const";
 import { millUpgrades } from "../techs/mill-techs.const";
 import { miningCampUpgrades } from "../techs/mining-camp-techs.const";
-import { monasteryUnits, monasteryUpgrade } from "../techs/monastery-techs.const";
+import { monasteryUnits, monasteryUpgrade, relicsUpgrade } from "../techs/monastery-techs.const";
 import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/lithuanians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 
 export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
     leitis: new Unit({
@@ -62,8 +65,14 @@ const uniqueTechs = [
         effectType: EffectType.pierceArmor,
         value: 2,
         cost: { wood: 0, food: 500, gold: 200, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(2, ArmorType.pierce)
+            }
+        }],
         duration: 40,
-        affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher],
+        affectedUnits: [barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher],
         affectedUpgrades: []
     })
 ]
@@ -84,20 +93,53 @@ export const lithuaniansTechTree: CivTechTree = {
             id: 'lithuanians2',
             effectType: EffectType.movementSpeed,
             value: 10,
-            affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.1)
+                }
+            }],
+            affectedUnits: [barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher],
             affectedUpgrades: []
         },
         {
             id: 'lithuanians3',
             effectType: EffectType.miscallenous,
             value: null,
-            affectedUnits: [stableUnits.paladin, lithuaniansUniqueUnits.eliteLeitis],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, relicsUpgrade.relic1)
+                    addElementIfNotInArray(unit.affectingUpgrades, relicsUpgrade.relic2)
+                    addElementIfNotInArray(unit.affectingUpgrades, relicsUpgrade.relic3)
+                    addElementIfNotInArray(unit.affectingUpgrades, relicsUpgrade.relic4)
+                    if (upgrades?.some(upgrade => upgrade.id === relicsUpgrade.relic1.id)) {
+                        unit.addAttackComponent(1, ArmorType.melee)
+                    }
+                    if (upgrades?.some(upgrade => upgrade.id === relicsUpgrade.relic2.id)) {
+                        unit.addAttackComponent(1, ArmorType.melee)
+                    }
+                    if (upgrades?.some(upgrade => upgrade.id === relicsUpgrade.relic3.id)) {
+                        unit.addAttackComponent(1, ArmorType.melee)
+                    }
+                    if (upgrades?.some(upgrade => upgrade.id === relicsUpgrade.relic4.id)) {
+                        unit.addAttackComponent(1, ArmorType.melee)
+                    }
+                }
+            }],
+            affectedUnits: [stableUnits.knight, stableUnits.cavalier, stableUnits.paladin, lithuaniansUniqueUnits.leitis, lithuaniansUniqueUnits.eliteLeitis],
             affectedUpgrades: []
         },
         {
             id: 'lithuanians4',
             effectType: EffectType.creationSpeed,
             value: 20,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.duration = multiplyNumber(unit.duration, 1/1.2)
+                }
+            }],
             affectedUnits: [monasteryUnits.monk],
             affectedUpgrades: [monasteryUpgrade.redemption, monasteryUpgrade.atonement, monasteryUpgrade.herbalMedecine, monasteryUpgrade.heresy, monasteryUpgrade.sanctity, monasteryUpgrade.fervor, monasteryUpgrade.faith, monasteryUpgrade.illumination, monasteryUpgrade.blockPrinting, monasteryUpgrade.theocracy],
             team: true
@@ -248,3 +290,6 @@ export const lithuaniansTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, lithuaniansTechTree)
+setCivOnUniqueTechs(lithuaniansTechTree.bonuses, lithuaniansTechTree)

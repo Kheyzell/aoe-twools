@@ -1,4 +1,4 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,6 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/huns.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
+import { Unit } from "../../models/unit.model";
 
 export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
     tarkan: new Unit({
@@ -53,7 +56,7 @@ const uniqueTechs = [
         value: null,
         cost: { wood: 300, food: 0, gold: 200, stone: 0 },
         duration: 40,
-        affectedUnits: [hunsUniqueUnits.eliteTarkan],
+        affectedUnits: [hunsUniqueUnits.tarkan, hunsUniqueUnits.eliteTarkan],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -84,13 +87,36 @@ export const hunsTechTree: CivTechTree = {
             id: 'huns2',
             effectType: EffectType.discount,
             value: { age3: 10, age4: 20 },
-            affectedUnits: [archeryUnits.heavyCavalryArcher],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.20))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.20))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.20))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.20))
+                    } else {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.10))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.10))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.10))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.10))
+                    }
+                }
+            }],
+            affectedUnits: [archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
             affectedUpgrades: []
         },
         {
             id: 'huns3',
             effectType: EffectType.accuracy,
             value: 30,
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.stats.accuracy! = Math.min(multiplyNumber(unit.stats.accuracy!, 30), 1)
+            }
+        }],
             affectedUnits: [castleUnits.trebuchet],
             affectedUpgrades: []
         },
@@ -98,7 +124,13 @@ export const hunsTechTree: CivTechTree = {
             id: 'huns4',
             effectType: EffectType.creationSpeed,
             value: 20,
-            affectedUnits: [stableUnits.hussar, stableUnits.paladin, hunsUniqueUnits.eliteTarkan],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.duration = multiplyNumber(unit.duration, 1/1.2)
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar, stableUnits.knight, stableUnits.cavalier, stableUnits.paladin, hunsUniqueUnits.tarkan, hunsUniqueUnits.eliteTarkan],
             affectedUpgrades: [stableUpgrades.bloodlines, stableUpgrades.husbandry],
             team: true
         }
@@ -233,3 +265,6 @@ export const hunsTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, hunsTechTree)
+setCivOnUniqueTechs(hunsTechTree.bonuses, hunsTechTree)

@@ -1,5 +1,10 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/celts.png';
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber, roundHundredth } from "../../utils/utils";
+import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 import { castleUnits, castleUpgrades } from "../techs/castle-techs.const";
@@ -13,8 +18,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/celts.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
     woadRaider: new Unit({
@@ -62,8 +65,14 @@ const uniqueTechs = [
         effectType: EffectType.healthPercent,
         value: 40,
         cost: { wood: 0, food: 750, gold: 450, stone: 0 },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.stats.health = multiplyNumber(unit.stats.health, 1.4)
+            }
+        }],
         duration: 50,
-        affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
+        affectedUnits: [siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam, siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager, siegeUnits.scorpion, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
         affectedUpgrades: []
     })
 ]
@@ -77,7 +86,15 @@ export const celtsTechTree: CivTechTree = {
             id: 'celts1',
             effectType: EffectType.movementSpeed,
             value: { age2: 15, age3: 15, age4: 15 },
-            affectedUnits: [barracksUnits.champion, barracksUnits.halberdier, celtsUniqueUnits.eliteWoadRaider],
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.15)
+                }
+            }],
+            affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion,
+                barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier,
+                celtsUniqueUnits.woadRaider, celtsUniqueUnits.eliteWoadRaider],
             affectedUpgrades: []
         },
         {
@@ -91,7 +108,13 @@ export const celtsTechTree: CivTechTree = {
             id: 'celts3',
             effectType: EffectType.fireRate,
             value: 25,
-            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion],
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.multiplyAttackRate(1.25)
+                }
+            }],
+            affectedUnits: [siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam, siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager, siegeUnits.scorpion, siegeUnits.heavyScorpion],
             affectedUpgrades: []
         },
         {
@@ -105,7 +128,13 @@ export const celtsTechTree: CivTechTree = {
             id: 'celts5',
             effectType: EffectType.creationSpeed,
             value: 20,
-            affectedUnits: [siegeUnits.siegeRam, siegeUnits.siegeOnager, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.duration = multiplyNumber(unit.duration, 1/1.2)
+                }
+            }],
+            affectedUnits: [siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam, siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager, siegeUnits.scorpion, siegeUnits.heavyScorpion, siegeUnits.siegeTower],
             affectedUpgrades: [],
             team: true
         }
@@ -248,3 +277,6 @@ export const celtsTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, celtsTechTree)
+setCivOnUniqueTechs(celtsTechTree.bonuses, celtsTechTree)

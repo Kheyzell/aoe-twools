@@ -1,4 +1,10 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { CapacityId, HealingCapacity } from "../../models/capacity.model";
+import { UnitType, EffectOrder, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/byzantines.png';
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addNumber, multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -13,8 +19,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/byzantines.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const byzantinesUniqueUnits: { cataphract: Unit, eliteCataphract: Unit } = {
     cataphract: new Unit({
@@ -52,8 +56,14 @@ const uniqueTechs = [
         effectType: EffectType.range,
         value: 1,
         cost: { wood: 0, food: 250, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.range! += 1
+            }
+        }],
         duration: 40,
-        affectedUnits: [dockUnits.fastFireShip],
+        affectedUnits: [dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -63,7 +73,7 @@ const uniqueTechs = [
         value: null,
         cost: { wood: 0, food: 800, gold: 600, stone: 0 },
         duration: 50,
-        affectedUnits: [byzantinesUniqueUnits.eliteCataphract],
+        affectedUnits: [byzantinesUniqueUnits.cataphract, byzantinesUniqueUnits.eliteCataphract],
         affectedUpgrades: []
     })
 ]
@@ -84,14 +94,29 @@ export const byzantinesTechTree: CivTechTree = {
             id: 'byzantines2',
             effectType: EffectType.discount,
             value: 25,
-            affectedUnits: [barracksUnits.halberdier, archeryUnits.eliteSkirmisher, stableUnits.heavyCamelRider],
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.25))
+                    unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.25))
+                    unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.25))
+                    unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.25))
+                }
+            }],
+            affectedUnits: [barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher, stableUnits.camelRider, stableUnits.heavyCamelRider],
             affectedUpgrades: []
         },
         {
             id: 'byzantines3',
             effectType: EffectType.fireRate,
             value: 25,
-            affectedUnits: [dockUnits.fastFireShip],
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.multiplyAttackRate(1.25)
+                }
+            }],
+            affectedUnits: [dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip],
             affectedUpgrades: []
         },
         {
@@ -112,6 +137,15 @@ export const byzantinesTechTree: CivTechTree = {
             id: 'byzantines6',
             effectType: EffectType.miscallenous,
             value: 50,
+            effects: [{
+                order: EffectOrder.first,
+                apply: unit => {
+                    const healingCapacity = unit.getCapacity(CapacityId.healing) as HealingCapacity
+                    if (healingCapacity) {
+                        healingCapacity.healthPerMinute = multiplyNumber(healingCapacity.healthPerMinute, 1.5)
+                    }
+                }
+            }],
             affectedUnits: [monasteryUnits.monk],
             affectedUpgrades: [],
             team: true
@@ -261,3 +295,6 @@ export const byzantinesTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, byzantinesTechTree)
+setCivOnUniqueTechs(byzantinesTechTree.bonuses, byzantinesTechTree)

@@ -1,5 +1,10 @@
-import { CivTechTree, Unit, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/franks.png';
+import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
+import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 import { castleUnits, castleUpgrades } from "../techs/castle-techs.const";
@@ -13,8 +18,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/franks.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
 
 export const franksUniqueUnits: { throwingAxeman: Unit, eliteThrowingAxeman: Unit } = {
     throwingAxeman: new Unit({
@@ -53,7 +56,7 @@ const uniqueTechs = [
         value: 1,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
         duration: 60,
-        affectedUnits: [franksUniqueUnits.eliteThrowingAxeman],
+        affectedUnits: [franksUniqueUnits.throwingAxeman, franksUniqueUnits.eliteThrowingAxeman],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -62,8 +65,14 @@ const uniqueTechs = [
         effectType: EffectType.creationSpeed,
         value: 40,
         cost: { wood: 600, food: 0, gold: 500, stone: 0 },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.duration = multiplyNumber(unit.duration, 1/1.40)
+            }
+        }],
         duration: 40,
-        affectedUnits: [stableUnits.lightCavalry, stableUnits.paladin],
+        affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.knight, stableUnits.cavalier, stableUnits.paladin],
         affectedUpgrades: [stableUpgrades.husbandry]
     })
 ]
@@ -91,7 +100,15 @@ export const franksTechTree: CivTechTree = {
             id: 'franks3',
             effectType: EffectType.healthPercent,
             value: { age2: 20, age3: 20, age4: 20 },
-            affectedUnits: [stableUnits.lightCavalry, stableUnits.paladin, archeryUnits.heavyCavalryArcher],
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.health = multiplyNumber(unit.stats.health, 1.2)
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry,
+                stableUnits.knight, stableUnits.cavalier, stableUnits.paladin,
+                archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
             affectedUpgrades: []
         },
         {
@@ -105,7 +122,13 @@ export const franksTechTree: CivTechTree = {
             id: 'franks5',
             effectType: EffectType.lineOfSight,
             value: 2,
-            affectedUnits: [stableUnits.paladin],
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.stats.lineOfSight = unit.stats.lineOfSight + 2
+                }
+            }],
+            affectedUnits: [stableUnits.knight, stableUnits.cavalier, stableUnits.paladin],
             affectedUpgrades: [],
             team: true
         }
@@ -249,3 +272,6 @@ export const franksTechTree: CivTechTree = {
         ])
     }
 }
+
+setCivOnUniqueTechs(uniqueTechs, franksTechTree)
+setCivOnUniqueTechs(franksTechTree.bonuses, franksTechTree)

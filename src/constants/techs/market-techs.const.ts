@@ -1,5 +1,8 @@
-import { Unit, UnitType, Upgrade } from "../../models/techs.model";
+import { ArmorType, EffectOrder, UnitType } from "../../models/techs.model";
+import { Unit } from "../../models/unit.model";
+import { Upgrade } from "../../models/upgrade.model";
 import { chainTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 
 interface MarketUnits {
     tradeCart: Unit
@@ -15,6 +18,7 @@ interface MarketUpgrades {
 export const marketUnits: MarketUnits = {
     tradeCart: new Unit({
         id: 'tradeCart',
+        wikiUrl: 'Trade_Cart',
         age: 2,
         unitType: UnitType.civilian,
         cost: {
@@ -23,6 +27,16 @@ export const marketUnits: MarketUnits = {
             gold: 50,
             stone: 0
         },
+        stats: {
+            health: 70,
+            attackComponents: [],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+            ],
+            movementSpeed: 1,
+            lineOfSight: 7
+        },
         duration: 51
     })
 }
@@ -30,6 +44,7 @@ export const marketUnits: MarketUnits = {
 export const marketUpgrade: MarketUpgrades = {
     coinage: new Upgrade({
         id: 'coinage',
+        wikiUrl: 'Coinage',
         age: 3,
         cost: {
             wood: 0,
@@ -41,6 +56,7 @@ export const marketUpgrade: MarketUpgrades = {
     }),
     caravan: new Upgrade({
         id: 'caravan',
+        wikiUrl: 'Caravan',
         age: 3,
         cost: {
             wood: 0,
@@ -48,10 +64,17 @@ export const marketUpgrade: MarketUpgrades = {
             gold: 200,
             stone: 0
         },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.5)
+            }
+        }],
         duration: 40
     }),
     banking: new Upgrade({
         id: 'banking',
+        wikiUrl: 'Banking',
         age: 4,
         cost: {
             wood: 0,
@@ -63,6 +86,7 @@ export const marketUpgrade: MarketUpgrades = {
     }),
     guilds: new Upgrade({
         id: 'guilds',
+        wikiUrl: 'Guilds',
         age: 4,
         cost: {
             wood: 0,
