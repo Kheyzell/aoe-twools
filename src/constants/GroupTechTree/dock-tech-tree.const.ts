@@ -3,7 +3,7 @@ import { dockUnits, dockUpgrades } from "../techs/dock-techs.const";
 
 export const dockTechs: GroupTechTree = {
     name: 'Dock',
-    units: [
+    unitLines: [
         new UnitLine([dockUnits.fishingShip]),
         new UnitLine([dockUnits.transportShip]),
         new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),

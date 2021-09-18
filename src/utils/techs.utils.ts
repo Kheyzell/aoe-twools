@@ -24,20 +24,20 @@ export const hasCivUpgrades = (civ: CivTechTree, upgrades: Upgrade[]): boolean =
 }
 
 export const getAllCivUnits = (civ: CivTechTree): Unit[] => ([
-    ...civ.barracks.units.reduce(reduceUnits, []), 
-    ...civ.archery.units.reduce(reduceUnits, []), 
-    ...civ.stable.units.reduce(reduceUnits, []), 
-    ...civ.siege.units.reduce(reduceUnits, []), 
-    ...civ.castle.units.reduce(reduceUnits, []), 
-    ...civ.blacksmith.units.reduce(reduceUnits, []), 
-    ...civ.monastery.units.reduce(reduceUnits, []), 
-    ...civ.university.units.reduce(reduceUnits, []), 
-    ...civ.townCenter.units.reduce(reduceUnits, []), 
-    ...civ.lumberCamp.units.reduce(reduceUnits, []), 
-    ...civ.mill.units.reduce(reduceUnits, []), 
-    ...civ.miningCamp.units.reduce(reduceUnits, []), 
-    ...civ.market.units.reduce(reduceUnits, []), 
-    ...civ.dock.units.reduce(reduceUnits, [])
+    ...civ.barracks.unitLines.reduce(reduceUnits, []), 
+    ...civ.archery.unitLines.reduce(reduceUnits, []), 
+    ...civ.stable.unitLines.reduce(reduceUnits, []), 
+    ...civ.siege.unitLines.reduce(reduceUnits, []), 
+    ...civ.castle.unitLines.reduce(reduceUnits, []), 
+    ...civ.blacksmith.unitLines.reduce(reduceUnits, []), 
+    ...civ.monastery.unitLines.reduce(reduceUnits, []), 
+    ...civ.university.unitLines.reduce(reduceUnits, []), 
+    ...civ.townCenter.unitLines.reduce(reduceUnits, []), 
+    ...civ.lumberCamp.unitLines.reduce(reduceUnits, []), 
+    ...civ.mill.unitLines.reduce(reduceUnits, []), 
+    ...civ.miningCamp.unitLines.reduce(reduceUnits, []), 
+    ...civ.market.unitLines.reduce(reduceUnits, []), 
+    ...civ.dock.unitLines.reduce(reduceUnits, [])
 ])
 
 
@@ -47,20 +47,20 @@ export const getAllCivMilitaryUnits = (civ: CivTechTree): Unit[] => getAllCivUni
 
 export const getAllCivUnitLines = (civ: CivTechTree): UnitLine[] => {
     return [
-        ...civ.barracks.units, 
-        ...civ.archery.units, 
-        ...civ.stable.units, 
-        ...civ.siege.units, 
-        ...civ.castle.units, 
-        ...civ.blacksmith.units, 
-        ...civ.monastery.units, 
-        ...civ.university.units, 
-        ...civ.townCenter.units, 
-        ...civ.lumberCamp.units, 
-        ...civ.mill.units, 
-        ...civ.miningCamp.units, 
-        ...civ.market.units, 
-        ...civ.dock.units
+        ...civ.barracks.unitLines, 
+        ...civ.archery.unitLines, 
+        ...civ.stable.unitLines, 
+        ...civ.siege.unitLines, 
+        ...civ.castle.unitLines, 
+        ...civ.blacksmith.unitLines, 
+        ...civ.monastery.unitLines, 
+        ...civ.university.unitLines, 
+        ...civ.townCenter.unitLines, 
+        ...civ.lumberCamp.unitLines, 
+        ...civ.mill.unitLines, 
+        ...civ.miningCamp.unitLines, 
+        ...civ.market.unitLines, 
+        ...civ.dock.unitLines
     ]
 }
 

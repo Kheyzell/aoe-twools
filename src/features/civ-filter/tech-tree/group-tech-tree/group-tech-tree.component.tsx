@@ -12,10 +12,8 @@ type Props = {
 type State = {}
 
 const GroupTechTreeComponent: React.FC<Props> = (props, state: State) => {
-  const unitLines = props.groupTechTree.units
+  const unitLines = props.groupTechTree.unitLines
   const upgradeLine = props.groupTechTree.upgrades
-
-  const onTechSelected = () => { }
 
   return (
     <div className="GroupTechTree">

@@ -74,10 +74,10 @@ const CivList: React.FC<Props> = (props) => {
                     showTools ?
                         (<div>
                             <label htmlFor="FullyUpgraded" onClick={() => { setShowCivsFullyUpgraded(!showCivsFullyUpgraded) }} title={t('Show the list of civilisations having the selected units fully upgraded')}>
-                                <input name="FullyUpgraded" type="checkbox" checked={showCivsFullyUpgraded} /> {t('Show Fully upgraded')}
+                                <input name="FullyUpgraded" type="checkbox" checked={showCivsFullyUpgraded} readOnly /> {t('Show Fully upgraded')}
                             </label>
                             <label htmlFor="Excluded" onClick={() => { setShowCivsExcluded(!showCivsExcluded) }} title={t('Show the list of civilisations that do not satisfy the filters')}>
-                                <input name="Excluded" type="checkbox" checked={showCivsExcluded} /> {t('Show Excluded')}
+                                <input name="Excluded" type="checkbox" checked={showCivsExcluded} readOnly /> {t('Show Excluded')}
                             </label>
                         </div>)
                         :

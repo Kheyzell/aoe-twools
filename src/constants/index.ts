@@ -1,5 +1,6 @@
 import { aztecsTechTree } from "./tech-trees/aztecs-tech-tree.const"
 import { berbersTechTree } from "./tech-trees/berbers-tech-tree.const"
+import { bohemiansTechTree } from "./tech-trees/bohemians-tech-tree.const"
 import { britonsTechTree } from "./tech-trees/britons-tech-tree.const"
 import { bulgariansTechTree } from "./tech-trees/bulgarians-tech-tree.const"
 import { burgundiansTechTree } from "./tech-trees/burgundians-tech-tree.const"
@@ -25,6 +26,7 @@ import { maliansTechTree } from "./tech-trees/malians-tech-tree.const"
 import { mayansTechTree } from "./tech-trees/mayans-tech-tree.const"
 import { mongolsTechTree } from "./tech-trees/mongols-tech-tree.const"
 import { persiansTechTree } from "./tech-trees/persians-tech-tree.const"
+import { polesTechTree } from "./tech-trees/poles-tech-tree.const"
 import { portugueseTechTree } from "./tech-trees/portuguese-tech-tree.const"
 import { saracensTechTree } from "./tech-trees/saracens-tech-tree.const"
 import { siciliansTechTree } from "./tech-trees/sicilians-tech-tree.const"
@@ -74,6 +76,7 @@ export * from "./tech-trees/vikings-tech-tree.const"
 export const allCivTechTrees = [
     aztecsTechTree,
     berbersTechTree,
+    bohemiansTechTree,
     britonsTechTree,
     bulgariansTechTree,
     burgundiansTechTree,
@@ -99,6 +102,7 @@ export const allCivTechTrees = [
     mayansTechTree,
     mongolsTechTree,
     persiansTechTree,
+    polesTechTree,
     portugueseTechTree,
     saracensTechTree,
     siciliansTechTree,

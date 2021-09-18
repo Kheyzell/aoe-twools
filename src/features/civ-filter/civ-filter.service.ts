@@ -1,3 +1,4 @@
+import { fullTechTree } from "../../constants/tech-trees/_full-tech-tree.const"
 import { castleUnits, castleUpgrades } from "../../constants/techs/castle-techs.const"
 import { CivTechTree, Tech, TechType, Unit, Upgrade, GroupTechTree, UpgradePerAgeGroup, UnitLine } from "../../models/techs.model"
 import { chainTechs } from "../../utils/techs.utils"
@@ -24,6 +25,69 @@ class CivFilterService {
         }
     }
 
+    mergeTechTrees(techTrees: CivTechTree[]): CivTechTree {
+        if (!techTrees.length) {
+            return fullTechTree
+        }
+
+        const GROUPS = ['barracks', 'archery', 'stable', 'siege', 'castle', 'blacksmith', 'monastery', 'university', 'townCenter', 'lumberCamp', 'mill', 'miningCamp', 'market', 'dock']
+        let mergedTechTree: any = {}
+        GROUPS.forEach(key => {
+            const isCastle = key === 'castle'
+
+            const civGroups = techTrees.map(techTree => (techTree as any)[key] as GroupTechTree)
+            const baseGroup = (fullTechTree as any)[key] as GroupTechTree
+
+            let mergedGroup: { unitLines: UnitLine[], upgrades: UpgradePerAgeGroup } = { unitLines: [], upgrades: baseGroup.upgrades }
+            if (isCastle) {
+                const uniqueUpgrades = civGroups.map(group => group.upgrades.list.filter(up => up.unique)).reduce((upgrades, civUpgrades) => upgrades.concat(civUpgrades), [])
+                mergedGroup.upgrades = new UpgradePerAgeGroup(uniqueUpgrades.concat(baseGroup.upgrades.list.slice(2))) // removing generic unique tech
+            } else {
+                mergedGroup.unitLines = ((fullTechTree as any)[key] as GroupTechTree).unitLines.map(lines => new UnitLine(lines.list))
+            }
+
+            baseGroup.unitLines.forEach(baseUnitLine => {
+                const correspondingLines = civGroups.map(group => group.unitLines.find(unitLine => unitLine.list[0].id === baseUnitLine.list[0].id))
+                const rootUnitLineIndex: number = mergedGroup.unitLines.findIndex((unitLine: UnitLine) => unitLine.list[0].id === baseUnitLine.list[0].id) // correspond to the original unit line, other corresponding unit lines are alternatives of this line for certain civs (for instance: hussar (generic civ)/ winged hussar (lithuanian/poles))
+                correspondingLines.forEach(line => {
+                    if (!line) return
+
+                    // prolongation of existing line
+                    if (line.list.length > baseUnitLine.list.length) { // this part of the code handle only one new upgrade of unit for a unit line among the selected civ (currently there is no unit line where multiple civs have different specific upgrade)
+                        const expandedLine = mergedGroup.unitLines[rootUnitLineIndex].list.concat(line.list.slice(baseUnitLine.list.length))
+                        mergedGroup.unitLines[rootUnitLineIndex] = new UnitLine(expandedLine)
+                        return
+                    }
+
+                    // alternative line
+                    const alternativeUnits = line.list.filter(unit => !baseUnitLine.list.some(baseUnit => baseUnit.id === unit.id))
+                    if (alternativeUnits.length) {
+                        const alternativeUnitLine = new UnitLine(alternativeUnits)
+                        mergedGroup.unitLines.splice(rootUnitLineIndex + 1, 0, alternativeUnitLine)
+                        return
+                    }
+                })
+            })
+            
+            // new lines
+            const specificUnitLines = civGroups
+                .map(group => group.unitLines.filter(unitLine => !baseGroup.unitLines.some(baseUnitLine => baseUnitLine.list[0].id === unitLine.list[0].id)))
+                .filter(unitLine => !!unitLine)
+                .reduce((unitLines, civUnitLines) => unitLines.concat(civUnitLines), [])
+            specificUnitLines.forEach(unitLine => {
+                mergedGroup.unitLines.push(new UnitLine(unitLine!.list))
+            })
+
+            if (isCastle) {
+                mergedGroup.unitLines = mergedGroup.unitLines.concat(baseGroup.unitLines.slice(1))
+            }
+
+            mergedTechTree[key] = mergedGroup as GroupTechTree
+        })
+
+        return mergedTechTree as CivTechTree
+    }
+
     civHasTech(civTechTree: CivTechTree, tech: Tech): boolean {
         if (tech.type === TechType.unit) {
             return this.civHasUnit(civTechTree, tech as Unit)
@@ -41,7 +105,7 @@ class CivFilterService {
     }
 
     private hasBarracksUnit(civTechs: CivTechTree, unit: Unit): boolean {
-        return !!civTechs.barracks.units.find(unitLine => {
+        return !!civTechs.barracks.unitLines.find(unitLine => {
             return (unitLine.age1.find(u1 => u1.id === unit.id) ||
                 unitLine.age2.find(u2 => u2.id === unit.id) ||
                 unitLine.age3.find(u3 => u3.id === unit.id) ||
@@ -50,7 +114,7 @@ class CivFilterService {
     }
 
     private hasArcheryUnit(civTechs: CivTechTree, unit: Unit): boolean {
-        return !!civTechs.archery.units.find(unitLine => {
+        return !!civTechs.archery.unitLines.find(unitLine => {
             return (unitLine.age1.find(u1 => u1.id === unit.id) ||
                 unitLine.age2.find(u2 => u2.id === unit.id) ||
                 unitLine.age3.find(u3 => u3.id === unit.id) ||
@@ -59,7 +123,7 @@ class CivFilterService {
     }
 
     private hasStableUnit(civTechs: CivTechTree, unit: Unit): boolean {
-        return !!civTechs.stable.units.find(unitLine => {
+        return !!civTechs.stable.unitLines.find(unitLine => {
             return (unitLine.age1.find(u1 => u1.id === unit.id) ||
                 unitLine.age2.find(u2 => u2.id === unit.id) ||
                 unitLine.age3.find(u3 => u3.id === unit.id) ||
@@ -68,7 +132,7 @@ class CivFilterService {
     }
 
     private hasSiegeUnit(civTechs: CivTechTree, unit: Unit): boolean {
-        return !!civTechs.siege.units.find(unitLine => {
+        return !!civTechs.siege.unitLines.find(unitLine => {
             return (unitLine.age1.find(u1 => u1.id === unit.id) ||
                 unitLine.age2.find(u2 => u2.id === unit.id) ||
                 unitLine.age3.find(u3 => u3.id === unit.id) ||
@@ -80,7 +144,7 @@ class CivFilterService {
         if (unit.id === castleUnits.uniqueUnit.id || unit.id === castleUnits.eliteUniqueUnit.id) {
             return true
         }
-        return !!civTechs.castle.units.find(unitLine => {
+        return !!civTechs.castle.unitLines.find(unitLine => {
             return (unitLine.age1.find(u1 => u1.id === unit.id) ||
                 unitLine.age2.find(u2 => u2.id === unit.id) ||
                 unitLine.age3.find(u3 => u3.id === unit.id) ||
@@ -89,7 +153,7 @@ class CivFilterService {
     }
 
     private hasMonasteryUnit(civTechs: CivTechTree, unit: Unit): boolean {
-        return !!civTechs.monastery.units.find(unitLine => {
+        return !!civTechs.monastery.unitLines.find(unitLine => {
             return (unitLine.age1.find(u1 => u1.id === unit.id) ||
                 unitLine.age2.find(u2 => u2.id === unit.id) ||
                 unitLine.age3.find(u3 => u3.id === unit.id) ||
@@ -98,7 +162,7 @@ class CivFilterService {
     }
 
     private hasTownCenterUnit(civTechs: CivTechTree, unit: Unit): boolean {
-        return !!civTechs.townCenter.units.find(unitLine => {
+        return !!civTechs.townCenter.unitLines.find(unitLine => {
             return (unitLine.age1.find(u1 => u1.id === unit.id) ||
                 unitLine.age2.find(u2 => u2.id === unit.id) ||
                 unitLine.age3.find(u3 => u3.id === unit.id) ||
@@ -107,7 +171,7 @@ class CivFilterService {
     }
 
     private hasMarketUnit(civTechs: CivTechTree, unit: Unit): boolean {
-        return !!civTechs.market.units.find(unitLine => {
+        return !!civTechs.market.unitLines.find(unitLine => {
             return (unitLine.age1.find(u1 => u1.id === unit.id) ||
                 unitLine.age2.find(u2 => u2.id === unit.id) ||
                 unitLine.age3.find(u3 => u3.id === unit.id) ||
@@ -116,7 +180,7 @@ class CivFilterService {
     }
 
     private hasDockUnit(civTechs: CivTechTree, unit: Unit): boolean {
-        return !!civTechs.dock.units.find(unitLine => {
+        return !!civTechs.dock.unitLines.find(unitLine => {
             return (unitLine.age1.find(u1 => u1.id === unit.id) ||
                 unitLine.age2.find(u2 => u2.id === unit.id) ||
                 unitLine.age3.find(u3 => u3.id === unit.id) ||
@@ -218,18 +282,18 @@ class CivFilterService {
     private mergeGroupTechTrees(baseGroup: GroupTechTree, otherGroup: GroupTechTree): GroupTechTree {
         return {
             name: baseGroup.name,
-            units: this.mergeUnitLine(baseGroup.units, otherGroup.units),
+            unitLines: this.mergeUnitLine(baseGroup.unitLines, otherGroup.unitLines),
             upgrades: this.mergeUpgrades(baseGroup.upgrades, otherGroup.upgrades)
         }
     }
 
     private castleReplaceAndMergeGroupTechTrees(baseGroup: GroupTechTree, otherGroup: GroupTechTree) {
-        let unitLines = [...baseGroup.units]
+        let unitLines = [...baseGroup.unitLines]
         if (unitLines[0].list[0].id === castleUnits.uniqueUnit.id) { // in the case of the default full tech tree, we replace the Unique Unit
-            unitLines[0] = otherGroup.units[0]
+            unitLines[0] = otherGroup.unitLines[0]
         } else { // otherwise we add the other unique unit to the group
-            unitLines.unshift(baseGroup.units[0])
-            unitLines[1] = otherGroup.units[0]
+            unitLines.unshift(baseGroup.unitLines[0])
+            unitLines[1] = otherGroup.unitLines[0]
         }
         let upgrades = [...baseGroup.upgrades.list]
         if (upgrades[0].id === castleUpgrades.castleUniqueTech.id) { // in the case of the default full tech tree, we replace the Unique Technology
@@ -243,21 +307,21 @@ class CivFilterService {
         const upgradePerAgeGroup = new UpgradePerAgeGroup(upgrades)
         return {
             name: baseGroup.name,
-            units: this.mergeUnitLine(unitLines, otherGroup.units),
+            unitLines: this.mergeUnitLine(unitLines, otherGroup.unitLines),
             upgrades: upgradePerAgeGroup
         }
     }
 
-    private mergeUnitLine(baseUnitLines: UnitLine[], otherUnitLines: UnitLine[]): UnitLine[] {
+    private mergeUnitLine(baseUnitLines: UnitLine[], mergingUnitLines: UnitLine[]): UnitLine[] {
         const baseUnitsWithUniqueUnitLine = baseUnitLines.map(unitLine => {
-            const correspondOtherUnitLine = otherUnitLines.find(o => o.list[0].id === unitLine.list[0].id)
-            if (correspondOtherUnitLine && correspondOtherUnitLine?.list.length > unitLine.list.length) {
-                chainTechs(correspondOtherUnitLine.list)
-                return correspondOtherUnitLine
+            const correspondMergingUnitLine = mergingUnitLines.find(mergingUnit => mergingUnit.list[0].id === unitLine.list[0].id)
+            if (correspondMergingUnitLine && correspondMergingUnitLine?.list.length > unitLine.list.length) {
+                chainTechs(correspondMergingUnitLine.list)
+                return correspondMergingUnitLine
             }
             return unitLine
         })
-        return baseUnitsWithUniqueUnitLine.concat(otherUnitLines.filter(o => !baseUnitLines.find(b => b.list[0].id === o.list[0].id)))
+        return baseUnitsWithUniqueUnitLine.concat(mergingUnitLines.filter(o => !baseUnitLines.find(b => b.list[0].id === o.list[0].id)))
     }
 
     private mergeUpgrades(baseUpgrades: UpgradePerAgeGroup, otherUpgrades: UpgradePerAgeGroup): UpgradePerAgeGroup {

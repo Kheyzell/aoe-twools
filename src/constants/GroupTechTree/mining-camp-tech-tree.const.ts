@@ -3,7 +3,7 @@ import { miningCampUpgrades } from "../techs/mining-camp-techs.const";
 
 export const miningCampTechs: GroupTechTree = {
     name: 'Mining Camp',
-    units: [],
+    unitLines: [],
     upgrades: new UpgradePerAgeGroup([
         miningCampUpgrades.goldMining,
         miningCampUpgrades.stoneMining,

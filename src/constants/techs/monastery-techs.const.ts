@@ -61,7 +61,7 @@ export const monasteryUpgrade: MonasteryUpgrades = {
         cost: {
             wood: 0,
             food: 0,
-            gold: 350,
+            gold: 200,
             stone: 0
         },
         duration: 35

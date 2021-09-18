@@ -33,9 +33,10 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
   const selectedCiv2 = useSelector(selectedCiv2Selector)
   const isInComparisonMode = useSelector(isInComparisonModeSelector)
   const selectedTechs = useSelector(selectedTechsSelector)
-  const techTreeToDisplay = selectedCiv ?
-    (selectedCiv2 ? civFilterService.generateTechTreeToDisplayFrom(civFilterService.generateTechTreeToDisplayFrom(fullTechTree, selectedCiv), selectedCiv2) : civFilterService.generateTechTreeToDisplayFrom(fullTechTree, selectedCiv))
-    : fullTechTree
+  const techTreeToDisplay = civFilterService.mergeTechTrees([selectedCiv!, selectedCiv2!].filter(civ => !!civ))
+  // selectedCiv ?
+  //   (selectedCiv2 ? civFilterService.generateTechTreeToDisplayFrom(civFilterService.generateTechTreeToDisplayFrom(fullTechTree, selectedCiv), selectedCiv2) : civFilterService.generateTechTreeToDisplayFrom(fullTechTree, selectedCiv))
+  //   : fullTechTree
 
   const onChangeTechSize = () => {
     const newTechSize = techSize === BoxSize.normal ? BoxSize.small : BoxSize.normal

@@ -18,6 +18,6 @@ setAffectingUpgrades(eagleLine, infantryUpgrades)
 
 export const barracksTechs: GroupTechTree = {
     name: 'Barracks',
-    units: [militiaLine, spearLine, eagleLine],
+    unitLines: [militiaLine, spearLine, eagleLine],
     upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
 };
