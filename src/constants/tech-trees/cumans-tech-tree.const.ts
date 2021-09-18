@@ -96,23 +96,30 @@ export const cumansTechTree: CivTechTree = {
         },
         {
             id: 'cumans4',
+            effectType: EffectType.discoutWood,
+            value: -100,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'cumans5',
             effectType: EffectType.healthPercent,
             value: 33,
             affectedUnits: [],
             affectedUpgrades: [],
             team: true
-        }
+        },
     ],
     uniqueTechs,
     barracks: {
-        units: [
+        unitLines: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
         upgrades: new UpgradePerAgeGroup([barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
-        units: [
+        unitLines: [
             new UnitLine([archeryUnits.archer, archeryUnits.crossbowman]),
             new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
             new UnitLine([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher]),
@@ -120,7 +127,7 @@ export const cumansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis])
     },
     stable: {
-        units: [
+        unitLines: [
             new UnitLine([stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar]),
             new UnitLine([stableUnits.knight, stableUnits.cavalier, stableUnits.paladin]),
             new UnitLine([stableUnits.camelRider]),
@@ -129,7 +136,7 @@ export const cumansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([stableUpgrades.bloodlines])
     },
     siege: {
-        units: [
+        unitLines: [
             new UnitLine([siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam]),
             new UnitLine([siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager]),
             new UnitLine([siegeUnits.scorpion]),
@@ -138,7 +145,7 @@ export const cumansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([])
     },
     castle: {
-        units: [
+        unitLines: [
             new UnitLine([cumansUniqueUnits.kipchak, cumansUniqueUnits.eliteKipchak]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
@@ -146,7 +153,7 @@ export const cumansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
             blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
@@ -156,7 +163,7 @@ export const cumansTechTree: CivTechTree = {
         ])
     },
     monastery: {
-        units: [new UnitLine([monasteryUnits.monk])],
+        unitLines: [new UnitLine([monasteryUnits.monk])],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
@@ -167,7 +174,7 @@ export const cumansTechTree: CivTechTree = {
         ])
     },
     university: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             universityUpgrades.masonry,
             universityUpgrades.ballistics,
@@ -177,7 +184,7 @@ export const cumansTechTree: CivTechTree = {
         ])
     },
     townCenter: {
-        units: [new UnitLine([townCenterUnits.villager])],
+        unitLines: [new UnitLine([townCenterUnits.villager])],
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
@@ -190,7 +197,7 @@ export const cumansTechTree: CivTechTree = {
         ])
     },
     lumberCamp: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             lumberCampUpgrades.doubleBitAxe,
             lumberCampUpgrades.bowSaw,
@@ -198,7 +205,7 @@ export const cumansTechTree: CivTechTree = {
         ])
     },
     mill: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             millUpgrades.horseColar,
             millUpgrades.heavyPlow,
@@ -206,7 +213,7 @@ export const cumansTechTree: CivTechTree = {
         ])
     },
     miningCamp: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             miningCampUpgrades.goldMining,
             miningCampUpgrades.stoneMining,
@@ -214,7 +221,7 @@ export const cumansTechTree: CivTechTree = {
         ])
     },
     market: {
-        units: [new UnitLine([marketUnits.tradeCart])],
+        unitLines: [new UnitLine([marketUnits.tradeCart])],
         upgrades: new UpgradePerAgeGroup([
             marketUpgrade.coinage,
             marketUpgrade.caravan,
@@ -223,7 +230,7 @@ export const cumansTechTree: CivTechTree = {
         ])
     },
     dock: {
-        units: [
+        unitLines: [
             new UnitLine([dockUnits.fishingShip]),
             new UnitLine([dockUnits.transportShip]),
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),

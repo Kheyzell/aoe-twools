@@ -58,6 +58,29 @@
                 }
             }
         },
+        "bohemians": {
+            "name": "Bohemians",
+            "bonus": {
+                "bohemians1": {
+                    "description": "Blacksmiths, Monasteries, and Universities cost -100 wood"
+                },
+                "bohemians2": {
+                    "description": "Chemistry and Hand Cannoneer available in Castle Age"
+                },
+                "bohemians3": {
+                    "description": "Spearman-line deals +25% bonus damage"
+                },
+                "bohemians4": {
+                    "description": "Fervor and Sanctity affect Villagers"
+                },
+                "bohemians5": {
+                    "description": "Mining Camp technologies free"
+                },
+                "bohemians6": {
+                    "description": "Markets work 80% faster"
+                }
+            }
+        },
         "britons": {
             "name": "Britons",
             "bonus": {
@@ -148,7 +171,7 @@
                     "description": "Advancing to the Imperial Age is 33% cheaper"
                 },
                 "byzantines5": {
-                    "description": "Town Watch is free"
+                    "description": "Town Watch and town patrol are free"
                 },
                 "byzantines6": {
                     "description": "Monks heal 50% faster"
@@ -191,7 +214,7 @@
                     "description": "Demolition Ships have +50% HP"
                 },
                 "chinese5": {
-                    "description": "Farms provide +45 food"
+                    "description": "Farms provide +10% food"
                 }
             }
         },
@@ -208,6 +231,9 @@
                     "description": "Mounted units move 5%/10%/15% faster in the Feudal/Castle/Imperial Age"
                 },
                 "cumans4": {
+                    "description": "Archery Ranges and Stables cost –100 wood"
+                },
+                "cumans5": {
                     "description": "Palisade Walls have +33% HP"
                 }
             }
@@ -470,7 +496,7 @@
                     "description": "Barracks units have +1/+2/+3 pierce armor in the Feudal/Castle/Imperial Age"
                 },
                 "malians3": {
-                    "description": "Gold Mining is free"
+                    "description": "Gold mines last 30% longer"
                 },
                 "malians4": {
                     "description": "Universities research +80% faster"
@@ -522,6 +548,23 @@
                 },
                 "persians3": {
                     "description": "Knights have +2 attack against archers"
+                }
+            }
+        },
+        "poles": {
+            "name": "Poles",
+            "bonus": {
+                "poles1": {
+                    "description": "Villagers recover 5/10/15/20 HP per minute in the Dark/Feudal/Castle/Imperial Age"
+                },
+                "poles2": {
+                    "description": "The Folwark replaces the Mill"
+                },
+                "poles3": {
+                    "description": "Stone miners generate gold in addition to stone (at about half the rate of stone mining: 0.184 gold/s)"
+                },
+                "poles4": {
+                    "description": "The Scout Cavalry line has +1 attack vs. archers"
                 }
             }
         },
@@ -584,7 +627,10 @@
                     "description": "Can build Donjons, which replace the regular Watch Tower line"
                 },
                 "sicilians5": {
-                    "description": "Transport Ships +5 carry capacity and +10 armor versus anti-ship bonus damage"
+                    "description": "Start with an extra 100 stone"
+                },
+                "sicilians6": {
+                    "description": "The first Transport Ship is free and created instantly"
                 }
             }
         },
@@ -802,6 +848,9 @@
         "hussar": {
             "name": "Hussar"
         },
+        "wingedHussar": {
+            "name": "Winged Hussar"
+        },
         "knight": {
             "name": "Knight"
         },
@@ -939,6 +988,15 @@
         },
         "eliteGenitour": {
             "name": "Elite Genitour"
+        },
+        "hussiteWagon": {
+            "name": "Hussite Wagon"
+        },
+        "eliteHussiteWagon": {
+            "name": "Elite Hussite Wagon"
+        },
+        "houfnice": {
+            "name": "Houfnice"
         },
         "longbowman": {
             "name": "Longbowman"
@@ -1107,6 +1165,12 @@
         },
         "eliteWarElephant": {
             "name": "Elite War Elephant"
+        },
+        "obuch": {
+            "name": "Obuch"
+        },
+        "eliteObuch": {
+            "name": "Elite Obuch"
         },
         "organGun": {
             "name": "Organ Gun"
@@ -1438,6 +1502,14 @@
             "name": "Maghrebi Camels",
             "description": "camel troops regenerate (15HP/min)"
         },
+        "wagenburgTactics": {
+            "name": "Wagenburg Tactics",
+            "description": "Gunpowder units move 15% faster"
+        },
+        "hussiteReforms": {
+            "name": "Hussite Reforms",
+            "description": "Monks and Monastery upgrades have their gold cost replaced by food"
+        },
         "yeomen": {
             "name": "Yeomen",
             "description": "+1 range for foot archers and +2 attack for towers"
@@ -1464,7 +1536,7 @@
         },
         "howdah": {
             "name": "Howdah",
-            "description": "Battle Elephants +1/+1 armor"
+            "description": "Battle Elephants +1/+2 armor"
         },
         "manipurCavalry": {
             "name": "Manipur Cavalry",
@@ -1638,6 +1710,14 @@
             "name": "Mahouts",
             "description": "War Elephants move +30% faster"
         },
+        "szlachtaPrivileges": {
+            "name": "Szlachta Privileges",
+            "description": "Knight line cost 30 gold"
+        },
+        "lechiticLegacy": {
+            "name": "Lechitic Legacy",
+            "description": "Light Cavalry line deal trample damage (33% damage)"
+        },
         "carrack": {
             "name": "Carrack",
             "description": "ships +1/+1 armor"
@@ -1658,9 +1738,9 @@
             "name": "First Crusade",
             "description": "Upon researching, each Town Center (up to 5) spawns a one-time group of 7 Serjeants; units become more resistant to conversion (+3)"
         },
-        "scutage": {
-            "name": "Scutage",
-            "description": "Upon researching, each team member receives a one-time payment of 15 gold for each military unit that they own"
+        "hauberk": {
+            "name": "Hauberk",
+            "description": "Knight-line +1 melee and +2 pierce armor"
         },
         "orthodoxy": {
             "name": "Orthodoxy",

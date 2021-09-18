@@ -27,6 +27,6 @@ setAffectingUpgrades(cavalryArcherLine, [archeryUpgrades.thumbRing, archeryUpgra
 
 export const archeryTechs: GroupTechTree = {
     name: 'Archery range',
-    units: [archerLine, skirmisherLine, handCannoneerLine, cavalryArcherLine],
+    unitLines: [archerLine, skirmisherLine, handCannoneerLine, cavalryArcherLine],
     upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis])
 };

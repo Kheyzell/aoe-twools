@@ -1,5 +1,6 @@
 import { Cost, TechType, Unit, Upgrade } from "./techs.model";
 
+
 export enum EffectType {
     miscallenous,
     uniqueUnit,
@@ -30,7 +31,8 @@ export enum EffectType {
     movementSpeed,
     creationSpeed,
     convertionResistance,
-    resourceGold
+    resourceGold,
+    resourceStone
 }
 
 export interface Bonus {

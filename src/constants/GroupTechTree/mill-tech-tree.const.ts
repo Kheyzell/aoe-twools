@@ -3,7 +3,7 @@ import { millUpgrades } from "../techs/mill-techs.const";
 
 export const millTechs: GroupTechTree = {
     name: 'Mill',
-    units: [],
+    unitLines: [],
     upgrades: new UpgradePerAgeGroup([
         millUpgrades.horseColar,
         millUpgrades.heavyPlow,

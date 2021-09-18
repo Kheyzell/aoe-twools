@@ -58,6 +58,29 @@
                 }
             }
         },
+        "bohemians": {
+            "name": "Bohemians",
+            "bonus": {
+                "bohemians1": {
+                    "description": "Forges, Monastères, et Universités coûtent -100 de bois"
+                },
+                "bohemians2": {
+                    "description": "Chimie et canoniers à main disponible à l'âge des châteaux"
+                },
+                "bohemians3": {
+                    "description": "Les lanciers font +25% de dégâts bonus"
+                },
+                "bohemians4": {
+                    "description": "Ferveur et la sainteté affectent les Villageois"
+                },
+                "bohemians5": {
+                    "description": "Technologies du camp de mineur gratuites"
+                },
+                "bohemians6": {
+                    "description": "Marchés travaillent 80% plus vite"
+                }
+            }
+        },
         "britons": {
             "name": "Britanniques",
             "bonus": {
@@ -148,7 +171,7 @@
                     "description": "Coût de progression vers l'âge impérial -33 %"
                 },
                 "byzantines5": {
-                    "description": "Tour de guet gratuite"
+                    "description": "Tour de guet et patrouille de villes gratuites"
                 },
                 "byzantines6": {
                     "description": "Les moines soignent 50 % plus vite"
@@ -191,7 +214,7 @@
                     "description": "Navires de démolition +50 % de PV"
                 },
                 "chinese5": {
-                    "description": "Fermes +45 de nourriture"
+                    "description": "Fermes +10% de nourriture"
                 }
             }
         },
@@ -208,6 +231,9 @@
                     "description": "Vitesse de déplacement de la cavalerie 5 %/10 %/15 % à l'âge féodal/châteaux/impérial"
                 },
                 "cumans4": {
+                    "description": "L'archerie et l'écurie coûtent -100 de bois"
+                },
+                "cumans5": {
                     "description": "PV des palissades +33 %"
                 }
             }
@@ -470,7 +496,7 @@
                     "description": "Protection perçage +1/+2/+3 par âge pour les unités des casernes à l'âge féodal/châteaux/impérial"
                 },
                 "malians3": {
-                    "description": "Minage d'or gratuit"
+                    "description": "Les mines d'or durent 30% plus longtemps"
                 },
                 "malians4": {
                     "description": "Cadence de travail +80 % pour les universités"
@@ -522,6 +548,23 @@
                 },
                 "persians3": {
                     "description": "Attaque des chevaliers +2 contre les archers"
+                }
+            }
+        },
+        "poles": {
+            "name": "Polonais",
+            "bonus": {
+                "poles1": {
+                    "description": "Les Villageois récupèrent 5/10/15/20 HP par minute à l'âge Sombre/Féodal/Château/Impérial"
+                },
+                "poles2": {
+                    "description": "Le Folwarki remplace the Moulin"
+                },
+                "poles3": {
+                    "description": "Les mineurs de pierre génèrent de l'or en plus de la pierre (à un taux environ motié moindre : 0.184 or/s)"
+                },
+                "poles4": {
+                    "description": "La Cavalrie légère a +1 dégât contre les Archers"
                 }
             }
         },
@@ -584,7 +627,10 @@
                     "description": "La construction de donjons est possible"
                 },
                 "sicilians5": {
-                    "description": "+5 de capacité de transport et +10 d'armure contre les attaques antinavires pour les navires de transport"
+                    "description": "Commence avec +100 de pierre"
+                },
+                "sicilians6": {
+                    "description": "Le premier navire de transport et gratuit et créé instantanément"
                 }
             }
         },
@@ -802,6 +848,9 @@
         "hussar": {
             "name": "Hussard"
         },
+        "wingedHussar": {
+            "name": "Hussard ailé"
+        },
         "knight": {
             "name": "Chevalier"
         },
@@ -939,6 +988,15 @@
         },
         "eliteGenitour": {
             "name": "Jinete d'élite"
+        },
+        "hussiteWagon": {
+            "name": "Chariot hussite"
+        },
+        "eliteHussiteWagon": {
+            "name": "Chariot hussite d'élite"
+        },
+        "houfnice": {
+            "name": "Houfnice"
         },
         "longbowman": {
             "name": "Fantassin à arc long"
@@ -1107,6 +1165,12 @@
         },
         "eliteWarElephant": {
             "name": "Éléphant de guerre d'élite"
+        },
+        "obuch": {
+            "name": "Obuch"
+        },
+        "eliteObuch": {
+            "name": "Obuch d'élite"
         },
         "organGun": {
             "name": "Ribaudequin"
@@ -1438,6 +1502,14 @@
             "name": "Chameaux du Maghreb",
             "description": "Les chameaux se regénèrent (15PV/min)"
         },
+        "wagenburgTactics": {
+            "name": "Tactiques de Wagenburg",
+            "description": "Les unités à poudre à canon se déplacent 15% plus vite"
+        },
+        "hussiteReforms": {
+            "name": "Réformes des Hussites",
+            "description": "Les Moines et les amélioration du monastères voient leur coût en or remplacer par de la nourriture"
+        },
         "yeomen": {
             "name": "Yeomen",
             "description": "+1 de portée pour les archers à pied and +2 d'attaque pour les tours"
@@ -1464,7 +1536,7 @@
         },
         "howdah": {
             "name": "Howdah",
-            "description": "Les éléphants de combat gagnent +1/+1 d'armure"
+            "description": "Les éléphants de combat gagnent +1/+2 d'armure"
         },
         "manipurCavalry": {
             "name": "cavalerie du Manipur",
@@ -1638,6 +1710,14 @@
             "name": "Cornacs",
             "description": "Les éléphants de guerre se déplacent +30 % plus vite"
         },
+        "szlachtaPrivileges": {
+            "name": "Privilèges szlachta",
+            "description": "Les Chevaliers coûtent 30 d'or"
+        },
+        "lechiticLegacy": {
+            "name": "Héritage léchitique",
+            "description": "La Cavalerie légère inflige des dégâts de piétinement (33% de dégât)"
+        },
         "carrack": {
             "name": "Caraque",
             "description": "Les navires gagnent +1/+1 d'armure"
@@ -1658,9 +1738,9 @@
             "name": "Première croisade",
             "description": "Chaque forum (max 5) produit un groupe de 7 sergents à la fin de la recherche. Les unités sont plus résistantes à la conversion (+3)"
         },
-        "scutage": {
-            "name": "Écuage",
-            "description": "Chaque membre de l'équipe reçoit un paiement unique de 15 pièces d'or pour chaque unité militaire qu'il possède"
+        "hauberk": {
+            "name": "Hauberk",
+            "description": "Les Chevaliers gagnent +1 d'armure de mélêe et +2 d'armure perçante"
         },
         "orthodoxy": {
             "name": "Orthodoxie",

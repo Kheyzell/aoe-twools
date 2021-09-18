@@ -3,7 +3,7 @@ import { castleUnits, castleUpgrades } from "../techs/castle-techs.const";
 
 export const castleTechs: GroupTechTree = {
     name: 'Castle',
-    units: [
+    unitLines: [
         new UnitLine([castleUnits.uniqueUnit, castleUnits.eliteUniqueUnit]),
         new UnitLine([castleUnits.petard]),
         new UnitLine([castleUnits.trebuchet]),

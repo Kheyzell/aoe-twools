@@ -3,7 +3,7 @@ import { universityUpgrades } from "../techs/university-techs.const";
 
 export const universityTechs: GroupTechTree = {
     name: 'University',
-    units: [],
+    unitLines: [],
     upgrades: new UpgradePerAgeGroup([
         universityUpgrades.masonry,
         universityUpgrades.fortifiedWall,

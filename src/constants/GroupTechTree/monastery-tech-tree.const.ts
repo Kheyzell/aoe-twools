@@ -16,7 +16,7 @@ setAffectingUpgrades(monkLine, [
 
 export const monasteryTechs: GroupTechTree = {
     name: 'Monastery',
-    units: [ monkLine ],
+    unitLines: [ monkLine ],
     upgrades: new UpgradePerAgeGroup([
         monasteryUpgrade.redemption,
         monasteryUpgrade.atonement,

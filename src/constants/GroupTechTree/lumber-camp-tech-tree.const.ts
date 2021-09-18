@@ -3,7 +3,7 @@ import { lumberCampUpgrades } from "../techs/lumber-camp-techs.const";
 
 export const lumberCampTechs: GroupTechTree = {
     name: 'Lumber Camp',
-    units: [],
+    unitLines: [],
     upgrades: new UpgradePerAgeGroup([
         lumberCampUpgrades.doubleBitAxe,
         lumberCampUpgrades.bowSaw,

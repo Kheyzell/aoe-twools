@@ -3,7 +3,7 @@ import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 
 export const blacksmithTechs: GroupTechTree = {
     name: 'Blacksmith',
-    units: [],
+    unitLines: [],
     upgrades: new UpgradePerAgeGroup([
         blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
         blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,

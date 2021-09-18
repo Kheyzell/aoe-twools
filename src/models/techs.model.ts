@@ -98,7 +98,7 @@ export interface CivTechTree {
 
 export interface GroupTechTree {
     name?: string
-    units: UnitLine[]
+    unitLines: UnitLine[]
     upgrades: UpgradePerAgeGroup
 }
 

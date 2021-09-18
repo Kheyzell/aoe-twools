@@ -134,14 +134,14 @@ export const vikingsTechTree: CivTechTree = {
     ],
     uniqueTechs,
     barracks: {
-        units: [
+        unitLines: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman]),
         ],
         upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
-        units: [
+        unitLines: [
             new UnitLine([archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester]),
             new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
             new UnitLine([archeryUnits.cavalryArcher]),
@@ -149,14 +149,14 @@ export const vikingsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
     },
     stable: {
-        units: [
+        unitLines: [
             new UnitLine([stableUnits.scoutCavalry, stableUnits.lightCavalry]),
             new UnitLine([stableUnits.knight, stableUnits.cavalier]),
         ],
         upgrades: new UpgradePerAgeGroup([])
     },
     siege: {
-        units: [
+        unitLines: [
             new UnitLine([siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam]),
             new UnitLine([siegeUnits.mangonel, siegeUnits.onager]),
             new UnitLine([siegeUnits.scorpion, siegeUnits.heavyScorpion]),
@@ -165,7 +165,7 @@ export const vikingsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([])
     },
     castle: {
-        units: [
+        unitLines: [
             new UnitLine([vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
@@ -173,7 +173,7 @@ export const vikingsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
             blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
@@ -183,7 +183,7 @@ export const vikingsTechTree: CivTechTree = {
         ])
     },
     monastery: {
-        units: [new UnitLine([monasteryUnits.monk])],
+        unitLines: [new UnitLine([monasteryUnits.monk])],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
             monasteryUpgrade.heresy,
@@ -193,7 +193,7 @@ export const vikingsTechTree: CivTechTree = {
         ])
     },
     university: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             universityUpgrades.masonry,
             universityUpgrades.fortifiedWall,
@@ -209,7 +209,7 @@ export const vikingsTechTree: CivTechTree = {
         ])
     },
     townCenter: {
-        units: [new UnitLine([townCenterUnits.villager])],
+        unitLines: [new UnitLine([townCenterUnits.villager])],
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
@@ -222,7 +222,7 @@ export const vikingsTechTree: CivTechTree = {
         ])
     },
     lumberCamp: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             lumberCampUpgrades.doubleBitAxe,
             lumberCampUpgrades.bowSaw,
@@ -230,7 +230,7 @@ export const vikingsTechTree: CivTechTree = {
         ])
     },
     mill: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             millUpgrades.horseColar,
             millUpgrades.heavyPlow,
@@ -238,7 +238,7 @@ export const vikingsTechTree: CivTechTree = {
         ])
     },
     miningCamp: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             miningCampUpgrades.goldMining,
             miningCampUpgrades.stoneMining,
@@ -246,7 +246,7 @@ export const vikingsTechTree: CivTechTree = {
         ])
     },
     market: {
-        units: [new UnitLine([marketUnits.tradeCart])],
+        unitLines: [new UnitLine([marketUnits.tradeCart])],
         upgrades: new UpgradePerAgeGroup([
             marketUpgrade.coinage,
             marketUpgrade.caravan,
@@ -254,7 +254,7 @@ export const vikingsTechTree: CivTechTree = {
         ])
     },
     dock: {
-        units: [
+        unitLines: [
             new UnitLine([dockUnits.fishingShip]),
             new UnitLine([dockUnits.transportShip]),
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),

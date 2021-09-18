@@ -16,6 +16,6 @@ setAffectingUpgrades(bombardCannonLine, [universityUpgrades.siegeEngineers])
 
 export const siegeTechs: GroupTechTree = {
     name: 'Siege',
-    units: [ ramLine, mangonelLine, scorpionLine, siegeTowerLine, bombardCannonLine],
+    unitLines: [ ramLine, mangonelLine, scorpionLine, siegeTowerLine, bombardCannonLine],
     upgrades: new UpgradePerAgeGroup([])
 };

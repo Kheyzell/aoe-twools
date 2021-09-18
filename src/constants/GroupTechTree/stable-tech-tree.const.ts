@@ -22,7 +22,7 @@ setAffectingUpgrades(steppeLancerLine, cavalryUpgrades)
 
 export const stableTechs: GroupTechTree = {
     name: 'Stable',
-    units: [
+    unitLines: [
         scoutLine,
         knightLine,
         camelLine,

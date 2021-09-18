@@ -3,7 +3,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 
 export const townCenterTechs: GroupTechTree = {
     name: 'Town Center',
-    units: [ new UnitLine([townCenterUnits.villager]) ],
+    unitLines: [ new UnitLine([townCenterUnits.villager]) ],
     upgrades: new UpgradePerAgeGroup([
         townCenterUpgrade.feudalAge,
         townCenterUpgrade.loom,

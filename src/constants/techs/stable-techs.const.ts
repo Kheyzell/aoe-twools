@@ -5,6 +5,7 @@ interface StableUnits {
     scoutCavalry: Unit
     lightCavalry: Unit
     hussar: Unit
+    wingedHussar: Unit
     knight: Unit
     cavalier: Unit
     paladin: Unit
@@ -48,6 +49,19 @@ export const stableUnits: StableUnits = {
     }),
     hussar: new Unit({
         id: 'hussar',
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 80,
+            gold: 0,
+            stone: 0
+        },
+        duration: 30
+    }),
+    wingedHussar: new Unit({
+        id: 'wingedHussar',
+        unique: true,
         age: 4,
         unitType: UnitType.military,
         cost: {
@@ -169,6 +183,7 @@ export const stableUnits: StableUnits = {
 }
 
 chainTechs([stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar])
+chainTechs([stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.wingedHussar])
 chainTechs([stableUnits.knight, stableUnits.cavalier, stableUnits.paladin])
 chainTechs([stableUnits.camelRider, stableUnits.heavyCamelRider])
 chainTechs([stableUnits.battleElephant, stableUnits.eliteBattleElephant])

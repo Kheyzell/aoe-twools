@@ -105,7 +105,7 @@ export const mayansTechTree: CivTechTree = {
     ],
     uniqueTechs,
     barracks: {
-        units: [
+        unitLines: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
             new UnitLine([barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior]),
@@ -113,18 +113,18 @@ export const mayansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
-        units: [
+        unitLines: [
             new UnitLine([archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester]),
             new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
         ],
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
     },
     stable: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([])
     },
     siege: {
-        units: [
+        unitLines: [
             new UnitLine([siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam]),
             new UnitLine([siegeUnits.mangonel, siegeUnits.onager]),
             new UnitLine([siegeUnits.scorpion, siegeUnits.heavyScorpion]),
@@ -133,7 +133,7 @@ export const mayansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([])
     },
     castle: {
-        units: [
+        unitLines: [
             new UnitLine([mayansUniqueUnits.plumedArcher, mayansUniqueUnits.elitePlumedArcher]),
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
@@ -141,7 +141,7 @@ export const mayansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
             blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
@@ -150,7 +150,7 @@ export const mayansTechTree: CivTechTree = {
         ])
     },
     monastery: {
-        units: [new UnitLine([monasteryUnits.monk])],
+        unitLines: [new UnitLine([monasteryUnits.monk])],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
@@ -163,7 +163,7 @@ export const mayansTechTree: CivTechTree = {
         ])
     },
     university: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             universityUpgrades.masonry,
             universityUpgrades.fortifiedWall,
@@ -178,7 +178,7 @@ export const mayansTechTree: CivTechTree = {
         ])
     },
     townCenter: {
-        units: [new UnitLine([townCenterUnits.villager])],
+        unitLines: [new UnitLine([townCenterUnits.villager])],
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
@@ -191,7 +191,7 @@ export const mayansTechTree: CivTechTree = {
         ])
     },
     lumberCamp: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             lumberCampUpgrades.doubleBitAxe,
             lumberCampUpgrades.bowSaw,
@@ -199,7 +199,7 @@ export const mayansTechTree: CivTechTree = {
         ])
     },
     mill: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             millUpgrades.horseColar,
             millUpgrades.heavyPlow,
@@ -207,7 +207,7 @@ export const mayansTechTree: CivTechTree = {
         ])
     },
     miningCamp: {
-        units: [],
+        unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             miningCampUpgrades.goldMining,
             miningCampUpgrades.stoneMining,
@@ -215,7 +215,7 @@ export const mayansTechTree: CivTechTree = {
         ])
     },
     market: {
-        units: [new UnitLine([marketUnits.tradeCart])],
+        unitLines: [new UnitLine([marketUnits.tradeCart])],
         upgrades: new UpgradePerAgeGroup([
             marketUpgrade.coinage,
             marketUpgrade.caravan,
@@ -224,7 +224,7 @@ export const mayansTechTree: CivTechTree = {
         ])
     },
     dock: {
-        units: [
+        unitLines: [
             new UnitLine([dockUnits.fishingShip]),
             new UnitLine([dockUnits.transportShip]),
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
