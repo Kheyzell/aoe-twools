@@ -52,6 +52,7 @@ function AppComponent() {
           <Route path="/calculator">
             <UnitCalculator></UnitCalculator>
           </Route>
+          <Route render={() => <Redirect to={{pathname: "/"}} />} />
           {/* <Redirect from="/" to="" /> */}
         </Switch>
       </Router>
