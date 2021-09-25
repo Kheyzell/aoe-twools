@@ -153,25 +153,6 @@ export const universityUpgrades: UniversityUpgrades = {
             gold: 0,
             stone: 0
         },
-        effects: [
-            {
-                order: EffectOrder.first,
-                apply: (unit: Unit) => {
-                    if (!!unit.stats.range) {
-                        unit.stats.range += 1
-                    }
-                }
-            },
-            {
-                order: EffectOrder.last,
-                apply: (unit: Unit) => {
-                    const buildingAttack = unit.stats.attackComponents.find(attack => attack.type === ArmorType.building)
-                    if (buildingAttack) {
-                        buildingAttack.value = multiplyNumber(buildingAttack.value, 1.2)
-                    }
-                }
-            }
-        ],
         duration: 45
     }),
     keep: new Upgrade({

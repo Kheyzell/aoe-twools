@@ -20,10 +20,15 @@ class UnitCalculatorService {
         const totalCost1 = unit1.cost.wood + unit1.cost.food + unit1.cost.gold + unit1.cost.stone
         const totalCost2 = unit2.cost.wood + unit2.cost.food + unit2.cost.gold + unit2.cost.stone
 
-        const composedDamageDealtPerHit1 = this.calculateDamageDealtComponentsPerHit(unit1, unit2)
-        const composedDamageDealtPerHit2 = this.calculateDamageDealtComponentsPerHit(unit2, unit1)
-        const damageDealtPerHit1 = unit1.stats.attackComponents.length ? Math.max(composedDamageDealtPerHit1.map(damage => damage.value).reduce((total: number, value: number) => total + value, 0), 1) : 0
-        const damageDealtPerHit2 = unit2.stats.attackComponents.length ? Math.max(composedDamageDealtPerHit2.map(damage => damage.value).reduce((total: number, value: number) => total + value, 0), 1) : 0
+        const secondaryAttackCount1 = unit1.stats.secondaryAttack?.count || 0
+        const secondaryAttackCount2 = unit2.stats.secondaryAttack?.count || 0
+
+        const composedDamageDealtPerHit1 = this.calculateDamageDealtComponentsPerHit(unit1.stats.attackComponents, unit2.stats.armorComponents)
+        const composedDamageDealtPerHit2 = this.calculateDamageDealtComponentsPerHit(unit2.stats.attackComponents, unit1.stats.armorComponents)
+        const composedSecondaryDamageDealtPerHit1 = this.calculateDamageDealtComponentsPerHit(unit1.stats.secondaryAttack?.components || [], unit2.stats.armorComponents)
+        const composedSecondaryDamageDealtPerHit2 = this.calculateDamageDealtComponentsPerHit(unit2.stats.secondaryAttack?.components || [], unit1.stats.armorComponents)
+        const damageDealtPerHit1 = unit1.stats.attackComponents.length ? this.calculateDamageDealtPerHit(composedDamageDealtPerHit1, { count: secondaryAttackCount1, composedSecondaryDamageDealtPerHit: composedSecondaryDamageDealtPerHit1}) : 0
+        const damageDealtPerHit2 = unit2.stats.attackComponents.length ? this.calculateDamageDealtPerHit(composedDamageDealtPerHit2, { count: secondaryAttackCount2, composedSecondaryDamageDealtPerHit: composedSecondaryDamageDealtPerHit2}) : 0
 
         const damagePerSecond1 = unit1.stats.attackRate ? unit1.stats.attackRate * damageDealtPerHit1 : 0
         const damagePerSecond2 = unit2.stats.attackRate ? unit2.stats.attackRate * damageDealtPerHit2 : 0
@@ -52,7 +57,7 @@ class UnitCalculatorService {
         const monkHealingResource1 = monkHealingPercentSpeed1 * totalCost1
         const monkHealingResource2 = monkHealingPercentSpeed2 * totalCost2
 
-        let calculatedStats: CalculatedStats = { totalCost1, totalCost2, composedDamageDealtPerHit1, composedDamageDealtPerHit2, damageDealtPerHit1, damageDealtPerHit2, damagePerSecond1, damagePerSecond2, numberOfHitToKill1, numberOfHitToKill2, timeNeededToKill1, timeNeededToKill2, damagePerSecondWithAccuracyHight1: damagePerSecondWithAccuracyHigh1, damagePerSecondWithAccuracyHight2: damagePerSecondWithAccuracyHigh2, damagePerSecondWithAccuracyLow1, damagePerSecondWithAccuracyLow2, healthRemaining1, healthRemaining2, monkHealingPercentSpeed1, monkHealingPercentSpeed2, monkHealingResource1, monkHealingResource2 }
+        let calculatedStats: CalculatedStats = { totalCost1, totalCost2, composedDamageDealtPerHit1, composedDamageDealtPerHit2, secondaryAttackCount1, secondaryAttackCount2, composedSecondaryDamageDealtPerHit1, composedSecondaryDamageDealtPerHit2, damageDealtPerHit1, damageDealtPerHit2, damagePerSecond1, damagePerSecond2, numberOfHitToKill1, numberOfHitToKill2, timeNeededToKill1, timeNeededToKill2, damagePerSecondWithAccuracyHight1: damagePerSecondWithAccuracyHigh1, damagePerSecondWithAccuracyHight2: damagePerSecondWithAccuracyHigh2, damagePerSecondWithAccuracyLow1, damagePerSecondWithAccuracyLow2, healthRemaining1, healthRemaining2, monkHealingPercentSpeed1, monkHealingPercentSpeed2, monkHealingResource1, monkHealingResource2 }
 
         calculatedStats = this.applyCapacities(calculatedStats, unit1, unit2)
         calculatedStats = this.applyCapacities(calculatedStats, unit2, unit1)
@@ -172,16 +177,22 @@ class UnitCalculatorService {
         }
     }
 
-    private calculateDamageDealtComponentsPerHit = (attackingUnit: Unit, defendingUnit: Unit): CombatStat[] => {
-        const attacks = attackingUnit.stats.attackComponents
-        const armors = defendingUnit.stats.armorComponents
+    private calculateDamageDealtComponentsPerHit =  (attackingUnitAttacks: CombatStat[], defendingUnitArmors: CombatStat[]): CombatStat[] => {
+        const attacks = attackingUnitAttacks
+        const armors = defendingUnitArmors
 
         return attacks
-            .filter(attack => armors.find(armor => armor.type === attack.type))
+            .filter(attack => armors.find(armor => armor.type === attack.type) || attack.type === ArmorType.trueDamage)
             .map(attack => {
-                const value = attack.value - armors.find(armor => armor.type === attack.type)!.value
+                const value = attack.value - (armors.find(armor => armor.type === attack.type)?.value || 0)
                 return { ...attack, value: Math.max(value, 0) }
             })
+    }
+
+    private calculateDamageDealtPerHit = (composedDamageDealtPerHit1: CombatStat[], { count, composedSecondaryDamageDealtPerHit }: { count: number, composedSecondaryDamageDealtPerHit: CombatStat[] }) => {
+        const mainAttackDamage = Math.max(composedDamageDealtPerHit1.map(damage => damage.value).reduce((total: number, value: number) => total + value, 0), 1)
+        const secondaryAttacksDamage = multiplyNumber(Math.max(composedSecondaryDamageDealtPerHit.map(damage => damage.value).reduce((total: number, value: number) => total + value, 0), 1), count)
+        return mainAttackDamage + secondaryAttacksDamage
     }
 
 }

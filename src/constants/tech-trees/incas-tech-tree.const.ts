@@ -181,7 +181,7 @@ export const incasTechTree: CivTechTree = {
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([...uniqueTechs, castleUpgrades.hoardings, castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         unitLines: [],

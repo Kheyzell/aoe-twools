@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import BonusLine from "../../components/bonus/bonus-line/bonus-line.component"
 import TechComponent, { BoxSize } from "../../components/tech/tech.component"
-import { allCivTechTrees } from "../../constants"
+import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits } from "../../constants"
 import { archeryUnits } from "../../constants/techs/archery-techs.const"
 import { barracksUnits } from "../../constants/techs/barracks-techs.const"
 import { castleUnits } from "../../constants/techs/castle-techs.const"
@@ -23,6 +23,7 @@ import UnitCalculatorUpgradeComponent from "./unit-calculator-upgrade/unit-calcu
 import { selectBonusForUnit1, selectBonusForUnit2, selectedBonusesForUnit1Selector, selectedBonusesForUnit2Selector, selectedUnitsSelector, selectedUpgradesForUnit1Selector, selectedUpgradesForUnit2Selector, selectUnit1, selectUnit2, selectUpgradesForUnit1, selectUpgradesForUnit2 } from "./unit-calculator.slice"
 import { Unit } from "../../models/unit.model"
 import { Upgrade } from "../../models/upgrade.model"
+import { bohemiansUniqueUnits } from "../../constants/tech-trees/bohemians-tech-tree.const"
 
 import "./unit-calculator.component.css"
 import parchmentBackground2 from "../../resources/images/backgrounds/parchment.jpg"
@@ -73,7 +74,11 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...monasteryUnits.monk }),
         new Unit({ ...townCenterUnits.villager }),
         new Unit({ ...marketUnits.tradeCart }),
-        new Unit({ ...dockUnits.fishingShip }), new Unit({ ...dockUnits.transportShip }), new Unit({ ...dockUnits.tradeCog }), new Unit({ ...dockUnits.galley }), new Unit({ ...dockUnits.warGalley }), new Unit({ ...dockUnits.galleon }), new Unit({ ...dockUnits.fireGalley }), new Unit({ ...dockUnits.fireShip }), new Unit({ ...dockUnits.fastFireShip }), new Unit({ ...dockUnits.demolitionRaft }), new Unit({ ...dockUnits.demotionShip }), new Unit({ ...dockUnits.heavyDemolitionShip }), new Unit({ ...dockUnits.cannonGalleon }), new Unit({ ...dockUnits.eliteCannonGalleon })
+        new Unit({ ...dockUnits.fishingShip }), new Unit({ ...dockUnits.transportShip }), new Unit({ ...dockUnits.tradeCog }), new Unit({ ...dockUnits.galley }), new Unit({ ...dockUnits.warGalley }), new Unit({ ...dockUnits.galleon }), new Unit({ ...dockUnits.fireGalley }), new Unit({ ...dockUnits.fireShip }), new Unit({ ...dockUnits.fastFireShip }), new Unit({ ...dockUnits.demolitionRaft }), new Unit({ ...dockUnits.demotionShip }), new Unit({ ...dockUnits.heavyDemolitionShip }), new Unit({ ...dockUnits.cannonGalleon }), new Unit({ ...dockUnits.eliteCannonGalleon }),
+        new Unit({ ...aztecsUniqueUnits.jaguarWarrior }), new Unit({ ...aztecsUniqueUnits.eliteJaguarWarrior }),
+        new Unit({ ...berbersUniqueUnits.camelArcher }), new Unit({ ...berbersUniqueUnits.eliteCamelArcher }), new Unit({ ...berbersUniqueUnits.genitour }), new Unit({ ...berbersUniqueUnits.eliteGenitour }),
+        new Unit({ ...bohemiansUniqueUnits.hussiteWagon }), new Unit({ ...bohemiansUniqueUnits.eliteHussiteWagon }), new Unit({ ...bohemiansUniqueUnits.houfnice }),
+        new Unit({ ...britonsUniqueUnits.longbowman }), new Unit({ ...britonsUniqueUnits.eliteLongbowman }),
     ]
 
     const uniqueTechs = allCivTechTrees.map(civ => civ.uniqueTechs)
@@ -89,8 +94,6 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
 
     const unit1AffectingBonuses = allBonuses.filter(bonus => bonus.affectedUnits.some(u => u.id === unit1.id))
     const unit2AffectingBonuses = allBonuses.filter(bonus => bonus.affectedUnits.some(u => u.id === unit2.id))
-
-    console.log(unit1AffectingBonuses)
 
     return (
         <div className="UnitCalculator" style={{ background: `url(${parchmentBackground2})` }}>
@@ -134,7 +137,7 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
                 <div className="Stats" style={{ background: `url(${parchmentBackground})` }}>
                     <StatsContainer class="CalculatedStats">
                         <tr className="SelectedUnitsClass">
-                            <td> <TechComponent tech={unit1} isSelected={true}></TechComponent> </td>
+                            <td> <TechComponent classes={['ImageInverted']} tech={unit1} isSelected={true}></TechComponent> </td>
                             <td></td>
                             <td> <TechComponent tech={unit2} isSelected={true} classes={['Selected2']}></TechComponent> </td>
                         </tr>

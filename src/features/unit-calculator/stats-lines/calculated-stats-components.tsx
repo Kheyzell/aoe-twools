@@ -7,22 +7,23 @@ import { roundHundredth } from "../../../utils/utils"
 import { calculatedStatsSelector, selectedUnitsSelector } from "../unit-calculator.slice"
 import { StatDisplay, StatLine } from "./basic-stats-components/basic-stats-components"
 
-const DamagePerHitStat = (props: { damagePerHit: CombatStat[], totalDamageCompared: StatCompared }) => {
+const DamagePerHitStat = (props: { damagePerHit: CombatStat[], secondaryDamagePerHit: CombatStat[], secondaryAttackCount: number, totalDamageCompared: StatCompared }) => {
     return (
         <span className="DamagePerHitStat">
-            {props.damagePerHit.map((damage, i) => (<span key={i}> {damage.value} ({damage.type}) </span>))}
+            { props.damagePerHit.map((damage, i) => (<span key={i}> {damage.value} ({damage.type}) </span>)) }
+            { props.secondaryAttackCount ? <span> ( secondary: {  props.secondaryDamagePerHit.map((damage, i) => (<span key={i}> {damage.value} ({damage.type}) </span>)) }) x { props.secondaryAttackCount } </span> : null }
             <StatDisplay comparison={props.totalDamageCompared.comparison}> {props.totalDamageCompared.value} </StatDisplay>
         </span>
     )
 }
 
 export const DamagePerHitLine = () => {
-    const { composedDamageDealtPerHit1, composedDamageDealtPerHit2, damageDealtPerHit1, damageDealtPerHit2 } = useSelector(calculatedStatsSelector)
+    const { composedDamageDealtPerHit1, composedDamageDealtPerHit2, secondaryAttackCount1, secondaryAttackCount2, composedSecondaryDamageDealtPerHit1, composedSecondaryDamageDealtPerHit2, damageDealtPerHit1, damageDealtPerHit2 } = useSelector(calculatedStatsSelector)
 
     const [totalDamageCompared1, totalDamageCompared2] = StatCompared.build2Comparisons(damageDealtPerHit1, damageDealtPerHit2)
 
-    const statComponent1 = (<DamagePerHitStat damagePerHit={composedDamageDealtPerHit1} totalDamageCompared={totalDamageCompared1}></DamagePerHitStat>)
-    const statComponent2 = (<DamagePerHitStat damagePerHit={composedDamageDealtPerHit2} totalDamageCompared={totalDamageCompared2}></DamagePerHitStat>)
+    const statComponent1 = (<DamagePerHitStat damagePerHit={composedDamageDealtPerHit1} secondaryDamagePerHit={composedSecondaryDamageDealtPerHit1} secondaryAttackCount={secondaryAttackCount1} totalDamageCompared={totalDamageCompared1}></DamagePerHitStat>)
+    const statComponent2 = (<DamagePerHitStat damagePerHit={composedDamageDealtPerHit2} secondaryDamagePerHit={composedSecondaryDamageDealtPerHit2} secondaryAttackCount={secondaryAttackCount2} totalDamageCompared={totalDamageCompared2}></DamagePerHitStat>)
 
     return (<StatLine title={"Damage per hit"} stat1={statComponent1} stat2={statComponent2}></StatLine>)
 }
@@ -40,25 +41,23 @@ export const DamagePerSecondWithAccuratyLine = () => {
     const { unit1, unit2 } = useSelector(selectedUnitsSelector)
     const { damagePerSecond1, damagePerSecond2, damagePerSecondWithAccuracyHight1, damagePerSecondWithAccuracyHight2, damagePerSecondWithAccuracyLow1, damagePerSecondWithAccuracyLow2 } = useSelector(calculatedStatsSelector)
 
+    if ((unit1.stats.accuracy === 1 || unit1.stats.attackType !== AttackType.projectile) && (unit2.stats.accuracy === 1 || unit2.stats.attackType !== AttackType.projectile)) {
+        return null
+    }
+
     const [dpsCompared1, dpsCompared2] = StatCompared.build2Comparisons(damagePerSecond1, damagePerSecond2)
     const [dpsHightCompared1, dpsHightCompared2] = StatCompared.build2Comparisons(damagePerSecondWithAccuracyHight1, damagePerSecondWithAccuracyHight2)
     const [dpsLowCompared1, dpsLowCompared2] = StatCompared.build2Comparisons(damagePerSecondWithAccuracyLow1, damagePerSecondWithAccuracyLow2)
     const component1 = unit1.stats.attackType === AttackType.projectile ? (<span>
             <StatDisplay comparison={dpsHightCompared1.comparison}> {roundHundredth(dpsHightCompared1.value)} </StatDisplay>
-            -
-            <StatDisplay comparison={dpsLowCompared1.comparison}> {roundHundredth(dpsLowCompared1.value)} </StatDisplay>
+            { unit1.stats.accuracy !== 1 ? <span> - <StatDisplay comparison={dpsLowCompared1.comparison}> {roundHundredth(dpsLowCompared1.value)} </StatDisplay> </span> : null }
         </span>) : (<StatDisplay comparison={dpsCompared1.comparison}> {roundHundredth(dpsCompared1.value)} </StatDisplay>)
     const component2 = unit2.stats.attackType === AttackType.projectile ? (<span>
             <StatDisplay comparison={dpsHightCompared2.comparison}> {roundHundredth(dpsHightCompared2.value)} </StatDisplay>
-            -
-            <StatDisplay comparison={dpsLowCompared2.comparison}> {roundHundredth(dpsLowCompared2.value)} </StatDisplay>
+            { unit2.stats.accuracy !== 1 ? <span> - <StatDisplay comparison={dpsLowCompared2.comparison}> {roundHundredth(dpsLowCompared2.value)} </StatDisplay> </span> : null }
         </span>) : (<StatDisplay comparison={dpsCompared2.comparison}> {roundHundredth(dpsCompared2.value)} </StatDisplay>)
     
-    if (unit1.stats.attackType === AttackType.projectile || unit2.stats.attackType === AttackType.projectile) {
-        return (<StatLine title="DPS with accuracy" stat1={component1} stat2={component2}></StatLine>)
-    } else {
-        return null
-    }
+    return (<StatLine title="DPS with accuracy" stat1={component1} stat2={component2}></StatLine>)
 }
 
 export const ResourcesPerHitLine = () => {

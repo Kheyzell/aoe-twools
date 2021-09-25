@@ -14,10 +14,10 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/bohemians.png'
-import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
 import { UnitType, EffectOrder, CivTechTree, ArmorType, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 
 export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit, houfnice: Unit } = {
     hussiteWagon: new Unit({
@@ -30,6 +30,32 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             food: 0,
             gold: 70,
             stone: 0
+        },
+        stats: {
+            health: 200,
+            rateOfFire: 3.45,
+            attackType: AttackType.projectile,
+            range: 6,
+            accuracy: .85,
+            attackComponents: [
+                { value: 17, type: ArmorType.pierce },
+                { value: 3, type: ArmorType.ram },
+                { value: 1, type: ArmorType.building },
+            ],
+            secondaryAttack: {
+                count: 2,
+                components: [{ value: 2, type: ArmorType.trueDamage }]
+            },
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 7, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.siegeWeapon },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit },
+                { value: 0, type: ArmorType.hussiteWagon },
+            ],
+            movementSpeed: .85,
+            lineOfSight: 8,
         },
         duration: 21
     }),
@@ -44,6 +70,32 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             gold: 70,
             stone: 0
         },
+        stats: {
+            health: 250,
+            rateOfFire: 3.45,
+            attackType: AttackType.projectile,
+            range: 6,
+            accuracy: .9,
+            attackComponents: [
+                { value: 20, type: ArmorType.pierce },
+                { value: 3, type: ArmorType.ram },
+                { value: 2, type: ArmorType.building },
+            ],
+            secondaryAttack: {
+                count: 3,
+                components: [{ value: 2, type: ArmorType.trueDamage }]
+            },
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 10, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.siegeWeapon },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit },
+                { value: 0, type: ArmorType.hussiteWagon },
+            ],
+            movementSpeed: .85,
+            lineOfSight: 8,
+        },
         duration: 21
     }),
     houfnice: new Unit({
@@ -57,12 +109,41 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             gold: 225,
             stone: 0
         },
+        stats: {
+            health: 90,
+            rateOfFire: 6.5,
+            attackType: AttackType.projectile,
+            range: 12,
+            accuracy: 1,
+            attackComponents: [
+                { value: 55, type: ArmorType.melee },
+                { value: 250, type: ArmorType.building },
+                { value: 55, type: ArmorType.ship },
+                { value: 55, type: ArmorType.fishingShip },
+                { value: 55, type: ArmorType.stoneDefense },
+                { value: 20, type: ArmorType.siegeWeapon },
+                { value: 55, type: ArmorType.hussiteWagon },
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 6, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.siegeWeapon },
+                { value: 0, type: ArmorType.gunpowderUnit }
+            ],
+            movementSpeed: .7,
+            lineOfSight: 14,
+        },
         duration: 56
     })
 }
 
 chainTechs([bohemiansUniqueUnits.hussiteWagon, bohemiansUniqueUnits.eliteHussiteWagon])
 chainTechs([siegeUnits.bombardCannon, bohemiansUniqueUnits.houfnice])
+
+const uniqueUnitLine = new UnitLine([bohemiansUniqueUnits.hussiteWagon, bohemiansUniqueUnits.eliteHussiteWagon])
+const houfniceLine = new UnitLine([siegeUnits.bombardCannon, bohemiansUniqueUnits.houfnice])
+setAffectingUpgrades(uniqueUnitLine, [universityUpgrades.siegeEngineers])
+setAffectingUpgrades(houfniceLine, [universityUpgrades.siegeEngineers])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -192,13 +273,13 @@ export const bohemiansTechTree: CivTechTree = {
             new UnitLine([siegeUnits.mangonel, siegeUnits.onager]),
             new UnitLine([siegeUnits.scorpion, siegeUnits.heavyScorpion]),
             new UnitLine([siegeUnits.siegeTower]),
-            new UnitLine([siegeUnits.bombardCannon, bohemiansUniqueUnits.houfnice]),
+            houfniceLine,
         ],
         upgrades: new UpgradePerAgeGroup([])
     },
     castle: {
         unitLines: [
-            new UnitLine([bohemiansUniqueUnits.hussiteWagon, bohemiansUniqueUnits.eliteHussiteWagon]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

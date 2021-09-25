@@ -78,6 +78,7 @@
     padding: 4px;
     outline: none;
     user-select: none;
+    z-index: 1;
 }
 .Tech.Small > .Name {
     width: 51px;
@@ -101,6 +102,9 @@
 .Tech.Mini > img {
     width: 32px;
     height: 32px;
+}
+.Tech.ImageInverted > img {
+    transform: scaleX(-1);
 }
 
 .TooltipName {

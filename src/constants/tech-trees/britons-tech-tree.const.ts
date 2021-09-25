@@ -1,8 +1,8 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/britons.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -31,6 +31,25 @@ export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 35,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: .7,
+            attackComponents: [
+                { value: 6, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.spearman }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .96,
+            lineOfSight: 7,
+        },
         duration: 18
     }),
     eliteLongbowman: new Unit({
@@ -44,9 +63,33 @@ export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 40,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 6,
+            accuracy: .8,
+            attackComponents: [
+                { value: 7, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.spearman }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .96,
+            lineOfSight: 8,
+        },
         duration: 18
     })
 }
+
+const uniqueUnitLine = new UnitLine([britonsUniqueUnits.longbowman, britonsUniqueUnits.eliteLongbowman])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -171,7 +214,7 @@ export const britonsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([britonsUniqueUnits.longbowman, britonsUniqueUnits.eliteLongbowman]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
