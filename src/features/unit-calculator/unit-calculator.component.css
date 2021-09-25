@@ -5,14 +5,16 @@
     padding: 0 0 16px 0;
 }
 
-.UnitCalculator .UnitList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.UnitCalculator .UnitLists {
     margin-bottom: 16px;
     padding: 8px 16px;
 }
-.UnitCalculator .UnitList .UnitCalculatorUnit + .UnitCalculatorUnit {
+.UnitCalculator .UnitLists .UnitList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.UnitCalculator .UnitLists .UnitList .UnitCalculatorUnit + .UnitCalculatorUnit {
     margin-left: 8px;
 }
 

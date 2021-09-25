@@ -2,7 +2,7 @@ import { Bonus, EffectType, UniqueTech } from "../../models/bonus.model";
 import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/aztecs.png';
-import { getAllCivMilitaryUnits, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, getAllCivMilitaryUnits, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 import { monasteryTechs } from "../GroupTechTree/monastery-tech-tree.const";
 import { archeryUnits } from "../techs/archery-techs.const";
@@ -88,6 +88,7 @@ export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit 
     })
 }
 
+chainTechs([aztecsUniqueUnits.jaguarWarrior, aztecsUniqueUnits.eliteJaguarWarrior])
 const uniqueUnitLine = new UnitLine([aztecsUniqueUnits.jaguarWarrior, aztecsUniqueUnits.eliteJaguarWarrior])
 setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
     blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,

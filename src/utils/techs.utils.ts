@@ -103,6 +103,28 @@ export const getAllCivUnitLines = (civ: CivTechTree): UnitLine[] => {
     ]
 }
 
+export const getChainedUnits = (unit: Unit): Unit[] => {
+    return [
+        ...(unit.previousLineTech ? getPreviousChainedUnits(unit.previousLineTech) : []),
+        unit,
+        ...(unit.nextLineTech ? getNextChainedUnits(unit.nextLineTech) : [])
+    ]
+}
+
+const getNextChainedUnits = (unit: Unit): Unit[] => {
+    if (unit.nextLineTech) {
+        return [unit, ...getNextChainedUnits(unit.nextLineTech)]
+    }
+    return [unit]
+}
+
+const getPreviousChainedUnits = (unit: Unit): Unit[] => {
+    if (unit.previousLineTech) {
+        return [...getPreviousChainedUnits(unit.previousLineTech), unit]
+    }
+    return [unit]
+}
+
 export const getAllCivUpgrades = (civ: CivTechTree): Upgrade[] => {
     return [
         ...civ.barracks.upgrades.list,
@@ -193,13 +215,6 @@ const arePartsOfTheSameUpgradeLine = (upgrade1: Upgrade, upgrade2: Upgrade): boo
     return false
 }
 
-// export const getAllUnitAffectingBonuses = (unit: Unit): Bonus[] => {
-    // return allCivTechTrees
-    //     .map(civ => civ.bonuses)
-    //     .reduce((allBonuses: Bonus[], civBonuses: Bonus[]) => allBonuses.concat(civBonuses), [])
-    //     .filter(bonus => bonus.affectedUnits.some(u => u.id === unit.id))
-// }
-
 export const getLastUnitsInLineInList = (units: Unit[]): Unit[] => {
     return units.reduce((lastUnits: Unit[], unit: Unit) => {
         const index = lastUnits.findIndex(u => u.id === unit.previousLineTech?.id)
@@ -217,9 +232,9 @@ export const getNextUpgradesInLine = (upgrade: Upgrade): Upgrade[] => {
     return [upgrade]
 }
 
-export const getpreviousUpgradesInLine = (upgrade: Upgrade): Upgrade[] => {
+export const getPreviousUpgradesInLine = (upgrade: Upgrade): Upgrade[] => {
     if (upgrade.previousLineTech) {
-        return [upgrade, ...getpreviousUpgradesInLine(upgrade.previousLineTech)]
+        return [upgrade, ...getPreviousUpgradesInLine(upgrade.previousLineTech)]
     }
     return [upgrade]
 }

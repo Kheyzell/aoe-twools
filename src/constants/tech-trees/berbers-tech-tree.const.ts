@@ -163,6 +163,7 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
     })
 }
 
+chainTechs([berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher])
 chainTechs([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour])
 const uniqueUnitsLine = new UnitLine([berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher])
 const genitourLine = new UnitLine([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour])
