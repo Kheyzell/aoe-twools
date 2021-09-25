@@ -2,7 +2,7 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/britons.png';
-import { setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -86,6 +86,7 @@ export const britonsUniqueUnits: { longbowman: Unit, eliteLongbowman: Unit } = {
     })
 }
 
+chainTechs([britonsUniqueUnits.longbowman, britonsUniqueUnits.eliteLongbowman])
 const uniqueUnitLine = new UnitLine([britonsUniqueUnits.longbowman, britonsUniqueUnits.eliteLongbowman])
 setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
     blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,

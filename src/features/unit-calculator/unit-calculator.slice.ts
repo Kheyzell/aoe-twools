@@ -9,7 +9,7 @@ import { Bonus } from '../../models/bonus.model'
 import { CalculatedStats } from '../../models/stats-calculation.model'
 import { Unit } from '../../models/unit.model'
 import { Upgrade } from '../../models/upgrade.model'
-import { getNextUpgradesInLine, getpreviousUpgradesInLine } from '../../utils/techs.utils'
+import { getNextUpgradesInLine, getPreviousUpgradesInLine } from '../../utils/techs.utils'
 import unitCalculatorService from './unit-calculator.service'
 
 export type UnitsSelected = { unit1: Unit, unit2: Unit }
@@ -76,7 +76,7 @@ export const unitCalculatorSlice = createSlice({
         const nextUpgrades = getNextUpgradesInLine(action.payload);
         state.selectedUpgrades1 = state.selectedUpgrades1.filter(selectedUpgrade => !nextUpgrades.some(u => u.id === selectedUpgrade.id))
       } else {
-        const previousUpgrades = getpreviousUpgradesInLine(action.payload)
+        const previousUpgrades = getPreviousUpgradesInLine(action.payload)
         previousUpgrades.forEach(upgrade => {
           const isAlreadySelected = state.selectedUpgrades1.some(selectedUpgrade => selectedUpgrade.id === upgrade.id)
           if (!isAlreadySelected) {
@@ -94,7 +94,7 @@ export const unitCalculatorSlice = createSlice({
         const nextUpgrades = getNextUpgradesInLine(action.payload);
         state.selectedUpgrades2 = state.selectedUpgrades2.filter(selectedUpgrade => !nextUpgrades.some(u => u.id === selectedUpgrade.id))
       } else {
-        const previousUpgrades = getpreviousUpgradesInLine(action.payload)
+        const previousUpgrades = getPreviousUpgradesInLine(action.payload)
         previousUpgrades.forEach(upgrade => {
           const isAlreadySelected = state.selectedUpgrades2.some(selectedUpgrade => selectedUpgrade.id === upgrade.id)
           if (!isAlreadySelected) {

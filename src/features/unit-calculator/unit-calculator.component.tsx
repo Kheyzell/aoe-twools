@@ -14,7 +14,7 @@ import { siegeUnits } from "../../constants/techs/siege-techs.const"
 import { stableUnits } from "../../constants/techs/stable-techs.const"
 import { townCenterUnits } from "../../constants/techs/town-center-techs.const"
 import { Bonus } from "../../models/bonus.model"
-import { getChainedUpgrades, rechainUpgradesInList } from "../../utils/techs.utils"
+import { getChainedUnits, getChainedUpgrades, rechainUpgradesInList } from "../../utils/techs.utils"
 import { SeparatorLine, StatsContainer, TitleLine } from "./stats-lines/basic-stats-components/basic-stats-components"
 import { ConversionLine, DamagePerHitLine, DamagePerSecondLine, DamagePerSecondWithAccuratyLine, HealthRemainingLine, MonkHealingLine, NumberOfHitToKillLine, ResourcesLostLine, ResourcesPerHitLine, ResourcesPerSecondLine, TimeNeededToKillLine } from "./stats-lines/calculated-stats-components"
 import { AccuracyLine, ArmorLine, AttackDamageLine, AttackRateLine, CapacitiesLine, ContinuousProductionLine, CostLine, HealthLine, LineOfSightLine, MovementSpeedLine, RangeLine, SecondaryAttackDamageLine, TrainingTimeLine } from "./stats-lines/static-stats-lines"
@@ -66,19 +66,21 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
     }
 
     const units = [
-        new Unit({ ...barracksUnits.militia }), new Unit({ ...barracksUnits.manAtArms }), new Unit({ ...barracksUnits.longSwordsman }), new Unit({ ...barracksUnits.twoHandedSwordsman }), new Unit({ ...barracksUnits.champion }), new Unit({ ...barracksUnits.spearman }), new Unit({ ...barracksUnits.pikeman }), new Unit({ ...barracksUnits.halberdier }), new Unit({ ...barracksUnits.eagleScout }), new Unit({ ...barracksUnits.eagleWarrior }), new Unit({ ...barracksUnits.eliteEagleWarrior }),
-        new Unit({ ...archeryUnits.archer }), new Unit({ ...archeryUnits.crossbowman }), new Unit({ ...archeryUnits.arbalester }), new Unit({ ...archeryUnits.skirmisher }), new Unit({ ...archeryUnits.eliteSkirmisher }), new Unit({ ...archeryUnits.handCannoneer }), new Unit({ ...archeryUnits.cavalryArcher }), new Unit({ ...archeryUnits.heavyCavalryArcher }),
-        new Unit({ ...stableUnits.scoutCavalry }), new Unit({ ...stableUnits.lightCavalry }), new Unit({ ...stableUnits.hussar }), new Unit({ ...stableUnits.knight }), new Unit({ ...stableUnits.cavalier }), new Unit({ ...stableUnits.paladin }), new Unit({ ...stableUnits.camelRider }), new Unit({ ...stableUnits.heavyCamelRider }), new Unit({ ...stableUnits.battleElephant }), new Unit({ ...stableUnits.eliteBattleElephant }), new Unit({ ...stableUnits.steppeLancer }), new Unit({ ...stableUnits.eliteSteppeLancer }),
-        new Unit({ ...siegeUnits.batteringRam }), new Unit({ ...siegeUnits.cappedRam }), new Unit({ ...siegeUnits.siegeRam }), new Unit({ ...siegeUnits.mangonel }), new Unit({ ...siegeUnits.onager }), new Unit({ ...siegeUnits.siegeOnager }), new Unit({ ...siegeUnits.scorpion }), new Unit({ ...siegeUnits.heavyScorpion }), new Unit({ ...siegeUnits.siegeTower }), new Unit({ ...siegeUnits.bombardCannon }),
+        new Unit({ ...barracksUnits.champion }), new Unit({ ...barracksUnits.halberdier }), new Unit({ ...barracksUnits.eliteEagleWarrior }),
+        new Unit({ ...archeryUnits.arbalester }),new Unit({ ...archeryUnits.eliteSkirmisher }), new Unit({ ...archeryUnits.handCannoneer }), new Unit({ ...archeryUnits.heavyCavalryArcher }),
+        new Unit({ ...stableUnits.hussar }), new Unit({ ...stableUnits.paladin }), new Unit({ ...stableUnits.heavyCamelRider }), new Unit({ ...stableUnits.eliteBattleElephant }), new Unit({ ...stableUnits.eliteSteppeLancer }),
+        new Unit({ ...siegeUnits.siegeRam }), new Unit({ ...siegeUnits.siegeOnager }), new Unit({ ...siegeUnits.heavyScorpion }), new Unit({ ...siegeUnits.siegeTower }), new Unit({ ...siegeUnits.bombardCannon }),
         new Unit({ ...castleUnits.petard }), new Unit({ ...castleUnits.trebuchet }),
         new Unit({ ...monasteryUnits.monk }),
         new Unit({ ...townCenterUnits.villager }),
         new Unit({ ...marketUnits.tradeCart }),
-        new Unit({ ...dockUnits.fishingShip }), new Unit({ ...dockUnits.transportShip }), new Unit({ ...dockUnits.tradeCog }), new Unit({ ...dockUnits.galley }), new Unit({ ...dockUnits.warGalley }), new Unit({ ...dockUnits.galleon }), new Unit({ ...dockUnits.fireGalley }), new Unit({ ...dockUnits.fireShip }), new Unit({ ...dockUnits.fastFireShip }), new Unit({ ...dockUnits.demolitionRaft }), new Unit({ ...dockUnits.demotionShip }), new Unit({ ...dockUnits.heavyDemolitionShip }), new Unit({ ...dockUnits.cannonGalleon }), new Unit({ ...dockUnits.eliteCannonGalleon }),
-        new Unit({ ...aztecsUniqueUnits.jaguarWarrior }), new Unit({ ...aztecsUniqueUnits.eliteJaguarWarrior }),
-        new Unit({ ...berbersUniqueUnits.camelArcher }), new Unit({ ...berbersUniqueUnits.eliteCamelArcher }), new Unit({ ...berbersUniqueUnits.genitour }), new Unit({ ...berbersUniqueUnits.eliteGenitour }),
-        new Unit({ ...bohemiansUniqueUnits.hussiteWagon }), new Unit({ ...bohemiansUniqueUnits.eliteHussiteWagon }), new Unit({ ...bohemiansUniqueUnits.houfnice }),
-        new Unit({ ...britonsUniqueUnits.longbowman }), new Unit({ ...britonsUniqueUnits.eliteLongbowman }),
+        new Unit({ ...dockUnits.fishingShip }), new Unit({ ...dockUnits.transportShip }), new Unit({ ...dockUnits.tradeCog }), new Unit({ ...dockUnits.galleon }), new Unit({ ...dockUnits.fastFireShip }), new Unit({ ...dockUnits.heavyDemolitionShip }), new Unit({ ...dockUnits.eliteCannonGalleon }),
+    ]
+    const uniqueUnits = [
+        new Unit({ ...aztecsUniqueUnits.eliteJaguarWarrior }),
+        new Unit({ ...berbersUniqueUnits.eliteCamelArcher }), new Unit({ ...berbersUniqueUnits.eliteGenitour }),
+        new Unit({ ...bohemiansUniqueUnits.eliteHussiteWagon }), new Unit({ ...bohemiansUniqueUnits.houfnice }),
+        new Unit({ ...britonsUniqueUnits.eliteLongbowman }),
     ]
 
     const uniqueTechs = allCivTechTrees.map(civ => civ.uniqueTechs)
@@ -97,15 +99,31 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
 
     return (
         <div className="UnitCalculator" style={{ background: `url(${parchmentBackground2})` }}>
-            <div className="UnitList" style={{ background: `url(${woodenBackground})` }}>
-                {
-                    units.map(unit => (
-                        <UnitCalculatorUnitComponent key={unit.id} unit={unit} onClick={onUnit1Click} onRightClick={onUnit2Click} size={BoxSize.mini}></UnitCalculatorUnitComponent>
-                    ))
-                }
+            <div className="UnitLists">
+                <div className="UnitList" style={{ background: `url(${woodenBackground})` }}>
+                    {
+                        units.map(unit => (
+                            <UnitCalculatorUnitComponent key={unit.id} unit={unit} onClick={onUnit1Click} onRightClick={onUnit2Click} size={BoxSize.mini}></UnitCalculatorUnitComponent>
+                        ))
+                    }
+                </div>
+                <div className="UnitList" style={{ background: `url(${woodenBackground})` }}>
+                    {
+                        uniqueUnits.map(unit => (
+                            <UnitCalculatorUnitComponent key={unit.id} unit={unit} onClick={onUnit1Click} onRightClick={onUnit2Click} size={BoxSize.mini}></UnitCalculatorUnitComponent>
+                        ))
+                    }
+                </div>
             </div>
 
             <div className="Main">
+                <div>
+                    {
+                        getChainedUnits(unit1).map(unit => (
+                            <UnitCalculatorUnitComponent key={unit.id} unit={unit} onClick={onUnit1Click} size={BoxSize.mini}></UnitCalculatorUnitComponent>
+                        ))
+                    }
+                </div>
                 <div className="Upgrades">
                     {
                         unit1UpgradeLines.map((line, i) => {
@@ -200,6 +218,13 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
                             })
                         }
                     </div>
+                </div>
+                <div>
+                    {
+                        getChainedUnits(unit2).map(unit => (
+                            <UnitCalculatorUnitComponent key={unit.id} unit={unit} onClick={onUnit2Click} size={BoxSize.mini}></UnitCalculatorUnitComponent>
+                        ))
+                    }
                 </div>
             </div>
         </div>
