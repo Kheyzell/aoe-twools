@@ -35,6 +35,9 @@ export enum ArmorType {
     castle = 'Castle',
     stoneDefense = 'Stone Defense',
     wallAndGate = 'Wall And Gate',
+    condottiero = 'condottiero',
+    uniqueUnit = 'Unique Unit',
+    trueDamage = "True Damage"
 }
 
 export interface Tech {

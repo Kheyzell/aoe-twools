@@ -153,13 +153,13 @@ export const SecondaryAttackDamageLine = () => {
 
     const stat1 = (
         <div>
-            <StatDisplay comparison={numberCompared1.comparison}> number: {`${numberCompared1.value}`} </StatDisplay>
+            <StatDisplay comparison={numberCompared1.comparison}> count: {`${numberCompared1.value}`} </StatDisplay>
             <CombatValueStat statComparedList={damageComparedList1} />
         </div>
     )
     const stat2 = (
         <div>
-            <StatDisplay comparison={numberCompared2.comparison}> number: {`${numberCompared2.value}`} </StatDisplay>
+            <StatDisplay comparison={numberCompared2.comparison}> count: {`${numberCompared2.value}`} </StatDisplay>
             <CombatValueStat statComparedList={damageComparedList2} />
         </div>
     )

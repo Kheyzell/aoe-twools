@@ -14,11 +14,11 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/berbers.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 import { CAPACITIES } from "../../models/capacity.model";
-import { UnitType, EffectOrder, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { UnitType, EffectOrder, CivTechTree, UnitLine, UpgradePerAgeGroup, ArmorType } from "../../models/techs.model";
+import { AttackType, Unit } from "../../models/unit.model";
 
 export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, genitour: Unit, eliteGenitour: Unit } = {
     camelArcher: new Unit({
@@ -31,6 +31,27 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
             food: 0,
             gold: 60,
             stone: 0
+        },
+        stats: {
+            health: 55,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .95,
+            attackComponents: [
+                { value: 7, type: ArmorType.pierce },
+                { value: 4, type: ArmorType.cavalryArcher },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.camel },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 5,
         },
         duration: 25
     }),
@@ -45,6 +66,27 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
             gold: 60,
             stone: 0
         },
+        stats: {
+            health: 60,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .95,
+            attackComponents: [
+                { value: 8, type: ArmorType.pierce },
+                { value: 6, type: ArmorType.cavalryArcher },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.camel },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 5,
+        },
         duration: 25
     }),
     genitour: new Unit({
@@ -57,6 +99,29 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
             food: 50,
             gold: 0,
             stone: 0
+        },
+        stats: {
+            health: 50,
+            rateOfFire: 3,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .90,
+            attackComponents: [
+                { value: 3, type: ArmorType.pierce },
+                { value: 4, type: ArmorType.archer },
+                { value: 2, type: ArmorType.spearman },
+                { value: 2, type: ArmorType.cavalryArcher },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 4, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 1, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.35,
+            lineOfSight: 5,
         },
         duration: 25
     }),
@@ -71,11 +136,43 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
             gold: 0,
             stone: 0
         },
+        stats: {
+            health: 55,
+            rateOfFire: 3,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .90,
+            attackComponents: [
+                { value: 4, type: ArmorType.pierce },
+                { value: 5, type: ArmorType.archer },
+                { value: 2, type: ArmorType.spearman },
+                { value: 2, type: ArmorType.cavalryArcher },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 4, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 1, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.35,
+            lineOfSight: 6,
+        },
         duration: 25
     })
 }
 
 chainTechs([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour])
+const uniqueUnitsLine = new UnitLine([berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher])
+const genitourLine = new UnitLine([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour])
+const cavArcherUpgrades = [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry,
+    universityUpgrades.ballistics, universityUpgrades.chemistry]
+setAffectingUpgrades(uniqueUnitsLine, [...cavArcherUpgrades])
+setAffectingUpgrades(genitourLine, [...cavArcherUpgrades])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -199,7 +296,7 @@ export const berbersTechTree: CivTechTree = {
             new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
             new UnitLine([archeryUnits.handCannoneer]),
             new UnitLine([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher]),
-            new UnitLine([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour]),
+            genitourLine,
         ],
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
     },
@@ -223,7 +320,7 @@ export const berbersTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher]),
+            uniqueUnitsLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

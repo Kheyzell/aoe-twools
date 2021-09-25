@@ -1,8 +1,8 @@
 import { Bonus, EffectType, UniqueTech } from "../../models/bonus.model";
 import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/aztecs.png';
-import { getAllCivMilitaryUnits, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { getAllCivMilitaryUnits, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 import { monasteryTechs } from "../GroupTechTree/monastery-tech-tree.const";
 import { archeryUnits } from "../techs/archery-techs.const";
@@ -31,6 +31,26 @@ export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit 
             gold: 30,
             stone: 0
         },
+        stats: {
+            health: 50,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 10, type: ArmorType.melee },
+                { value: 10, type: ArmorType.infantry },
+                { value: 10, type: ArmorType.condottiero },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1,
+            lineOfSight: 3,
+        },
         duration: 12
     }),
     eliteJaguarWarrior: new Unit({
@@ -44,9 +64,34 @@ export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit 
             gold: 30,
             stone: 0
         },
+        stats: {
+            health: 75,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 12, type: ArmorType.melee },
+                { value: 11, type: ArmorType.infantry },
+                { value: 10, type: ArmorType.condottiero },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1,
+            lineOfSight: 5,
+        },
         duration: 12
     })
 }
+
+const uniqueUnitLine = new UnitLine([aztecsUniqueUnits.jaguarWarrior, aztecsUniqueUnits.eliteJaguarWarrior])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -117,7 +162,7 @@ export const aztecsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([aztecsUniqueUnits.jaguarWarrior, aztecsUniqueUnits.eliteJaguarWarrior]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

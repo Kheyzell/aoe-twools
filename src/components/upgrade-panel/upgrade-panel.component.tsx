@@ -8,12 +8,14 @@ import { TechType } from "../../models/techs.model"
 import { getAllCivUniqueUnits, getAllCivUnits } from "../../utils/techs.utils"
 import { stopEventPropagation } from "../../utils/utils"
 import TechComponent, { BoxSize } from "../tech/tech.component"
+import { Unit } from "../../models/unit.model"
+import { Upgrade } from "../../models/upgrade.model"
+import { CostStat } from "../../features/unit-calculator/stats-lines/static-stats-lines"
+import { CostCompared } from "../../models/stats-calculation.model"
 
 import woodenBackground from "../../resources/images/backgrounds/parchment2.jpg"
 
 import './upgrade-panel.component.css'
-import { Unit } from "../../models/unit.model"
-import { Upgrade } from "../../models/upgrade.model"
 
 
 type Props = {
@@ -53,7 +55,11 @@ const UpgradePanel: React.FC<Props> = (props) => {
     return (
         <div className="TechPanel" ref={panelRef} style={{ background: `url(${woodenBackground})` }} onClick={stopEventPropagation}>
             <div className={ showDetails ? 'Title' : '' }>
-                { <span> <span> { t(`${translationKey}.name`) } </span> { isUniqueTech ? <span> ({ t(`civ.${(props.upgrade as UniqueTech).civ.id}.name`) }) </span> : null } </span> }
+                { <span>
+                    <span> { t(`${translationKey}.name`) } </span>
+                    { isUniqueTech ? <span> ({ t(`civ.${(props.upgrade as UniqueTech).civ.id}.name`) }) </span> : null }
+                    <span className="StatLabel"> </span> <span className="StatValue"> (<CostStat cost={ new CostCompared(props.upgrade.cost) }></CostStat>) </span>
+                </span> }
                 {/* { showDetails ? (<span> • <a href={wikiBaseUrl} target="_blank" rel="noreferrer"> wiki </a> </span>): null } */}
             </div>
 
