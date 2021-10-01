@@ -1,10 +1,10 @@
 .Tech.Selected2 {
-  border-color: cyan;
+  border-color: cyan !important;
 }
 
 .Tech.Selected1.Selected2 {
-  border-top-color: cyan;
-  border-right-color: cyan;
-  border-left-color: yellow;
-  border-bottom-color: yellow;
+  border-top-color: cyan !important;
+  border-right-color: cyan !important;
+  border-left-color: yellow !important;
+  border-bottom-color: yellow !important;
 }

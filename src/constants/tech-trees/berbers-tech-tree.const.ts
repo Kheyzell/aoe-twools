@@ -16,7 +16,7 @@ import crest from '../../resources/images/crests/berbers.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
-import { CAPACITIES } from "../../models/capacity.model";
+import { CAPACITIES, RegenCapacity } from "../../models/capacity.model";
 import { UnitType, EffectOrder, CivTechTree, UnitLine, UpgradePerAgeGroup, ArmorType } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
 
@@ -202,7 +202,7 @@ const uniqueTechs = [
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
-                unit.stats.capacities.push(CAPACITIES.maghrebiRegen)
+                unit.stats.capacities.push({ ...CAPACITIES.regen, healthPerMinute: 15 } as RegenCapacity)
             }
         }],
         duration: 40,

@@ -1,7 +1,6 @@
 import { ArmorType, EffectOrder, GroupTechTree, UpgradePerAgeGroup } from "../../models/techs.model";
 import { Unit } from "../../models/unit.model";
 import { multiplyNumber } from "../../utils/utils";
-import { bohemiansUniqueUnits } from "../tech-trees/bohemians-tech-tree.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 
 universityUpgrades.siegeEngineers.effects = [
@@ -9,9 +8,7 @@ universityUpgrades.siegeEngineers.effects = [
         order: EffectOrder.first,
         apply: (unit: Unit) => {
             if (!!unit.stats.range) {
-                if (unit.id !== bohemiansUniqueUnits.hussiteWagon.id && unit.id !== bohemiansUniqueUnits.eliteHussiteWagon.id) {
-                    unit.stats.range += 1
-                }
+                unit.stats.range += 1
             }
         }
     },

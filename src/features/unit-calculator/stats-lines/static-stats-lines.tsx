@@ -1,17 +1,19 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
+import { Trans, useTranslation } from "react-i18next"
+import { useDispatch, useSelector } from "react-redux"
+import { BoxSize } from "../../../components/tech/tech.component"
 import { Capacity } from "../../../models/capacity.model"
 
 import { CombatStatCompared, CostCompared, StatCompared } from "../../../models/stats-calculation.model"
-import { AttackType } from "../../../models/unit.model"
+import { AttackType, Unit } from "../../../models/unit.model"
 import foodIcon from "../../../resources/icons/food.png"
 import goldIcon from "../../../resources/icons/gold.png"
 import stoneIcon from "../../../resources/icons/stone.png"
 import woodIcon from "../../../resources/icons/wood.png"
 import {  roundHundredth } from "../../../utils/utils"
+import UnitCalculatorUnitComponent from "../unit-calculator-tech/unit-calculator-unit.component"
 import unitCalculatorService from "../unit-calculator.service"
-import { selectedUnitsSelector } from "../unit-calculator.slice"
+import { selectedUnitsSelector, selectUnit1, selectUnit2 } from "../unit-calculator.slice"
 import { GenericStatLine, StatDisplay, StatLine } from "./basic-stats-components/basic-stats-components"
 
 import './static-stats-lines.css'
@@ -94,21 +96,37 @@ export const AccuracyLine = () => {
 }
 
 export const CapacitiesLine = () => {
+    const dispatch = useDispatch()
     const { t, i18n } = useTranslation()
     const { unit1, unit2 } = useSelector(selectedUnitsSelector)
 
-    const CapacitiesDisplay = (capactities: Capacity[]) => {
+    const CapacitiesDisplay = (capactities: Capacity[], unitIndex: 1 | 2) => {
+        const onUnitClick = (unit: Unit) => {
+            if (unitIndex === 1) {
+                dispatch(selectUnit1(unit))
+            } else {
+                dispatch(selectUnit2(unit))
+            }
+        }
+        
         return (<div className="Capacity"> {capactities.map(capacity => {
             const hasShortDescription = i18n.exists(`capacities.${capacity.id}.shortDescription`)
             return (<div> • 
                 <span> {t(`capacities.${capacity.id}.title`)} </span>
-                { hasShortDescription ? <span className="ShortDescription"> {t(`capacities.${capacity.id}.shortDescription`, capacity)} </span> : null }
+                { hasShortDescription ?
+                    <span className="ShortDescription">
+                        <Trans
+                            i18nKey={`capacities.${capacity.id}.shortDescription`}
+                            values={ capacity }
+                            components={{ Unit: <UnitCalculatorUnitComponent unit={(capacity as any).unit} onClick={onUnitClick} size={BoxSize.mini} /> }} />
+                    </span>
+                : null }
             </div>)})
         } </div>)
     }
 
     if (unit1.stats.capacities.length || unit2.stats.capacities.length) {
-        return (<StatLine title="Capacities" stat1={CapacitiesDisplay(unit1.stats.capacities)} stat2={CapacitiesDisplay(unit2.stats.capacities)}></StatLine>)
+        return (<StatLine title="Capacities" stat1={CapacitiesDisplay(unit1.stats.capacities, 1)} stat2={CapacitiesDisplay(unit2.stats.capacities, 2)}></StatLine>)
     }
     return null
 }

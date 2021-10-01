@@ -17,3 +17,7 @@
 .Capacity .ShortDescription::before {
     content: ": "
 }
+.Capacity .ShortDescription .UnitCalculatorUnit {
+    display: inline-block;
+    margin: 2px;
+}

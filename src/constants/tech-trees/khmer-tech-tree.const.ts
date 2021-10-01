@@ -76,6 +76,7 @@ const uniqueTechs = [
             apply: (unit: Unit) => {
                 unit.stats.secondaryAttack = {
                     count: 0,
+                    accuracy: 1,
                     components: [{ value: 0, type: ArmorType.pierce }]
                 }
             }

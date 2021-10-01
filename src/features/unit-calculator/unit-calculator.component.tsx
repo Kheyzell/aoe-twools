@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import BonusLine from "../../components/bonus/bonus-line/bonus-line.component"
 import TechComponent, { BoxSize } from "../../components/tech/tech.component"
-import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits } from "../../constants"
+import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits } from "../../constants"
 import { archeryUnits } from "../../constants/techs/archery-techs.const"
 import { barracksUnits } from "../../constants/techs/barracks-techs.const"
 import { castleUnits } from "../../constants/techs/castle-techs.const"
@@ -67,8 +67,8 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
 
     const units = [
         new Unit({ ...barracksUnits.champion }), new Unit({ ...barracksUnits.halberdier }), new Unit({ ...barracksUnits.eliteEagleWarrior }),
-        new Unit({ ...archeryUnits.arbalester }),new Unit({ ...archeryUnits.eliteSkirmisher }), new Unit({ ...archeryUnits.handCannoneer }), new Unit({ ...archeryUnits.heavyCavalryArcher }),
-        new Unit({ ...stableUnits.hussar }), new Unit({ ...stableUnits.paladin }), new Unit({ ...stableUnits.heavyCamelRider }), new Unit({ ...stableUnits.eliteBattleElephant }), new Unit({ ...stableUnits.eliteSteppeLancer }),
+        new Unit({ ...archeryUnits.arbalester }), new Unit({ ...archeryUnits.eliteSkirmisher }), new Unit({ ...archeryUnits.handCannoneer }), new Unit({ ...archeryUnits.heavyCavalryArcher }),
+        new Unit({ ...stableUnits.hussar }), new Unit({ ...stableUnits.wingedHussar }), new Unit({ ...stableUnits.paladin }), new Unit({ ...stableUnits.heavyCamelRider }), new Unit({ ...stableUnits.eliteBattleElephant }), new Unit({ ...stableUnits.eliteSteppeLancer }),
         new Unit({ ...siegeUnits.siegeRam }), new Unit({ ...siegeUnits.siegeOnager }), new Unit({ ...siegeUnits.heavyScorpion }), new Unit({ ...siegeUnits.siegeTower }), new Unit({ ...siegeUnits.bombardCannon }),
         new Unit({ ...castleUnits.petard }), new Unit({ ...castleUnits.trebuchet }),
         new Unit({ ...monasteryUnits.monk }),
@@ -81,6 +81,10 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...berbersUniqueUnits.eliteCamelArcher }), new Unit({ ...berbersUniqueUnits.eliteGenitour }),
         new Unit({ ...bohemiansUniqueUnits.eliteHussiteWagon }), new Unit({ ...bohemiansUniqueUnits.houfnice }),
         new Unit({ ...britonsUniqueUnits.eliteLongbowman }),
+        new Unit({ ...bulgariansUniqueUnits.eliteKonnik }),
+        new Unit({ ...burgundiansUniqueUnits.eliteCoustillier }), new Unit({ ...burgundiansUniqueUnits.flemishMilitia }),
+        new Unit({ ...burmeseUniqueUnits.eliteArambai }),
+        new Unit({ ...byzantinesUniqueUnits.eliteCataphract }),
     ]
 
     const uniqueTechs = allCivTechTrees.map(civ => civ.uniqueTechs)
@@ -166,6 +170,7 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
                         <NumberOfHitToKillLine></NumberOfHitToKillLine>
                         {/* <NumberOfUnitsNeededToKill></NumberOfUnitsNeededToKill> */}
                         <TimeNeededToKillLine></TimeNeededToKillLine>
+                        {/* <TimeNeededToComeInRangeLine></TimeNeededToComeInRangeLine> */}
                         <HealthRemainingLine></HealthRemainingLine>
                         <ResourcesLostLine></ResourcesLostLine>
                         <ResourcesPerHitLine></ResourcesPerHitLine>

@@ -59,6 +59,7 @@ setAffectingUpgrades(archerLine, [
 setAffectingUpgrades(skirmisherLine, [
     blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
     blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing,
     universityUpgrades.ballistics, universityUpgrades.chemistry])
 setAffectingUpgrades(handCannoneerLine, [blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor])
 setAffectingUpgrades(cavalryArcherLine, [

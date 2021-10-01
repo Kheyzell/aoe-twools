@@ -1007,8 +1007,14 @@
         "konnik": {
             "name": "Konnik"
         },
+        "dismountedKonnik": {
+            "name": "Dismounted Konnik"
+        },
         "eliteKonnik": {
             "name": "Elite Konnik"
+        },
+        "eliteDismountedKonnik": {
+            "name": "Dismounted Elite Konnik"
         },
         "coustillier": {
             "name": "Coustillier"
@@ -1636,7 +1642,7 @@
         },
         "kataparuto": {
             "name": "Kataparuto",
-            "description": "Trebuchets fire 33% and pack 4x faster"
+            "description": "Trebuchets fire 33% faster and pack 4x faster"
         },
         "tuskSwords": {
             "name": "Tusk Swords",
@@ -1808,8 +1814,7 @@
         },
         "healing": {
             "title": "healing",
-            "shortDescription": "heal target unit for {{healthPerMinute}} per minute at a range of {{range}}",
-            "description": ""
+            "shortDescription": "heal target unit for {{healthPerMinute}}/min at a range of {{range}}"
         },
         "redemption": {
             "title": "redemption"
@@ -1829,8 +1834,8 @@
         "trampleDruzhina": {
             "title": "trample"
         },
-        "maghrebiRegen": {
-            "title": "regen"
+        "trampleLogistica": {
+            "title": "trample"
         },
         "madrasahRefund": {
             "title": "refund on death"
@@ -1839,7 +1844,24 @@
             "title": "health bonus"
         },
         "regen": {
-            "title": "regen"
+            "title": "regen",
+            "shortDescription": "{{healthPerMinute}} hp/min"
+        },
+        "chargedAttack": {
+            "title": "charged attack",
+            "shortDescription": "deals {{damage}} then recharge the attack over {{reloadTime}} s"
+        },
+        "fullMissedShot": {
+            "title": "full missed shot",
+            "shortDescription": "missed shots that hit a target deal full damage instead of half"
+        },
+        "projectileProtection": {
+            "title": "projectile protection",
+            "shortDescription": "Halves the damage dealt by enemy ranged projectiles passing through the Hussite Wagon"
+        },
+        "dismountOnDeath": {
+            "title": "Dismount On Death",
+            "shortDescription": "Turn into <Unit></Unit> upon death"
         }
     }
 }

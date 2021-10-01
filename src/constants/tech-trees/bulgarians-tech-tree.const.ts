@@ -15,11 +15,10 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/bulgarians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { multiplyNumber } from "../../utils/utils";
-import { Unit } from "../../models/unit.model";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { AttackType, Unit } from "../../models/unit.model";
 
-export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
+export const bulgariansUniqueUnits: { konnik: Unit, dismountedKonnik: Unit, eliteKonnik: Unit, eliteDismountedKonnik: Unit } = {
     konnik: new Unit({
         id: 'konnik',
         unique: true,
@@ -31,7 +30,53 @@ export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
             gold: 70,
             stone: 0
         },
+        stats: {
+            health: 100,
+            rateOfFire: 2.4 ,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 12, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.35,
+            lineOfSight: 5
+        },
         duration: 19
+    }),
+    dismountedKonnik: new Unit({
+        id: 'dismountedKonnik',
+        unique: true,
+        age: 3,
+        UnitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 0,
+            gold: 0,
+            stone: 0
+        },
+        stats: {
+            health: 45,
+            rateOfFire: 2.4,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 12, type: ArmorType.melee },
+                { value: 4, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .9,
+            lineOfSight: 3,
+        },
+        duration: 0
     }),
     eliteKonnik: new Unit({
         id: 'eliteKonnik',
@@ -44,9 +89,71 @@ export const bulgariansUniqueUnits: { konnik: Unit, eliteKonnik: Unit } = {
             gold: 70,
             stone: 0
         },
+        stats: {
+            health: 120,
+            rateOfFire: 2.4 ,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 14, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.35,
+            lineOfSight: 5
+        },
         duration: 19
-    })
+    }),
+    eliteDismountedKonnik: new Unit({
+        id: 'eliteDismountedKonnik',
+        unique: true,
+        age: 3,
+        UnitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 0,
+            gold: 0,
+            stone: 0
+        },
+        stats: {
+            health: 50,
+            rateOfFire: 2.4,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 13, type: ArmorType.melee },
+                { value: 4, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .9,
+            lineOfSight: 3,
+        },
+        duration: 0
+    }),
 }
+
+const uniqueUnitLine = new UnitLine([bulgariansUniqueUnits.konnik, bulgariansUniqueUnits.eliteKonnik])
+const cavalryUpgrades = [
+    blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry,
+]
+setAffectingUpgrades(uniqueUnitLine, cavalryUpgrades)
+const infantryUpgrades = [
+    blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson,
+]
+bulgariansUniqueUnits.dismountedKonnik.affectingUpgrades = infantryUpgrades
+bulgariansUniqueUnits.eliteDismountedKonnik.affectingUpgrades = infantryUpgrades
+chainTechs([bulgariansUniqueUnits.konnik, bulgariansUniqueUnits.dismountedKonnik, bulgariansUniqueUnits.eliteKonnik, bulgariansUniqueUnits.eliteDismountedKonnik])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -159,7 +266,7 @@ export const bulgariansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([bulgariansUniqueUnits.konnik, bulgariansUniqueUnits.eliteKonnik]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
