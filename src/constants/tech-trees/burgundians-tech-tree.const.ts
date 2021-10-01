@@ -1,8 +1,9 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { CAPACITIES, ChargedAttackCapacity } from "../../models/capacity.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/burgundians.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -31,6 +32,23 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
             gold: 55,
             stone: 0
         },
+        stats: {
+            health: 115,
+            rateOfFire: 1.9 ,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 8, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            capacities: [{ ...CAPACITIES.chargedAttack, reloadTime: 40, damage: 25 } as ChargedAttackCapacity],
+            movementSpeed: 1.35,
+            lineOfSight: 5
+        },
         duration: 15
     }),
     eliteCoustillier: new Unit({
@@ -43,6 +61,23 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
             food: 55,
             gold: 55,
             stone: 0
+        },
+        stats: {
+            health: 145,
+            rateOfFire: 1.9 ,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 11, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            capacities: [{ ...CAPACITIES.chargedAttack, reloadTime: 40, damage: 30 } as ChargedAttackCapacity],
+            movementSpeed: 1.35,
+            lineOfSight: 5
         },
         duration: 14
     }),
@@ -57,9 +92,45 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
             gold: 25,
             stone: 0
         },
+        stats: {
+            health: 75,
+            rateOfFire: 2 ,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 12, type: ArmorType.melee },
+                { value: 8, type: ArmorType.cavalry },
+                { value: 8, type: ArmorType.warElephant },
+                { value: 6, type: ArmorType.camel },
+                { value: 6, type: ArmorType.ship },
+                { value: 2, type: ArmorType.eagleWarrior },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            capacities: [{ ...CAPACITIES.chargedAttack, reloadTime: 40, damage: 25 } as ChargedAttackCapacity],
+            movementSpeed: .9,
+            lineOfSight: 7
+        },
         duration: 14
     })
 }
+
+chainTechs([burgundiansUniqueUnits.coustillier, burgundiansUniqueUnits.eliteCoustillier])
+const uniqueUnitLine = new UnitLine([burgundiansUniqueUnits.coustillier, burgundiansUniqueUnits.eliteCoustillier])
+setAffectingUpgrades(uniqueUnitLine, [
+    blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.husbandry,
+])
+const flemishMilitiaLine = new UnitLine([burgundiansUniqueUnits.flemishMilitia])
+setAffectingUpgrades(flemishMilitiaLine, [
+    blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson,
+])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -175,7 +246,7 @@ export const burgundiansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([burgundiansUniqueUnits.coustillier, burgundiansUniqueUnits.eliteCoustillier]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -221,7 +292,7 @@ export const burgundiansTechTree: CivTechTree = {
         ])
     },
     townCenter: {
-        unitLines: [new UnitLine([townCenterUnits.villager]), new UnitLine([burgundiansUniqueUnits.flemishMilitia])],
+        unitLines: [new UnitLine([townCenterUnits.villager]), flemishMilitiaLine],
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,

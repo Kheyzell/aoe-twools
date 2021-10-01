@@ -1,13 +1,20 @@
+import { Unit } from "./unit.model";
+
 export enum CapacityId {
     selfDestruction = "selfDestruction", conversion = "conversion", ballistics = "ballistics",
-    trampleDruzhina = "trampleDruzhina", maghrebiRegen = "maghrebiRegen", madrasahRefund = "madrasahRefund",
+    trampleDruzhina = "trampleDruzhina", madrasahRefund = "madrasahRefund",
     redemption = "redemption",
     atonement = "atonement",
     theocracy = "theocracy",
     heresy = "heresy",
     aztecsMonkHealthBonus = "aztecsMonkHealthBonus",
     regen = "regen",
-    healing = "healing"
+    healing = "healing",
+    chargedAttack = "chargedAttack",
+    fullMissedShot = "fullMissedShot",
+    trampleLogistica = "trampleLogistica",
+    projectileProtection = "projectileProtection",
+    dismountOnDeath = "dismountOnDeath"
 }
 
 export const CAPACITIES = {
@@ -20,10 +27,14 @@ export const CAPACITIES = {
     heresy: { id: CapacityId.heresy },
     ballistics: { id: CapacityId.ballistics },
     trampleDruzhina: { id: CapacityId.trampleDruzhina },
-    maghrebiRegen: { id: CapacityId.maghrebiRegen, healthPerMinute: 15 } as RegenCapacity,
-    madrasahRefund: { id: CapacityId.madrasahRefund, percentValue: 33 } as RefundAfterDeath,
+    trampleLogistica: { id: CapacityId.trampleLogistica },
+    madrasahRefund: { id: CapacityId.madrasahRefund, percentValue: 33 } as RefundAfterDeathCapacity,
     aztecsMonkHealthBonus: { id: CapacityId.aztecsMonkHealthBonus },
-    regen: { id: CapacityId.regen, healthPerMinute: 0 } as RegenCapacity
+    regen: { id: CapacityId.regen, healthPerMinute: 0 } as RegenCapacity,
+    chargedAttack: { id: CapacityId.chargedAttack, reloadTime: 0, damage: 0 } as ChargedAttackCapacity,
+    fullMissedShot: { id: CapacityId.fullMissedShot },
+    projectileProtection: { id: CapacityId.projectileProtection },
+    dismountOnDeath: { id: CapacityId.dismountOnDeath, unit: new Unit({}) } as SpawnUnitOnDeathCapacity,
 }
 
 export interface Capacity {
@@ -46,7 +57,18 @@ export interface HealingCapacity extends Capacity {
     range: number
 }
 
-export interface RefundAfterDeath extends Capacity {
+export interface RefundAfterDeathCapacity extends Capacity {
     id: CapacityId
     percentValue: number
+}
+
+export interface ChargedAttackCapacity extends Capacity {
+    id: CapacityId
+    reloadTime: number
+    damage: number
+}
+
+export interface SpawnUnitOnDeathCapacity extends Capacity {
+    id: CapacityId
+    unit: Unit
 }

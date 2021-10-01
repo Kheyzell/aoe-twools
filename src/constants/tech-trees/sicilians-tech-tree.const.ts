@@ -71,6 +71,13 @@ const uniqueTechs = [
         effectType: EffectType.armor,
         value: 1,
         cost: { wood: 0, food: 500, gold: 400, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(1, ArmorType.melee)
+                unit.addArmorComponent(2, ArmorType.pierce)
+            }
+        }],
         duration: 45,
         affectedUnits: [stableUnits.knight, stableUnits.cavalier],
         affectedUpgrades: []

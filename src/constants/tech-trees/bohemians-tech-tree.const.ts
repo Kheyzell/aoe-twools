@@ -18,6 +18,7 @@ import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../uti
 import { multiplyNumber } from "../../utils/utils";
 import { UnitType, EffectOrder, CivTechTree, ArmorType, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
+import { CAPACITIES } from "../../models/capacity.model";
 
 export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit, houfnice: Unit } = {
     hussiteWagon: new Unit({
@@ -44,6 +45,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             ],
             secondaryAttack: {
                 count: 2,
+                accuracy: .75,
                 components: [{ value: 2, type: ArmorType.trueDamage }]
             },
             armorComponents: [
@@ -54,6 +56,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
                 { value: 0, type: ArmorType.uniqueUnit },
                 { value: 0, type: ArmorType.hussiteWagon },
             ],
+            capacities: [CAPACITIES.projectileProtection],
             movementSpeed: .85,
             lineOfSight: 8,
         },
@@ -83,7 +86,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             ],
             secondaryAttack: {
                 count: 3,
-                components: [{ value: 2, type: ArmorType.trueDamage }]
+                components: [{ value: 2, accuracy: .75, type: ArmorType.trueDamage }]
             },
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
@@ -93,6 +96,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
                 { value: 0, type: ArmorType.uniqueUnit },
                 { value: 0, type: ArmorType.hussiteWagon },
             ],
+            capacities: [CAPACITIES.projectileProtection],
             movementSpeed: .85,
             lineOfSight: 8,
         },

@@ -66,6 +66,12 @@ const uniqueTechs = [
         value: null,
         cost: { wood: 750, food: 0, gold: 400, stone: 0 },
         duration: 60,
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.multiplyAttackRate(1.33)
+            }
+        }],
         affectedUnits: [castleUnits.trebuchet],
         affectedUpgrades: []
     })

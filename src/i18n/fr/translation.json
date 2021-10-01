@@ -1007,8 +1007,14 @@
         "konnik": {
             "name": "Cavalier bulgar"
         },
+        "dismountedKonnik": {
+            "name": "Konnik à pied"
+        },
         "eliteKonnik": {
             "name": "Cavalier bulgar d'élite"
+        },
+        "dismountedEliteKonnik": {
+            "name": "Konnik à pied d'élite"
         },
         "coustillier": {
             "name": "Coutillier"

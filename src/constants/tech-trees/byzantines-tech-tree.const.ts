@@ -1,9 +1,9 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { CapacityId, HealingCapacity } from "../../models/capacity.model";
-import { UnitType, EffectOrder, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { CAPACITIES, CapacityId, ChargedAttackCapacity, HealingCapacity } from "../../models/capacity.model";
+import { UnitType, EffectOrder, CivTechTree, UnitLine, UpgradePerAgeGroup, ArmorType } from "../../models/techs.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/byzantines.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addNumber, multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -32,6 +32,24 @@ export const byzantinesUniqueUnits: { cataphract: Unit, eliteCataphract: Unit } 
             gold: 75,
             stone: 0
         },
+        stats: {
+            health: 110,
+            rateOfFire: 1.8,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 9, type: ArmorType.melee },
+                { value: 9, type: ArmorType.infantry },
+                { value: 9, type: ArmorType.condottiero },
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 12, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.35,
+            lineOfSight: 4
+        },
         duration: 20
     }),
     eliteCataphract: new Unit({
@@ -45,9 +63,36 @@ export const byzantinesUniqueUnits: { cataphract: Unit, eliteCataphract: Unit } 
             gold: 75,
             stone: 0
         },
+        stats: {
+            health: 150,
+            rateOfFire: 1.7,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 12, type: ArmorType.melee },
+                { value: 12, type: ArmorType.infantry },
+                { value: 10, type: ArmorType.condottiero },
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 16, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.35,
+            lineOfSight: 5
+        },
         duration: 20
     })
 }
+
+chainTechs([byzantinesUniqueUnits.cataphract, byzantinesUniqueUnits.eliteCataphract])
+const uniqueUnitLine = new UnitLine([byzantinesUniqueUnits.cataphract, byzantinesUniqueUnits.eliteCataphract])
+const cavalryUpgrades = [
+    blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.husbandry,
+]
+setAffectingUpgrades(uniqueUnitLine, cavalryUpgrades)
 
 const uniqueTechs = [
     new UniqueTech({
@@ -73,6 +118,13 @@ const uniqueTechs = [
         value: null,
         cost: { wood: 0, food: 800, gold: 600, stone: 0 },
         duration: 50,
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addAttackComponent(6, ArmorType.infantry)
+                unit.stats.capacities.push(CAPACITIES.trampleLogistica)
+            }
+        }],
         affectedUnits: [byzantinesUniqueUnits.cataphract, byzantinesUniqueUnits.eliteCataphract],
         affectedUpgrades: []
     })
@@ -188,7 +240,7 @@ export const byzantinesTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([byzantinesUniqueUnits.cataphract, byzantinesUniqueUnits.eliteCataphract]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

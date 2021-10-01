@@ -15,9 +15,10 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/burmese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray } from "../../utils/utils";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
+import { CAPACITIES } from "../../models/capacity.model";
 
 export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
     arambai: new Unit({
@@ -30,6 +31,28 @@ export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
             food: 0,
             gold: 60,
             stone: 0
+        },
+        stats: {
+            health: 60,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: .2,
+            attackComponents: [
+                { value: 12, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.ram }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            capacities: [CAPACITIES.fullMissedShot],
+            movementSpeed: 1.3,
+            lineOfSight: 7,
         },
         duration: 21
     }),
@@ -44,9 +67,40 @@ export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
             gold: 60,
             stone: 0
         },
+        stats: {
+            health: 65,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: .2,
+            attackComponents: [
+                { value: 15, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.ram }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            capacities: [CAPACITIES.fullMissedShot],
+            movementSpeed: 1.3,
+            lineOfSight: 7,
+        },
         duration: 21
     })
 }
+
+chainTechs([burmeseUniqueUnits.arambai, burmeseUniqueUnits.eliteArambai])
+const uniqueUnitLine = new UnitLine([burmeseUniqueUnits.arambai, burmeseUniqueUnits.eliteArambai])
+setAffectingUpgrades(uniqueUnitLine, [
+    blacksmithUpgrades.paddedArcherArmor,
+    archeryUpgrades.parthianTactis,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry,
+    universityUpgrades.ballistics
+])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -172,7 +226,7 @@ export const burmeseTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([burmeseUniqueUnits.arambai, burmeseUniqueUnits.eliteArambai]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

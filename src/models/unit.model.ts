@@ -136,6 +136,7 @@ export interface StatList {
     secondaryAttack?: {
         count: number
         components: CombatStat[]
+        accuracy: number
     }
     capacities: Capacity[]
     continuousProductionVillagerCost: Cost
