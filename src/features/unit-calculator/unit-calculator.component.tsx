@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import BonusLine from "../../components/bonus/bonus-line/bonus-line.component"
 import TechComponent, { BoxSize } from "../../components/tech/tech.component"
-import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits } from "../../constants"
+import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits, celtsUniqueUnits, chineseUniqueUnits } from "../../constants"
 import { archeryUnits } from "../../constants/techs/archery-techs.const"
 import { barracksUnits } from "../../constants/techs/barracks-techs.const"
 import { castleUnits } from "../../constants/techs/castle-techs.const"
@@ -85,6 +85,8 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...burgundiansUniqueUnits.eliteCoustillier }), new Unit({ ...burgundiansUniqueUnits.flemishMilitia }),
         new Unit({ ...burmeseUniqueUnits.eliteArambai }),
         new Unit({ ...byzantinesUniqueUnits.eliteCataphract }),
+        new Unit({ ...celtsUniqueUnits.eliteWoadRaider }),
+        new Unit({ ...chineseUniqueUnits.eliteChukonu }),
     ]
 
     const uniqueTechs = allCivTechTrees.map(civ => civ.uniqueTechs)
