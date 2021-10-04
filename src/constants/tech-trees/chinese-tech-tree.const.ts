@@ -15,9 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/chinese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { getAllCivUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, getAllCivUpgrades, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 
 export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
     chukonu: new Unit({
@@ -30,6 +30,34 @@ export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
             food: 40,
             gold: 35,
             stone: 0
+        },
+        stats: {
+            health: 45,
+            rateOfFire: 3,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .85,
+            attackComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 8, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.spearman }
+            ],
+            secondaryAttack: {
+                count: 3,
+                accuracy: .85,
+                components: [
+                    { value: 0, type: ArmorType.melee },
+                    { value: 3, type: ArmorType.pierce },
+                ]
+            },
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .96,
+            lineOfSight: 6,
         },
         duration: 16
     }),
@@ -44,9 +72,44 @@ export const chineseUniqueUnits: { chukonu: Unit, eliteChukonu: Unit } = {
             gold: 35,
             stone: 0
         },
+        stats: {
+            health: 50,
+            rateOfFire: 3,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .85,
+            attackComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 8, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.spearman }
+            ],
+            secondaryAttack: {
+                count: 5,
+                accuracy: .85,
+                components: [
+                    { value: 0, type: ArmorType.melee },
+                    { value: 3, type: ArmorType.pierce },
+                ]
+            },
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .96,
+            lineOfSight: 6,
+        },
         duration: 13
     })
 }
+
+chainTechs([chineseUniqueUnits.chukonu, chineseUniqueUnits.eliteChukonu])
+const uniqueUnitLine = new UnitLine([chineseUniqueUnits.chukonu, chineseUniqueUnits.eliteChukonu])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
 
 const uniqueTechs = [
     new UniqueTech({

@@ -1,8 +1,8 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/celts.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, roundHundredth } from "../../utils/utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -31,6 +31,24 @@ export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
             gold: 25,
             stone: 0
         },
+        stats: {
+            health: 65,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 3,
+        },
         duration: 10
     }),
     eliteWoadRaider: new Unit({
@@ -44,9 +62,33 @@ export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
             gold: 25,
             stone: 0
         },
+        stats: {
+            health: 80,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 13, type: ArmorType.melee },
+                { value: 3, type: ArmorType.eagleWarrior },
+                { value: 3, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 5,
+        },
         duration: 10
     })
 }
+
+chainTechs([celtsUniqueUnits.woadRaider, celtsUniqueUnits.eliteWoadRaider])
+const uniqueUnitLine = new UnitLine([celtsUniqueUnits.woadRaider, celtsUniqueUnits.eliteWoadRaider])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
