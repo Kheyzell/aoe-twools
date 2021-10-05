@@ -1,8 +1,8 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/goths.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, addNumber, multiplyNumber } from "../../utils/utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -31,6 +31,25 @@ export const gothsUniqueUnits: { huskarl: Unit, eliteHuskarl: Unit } = {
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 60,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 10, type: ArmorType.melee },
+                { value: 6, type: ArmorType.archer },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 6, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.05,
+            lineOfSight: 3,
+        },
         duration: 16
     }),
     eliteHuskarl: new Unit({
@@ -44,9 +63,34 @@ export const gothsUniqueUnits: { huskarl: Unit, eliteHuskarl: Unit } = {
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 70,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 12, type: ArmorType.melee },
+                { value: 10, type: ArmorType.archer },
+                { value: 3, type: ArmorType.eagleWarrior },
+                { value: 3, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 8, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.05,
+            lineOfSight: 5,
+        },
         duration: 16
     })
 }
+
+chainTechs([gothsUniqueUnits.huskarl, gothsUniqueUnits.eliteHuskarl])
+const uniqueUnitLine = new UnitLine([gothsUniqueUnits.huskarl, gothsUniqueUnits.eliteHuskarl])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -222,7 +266,7 @@ export const gothsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([gothsUniqueUnits.huskarl, gothsUniqueUnits.eliteHuskarl]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

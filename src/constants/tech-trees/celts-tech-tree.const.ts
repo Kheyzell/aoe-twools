@@ -215,7 +215,7 @@ export const celtsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([celtsUniqueUnits.woadRaider, celtsUniqueUnits.eliteWoadRaider]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

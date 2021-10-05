@@ -1,8 +1,8 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/franks.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -31,6 +31,26 @@ export const franksUniqueUnits: { throwingAxeman: Unit, eliteThrowingAxeman: Uni
             gold: 25,
             stone: 0
         },
+        stats: {
+            health: 60,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 3,
+            accuracy: 1,
+            attackComponents: [
+                { value: 7, type: ArmorType.melee },
+                { value: 1, type: ArmorType.eagleWarrior },
+                { value: 1, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1,
+            lineOfSight: 5,
+        },
         duration: 17
     }),
     eliteThrowingAxeman: new Unit({
@@ -44,9 +64,35 @@ export const franksUniqueUnits: { throwingAxeman: Unit, eliteThrowingAxeman: Uni
             gold: 25,
             stone: 0
         },
+        stats: {
+            health: 70,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: 1,
+            attackComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1,
+            lineOfSight: 6,
+        },
         duration: 17
     })
 }
+
+chainTechs([franksUniqueUnits.throwingAxeman, franksUniqueUnits.eliteThrowingAxeman])
+const uniqueUnitLine = new UnitLine([franksUniqueUnits.throwingAxeman, franksUniqueUnits.eliteThrowingAxeman])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -55,6 +101,12 @@ const uniqueTechs = [
         effectType: EffectType.range,
         value: 1,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.range = (unit.stats.range || 0) + 1
+            }
+        }],
         duration: 60,
         affectedUnits: [franksUniqueUnits.throwingAxeman, franksUniqueUnits.eliteThrowingAxeman],
         affectedUpgrades: []
@@ -169,7 +221,7 @@ export const franksTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([franksUniqueUnits.throwingAxeman, franksUniqueUnits.eliteThrowingAxeman]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

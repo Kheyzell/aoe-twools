@@ -110,7 +110,6 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
                 { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
-            capacities: [{ ...CAPACITIES.chargedAttack, reloadTime: 40, damage: 25 } as ChargedAttackCapacity],
             movementSpeed: .9,
             lineOfSight: 7
         },

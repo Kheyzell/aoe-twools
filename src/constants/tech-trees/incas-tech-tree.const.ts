@@ -1,8 +1,8 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/incas.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -30,6 +30,27 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
             gold: 30,
             stone: 0
         },
+        stats: {
+            health: 60,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            range: 1,
+            attackComponents: [
+                { value: 7, type: ArmorType.melee },
+                { value: 20, type: ArmorType.warElephant },
+                { value: 8, type: ArmorType.cavalry },
+                { value: 6, type: ArmorType.camel },
+                { value: 1, type: ArmorType.mameluke }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1,
+            lineOfSight: 4,
+        },
         duration: 10
     }),
     eliteKamayuk: new Unit({
@@ -42,6 +63,27 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
             food: 60,
             gold: 30,
             stone: 0
+        },
+        stats: {
+            health: 80,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            range: 1,
+            attackComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 20, type: ArmorType.warElephant },
+                { value: 12, type: ArmorType.cavalry },
+                { value: 10, type: ArmorType.camel },
+                { value: 1, type: ArmorType.mameluke }
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1,
+            lineOfSight: 5,
         },
         duration: 10
     }),
@@ -56,9 +98,42 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 40,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: .9,
+            attackComponents: [
+                { value: 4, type: ArmorType.pierce },
+                { value: 10, type: ArmorType.infantry },
+                { value: 10, type: ArmorType.condottiero },
+                { value: 3, type: ArmorType.ram },
+                { value: 1, type: ArmorType.spearman }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .96,
+            lineOfSight: 7,
+        },
         duration: 25
     })
 }
+
+chainTechs([incasUniqueUnits.kamayuk, incasUniqueUnits.eliteKamayuk])
+const uniqueUnitLine = new UnitLine([incasUniqueUnits.kamayuk, incasUniqueUnits.eliteKamayuk])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
+const slingerLine = new UnitLine([incasUniqueUnits.slinger])
+setAffectingUpgrades(slingerLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -158,7 +233,7 @@ export const incasTechTree: CivTechTree = {
         unitLines: [
             new UnitLine([archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester]),
             new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
-            new UnitLine([incasUniqueUnits.slinger]),
+            slingerLine
         ],
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
     },
@@ -177,7 +252,7 @@ export const incasTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([incasUniqueUnits.kamayuk, incasUniqueUnits.eliteKamayuk]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

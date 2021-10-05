@@ -15,9 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/indians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 
 export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Unit, imperialCamelRider: Unit } = {
     elephantArcher: new Unit({
@@ -30,6 +30,29 @@ export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Un
             food: 100,
             gold: 70,
             stone: 0
+        },
+        stats: {
+            health: 280,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: 1,
+            attackComponents: [
+                { value: 6, type: ArmorType.pierce },
+                { value: 3, type: ArmorType.stoneDefense },
+                { value: 3, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 3, type: ArmorType.pierce },
+                { value: -2, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.warElephant },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .8,
+            lineOfSight: 7,
         },
         duration: 25
     }),
@@ -44,6 +67,29 @@ export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Un
             gold: 70,
             stone: 0
         },
+        stats: {
+            health: 330,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: 1,
+            attackComponents: [
+                { value: 7, type: ArmorType.pierce },
+                { value: 4, type: ArmorType.stoneDefense },
+                { value: 4, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 3, type: ArmorType.pierce },
+                { value: -2, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.warElephant },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .8,
+            lineOfSight: 7,
+        },
         duration: 25
     }),
     imperialCamelRider: new Unit({
@@ -57,9 +103,44 @@ export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Un
             gold: 60,
             stone: 0
         },
+        stats: {
+            health: 140,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 9, type: ArmorType.melee },
+                { value: 18, type: ArmorType.cavalry },
+                { value: 9, type: ArmorType.camel },
+                { value: 9, type: ArmorType.ship },
+                { value: 9, type: ArmorType.fishingShip },
+                { value: 7, type: ArmorType.mameluke },
+                { value: 4, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.camel },
+            ],
+            movementSpeed: 1.45,
+            lineOfSight: 5
+        },
         duration: 20
     })
 }
+
+chainTechs([indiansUniqueUnits.elephantArcher, indiansUniqueUnits.eliteElephantArcher])
+const uniqueUnitLine = new UnitLine([indiansUniqueUnits.elephantArcher, indiansUniqueUnits.eliteElephantArcher])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
+
+chainTechs([stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider])
+const camelLine = new UnitLine([stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider])
+setAffectingUpgrades(camelLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -192,7 +273,7 @@ export const indiansTechTree: CivTechTree = {
     stable: {
         unitLines: [
             new UnitLine([stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar]),
-            new UnitLine([stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider]),
+            camelLine
         ],
         upgrades: new UpgradePerAgeGroup([stableUpgrades.bloodlines, stableUpgrades.husbandry])
     },
@@ -208,7 +289,7 @@ export const indiansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([indiansUniqueUnits.elephantArcher, indiansUniqueUnits.eliteElephantArcher]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
