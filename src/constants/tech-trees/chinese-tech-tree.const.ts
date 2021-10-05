@@ -185,7 +185,7 @@ export const chineseTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([chineseUniqueUnits.chukonu, chineseUniqueUnits.eliteChukonu]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

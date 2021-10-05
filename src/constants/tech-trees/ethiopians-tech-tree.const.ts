@@ -1,4 +1,4 @@
-import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,8 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/ethiopians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { Unit } from "../../models/unit.model";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { AttackType, Unit } from "../../models/unit.model";
+import { multiplyNumber } from "../../utils/utils";
 
 export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: Unit } = {
     shotelWarrior: new Unit({
@@ -29,6 +30,24 @@ export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: U
             food: 50,
             gold: 30,
             stone: 0
+        },
+        stats: {
+            health: 40,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 16, type: ArmorType.melee },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 1, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 3,
         },
         duration: 8
     }),
@@ -43,9 +62,33 @@ export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: U
             gold: 30,
             stone: 0
         },
+        stats: {
+            health: 50,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 18, type: ArmorType.melee },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 1, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 3,
+        },
         duration: 8
     })
 }
+
+chainTechs([ethiopiansUniqueUnits.shotelWarrior, ethiopiansUniqueUnits.eliteShotelWarrior])
+const uniqueUnitLine = new UnitLine([ethiopiansUniqueUnits.shotelWarrior, ethiopiansUniqueUnits.eliteShotelWarrior])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -54,6 +97,12 @@ const uniqueTechs = [
         effectType: EffectType.creationSpeed,
         value: 100,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.duration = multiplyNumber(unit.duration, 1/2)
+            }
+        }],
         duration: 40,
         affectedUnits: [ethiopiansUniqueUnits.shotelWarrior, ethiopiansUniqueUnits.eliteShotelWarrior],
         affectedUpgrades: []
@@ -147,7 +196,7 @@ export const ethiopiansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([ethiopiansUniqueUnits.shotelWarrior, ethiopiansUniqueUnits.eliteShotelWarrior]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

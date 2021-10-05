@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import BonusLine from "../../components/bonus/bonus-line/bonus-line.component"
 import TechComponent, { BoxSize } from "../../components/tech/tech.component"
-import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits, celtsUniqueUnits, chineseUniqueUnits } from "../../constants"
+import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits, celtsUniqueUnits, chineseUniqueUnits, cumansUniqueUnits, ethiopiansUniqueUnits, franksUniqueUnits, gothsUniqueUnits, hunsUniqueUnits, italiansUniqueUnits } from "../../constants"
 import { archeryUnits } from "../../constants/techs/archery-techs.const"
 import { barracksUnits } from "../../constants/techs/barracks-techs.const"
 import { castleUnits } from "../../constants/techs/castle-techs.const"
@@ -29,6 +29,8 @@ import "./unit-calculator.component.css"
 import parchmentBackground2 from "../../resources/images/backgrounds/parchment.jpg"
 import parchmentBackground from "../../resources/images/backgrounds/parchment7.jpg"
 import woodenBackground from "../../resources/images/backgrounds/wood4.jpg"
+import { incasUniqueUnits } from "../../constants/tech-trees/incas-tech-tree.const"
+import { indiansUniqueUnits } from "../../constants/tech-trees/indians-tech-tree.const"
 
 
 type UnitCalculatorProps = {}
@@ -87,6 +89,14 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...byzantinesUniqueUnits.eliteCataphract }),
         new Unit({ ...celtsUniqueUnits.eliteWoadRaider }),
         new Unit({ ...chineseUniqueUnits.eliteChukonu }),
+        new Unit({ ...cumansUniqueUnits.eliteKipchak }),
+        new Unit({ ...ethiopiansUniqueUnits.eliteShotelWarrior }),
+        new Unit({ ...franksUniqueUnits.eliteThrowingAxeman }),
+        new Unit({ ...gothsUniqueUnits.eliteHuskarl }),
+        new Unit({ ...hunsUniqueUnits.eliteTarkan }),
+        new Unit({ ...incasUniqueUnits.eliteKamayuk }), new Unit({ ...incasUniqueUnits.slinger }),
+        new Unit({ ...indiansUniqueUnits.eliteElephantArcher }), new Unit({ ...indiansUniqueUnits.imperialCamelRider }),
+        new Unit({ ...italiansUniqueUnits.eliteGenoeseCrossbowman }), new Unit({ ...italiansUniqueUnits.condottiero }),
     ]
 
     const uniqueTechs = allCivTechTrees.map(civ => civ.uniqueTechs)
@@ -177,6 +187,8 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
                         <ResourcesLostLine></ResourcesLostLine>
                         <ResourcesPerHitLine></ResourcesPerHitLine>
                         <ResourcesPerSecondLine></ResourcesPerSecondLine>
+                        {/* <TimeNeededToReachFromStartingFromMaxRange></TimeNeededToReachFromStartingFromMaxRange> */}
+                        {/* <AttackVsArmorLine></AttackVsArmorLine> */}
                         <MonkHealingLine></MonkHealingLine>
                         <ConversionLine></ConversionLine>
                         

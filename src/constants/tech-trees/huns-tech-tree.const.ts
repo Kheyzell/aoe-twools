@@ -1,4 +1,4 @@
-import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,9 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/huns.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 
 export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
     tarkan: new Unit({
@@ -30,6 +30,26 @@ export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
             food: 60,
             gold: 60,
             stone: 0
+        },
+        stats: {
+            health: 100,
+            rateOfFire: 2.1,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 12, type: ArmorType.stoneDefense },
+                { value: 10, type: ArmorType.castle },
+                { value: 8, type: ArmorType.building },
+                { value: 8, type: ArmorType.wallAndGate },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 3, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.35,
+            lineOfSight: 5
         },
         duration: 14
     }),
@@ -44,9 +64,35 @@ export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
             gold: 60,
             stone: 0
         },
+        stats: {
+            health: 150,
+            rateOfFire: 2.1,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 11, type: ArmorType.melee },
+                { value: 12, type: ArmorType.stoneDefense },
+                { value: 10, type: ArmorType.castle },
+                { value: 10, type: ArmorType.building },
+                { value: 10, type: ArmorType.wallAndGate },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 4, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.35,
+            lineOfSight: 7
+        },
         duration: 14
     })
 }
+
+chainTechs([hunsUniqueUnits.tarkan, hunsUniqueUnits.eliteTarkan])
+const uniqueUnitLine = new UnitLine([hunsUniqueUnits.tarkan, hunsUniqueUnits.eliteTarkan])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -169,7 +215,7 @@ export const hunsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([hunsUniqueUnits.tarkan, hunsUniqueUnits.eliteTarkan]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

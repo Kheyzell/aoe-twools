@@ -1,4 +1,4 @@
-import { CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,9 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/cumans.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 
 export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
     kipchak: new Unit({
@@ -30,6 +30,35 @@ export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
             food: 0,
             gold: 35,
             stone: 0
+        },
+        stats: {
+            health: 40,
+            rateOfFire: 2.2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .9,
+            attackComponents: [
+                { value: 4, type: ArmorType.pierce },
+                { value: 1, type: ArmorType.spearman }
+            ],
+            secondaryAttack: {
+                count: 3,
+                accuracy: .85,
+                components: [
+                    { value: 0, type: ArmorType.melee },
+                    { value: 3, type: ArmorType.pierce },
+                ]
+            },
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 6,
         },
         duration: 20
     }),
@@ -44,9 +73,46 @@ export const cumansUniqueUnits: { kipchak: Unit, eliteKipchak: Unit } = {
             gold: 35,
             stone: 0
         },
+        stats: {
+            health: 45,
+            rateOfFire: 2.2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .9,
+            attackComponents: [
+                { value: 5, type: ArmorType.pierce },
+                { value: 1, type: ArmorType.spearman }
+            ],
+            secondaryAttack: {
+                count: 4,
+                accuracy: .85,
+                components: [
+                    { value: 0, type: ArmorType.melee },
+                    { value: 3, type: ArmorType.pierce },
+                ]
+            },
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 6,
+        },
         duration: 20
     })
 }
+
+chainTechs([cumansUniqueUnits.kipchak, cumansUniqueUnits.eliteKipchak])
+const uniqueUnitLine = new UnitLine([cumansUniqueUnits.kipchak, cumansUniqueUnits.eliteKipchak])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow,
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis,
+    stableUpgrades.bloodlines,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -177,7 +243,7 @@ export const cumansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([cumansUniqueUnits.kipchak, cumansUniqueUnits.eliteKipchak]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],

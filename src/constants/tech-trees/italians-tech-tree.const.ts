@@ -15,9 +15,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/italians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, addNumber } from "../../utils/utils";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 
 export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossbowman: Unit, condottiero: Unit } = {
     genoeseCrossbowman: new Unit({
@@ -30,6 +30,29 @@ export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossb
             food: 0,
             gold: 40,
             stone: 0
+        },
+        stats: {
+            health: 45,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: 1,
+            attackComponents: [
+                { value: 6, type: ArmorType.pierce },
+                { value: 5, type: ArmorType.cavalry },
+                { value: 5, type: ArmorType.warElephant },
+                { value: 4, type: ArmorType.camel },
+                { value: 4, type: ArmorType.ship },
+                { value: 4, type: ArmorType.fishingShip },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .96,
+            lineOfSight: 8,
         },
         duration: 18
     }),
@@ -44,6 +67,29 @@ export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossb
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 50,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: 1,
+            attackComponents: [
+                { value: 6, type: ArmorType.pierce },
+                { value: 7, type: ArmorType.cavalry },
+                { value: 7, type: ArmorType.warElephant },
+                { value: 6, type: ArmorType.camel },
+                { value: 5, type: ArmorType.ship },
+                { value: 5, type: ArmorType.fishingShip },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .96,
+            lineOfSight: 8,
+        },
         duration: 14
     }),
     condottiero: new Unit({
@@ -57,9 +103,40 @@ export const italiansUniqueUnits: { genoeseCrossbowman: Unit, eliteGenoeseCrossb
             gold: 35,
             stone: 0
         },
+        stats: {
+            health: 80,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 10, type: ArmorType.melee },
+                { value: 10, type: ArmorType.gunpowderUnit },
+                { value: 2, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 10, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit },
+                { value: 0, type: ArmorType.condottiero }
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 6,
+        },
         duration: 18
     })
 }
+
+chainTechs([italiansUniqueUnits.genoeseCrossbowman, italiansUniqueUnits.eliteGenoeseCrossbowman])
+const uniqueUnitLine = new UnitLine([italiansUniqueUnits.genoeseCrossbowman, italiansUniqueUnits.eliteGenoeseCrossbowman])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
+
+const condottieroLine = new UnitLine([italiansUniqueUnits.condottiero])
+setAffectingUpgrades(condottieroLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -76,7 +153,7 @@ const uniqueTechs = [
             }
         }],
         duration: 40,
-        affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester, italiansUniqueUnits.condottiero],
+        affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester, italiansUniqueUnits.genoeseCrossbowman, italiansUniqueUnits.eliteGenoeseCrossbowman, italiansUniqueUnits.condottiero],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -165,7 +242,7 @@ export const italiansTechTree: CivTechTree = {
         unitLines: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman]),
-            new UnitLine([italiansUniqueUnits.condottiero])
+            condottieroLine
         ],
         upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
     },
@@ -197,7 +274,7 @@ export const italiansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([italiansUniqueUnits.genoeseCrossbowman, italiansUniqueUnits.eliteGenoeseCrossbowman]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
