@@ -75,7 +75,7 @@ const uniqueTechs = [
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
-                unit.stats.health += 50
+                unit.stats.health += 100
             }
         }],
         duration: 40,

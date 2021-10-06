@@ -60,7 +60,7 @@ export const dockUnits: DockUnits = {
         age: 1,
         unitType: UnitType.civilian,
         cost: {
-            wood: 255,
+            wood: 125,
             food: 0,
             gold: 0,
             stone: 0
