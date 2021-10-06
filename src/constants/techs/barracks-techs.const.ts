@@ -104,7 +104,7 @@ export const barracksUnits: BarracksUnits = {
                 { value: 3, type: ArmorType.standardBuilding }
             ],
             armorComponents: [
-                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.melee },
                 { value: 1, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.infantry }
             ],
@@ -134,7 +134,7 @@ export const barracksUnits: BarracksUnits = {
                 { value: 4, type: ArmorType.standardBuilding }
             ],
             armorComponents: [
-                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.melee },
                 { value: 1, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.infantry }
             ],
@@ -400,8 +400,8 @@ export const barracksUpgrade: BarracksUpgrades = {
         age: 2,
         cost: {
             wood: 0,
-            food: 150,
-            gold: 100,
+            food: 75,
+            gold: 75,
             stone: 0
         },
         effects: [{

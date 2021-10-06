@@ -630,7 +630,7 @@
                     "description": "Commence avec +100 de pierre"
                 },
                 "sicilians6": {
-                    "description": "Le premier navire de transport et gratuit et créé instantanément"
+                    "description": "Les navires de transport ont +5 ligne de mire et coûtent 50% moins"
                 }
             }
         },
@@ -1534,7 +1534,7 @@
         },
         "burgundianVineyards": {
             "name": "Vignobles bourguignons",
-            "description": "Convertit la moitié de la nourriture en or à un ratio de 2:1. Les fermiers produit lentement de l'or (environ 0.012 or/s)"
+            "description": "Les fermiers produisent lentement de l'or (environ 0.012 or/s)"
         },
         "flemishRevolution": {
             "name": "Révolution flamande",
@@ -1790,7 +1790,7 @@
         },
         "chatras": {
             "name": "Chatras",
-            "description": "Les éléphants de combat gagnent +50 PV"
+            "description": "Les éléphants de combat gagnent +100 PV"
         },
         "paperMoney": {
             "name": "Monnaie de papier",

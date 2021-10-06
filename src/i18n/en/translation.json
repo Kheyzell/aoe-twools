@@ -630,7 +630,7 @@
                     "description": "Start with an extra 100 stone"
                 },
                 "sicilians6": {
-                    "description": "The first Transport Ship is free and created instantly"
+                    "description": "Transport Ships have +5 line of sight and cost -50%"
                 }
             }
         },
@@ -1534,7 +1534,7 @@
         },
         "burgundianVineyards": {
             "name": "Burgundian Vineyards",
-            "description": "Transforms half of the player's food into gold at a 2:1 ratio. Farmers slowly produce gold (about 0.012 gold/s)"
+            "description": "Farmers slowly produce gold (about 0.012 gold/s)"
         },
         "flemishRevolution": {
             "name": "Flemish Revolution",
@@ -1790,7 +1790,7 @@
         },
         "chatras": {
             "name": "Chatras",
-            "description": "Battle Elephants +50 hit points"
+            "description": "Battle Elephants +100 hit points"
         },
         "paperMoney": {
             "name": "Paper Money",

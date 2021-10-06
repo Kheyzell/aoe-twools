@@ -18,6 +18,7 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
+import { multiplyNumber } from "../../utils/utils";
 
 export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
     serjeant: new Unit({
@@ -144,6 +145,16 @@ export const siciliansTechTree: CivTechTree = {
             id: 'sicilians6',
             effectType: EffectType.miscallenous,
             value: null,
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.stats.lineOfSight += 5
+                    unit.cost.wood = multiplyNumber(unit.cost.wood, .5)
+                    unit.cost.food = multiplyNumber(unit.cost.food, .5)
+                    unit.cost.gold = multiplyNumber(unit.cost.gold, .5)
+                    unit.cost.stone = multiplyNumber(unit.cost.stone, .5)
+                }
+            }],
             affectedUnits: [dockUnits.transportShip],
             affectedUpgrades: [],
             team: true
