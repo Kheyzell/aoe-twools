@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/vietnamese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades } from "../../utils/techs.utils";
 import { setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
 
@@ -32,6 +32,25 @@ export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Uni
             gold: 45,
             stone: 0
         },
+        stats: {
+            health: 40,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .8,
+            attackComponents: [
+                { value: 6, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.spearman },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 4, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.1,
+            lineOfSight: 6,
+        },
         duration: 16
     }),
     eliteRattanArcher: new Unit({
@@ -44,6 +63,25 @@ export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Uni
             food: 0,
             gold: 45,
             stone: 0
+        },
+        stats: {
+            health: 45,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: .9,
+            attackComponents: [
+                { value: 7, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.spearman },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 6, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.1,
+            lineOfSight: 6,
         },
         duration: 16
     }),
@@ -58,12 +96,44 @@ export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Uni
             gold: 0,
             stone: 0
         },
-        duration: 16
+        stats: {
+            health: 35,
+            rateOfFire: 3,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: .95,
+            attackComponents: [
+                { value: 4, type: ArmorType.pierce },
+                { value: 5, type: ArmorType.archer },
+                { value: 3, type: ArmorType.spearman },
+                { value: 3, type: ArmorType.cavalryArcher },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 5, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .96,
+            lineOfSight: 7,
+        },
+        duration: 22
     })
 }
 
 chainTechs([vietnameseUniqueUnits.rattanArcher, vietnameseUniqueUnits.eliteRattanArcher])
+const uniqueUnitLine = new UnitLine([vietnameseUniqueUnits.rattanArcher, vietnameseUniqueUnits.eliteRattanArcher])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
+
 chainTechs([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher, vietnameseUniqueUnits.imperialSkirmisher])
+const imperialSkirmisherLine = new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher, vietnameseUniqueUnits.imperialSkirmisher])
+setAffectingUpgrades(imperialSkirmisherLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -160,7 +230,7 @@ export const vietnameseTechTree: CivTechTree = {
     archery: {
         unitLines: [
             new UnitLine([archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester]),
-            new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher, vietnameseUniqueUnits.imperialSkirmisher]),
+            imperialSkirmisherLine,
             new UnitLine([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher]),
         ],
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
@@ -185,7 +255,7 @@ export const vietnameseTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([vietnameseUniqueUnits.rattanArcher, vietnameseUniqueUnits.eliteRattanArcher]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -234,7 +304,7 @@ export const vietnameseTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

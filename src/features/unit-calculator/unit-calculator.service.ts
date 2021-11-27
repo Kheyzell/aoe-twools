@@ -1,4 +1,4 @@
-import { siciliansTechTree } from "../../constants";
+import { siciliansTechTree, spanishUniqueUnits } from "../../constants";
 import { conversionCycleTime } from "../../constants/game.const";
 import { monasteryUnits, monasteryUpgrade } from "../../constants/techs/monastery-techs.const";
 import { Bonus } from "../../models/bonus.model";
@@ -23,10 +23,13 @@ class UnitCalculatorService {
         const secondaryAttackCount1 = unit1.stats.secondaryAttack?.count || 0
         const secondaryAttackCount2 = unit2.stats.secondaryAttack?.count || 0
 
-        const composedDamageDealtPerHit1 = this.calculateDamageDealtComponentsPerHit(unit1.stats.attackComponents, unit2.stats.armorComponents)
-        const composedDamageDealtPerHit2 = this.calculateDamageDealtComponentsPerHit(unit2.stats.attackComponents, unit1.stats.armorComponents)
-        const composedSecondaryDamageDealtPerHit1 = this.calculateDamageDealtComponentsPerHit(unit1.stats.secondaryAttack?.components || [], unit2.stats.armorComponents)
-        const composedSecondaryDamageDealtPerHit2 = this.calculateDamageDealtComponentsPerHit(unit2.stats.secondaryAttack?.components || [], unit1.stats.armorComponents)
+        const ignoreArmor1 = unit1.stats.capacities.some(capacity => capacity.id === CapacityId.ignoreArmor)
+        const ignoreArmor2 = unit2.stats.capacities.some(capacity => capacity.id === CapacityId.ignoreArmor)
+
+        const composedDamageDealtPerHit1 = this.calculateDamageDealtComponentsPerHit(unit1.stats.attackComponents, unit2.stats.armorComponents, ignoreArmor1)
+        const composedDamageDealtPerHit2 = this.calculateDamageDealtComponentsPerHit(unit2.stats.attackComponents, unit1.stats.armorComponents, ignoreArmor2)
+        const composedSecondaryDamageDealtPerHit1 = this.calculateDamageDealtComponentsPerHit(unit1.stats.secondaryAttack?.components || [], unit2.stats.armorComponents, ignoreArmor1)
+        const composedSecondaryDamageDealtPerHit2 = this.calculateDamageDealtComponentsPerHit(unit2.stats.secondaryAttack?.components || [], unit1.stats.armorComponents, ignoreArmor2)
         
         const mainDamageDealtPerHit1 = unit1.stats.attackComponents.length ? this.calculateDamageDealtPerHit(composedDamageDealtPerHit1) : 0
         const mainDamageDealtPerHit2 = unit2.stats.attackComponents.length ? this.calculateDamageDealtPerHit(composedDamageDealtPerHit2) : 0
@@ -216,24 +219,24 @@ class UnitCalculatorService {
 
     private addUnitsRelatedUpgrades = (unit1: Unit, unit2: Unit) => {
         const firstCrusade = siciliansTechTree.uniqueTechs[0]
-        if (unit1.id === monasteryUnits.monk.id) {
+        if (unit1.id === monasteryUnits.monk.id || unit1.id === spanishUniqueUnits.missionary.id) {
             unit2.affectingUpgrades.push(monasteryUpgrade.faith)
             unit2.affectingUpgrades.push(firstCrusade)
         }
-        if (unit2.id === monasteryUnits.monk.id) {
+        if (unit2.id === monasteryUnits.monk.id || unit2.id === spanishUniqueUnits.missionary.id) {
             unit1.affectingUpgrades.push(monasteryUpgrade.faith)
             unit1.affectingUpgrades.push(firstCrusade)
         }
     }
 
-    private calculateDamageDealtComponentsPerHit =  (attackingUnitAttacks: CombatStat[], defendingUnitArmors: CombatStat[]): CombatStat[] => {
+    private calculateDamageDealtComponentsPerHit =  (attackingUnitAttacks: CombatStat[], defendingUnitArmors: CombatStat[], ignoreArmor = false): CombatStat[] => {
         const attacks = attackingUnitAttacks
         const armors = defendingUnitArmors
 
         return attacks
             .filter(attack => armors.find(armor => armor.type === attack.type) || attack.type === ArmorType.trueDamage)
             .map(attack => {
-                const value = attack.value - (armors.find(armor => armor.type === attack.type)?.value || 0)
+                const value = ignoreArmor ? attack.value : attack.value - (armors.find(armor => armor.type === attack.type)?.value || 0)
                 return { ...attack, value: Math.max(value, 0) }
             })
     }

@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/koreans.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, addNumber } from "../../utils/utils";
 
 export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleShip: Unit, eliteTurtleShip: Unit } = {
@@ -31,6 +31,27 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
             gold: 60,
             stone: 0
         },
+        stats: {
+            health: 150,
+            rateOfFire: 2.5,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: 1,
+            attackComponents: [
+                { value: 9, type: ArmorType.pierce },
+                { value: 5, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 3, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 7,
+        },
         duration: 21
     }),
     eliteWarWagon: new Unit({
@@ -43,6 +64,27 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
             food: 0,
             gold: 60,
             stone: 0
+        },
+        stats: {
+            health: 200,
+            rateOfFire: 2.5,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: 1,
+            attackComponents: [
+                { value: 9, type: ArmorType.pierce },
+                { value: 5, type: ArmorType.standardBuilding },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 4, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 8,
         },
         duration: 21
     }),
@@ -57,6 +99,26 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
             gold: 180,
             stone: 0
         },
+        stats: {
+            health: 200,
+            rateOfFire: 6,
+            attackType: AttackType.projectile,
+            range: 6,
+            accuracy: 1,
+            attackComponents: [
+                { value: 50, type: ArmorType.melee },
+            ],
+            armorComponents: [
+                { value: 6, type: ArmorType.melee },
+                { value: 5, type: ArmorType.pierce },
+                { value: 8, type: ArmorType.ship },
+                { value: 0, type: ArmorType.turtleShip },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .9,
+            lineOfSight: 8,
+        },
         duration: 50
     }),
     eliteTurtleShip: new Unit({
@@ -70,11 +132,41 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
             gold: 180,
             stone: 0
         },
+        stats: {
+            health: 300,
+            rateOfFire: 6,
+            attackType: AttackType.projectile,
+            range: 6,
+            accuracy: 1,
+            attackComponents: [
+                { value: 50, type: ArmorType.melee },
+            ],
+            armorComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 6, type: ArmorType.pierce },
+                { value: 11, type: ArmorType.ship },
+                { value: 1, type: ArmorType.turtleShip },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.035,
+            lineOfSight: 8,
+        },
         duration: 50
     })
 }
 
+chainTechs([koreansUniqueUnits.warWagon, koreansUniqueUnits.eliteWarWagon])
+const uniqueUnitLine = new UnitLine([koreansUniqueUnits.warWagon, koreansUniqueUnits.eliteWarWagon])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing,
+    stableUpgrades.husbandry,
+    universityUpgrades.ballistics, universityUpgrades.chemistry
+])
 chainTechs([koreansUniqueUnits.turtleShip, koreansUniqueUnits.eliteTurtleShip])
+const turtleShipLine = new UnitLine([koreansUniqueUnits.turtleShip, koreansUniqueUnits.eliteTurtleShip])
+setAffectingUpgrades(turtleShipLine, [dockUpgrades.careening, dockUpgrades.dryDock, dockUpgrades.shipwright])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -209,7 +301,7 @@ export const koreansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([koreansUniqueUnits.warWagon, koreansUniqueUnits.eliteWarWagon]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -259,7 +351,7 @@ export const koreansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,
@@ -307,7 +399,7 @@ export const koreansTechTree: CivTechTree = {
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip]),
             new UnitLine([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon]),
-            new UnitLine([koreansUniqueUnits.turtleShip, koreansUniqueUnits.eliteTurtleShip]),
+            turtleShipLine
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,

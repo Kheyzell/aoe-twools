@@ -1,9 +1,9 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { CapacityId, ConvertionCapacity } from "../../models/capacity.model";
+import { CAPACITIES, CapacityId, ConvertionCapacity } from "../../models/capacity.model";
 import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/spanish.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, roundHundredth } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -32,6 +32,28 @@ export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, 
             gold: 70,
             stone: 0
         },
+        stats: {
+            health: 55,
+            rateOfFire: 2.9,
+            attackType: AttackType.projectile,
+            range: 6,
+            accuracy: .65,
+            attackComponents: [
+                { value: 16, type: ArmorType.pierce },
+                { value: 4, type: ArmorType.ram },
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.3,
+            lineOfSight: 8,
+        },
         duration: 24
     }),
     eliteConquistador: new Unit({
@@ -44,6 +66,29 @@ export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, 
             food: 60,
             gold: 70,
             stone: 0
+        },
+        stats: {
+            health: 70,
+            rateOfFire: 2.9,
+            attackType: AttackType.projectile,
+            range: 6,
+            accuracy: .7,
+            attackComponents: [
+                { value: 18, type: ArmorType.pierce },
+                { value: 6, type: ArmorType.ram },
+                { value: 2, type: ArmorType.building },
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.3,
+            lineOfSight: 9,
         },
         duration: 24
     }),
@@ -58,9 +103,45 @@ export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, 
             gold: 100,
             stone: 0
         },
+        stats: {
+            health: 30,
+            range: 7,
+            rateOfFire: 62,
+            accuracy: .26,
+            attackType: AttackType.melee,
+            attackComponents: [],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.monk },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.1,
+            lineOfSight: 9,
+            capacities: [CAPACITIES.conversion, CAPACITIES.healing]
+        },
         duration: 51
     })
 }
+
+chainTechs([spanishUniqueUnits.conquistador, spanishUniqueUnits.eliteConquistador])
+const uniqueUnitLine = new UnitLine([spanishUniqueUnits.conquistador, spanishUniqueUnits.eliteConquistador])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
+
+const missionaryLine = new UnitLine([spanishUniqueUnits.missionary])
+setAffectingUpgrades(missionaryLine, [
+    monasteryUpgrade.redemption,
+    monasteryUpgrade.atonement,
+    monasteryUpgrade.herbalMedecine,
+    monasteryUpgrade.heresy,
+    monasteryUpgrade.sanctity,
+    monasteryUpgrade.fervor,
+    monasteryUpgrade.faith,
+    monasteryUpgrade.illumination,
+    monasteryUpgrade.blockPrinting,
+    monasteryUpgrade.theocracy])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -194,7 +275,7 @@ export const spanishTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([spanishUniqueUnits.conquistador, spanishUniqueUnits.eliteConquistador]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -211,7 +292,7 @@ export const spanishTechTree: CivTechTree = {
         ])
     },
     monastery: {
-        unitLines: [new UnitLine([monasteryUnits.monk]), new UnitLine([spanishUniqueUnits.missionary])],
+        unitLines: [new UnitLine([monasteryUnits.monk]), missionaryLine],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,
@@ -245,7 +326,7 @@ export const spanishTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

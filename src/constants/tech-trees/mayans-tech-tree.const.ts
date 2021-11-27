@@ -1,8 +1,8 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/mayans.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, addNumber, multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -30,6 +30,27 @@ export const mayansUniqueUnits: { plumedArcher: Unit, elitePlumedArcher: Unit } 
             gold: 55,
             stone: 0
         },
+        stats: {
+            health: 50,
+            rateOfFire: 1.9,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .8,
+            attackComponents: [
+                { value: 5, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.spearman },
+                { value: 1, type: ArmorType.infantry },
+                { value: 1, type: ArmorType.condottiero },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 6,
+        },
         duration: 16
     }),
     elitePlumedArcher: new Unit({
@@ -43,9 +64,37 @@ export const mayansUniqueUnits: { plumedArcher: Unit, elitePlumedArcher: Unit } 
             gold: 55,
             stone: 0
         },
+        stats: {
+            health: 65,
+            rateOfFire: 1.9,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: .9,
+            attackComponents: [
+                { value: 5, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.spearman },
+                { value: 2, type: ArmorType.infantry },
+                { value: 2, type: ArmorType.condottiero },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 6,
+        },
         duration: 16
     })
 }
+
+chainTechs([mayansUniqueUnits.plumedArcher, mayansUniqueUnits.elitePlumedArcher])
+const uniqueUnitLine = new UnitLine([mayansUniqueUnits.plumedArcher, mayansUniqueUnits.elitePlumedArcher])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -112,7 +161,7 @@ export const mayansTechTree: CivTechTree = {
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.30))
@@ -120,7 +169,7 @@ export const mayansTechTree: CivTechTree = {
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.30))
                         unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.30))
                     } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.20))
                         unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.20))
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.20))
@@ -176,7 +225,7 @@ export const mayansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([mayansUniqueUnits.plumedArcher, mayansUniqueUnits.elitePlumedArcher]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -224,7 +273,7 @@ export const mayansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

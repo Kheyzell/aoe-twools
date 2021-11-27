@@ -5,6 +5,7 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUpgrade } from "../techs/town-center-techs.const";
 
 const scoutLine = new UnitLine([stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar])
+const wingedLine = new UnitLine([stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.wingedHussar])
 const knightLine = new UnitLine([stableUnits.knight, stableUnits.cavalier, stableUnits.paladin])
 const camelLine = new UnitLine([stableUnits.camelRider, stableUnits.heavyCamelRider])
 const elephantLine = new UnitLine([stableUnits.battleElephant, stableUnits.eliteBattleElephant])
@@ -16,6 +17,7 @@ const cavalryUpgrades = [
     stableUpgrades.bloodlines, stableUpgrades.husbandry,
 ]
 setAffectingUpgrades(scoutLine, cavalryUpgrades)
+setAffectingUpgrades(wingedLine, cavalryUpgrades)
 setAffectingUpgrades(knightLine, cavalryUpgrades)
 setAffectingUpgrades(camelLine, cavalryUpgrades)
 setAffectingUpgrades(elephantLine, cavalryUpgrades)

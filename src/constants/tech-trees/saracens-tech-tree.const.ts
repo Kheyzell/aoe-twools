@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { CAPACITIES } from "../../models/capacity.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -17,8 +17,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/saracens.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { multiplyNumber, roundHundredth } from "../../utils/utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 
 export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
     mameluke: new Unit({
@@ -31,6 +30,26 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
             food: 55,
             gold: 85,
             stone: 0
+        },
+        stats: {
+            health: 65,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            accuracy: 1,
+            attackComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 9, type: ArmorType.cavalry },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.mameluke },
+                { value: 0, type: ArmorType.camel },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 5
         },
         duration: 23
     }),
@@ -45,9 +64,36 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
             gold: 85,
             stone: 0
         },
+        stats: {
+            health: 80,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            accuracy: 1,
+            attackComponents: [
+                { value: 10, type: ArmorType.melee },
+                { value: 12, type: ArmorType.cavalry },
+                { value: 1, type: ArmorType.mameluke },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.mameluke },
+                { value: 0, type: ArmorType.camel },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 5
+        },
         duration: 23
     })
 }
+
+chainTechs([saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke])
+const uniqueUnitLine = new UnitLine([saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -194,7 +240,7 @@ export const saracensTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -245,7 +291,7 @@ export const saracensTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

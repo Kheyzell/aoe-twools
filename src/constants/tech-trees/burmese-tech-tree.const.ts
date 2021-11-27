@@ -158,12 +158,12 @@ export const burmeseTechTree: CivTechTree = {
                 order: EffectOrder.first,
                 apply: (unit, upgrades) => {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
                         unit.addAttackComponent(1, ArmorType.melee)
                     }
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.addAttackComponent(1, ArmorType.melee)
                     }
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
@@ -277,7 +277,7 @@ export const burmeseTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

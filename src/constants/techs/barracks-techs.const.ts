@@ -316,7 +316,7 @@ export const barracksUnits: BarracksUnits = {
             movementSpeed: 1.1,
             lineOfSight: 5
         },
-        duration: 35
+        duration: 60
     }),
     eagleWarrior: new Unit({
         id: 'eagleWarrior',

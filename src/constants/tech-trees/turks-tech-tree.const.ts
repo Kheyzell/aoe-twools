@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/turks.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
 
 export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
@@ -31,6 +31,26 @@ export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
             gold: 55,
             stone: 0
         },
+        stats: {
+            health: 35,
+            rateOfFire: 3.45,
+            attackType: AttackType.projectile,
+            range: 8,
+            accuracy: .5,
+            attackComponents: [
+                { value: 17, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.ram },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .96,
+            lineOfSight: 10,
+        },
         duration: 21
     }),
     eliteJanissary: new Unit({
@@ -44,9 +64,33 @@ export const turksUniqueUnits: { janissary: Unit, eliteJanissary: Unit } = {
             gold: 55,
             stone: 0
         },
+        stats: {
+            health: 40,
+            rateOfFire: 3.45,
+            attackType: AttackType.projectile,
+            range: 8,
+            accuracy: .65,
+            attackComponents: [
+                { value: 22, type: ArmorType.pierce },
+                { value: 3, type: ArmorType.ram },
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .96,
+            lineOfSight: 10,
+        },
         duration: 21
     })
 }
+
+chainTechs([turksUniqueUnits.janissary, turksUniqueUnits.eliteJanissary])
+const uniqueUnitLine = new UnitLine([turksUniqueUnits.janissary, turksUniqueUnits.eliteJanissary])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -244,7 +288,7 @@ export const turksTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

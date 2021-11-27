@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/khmer.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
 
 export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: Unit } = {
@@ -31,6 +31,31 @@ export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: 
             gold: 80,
             stone: 0
         },
+        stats: {
+            health: 250,
+            rateOfFire: 2.5,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: 1,
+            attackComponents: [
+                { value: 8, type: ArmorType.pierce },
+                { value: 8, type: ArmorType.ship },
+                { value: 8, type: ArmorType.fishingShip },
+                { value: 3, type: ArmorType.stoneDefense },
+                { value: 3, type: ArmorType.standardBuilding },
+                { value: 2, type: ArmorType.building },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 3, type: ArmorType.pierce },
+                { value: -2, type: ArmorType.cavalry },
+                { value: -2, type: ArmorType.warElephant },
+                { value: -2, type: ArmorType.siegeWeapon },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .8,
+            lineOfSight: 7,
+        },
         duration: 25
     }),
     eliteBallistaElephant: new Unit({
@@ -44,9 +69,41 @@ export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: 
             gold: 80,
             stone: 0
         },
+        stats: {
+            health: 290,
+            rateOfFire: 2.5,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: 1,
+            attackComponents: [
+                { value: 9, type: ArmorType.pierce },
+                { value: 8, type: ArmorType.ship },
+                { value: 8, type: ArmorType.fishingShip },
+                { value: 4, type: ArmorType.stoneDefense },
+                { value: 4, type: ArmorType.standardBuilding },
+                { value: 4, type: ArmorType.building },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 3, type: ArmorType.pierce },
+                { value: -2, type: ArmorType.cavalry },
+                { value: -2, type: ArmorType.warElephant },
+                { value: -2, type: ArmorType.siegeWeapon },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .8,
+            lineOfSight: 7,
+        },
         duration: 25
     })
 }
+
+chainTechs([khmerUniqueUnits.ballistaElephant, khmerUniqueUnits.eliteBallistaElephant])
+const uniqueUnitLine = new UnitLine([khmerUniqueUnits.ballistaElephant, khmerUniqueUnits.eliteBallistaElephant])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry,
+    universityUpgrades.siegeEngineers, universityUpgrades.chemistry
+])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -75,9 +132,13 @@ const uniqueTechs = [
             order: EffectOrder.first,
             apply: (unit: Unit) => {
                 unit.stats.secondaryAttack = {
-                    count: 0,
+                    count: 1,
                     accuracy: 1,
-                    components: [{ value: 0, type: ArmorType.pierce }]
+                    components: [
+                        { value: 6, type: ArmorType.pierce },
+                        { value: 3, type: ArmorType.warElephant },
+                        { value: 1, type: ArmorType.building },
+                    ]
                 }
             }
         }],
@@ -225,7 +286,7 @@ export const khmerTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

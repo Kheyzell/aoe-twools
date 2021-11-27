@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/persians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 
 export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } = {
@@ -31,6 +31,25 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } 
             gold: 85,
             stone: 0
         },
+        stats: {
+            health: 450,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 15, type: ArmorType.melee },
+                { value: 7, type: ArmorType.building },
+                { value: 7, type: ArmorType.stoneDefense },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.warElephant },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .6,
+            lineOfSight: 4
+        },
         duration: 25
     }),
     eliteWarElephant: new Unit({
@@ -44,9 +63,34 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } 
             gold: 85,
             stone: 0
         },
+        stats: {
+            health: 600,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 20, type: ArmorType.melee },
+                { value: 10, type: ArmorType.building },
+                { value: 10, type: ArmorType.stoneDefense },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 3, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.warElephant },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .6,
+            lineOfSight: 5
+        },
         duration: 25
     })
 }
+
+chainTechs([persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant])
+const uniqueUnitLine = new UnitLine([persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -103,12 +147,12 @@ export const persiansTechTree: CivTechTree = {
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
                         unit.duration = multiplyNumber(unit.duration, 1/1.2)
                     } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.duration = multiplyNumber(unit.duration, 1/1.15)
                     } else {
                         unit.duration = multiplyNumber(unit.duration, 1/1.1)
@@ -122,7 +166,7 @@ export const persiansTechTree: CivTechTree = {
                 dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip,
                 dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip,
                 dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon],
-            affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.loom, townCenterUpgrade.casteAge, townCenterUpgrade.wheelbarrow, townCenterUpgrade.townWatch, townCenterUpgrade.imperialAge, townCenterUpgrade.handCart, townCenterUpgrade.townPatrol, dockUpgrades.gillnets, dockUpgrades.careening, dockUpgrades.dryDock]
+            affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.loom, townCenterUpgrade.castleAge, townCenterUpgrade.wheelbarrow, townCenterUpgrade.townWatch, townCenterUpgrade.imperialAge, townCenterUpgrade.handCart, townCenterUpgrade.townPatrol, dockUpgrades.gillnets, dockUpgrades.careening, dockUpgrades.dryDock]
         },
         {
             id: 'persians3',
@@ -219,7 +263,7 @@ export const persiansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

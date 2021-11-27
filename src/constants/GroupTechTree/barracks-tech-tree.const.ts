@@ -16,7 +16,7 @@ const infantryUpgrades = [
 setAffectingUpgrades(militiaLine, [...infantryUpgrades, barracksUpgrade.supplies])
 setAffectingUpgrades(spearLine, infantryUpgrades)
 setAffectingUpgrades(eagleLine, infantryUpgrades)
-barracksUnits.eagleScout.affectingUpgrades = [...barracksUnits.eagleScout.affectingUpgrades, townCenterUpgrade.feudalAge]
+barracksUnits.eagleScout.affectingUpgrades = [...barracksUnits.eagleScout.affectingUpgrades, townCenterUpgrade.feudalAge, townCenterUpgrade.castleAge]
 
 export const barracksTechs: GroupTechTree = {
     name: 'Barracks',

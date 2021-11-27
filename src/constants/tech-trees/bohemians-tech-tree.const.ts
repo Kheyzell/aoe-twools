@@ -15,7 +15,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/bohemians.png'
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { multiplyNumber } from "../../utils/utils";
+import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 import { UnitType, EffectOrder, CivTechTree, ArmorType, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
 import { CAPACITIES } from "../../models/capacity.model";
@@ -223,6 +223,13 @@ export const bohemiansTechTree: CivTechTree = {
             id: 'bohemians4',
             effectType: EffectType.miscallenous,
             value: null,
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, monasteryUpgrade.fervor)
+                    addElementIfNotInArray(unit.affectingUpgrades, monasteryUpgrade.sanctity)
+                }
+            }],
             affectedUnits: [townCenterUnits.villager],
             affectedUpgrades: [monasteryUpgrade.fervor, monasteryUpgrade.sanctity]
         },
@@ -336,7 +343,7 @@ export const bohemiansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

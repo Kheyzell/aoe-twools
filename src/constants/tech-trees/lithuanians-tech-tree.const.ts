@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,8 +16,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/lithuanians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
+import { CAPACITIES } from "../../models/capacity.model";
 
 export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
     leitis: new Unit({
@@ -30,6 +31,23 @@ export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
             food: 70,
             gold: 50,
             stone: 0
+        },
+        stats: {
+            health: 100,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 13, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            capacities: [CAPACITIES.ignoreArmor],
+            movementSpeed: 1.4,
+            lineOfSight: 5
         },
         duration: 20
     }),
@@ -44,9 +62,32 @@ export const lithuaniansUniqueUnits: { leitis: Unit, eliteLeitis: Unit } = {
             gold: 50,
             stone: 0
         },
+        stats: {
+            health: 130,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 16, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            capacities: [CAPACITIES.ignoreArmor],
+            movementSpeed: 1.4,
+            lineOfSight: 5
+        },
         duration: 18
     })
 }
+
+chainTechs([lithuaniansUniqueUnits.leitis, lithuaniansUniqueUnits.eliteLeitis])
+const uniqueUnitLine = new UnitLine([lithuaniansUniqueUnits.leitis, lithuaniansUniqueUnits.eliteLeitis])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -181,7 +222,7 @@ export const lithuaniansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([lithuaniansUniqueUnits.leitis, lithuaniansUniqueUnits.eliteLeitis]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -233,7 +274,7 @@ export const lithuaniansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

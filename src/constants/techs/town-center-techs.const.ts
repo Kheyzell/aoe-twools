@@ -1,3 +1,4 @@
+import { siciliansUniqueUnits } from "..";
 import { ArmorType, EffectOrder, UnitType } from "../../models/techs.model";
 import { Unit, AttackType } from "../../models/unit.model";
 import { Upgrade } from "../../models/upgrade.model";
@@ -13,7 +14,7 @@ interface TownCenterUnits {
 interface TownCenterUpgrades {
     feudalAge: Upgrade,
     loom: Upgrade,
-    casteAge: Upgrade,
+    castleAge: Upgrade,
     wheelbarrow: Upgrade,
     townWatch: Upgrade,
     imperialAge: Upgrade,
@@ -99,7 +100,7 @@ export const townCenterUpgrade: TownCenterUpgrades = {
         }],
         duration: 25
     }),
-    casteAge: new Upgrade({
+    castleAge: new Upgrade({
         id: 'castleAge',
         wikiUrl: 'CastleAge',
         age: 2,
@@ -193,6 +194,6 @@ export const townCenterUpgrade: TownCenterUpgrades = {
     }),
 }
 
-chainTechs([townCenterUpgrade.feudalAge, townCenterUpgrade.casteAge, townCenterUpgrade.imperialAge])
+chainTechs([townCenterUpgrade.feudalAge, townCenterUpgrade.castleAge, townCenterUpgrade.imperialAge])
 chainTechs([townCenterUpgrade.wheelbarrow, townCenterUpgrade.handCart])
 chainTechs([townCenterUpgrade.townWatch, townCenterUpgrade.townPatrol])

@@ -128,6 +128,24 @@ export const stableUnits: StableUnits = {
             gold: 0,
             stone: 0
         },
+        stats: {
+            health: 80,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 9, type: ArmorType.melee },
+                { value: 14, type: ArmorType.monk },
+                { value: 4, type: ArmorType.gunpowderUnit }
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry }
+            ],
+            movementSpeed: 1.5,
+            lineOfSight: 10,
+            conversionResistance: 8
+        },
         duration: 30
     }),
     knight: new Unit({

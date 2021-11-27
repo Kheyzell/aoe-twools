@@ -1,9 +1,9 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { CAPACITIES, RegenCapacity } from "../../models/capacity.model";
 import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/vikings.png';
-import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -32,6 +32,24 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
             gold: 25,
             stone: 0
         },
+        stats: {
+            health: 54,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 9, type: ArmorType.melee },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.05,
+            lineOfSight: 3,
+        },
         duration: 14
     }),
     eliteBerserk: new Unit({
@@ -44,6 +62,24 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
             food: 65,
             gold: 25,
             stone: 0
+        },
+        stats: {
+            health: 62,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 14, type: ArmorType.melee },
+                { value: 3, type: ArmorType.eagleWarrior },
+                { value: 3, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.05,
+            lineOfSight: 5,
         },
         duration: 14
     }),
@@ -58,6 +94,36 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
             gold: 50,
             stone: 0
         },
+        stats: {
+            health: 130,
+            rateOfFire: 3,
+            attackType: AttackType.projectile,
+            range: 6,
+            accuracy: 1,
+            attackComponents: [
+                { value: 7, type: ArmorType.pierce },
+                { value: 9, type: ArmorType.ship },
+                { value: 9, type: ArmorType.fishingShip },
+                { value: 7, type: ArmorType.building },
+                { value: 4, type: ArmorType.ram },
+            ],
+            secondaryAttack: {
+                count: 4,
+                accuracy: 1,
+                components: [
+                    { value: 1, type: ArmorType.pierce },
+                    { value: 1, type: ArmorType.camel },
+                ]
+            },
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 6, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.ship },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.54,
+            lineOfSight: 8,
+        },
         duration: 25
     }),
     eliteLongboat: new Unit({
@@ -71,9 +137,50 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
             gold: 50,
             stone: 0
         },
+        stats: {
+            health: 160,
+            rateOfFire: 3,
+            attackType: AttackType.projectile,
+            range: 7,
+            accuracy: 1,
+            attackComponents: [
+                { value: 8, type: ArmorType.pierce },
+                { value: 11, type: ArmorType.ship },
+                { value: 11, type: ArmorType.fishingShip },
+                { value: 8, type: ArmorType.building },
+                { value: 4, type: ArmorType.ram },
+            ],
+            secondaryAttack: {
+                count: 4,
+                accuracy: 1,
+                components: [
+                    { value: 1, type: ArmorType.pierce },
+                    { value: 1, type: ArmorType.camel },
+                ]
+            },
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 8, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.ship },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.54,
+            lineOfSight: 9,
+        },
         duration: 25
     })
 }
+
+chainTechs([vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk])
+const uniqueUnitLine = new UnitLine([vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
+chainTechs([vikingsUniqueUnits.longboat, vikingsUniqueUnits.eliteLongboat])
+const longboatLine = new UnitLine([vikingsUniqueUnits.longboat, vikingsUniqueUnits.eliteLongboat])
+setAffectingUpgrades(longboatLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
+    universityUpgrades.ballistics, universityUpgrades.chemistry,
+    dockUpgrades.careening, dockUpgrades.dryDock])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -126,7 +233,7 @@ export const vikingsTechTree: CivTechTree = {
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.2))
@@ -134,7 +241,7 @@ export const vikingsTechTree: CivTechTree = {
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.2))
                         unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.2))
                     } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.15))
                         unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.15))
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.15))
@@ -162,12 +269,12 @@ export const vikingsTechTree: CivTechTree = {
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
                         unit.stats.health = multiplyNumber(unit.stats.health, 1.2)
                     } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.stats.health = multiplyNumber(unit.stats.health, 1.15)
                     } else
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
@@ -230,7 +337,7 @@ export const vikingsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -277,7 +384,7 @@ export const vikingsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,
@@ -324,7 +431,7 @@ export const vikingsTechTree: CivTechTree = {
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
             new UnitLine([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon]),
-            new UnitLine([vikingsUniqueUnits.longboat, vikingsUniqueUnits.eliteLongboat]),
+            longboatLine
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,

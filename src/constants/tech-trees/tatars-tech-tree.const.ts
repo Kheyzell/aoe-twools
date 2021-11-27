@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,8 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/tatars.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { CAPACITIES, GenerateGoldWhenFightingCapacity } from "../../models/capacity.model";
 
 export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel: Unit } = {
     keshik: new Unit({
@@ -29,6 +30,23 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
             food: 60,
             gold: 40,
             stone: 0
+        },
+        stats: {
+            health: 110,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 9, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 5,
+            capacities: [{ ...CAPACITIES.generateGoldWhenFighting, goldPerSecond: .367 } as GenerateGoldWhenFightingCapacity]
         },
         duration: 16
     }),
@@ -43,6 +61,23 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 140,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 11, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 3, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 5,
+            capacities: [{ ...CAPACITIES.generateGoldWhenFighting, goldPerSecond: .367 } as GenerateGoldWhenFightingCapacity]
+        },
         duration: 14
     }),
     flamingCamel: new Unit({
@@ -56,9 +91,38 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
             gold: 30,
             stone: 0
         },
+        stats: {
+            health: 50,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 20, type: ArmorType.melee },
+                { value: 100, type: ArmorType.building },
+                { value: 50, type: ArmorType.cavalry },
+                { value: 50, type: ArmorType.camel },
+                { value: 130, type: ArmorType.warElephant },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+            ],
+            movementSpeed: .8,
+            lineOfSight: 4,
+            capacities: [CAPACITIES.selfDestruction]
+        },
         duration: 20
     })
 }
+
+chainTechs([tatarsUniqueUnits.keshik, tatarsUniqueUnits.eliteKeshik])
+const uniqueUnitLine = new UnitLine([tatarsUniqueUnits.keshik, tatarsUniqueUnits.eliteKeshik])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
+
+const flamingCamelLine = new UnitLine([tatarsUniqueUnits.flamingCamel])
+setAffectingUpgrades(flamingCamelLine, [stableUpgrades.bloodlines, stableUpgrades.husbandry,
+    universityUpgrades.siegeEngineers])
+    
 
 const uniqueTechs = [
     new UniqueTech({
@@ -183,9 +247,9 @@ export const tatarsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([tatarsUniqueUnits.keshik, tatarsUniqueUnits.eliteKeshik]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
-            new UnitLine([tatarsUniqueUnits.flamingCamel]),
+            flamingCamelLine,
             new UnitLine([castleUnits.trebuchet]),
         ],
         upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.sappers, castleUpgrades.conscription, castleUpgrades.spies])
@@ -230,7 +294,7 @@ export const tatarsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

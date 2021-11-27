@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { CAPACITIES } from "../../models/capacity.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -17,7 +17,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/portuguese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, addNumber } from "../../utils/utils";
 
 export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, caravel: Unit, eliteCaravel: Unit } = {
@@ -32,6 +32,31 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
             gold: 70,
             stone: 0
         },
+        stats: {
+            health: 60,
+            rateOfFire: 3.45,
+            attackType: AttackType.projectile,
+            range: 7,
+            accuracy: .5,
+            attackComponents: [
+                { value: 16, type: ArmorType.pierce },
+                { value: 1, type: ArmorType.ram },
+            ],
+            secondaryAttack: {
+                count: 4,
+                accuracy: .5,
+                components: [{ value: 2, type: ArmorType.pierce }]
+            },
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 4, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.siegeWeapon },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .85,
+            lineOfSight: 9,
+        },
         duration: 21
     }),
     eliteOrganGun: new Unit({
@@ -44,6 +69,31 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
             food: 0,
             gold: 70,
             stone: 0
+        },
+        stats: {
+            health: 70,
+            rateOfFire: 3.45,
+            attackType: AttackType.projectile,
+            range: 7,
+            accuracy: .5,
+            attackComponents: [
+                { value: 20, type: ArmorType.pierce },
+                { value: 1, type: ArmorType.ram },
+            ],
+            secondaryAttack: {
+                count: 4,
+                accuracy: .75,
+                components: [{ value: 2, type: ArmorType.pierce }]
+            },
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 4, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.siegeWeapon },
+                { value: 0, type: ArmorType.gunpowderUnit },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: .85,
+            lineOfSight: 9,
         },
         duration: 21
     }),
@@ -58,6 +108,29 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
             gold: 43,
             stone: 0
         },
+        stats: {
+            health: 130,
+            rateOfFire: 3,
+            attackType: AttackType.projectile,
+            range: 6,
+            accuracy: 1,
+            attackComponents: [
+                { value: 6, type: ArmorType.pierce },
+                { value: 8, type: ArmorType.building },
+                { value: 6, type: ArmorType.ship },
+                { value: 6, type: ArmorType.fishingShip },
+                { value: 4, type: ArmorType.ram },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 8, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.ship },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.43,
+            lineOfSight: 9,
+            capacities: [CAPACITIES.projectilePassesThroughUnits]
+        },
         duration: 36
     }),
     eliteCaravel: new Unit({
@@ -71,11 +144,42 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
             gold: 43,
             stone: 0
         },
+        stats: {
+            health: 150,
+            rateOfFire: 3,
+            attackType: AttackType.projectile,
+            range: 7,
+            accuracy: 1,
+            attackComponents: [
+                { value: 8, type: ArmorType.pierce },
+                { value: 9, type: ArmorType.building },
+                { value: 7, type: ArmorType.ship },
+                { value: 7, type: ArmorType.fishingShip },
+                { value: 4, type: ArmorType.ram },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 8, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.ship },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.43,
+            lineOfSight: 9,
+            capacities: [CAPACITIES.projectilePassesThroughUnits]
+        },
         duration: 36
     })
 }
 
+chainTechs([portugeseUniqueUnits.organGun, portugeseUniqueUnits.eliteOrganGun])
+const uniqueUnitLine = new UnitLine([portugeseUniqueUnits.organGun, portugeseUniqueUnits.eliteOrganGun])
+setAffectingUpgrades(uniqueUnitLine, [universityUpgrades.siegeEngineers])
+
 chainTechs([portugeseUniqueUnits.caravel, portugeseUniqueUnits.eliteCaravel])
+const caravelLine = new UnitLine([portugeseUniqueUnits.caravel, portugeseUniqueUnits.eliteCaravel])
+setAffectingUpgrades(caravelLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
+    universityUpgrades.ballistics, universityUpgrades.chemistry,
+    dockUpgrades.careening, dockUpgrades.dryDock])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -301,7 +405,7 @@ export const portugueseTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

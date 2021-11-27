@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malians.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray } from "../../utils/utils";
 
 export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
@@ -31,6 +31,25 @@ export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 30,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: 1,
+            attackComponents: [
+                { value: 10, type: ArmorType.melee },
+                { value: 1, type: ArmorType.eagleWarrior }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.25,
+            lineOfSight: 6,
+        },
         duration: 17
     }),
     eliteGbeto: new Unit({
@@ -44,9 +63,34 @@ export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 45,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 5,
+            accuracy: 1,
+            attackComponents: [
+                { value: 13, type: ArmorType.melee },
+                { value: 1, type: ArmorType.eagleWarrior }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.25,
+            lineOfSight: 7,
+        },
         duration: 17
     })
 }
+
+chainTechs([maliansUniqueUnits.gbeto, maliansUniqueUnits.eliteGbeto])
+const uniqueUnitLine = new UnitLine([maliansUniqueUnits.gbeto, maliansUniqueUnits.eliteGbeto])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -97,12 +141,12 @@ export const maliansTechTree: CivTechTree = {
                 order: EffectOrder.first,
                 apply: (unit, upgrades) => {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
                         unit.addArmorComponent(1, ArmorType.pierce)
                     }
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.addArmorComponent(1, ArmorType.pierce)
                     }
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
@@ -216,7 +260,7 @@ export const maliansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,
