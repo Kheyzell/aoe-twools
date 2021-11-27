@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,8 +16,9 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/malay.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
+import { CAPACITIES } from "../../models/capacity.model";
 
 export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Unit } = {
     karambitWarrior: new Unit({
@@ -30,6 +31,25 @@ export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Un
             food: 25,
             gold: 15,
             stone: 0
+        },
+        stats: {
+            health: 30,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 7, type: ArmorType.melee },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 1, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 3,
+            capacities: [CAPACITIES.halfPopulation]
         },
         duration: 6
     }),
@@ -44,9 +64,34 @@ export const malayUniqueUnits: { karambitWarrior: Unit, eliteKarambitWarrior: Un
             gold: 15,
             stone: 0
         },
+        stats: {
+            health: 40,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 1, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.2,
+            lineOfSight: 3,
+            capacities: [CAPACITIES.halfPopulation]
+        },
         duration: 6
     })
 }
+
+chainTechs([malayUniqueUnits.karambitWarrior, malayUniqueUnits.eliteKarambitWarrior])
+const uniqueUnitLine = new UnitLine([malayUniqueUnits.karambitWarrior, malayUniqueUnits.eliteKarambitWarrior])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -88,7 +133,7 @@ export const malayTechTree: CivTechTree = {
             effectType: EffectType.miscallenous,
             value: 66,
             affectedUnits: [],
-            affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.casteAge, townCenterUpgrade.imperialAge]
+            affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.castleAge, townCenterUpgrade.imperialAge]
         },
         {
             id: 'malay2',
@@ -111,7 +156,7 @@ export const malayTechTree: CivTechTree = {
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.40))
@@ -119,7 +164,7 @@ export const malayTechTree: CivTechTree = {
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.40))
                         unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.40))
                     } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.30))
                         unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.30))
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.30))
@@ -223,7 +268,7 @@ export const malayTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

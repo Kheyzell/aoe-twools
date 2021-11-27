@@ -15,10 +15,10 @@ import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/poles.png'
-import { chainTechs, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray } from "../../utils/utils";
 import { CAPACITIES, RegenCapacity } from "../../models/capacity.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 
 export const polesUniqueUnits: { obuch: Unit, eliteObuch: Unit } = {
     obuch: new Unit({
@@ -31,6 +31,25 @@ export const polesUniqueUnits: { obuch: Unit, eliteObuch: Unit } = {
             food: 55,
             gold: 20,
             stone: 0
+        },
+        stats: {
+            health: 80,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 4, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .9,
+            lineOfSight: 3,
+            capacities: [CAPACITIES.reduceArmor]
         },
         duration: 9
     }),
@@ -45,11 +64,34 @@ export const polesUniqueUnits: { obuch: Unit, eliteObuch: Unit } = {
             gold: 20,
             stone: 0
         },
+        stats: {
+            health: 95,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 10, type: ArmorType.melee },
+                { value: 3, type: ArmorType.eagleWarrior },
+                { value: 6, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .9,
+            lineOfSight: 3,
+            capacities: [CAPACITIES.reduceArmor]
+        },
         duration: 9
     })
 }
 
 chainTechs([polesUniqueUnits.obuch, polesUniqueUnits.eliteObuch])
+const uniqueUnitLine = new UnitLine([polesUniqueUnits.obuch, polesUniqueUnits.eliteObuch])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -59,7 +101,13 @@ const uniqueTechs = [
         value: 30,
         cost: { wood: 0, food: 500, gold: 300, stone: 0 },
         duration: 45,
-        affectedUnits: [stableUnits.cavalier],
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.cost.gold = 30
+            }
+        }],
+        affectedUnits: [stableUnits.knight, stableUnits.cavalier],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -87,12 +135,12 @@ export const polesTechTree: CivTechTree = {
                 order: EffectOrder.first,
                 apply: (unit, upgrades) => {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
                         unit.addCapacity({ ...CAPACITIES.regen, healthPerMinute: 20 } as RegenCapacity)
                     } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.addCapacity({ ...CAPACITIES.regen, healthPerMinute: 15 } as RegenCapacity)
                     } else
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
@@ -169,7 +217,7 @@ export const polesTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([polesUniqueUnits.obuch, polesUniqueUnits.eliteObuch]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -217,7 +265,7 @@ export const polesTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

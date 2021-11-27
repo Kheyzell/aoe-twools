@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/mongols.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, roundHundredth } from "../../utils/utils";
 
 export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
@@ -31,6 +31,28 @@ export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
             gold: 65,
             stone: 0
         },
+        stats: {
+            health: 60,
+            rateOfFire: 2.1,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .95,
+            attackComponents: [
+                { value: 6, type: ArmorType.pierce },
+                { value: 3, type: ArmorType.siegeWeapon },
+                { value: 1, type: ArmorType.spearman },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 6,
+        },
         duration: 26
     }),
     eliteMangudai: new Unit({
@@ -44,9 +66,39 @@ export const mongolsUniqueUnits: { mangudai: Unit, eliteMangudai: Unit } = {
             gold: 65,
             stone: 0
         },
+        stats: {
+            health: 60,
+            rateOfFire: 2.1,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .95,
+            attackComponents: [
+                { value: 8, type: ArmorType.pierce },
+                { value: 5, type: ArmorType.siegeWeapon },
+                { value: 1, type: ArmorType.spearman },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 0, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit },
+            ],
+            movementSpeed: 1.4,
+            lineOfSight: 6,
+        },
         duration: 26
     })
 }
+
+chainTechs([mongolsUniqueUnits.mangudai, mongolsUniqueUnits.eliteMangudai])
+const uniqueUnitLine = new UnitLine([mongolsUniqueUnits.mangudai, mongolsUniqueUnits.eliteMangudai])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor,
+    archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -166,7 +218,7 @@ export const mongolsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([mongolsUniqueUnits.mangudai, mongolsUniqueUnits.eliteMangudai]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -209,7 +261,7 @@ export const mongolsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

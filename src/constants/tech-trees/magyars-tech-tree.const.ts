@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/magyars.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, addNumber } from "../../utils/utils";
 
 export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit } = {
@@ -31,6 +31,24 @@ export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit }
             gold: 10,
             stone: 0
         },
+        stats: {
+            health: 70,
+            rateOfFire: 1.8,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 9, type: ArmorType.melee },
+                { value: 5, type: ArmorType.siegeWeapon },
+                { value: 1, type: ArmorType.ram }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.5,
+            lineOfSight: 5,
+        },
         duration: 16
     }),
     eliteMagyarHuszar: new Unit({
@@ -44,9 +62,33 @@ export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit }
             gold: 10,
             stone: 0
         },
+        stats: {
+            health: 85,
+            rateOfFire: 1.8,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 10, type: ArmorType.melee },
+                { value: 8, type: ArmorType.siegeWeapon },
+                { value: 2, type: ArmorType.ram }
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.5,
+            lineOfSight: 6,
+        },
         duration: 16
     })
 }
+
+chainTechs([magyarsUniqueUnits.magyarHuszar, magyarsUniqueUnits.eliteMagyarHuszar])
+const uniqueUnitLine = new UnitLine([magyarsUniqueUnits.magyarHuszar, magyarsUniqueUnits.eliteMagyarHuszar])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -165,7 +207,7 @@ export const magyarsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([magyarsUniqueUnits.magyarHuszar, magyarsUniqueUnits.eliteMagyarHuszar]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -211,7 +253,7 @@ export const magyarsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

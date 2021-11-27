@@ -1,9 +1,9 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { CAPACITIES } from "../../models/capacity.model";
 import crest from '../../resources/images/crests/slavs.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, addNumber } from "../../utils/utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -32,6 +32,22 @@ export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
             gold: 80,
             stone: 0
         },
+        stats: {
+            health: 100,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 12, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 4, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.3,
+            lineOfSight: 5
+        },
         duration: 15
     }),
     eliteBoyar: new Unit({
@@ -45,9 +61,31 @@ export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
             gold: 80,
             stone: 0
         },
+        stats: {
+            health: 130,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 14, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 3, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1.3,
+            lineOfSight: 5
+        },
         duration: 15
     })
 }
+
+chainTechs([slavsUniqueUnits.boyar, slavsUniqueUnits.eliteBoyar])
+const uniqueUnitLine = new UnitLine([slavsUniqueUnits.boyar, slavsUniqueUnits.eliteBoyar])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -166,7 +204,7 @@ export const slavsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([slavsUniqueUnits.boyar, slavsUniqueUnits.eliteBoyar]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -213,7 +251,7 @@ export const slavsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

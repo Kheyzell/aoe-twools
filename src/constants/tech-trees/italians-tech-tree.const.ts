@@ -226,7 +226,7 @@ export const italiansTechTree: CivTechTree = {
             effectType: EffectType.discount,
             value: 15,
             affectedUnits: [],
-            affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.casteAge, townCenterUpgrade.imperialAge]
+            affectedUpgrades: [townCenterUpgrade.feudalAge, townCenterUpgrade.castleAge, townCenterUpgrade.imperialAge]
         },
         {
             id: 'italians5',
@@ -326,7 +326,7 @@ export const italiansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

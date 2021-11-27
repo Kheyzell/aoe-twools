@@ -134,7 +134,7 @@ export const gothsTechTree: CivTechTree = {
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.35))
@@ -142,7 +142,7 @@ export const gothsTechTree: CivTechTree = {
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.35))
                         unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.35))
                     } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.30))
                         unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.30))
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.30))
@@ -174,12 +174,12 @@ export const gothsTechTree: CivTechTree = {
                 order: EffectOrder.first,
                 apply: (unit, upgrades) => {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
                         unit.addAttackComponent(1, ArmorType.standardBuilding)
                     }
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.addAttackComponent(1, ArmorType.standardBuilding)
                     }
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
@@ -309,7 +309,7 @@ export const gothsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

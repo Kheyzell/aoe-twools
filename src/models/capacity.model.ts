@@ -14,7 +14,12 @@ export enum CapacityId {
     fullMissedShot = "fullMissedShot",
     trampleLogistica = "trampleLogistica",
     projectileProtection = "projectileProtection",
-    dismountOnDeath = "dismountOnDeath"
+    dismountOnDeath = "dismountOnDeath",
+    ignoreArmor = "ignoreArmor",
+    halfPopulation = "halfPopulation",
+    reduceArmor = "reduceArmor",
+    projectilePassesThroughUnits = "projectilePassesThroughUnits",
+    generateGoldWhenFighting = "generateGoldWhenFighting"
 }
 
 export const CAPACITIES = {
@@ -35,6 +40,11 @@ export const CAPACITIES = {
     fullMissedShot: { id: CapacityId.fullMissedShot },
     projectileProtection: { id: CapacityId.projectileProtection },
     dismountOnDeath: { id: CapacityId.dismountOnDeath, unit: new Unit({}) } as SpawnUnitOnDeathCapacity,
+    ignoreArmor: { id: CapacityId.ignoreArmor },
+    halfPopulation: { id: CapacityId.halfPopulation },
+    reduceArmor: { id: CapacityId.reduceArmor, melee: 1, pierce: 1 } as ReduceArmorCapacity,
+    projectilePassesThroughUnits: { id: CapacityId.projectilePassesThroughUnits },
+    generateGoldWhenFighting: { id: CapacityId.generateGoldWhenFighting, goldPerSecond: 0 } as GenerateGoldWhenFightingCapacity
 }
 
 export interface Capacity {
@@ -71,4 +81,15 @@ export interface ChargedAttackCapacity extends Capacity {
 export interface SpawnUnitOnDeathCapacity extends Capacity {
     id: CapacityId
     unit: Unit
+}
+
+export interface ReduceArmorCapacity extends Capacity {
+    id: CapacityId
+    melee: number
+    pierce: number
+}
+
+export interface GenerateGoldWhenFightingCapacity extends Capacity {
+    id: CapacityId
+    goldPerSecond: number
 }

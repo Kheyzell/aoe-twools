@@ -1,9 +1,9 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { CapacityId, HealingCapacity } from "../../models/capacity.model";
 import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/teutons.png';
-import { getAllCivUnits, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, getAllCivUnits, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray } from "../../utils/utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -32,6 +32,24 @@ export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Un
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 80,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 14, type: ArmorType.melee },
+                { value: 4, type: ArmorType.standardBuilding },
+                { value: 4, type: ArmorType.eagleWarrior },
+            ],
+            armorComponents: [
+                { value: 7, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .8,
+            lineOfSight: 3,
+        },
         duration: 12
     }),
     eliteTeutonicKnight: new Unit({
@@ -45,9 +63,33 @@ export const teutonsUniqueUnits: { teutonicKnight: Unit, eliteTeutonicKnight: Un
             gold: 40,
             stone: 0
         },
+        stats: {
+            health: 100,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 17, type: ArmorType.melee },
+                { value: 4, type: ArmorType.standardBuilding },
+                { value: 4, type: ArmorType.eagleWarrior },
+            ],
+            armorComponents: [
+                { value: 10, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .8,
+            lineOfSight: 5,
+        },
         duration: 12
     })
 }
+
+chainTechs([teutonsUniqueUnits.teutonicKnight, teutonsUniqueUnits.eliteTeutonicKnight])
+const uniqueUnitLine = new UnitLine([teutonsUniqueUnits.teutonicKnight, teutonsUniqueUnits.eliteTeutonicKnight])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
 
 const uniqueTechs = [
     new UniqueTech({
@@ -119,7 +161,7 @@ export const teutonsTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([teutonsUniqueUnits.teutonicKnight, teutonsUniqueUnits.eliteTeutonicKnight]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -172,7 +214,7 @@ export const teutonsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,
@@ -274,10 +316,10 @@ teutonsTechTree.bonuses = [
         effects: [{
             order: EffectOrder.first,
             apply: (unit, upgrades) => {
-                addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.casteAge)
+                addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                 addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                 unit.addArmorComponent(1, ArmorType.melee)
-                if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.casteAge.id)) {
+                if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                     unit.addArmorComponent(1, ArmorType.melee)
                 }
                 if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {

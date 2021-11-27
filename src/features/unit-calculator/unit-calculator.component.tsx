@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import BonusLine from "../../components/bonus/bonus-line/bonus-line.component"
 import TechComponent, { BoxSize } from "../../components/tech/tech.component"
-import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits, celtsUniqueUnits, chineseUniqueUnits, cumansUniqueUnits, ethiopiansUniqueUnits, franksUniqueUnits, gothsUniqueUnits, hunsUniqueUnits, italiansUniqueUnits } from "../../constants"
+import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits, celtsUniqueUnits, chineseUniqueUnits, cumansUniqueUnits, ethiopiansUniqueUnits, franksUniqueUnits, gothsUniqueUnits, hunsUniqueUnits, italiansUniqueUnits, japaneseUniqueUnits, khmerUniqueUnits, koreansUniqueUnits, lithuaniansUniqueUnits, magyarsUniqueUnits, malayUniqueUnits, maliansUniqueUnits, mayansUniqueUnits, mongolsUniqueUnits, persiansUniqueUnits, portugeseUniqueUnits, saracensUniqueUnits, siciliansUniqueUnits, slavsUniqueUnits, spanishUniqueUnits, tatarsUniqueUnits, teutonsUniqueUnits, turksUniqueUnits, vikingsUniqueUnits } from "../../constants"
 import { archeryUnits } from "../../constants/techs/archery-techs.const"
 import { barracksUnits } from "../../constants/techs/barracks-techs.const"
 import { castleUnits } from "../../constants/techs/castle-techs.const"
@@ -31,6 +31,8 @@ import parchmentBackground from "../../resources/images/backgrounds/parchment7.j
 import woodenBackground from "../../resources/images/backgrounds/wood4.jpg"
 import { incasUniqueUnits } from "../../constants/tech-trees/incas-tech-tree.const"
 import { indiansUniqueUnits } from "../../constants/tech-trees/indians-tech-tree.const"
+import { polesUniqueUnits } from "../../constants/tech-trees/poles-tech-tree.const"
+import { vietnameseUniqueUnits } from "../../constants/tech-trees/vietnamese-tech-tree.const"
 
 
 type UnitCalculatorProps = {}
@@ -97,6 +99,27 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...incasUniqueUnits.eliteKamayuk }), new Unit({ ...incasUniqueUnits.slinger }),
         new Unit({ ...indiansUniqueUnits.eliteElephantArcher }), new Unit({ ...indiansUniqueUnits.imperialCamelRider }),
         new Unit({ ...italiansUniqueUnits.eliteGenoeseCrossbowman }), new Unit({ ...italiansUniqueUnits.condottiero }),
+        new Unit({ ...japaneseUniqueUnits.eliteSamurai }),
+        new Unit({ ...khmerUniqueUnits.eliteBallistaElephant }),
+        new Unit({ ...koreansUniqueUnits.eliteWarWagon }), new Unit({ ...koreansUniqueUnits.eliteTurtleShip }),
+        new Unit({ ...lithuaniansUniqueUnits.eliteLeitis }),
+        new Unit({ ...magyarsUniqueUnits.eliteMagyarHuszar }),
+        new Unit({ ...malayUniqueUnits.eliteKarambitWarrior }),
+        new Unit({ ...maliansUniqueUnits.eliteGbeto }),
+        new Unit({ ...mayansUniqueUnits.elitePlumedArcher }),
+        new Unit({ ...mongolsUniqueUnits.eliteMangudai }),
+        new Unit({ ...persiansUniqueUnits.eliteWarElephant }),
+        new Unit({ ...polesUniqueUnits.eliteObuch }),
+        new Unit({ ...portugeseUniqueUnits.eliteOrganGun }), new Unit({ ...portugeseUniqueUnits.eliteCaravel }),
+        new Unit({ ...saracensUniqueUnits.eliteMameluke }),
+        new Unit({ ...siciliansUniqueUnits.eliteSerjeant }),
+        new Unit({ ...slavsUniqueUnits.eliteBoyar }),
+        new Unit({ ...spanishUniqueUnits.eliteConquistador }), new Unit({ ...spanishUniqueUnits.missionary }),
+        new Unit({ ...tatarsUniqueUnits.eliteKeshik }), new Unit({ ...tatarsUniqueUnits.flamingCamel }),
+        new Unit({ ...teutonsUniqueUnits.eliteTeutonicKnight }),
+        new Unit({ ...turksUniqueUnits.eliteJanissary }),
+        new Unit({ ...vietnameseUniqueUnits.eliteRattanArcher }), new Unit({ ...vietnameseUniqueUnits.imperialSkirmisher }),
+        new Unit({ ...vikingsUniqueUnits.eliteBerserk }), new Unit({ ...vikingsUniqueUnits.eliteLongboat })
     ]
 
     const uniqueTechs = allCivTechTrees.map(civ => civ.uniqueTechs)
@@ -191,6 +214,8 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
                         {/* <AttackVsArmorLine></AttackVsArmorLine> */}
                         <MonkHealingLine></MonkHealingLine>
                         <ConversionLine></ConversionLine>
+                        {/* <RemainingArmorAfterFight></RemainingArmorAfterFight> */}
+                        {/* <GoldGeneratedDuringFight></GoldGeneratedDuringFight> */}
                         
                         <SeparatorLine></SeparatorLine>
 

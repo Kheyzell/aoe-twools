@@ -1,9 +1,9 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { CAPACITIES } from "../../models/capacity.model";
 import crest from '../../resources/images/crests/sicilians.png';
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -32,6 +32,24 @@ export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
             gold: 35,
             stone: 0
         },
+        stats: {
+            health: 45,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 5, type: ArmorType.melee },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 2, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .9,
+            lineOfSight: 3,
+        },
         duration: 12
     }),
     eliteSerjeant: new Unit({
@@ -45,9 +63,34 @@ export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
             gold: 35,
             stone: 0
         },
+        stats: {
+            health: 85,
+            rateOfFire: 2,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 11, type: ArmorType.melee },
+                { value: 3, type: ArmorType.eagleWarrior },
+                { value: 3, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 4, type: ArmorType.melee },
+                { value: 4, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: .9,
+            lineOfSight: 5,
+        },
         duration: 12
     })
 }
+
+chainTechs([siciliansUniqueUnits.serjeant, siciliansUniqueUnits.eliteSerjeant])
+const uniqueUnitLine = new UnitLine([siciliansUniqueUnits.serjeant, siciliansUniqueUnits.eliteSerjeant])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson,])
+siciliansUniqueUnits.serjeant.affectingUpgrades.push(townCenterUpgrade.castleAge)
 
 const uniqueTechs = [
     new UniqueTech({
@@ -194,7 +237,7 @@ export const siciliansTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([siciliansUniqueUnits.serjeant, siciliansUniqueUnits.eliteSerjeant]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -238,7 +281,7 @@ export const siciliansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,

@@ -1,5 +1,5 @@
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { Unit } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -16,7 +16,7 @@ import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.c
 import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/japanese.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, roundHundredth } from "../../utils/utils";
 
 export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
@@ -31,6 +31,25 @@ export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
             gold: 30,
             stone: 0
         },
+        stats: {
+            health: 60,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 8, type: ArmorType.melee },
+                { value: 10, type: ArmorType.uniqueUnit },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1,
+            lineOfSight: 4,
+        },
         duration: 9
     }),
     eliteSamurai: new Unit({
@@ -44,9 +63,35 @@ export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
             gold: 30,
             stone: 0
         },
+        stats: {
+            health: 80,
+            rateOfFire: 1.9,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 12, type: ArmorType.melee },
+                { value: 12, type: ArmorType.uniqueUnit },
+                { value: 3, type: ArmorType.eagleWarrior },
+                { value: 3, type: ArmorType.standardBuilding }
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
+                { value: 0, type: ArmorType.uniqueUnit }
+            ],
+            movementSpeed: 1,
+            lineOfSight: 5,
+        },
         duration: 9
     })
 }
+
+chainTechs([japaneseUniqueUnits.samurai, japaneseUniqueUnits.eliteSamurai])
+const uniqueUnitLine = new UnitLine([japaneseUniqueUnits.samurai, japaneseUniqueUnits.eliteSamurai])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson])
+
 
 const uniqueTechs = [
     new UniqueTech({
@@ -175,7 +220,7 @@ export const japaneseTechTree: CivTechTree = {
     },
     castle: {
         unitLines: [
-            new UnitLine([japaneseUniqueUnits.samurai, japaneseUniqueUnits.eliteSamurai]),
+            uniqueUnitLine,
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
@@ -225,7 +270,7 @@ export const japaneseTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             townCenterUpgrade.feudalAge,
             townCenterUpgrade.loom,
-            townCenterUpgrade.casteAge,
+            townCenterUpgrade.castleAge,
             townCenterUpgrade.wheelbarrow,
             townCenterUpgrade.townWatch,
             townCenterUpgrade.imperialAge,
