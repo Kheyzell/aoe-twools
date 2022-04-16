@@ -5,39 +5,44 @@
     height: 100%;
 }
 
-.TechTree .Tools > button {
+.TechTree .Tools > .Box > button {
     width: 40px;
     height: 40px;
     outline: none;
     user-select: none;
 }
-.TechTree .Tools > button > img {
+.TechTree .Tools > .Box > button > img {
     width: 24px;
     height: 24px;
 }
 
-.TechTree .Tools > .SelectedCivs {
+.TechTree .Tools > .Box > .SelectedCivs {
     margin-left: 8px;
     height: 36px;
 }
 
-.TechTree .Tools > .SelectedCivs > img {
+.TechTree .Tools > .Box > .SelectedCivs > img {
     height: 36px;
     width: 36px;
     cursor: pointer;
 }
 
-.TechTree .Tools > .SelectedTechs {
+.TechTree .Tools > .Box > .SelectedTechs {
     display: flex;
 }
-.TechTree .Tools > .SelectedTechs > .Tech:first-child {
+.TechTree .Tools > .Box > .SelectedTechs > .Tech:first-child {
     margin-left: 8px;
 }
-.TechTree .Tools > .SelectedTechs > .Tech:not(:first-child) {
+.TechTree .Tools > .Box > .SelectedTechs > .Tech:not(:first-child) {
     margin-left: 4px;
 }
-.TechTree .Tools > .SelectedTechs > .Tech:last-child {
+.TechTree .Tools > .Box > .SelectedTechs > .Tech:last-child {
     margin-right: 8px;
+}
+
+.LastUpdate {
+    margin-left: 8px;
+    color: white;
 }
 
 .LeftPanel {

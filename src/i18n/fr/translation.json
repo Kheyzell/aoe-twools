@@ -1,4 +1,5 @@
 {
+    "Last update": "Dernière mise à jour",
     "Bonuses": "Bonus",
     "Unique technologies": "Technologies uniques",
     "Units affected by bonuses or technologies": "Unités affectées par des bonus ou technologies",
@@ -174,7 +175,7 @@
                     "description": "Tour de guet et patrouille de villes gratuites"
                 },
                 "byzantines6": {
-                    "description": "Les moines soignent 50 % plus vite"
+                    "description": "Les moines soignent 100 % plus vite"
                 }
             }
         },
@@ -231,7 +232,7 @@
                     "description": "Vitesse de déplacement de la cavalerie 5 %/10 %/15 % à l'âge féodal/châteaux/impérial"
                 },
                 "cumans4": {
-                    "description": "L'archerie et l'écurie coûtent -100 de bois"
+                    "description": "L'archerie et l'écurie coûtent -75 de bois"
                 },
                 "cumans5": {
                     "description": "PV des palissades +33 %"
@@ -770,7 +771,7 @@
                     "description": "Coût des navires de guerre -15 % à l'âge féodal, -15 % à l'âge des châteaux, -20 % à l'âge impérial"
                 },
                 "vikings2": {
-                    "description": "PV de l'infanterie +10 % à l'âge féodal, +15 % à l'âge des châteaux, +20 % à l'âge impérial"
+                    "description": "PV de l'infanterie +20 % à partir de l'âge féodal"
                 },
                 "vikings3": {
                     "description": "Brouette, charrette à bras gratuites"
@@ -1546,7 +1547,7 @@
         },
         "manipurCavalry": {
             "name": "cavalerie du Manipur",
-            "description": "La cavalerie et les arambais gagnent +6 d'attaque contre les bâtiments"
+            "description": "La cavalerie et les arambais gagnent +5 d'attaque contre les archers"
         },
         "greekFire": {
             "name": "Feu grégeois",

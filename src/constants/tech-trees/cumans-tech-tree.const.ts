@@ -194,7 +194,7 @@ export const cumansTechTree: CivTechTree = {
         {
             id: 'cumans4',
             effectType: EffectType.discoutWood,
-            value: -100,
+            value: -75,
             affectedUnits: [],
             affectedUpgrades: []
         },

@@ -1,4 +1,5 @@
 {
+    "Last update": "Last update",
     "Bonuses": "Bonuses",
     "Unique technologies": "Unique technologies",
     "Units affected by bonuses or technologies": "Units affected by bonuses or technologies",
@@ -174,7 +175,7 @@
                     "description": "Town Watch and town patrol are free"
                 },
                 "byzantines6": {
-                    "description": "Monks heal 50% faster"
+                    "description": "Monks heal 100% faster"
                 }
             }
         },
@@ -231,7 +232,7 @@
                     "description": "Mounted units move 5%/10%/15% faster in the Feudal/Castle/Imperial Age"
                 },
                 "cumans4": {
-                    "description": "Archery Ranges and Stables cost –100 wood"
+                    "description": "Archery Ranges and Stables cost -75 wood"
                 },
                 "cumans5": {
                     "description": "Palisade Walls have +33% HP"
@@ -770,7 +771,7 @@
                     "description": "Warships are 15%/15%/20% cheaper in the Feudal/Castle/Imperial Age"
                 },
                 "vikings2": {
-                    "description": "Infantry have +10%/+15%/+20% HP in the Feudal/Castle/Imperial Age"
+                    "description": "Infantry have +20% HP starting in Feudal Age"
                 },
                 "vikings3": {
                     "description": "Wheelbarrow and Hand Cart are free"
@@ -1546,7 +1547,7 @@
         },
         "manipurCavalry": {
             "name": "Manipur Cavalry",
-            "description": "cavalry and Arambai +6 attack against standard buildings"
+            "description": "cavalry and Arambai +5 attack against archers"
         },
         "greekFire": {
             "name": "Greek Fire",

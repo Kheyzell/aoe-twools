@@ -32,7 +32,7 @@ export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
             stone: 0
         },
         stats: {
-            health: 30,
+            health: 35,
             rateOfFire: 2,
             attackType: AttackType.projectile,
             range: 5,

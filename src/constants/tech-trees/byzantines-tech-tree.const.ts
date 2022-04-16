@@ -194,7 +194,7 @@ export const byzantinesTechTree: CivTechTree = {
                 apply: unit => {
                     const healingCapacity = unit.getCapacity(CapacityId.healing) as HealingCapacity
                     if (healingCapacity) {
-                        healingCapacity.healthPerMinute = multiplyNumber(healingCapacity.healthPerMinute, 1.5)
+                        healingCapacity.healthPerMinute = multiplyNumber(healingCapacity.healthPerMinute, 2)
                     }
                 }
             }],

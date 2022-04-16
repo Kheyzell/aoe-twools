@@ -36,7 +36,7 @@ export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
             rateOfFire: 2,
             attackType: AttackType.melee,
             attackComponents: [
-                { value: 8, type: ArmorType.melee },
+                { value: 10, type: ArmorType.melee },
                 { value: 2, type: ArmorType.eagleWarrior },
                 { value: 2, type: ArmorType.standardBuilding },
             ],

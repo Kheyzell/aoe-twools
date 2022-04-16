@@ -37,12 +37,12 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
             rateOfFire: 2,
             attackType: AttackType.melee,
             attackComponents: [
-                { value: 9, type: ArmorType.melee },
+                { value: 12, type: ArmorType.melee },
                 { value: 2, type: ArmorType.eagleWarrior },
                 { value: 2, type: ArmorType.standardBuilding }
             ],
             armorComponents: [
-                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.melee },
                 { value: 1, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit }
@@ -50,7 +50,7 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
             movementSpeed: 1.05,
             lineOfSight: 3,
         },
-        duration: 14
+        duration: 12
     }),
     eliteBerserk: new Unit({
         id: 'eliteBerserk',
@@ -264,21 +264,15 @@ export const vikingsTechTree: CivTechTree = {
         {
             id: 'vikings2',
             effectType: EffectType.healthPercent,
-            value: { age2: 10, age3: 15, age4: 20 },
+            value: { age2: 20, age3: 20, age4: 20 },
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
-                        unit.stats.health = multiplyNumber(unit.stats.health, 1.2)
-                    } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
-                        unit.stats.health = multiplyNumber(unit.stats.health, 1.15)
-                    } else
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
-                        unit.stats.health = multiplyNumber(unit.stats.health, 1.1)
+                        unit.stats.health = multiplyNumber(unit.stats.health, 1.2)
                     }
                 }
             }],
@@ -317,7 +311,7 @@ export const vikingsTechTree: CivTechTree = {
             new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
             new UnitLine([archeryUnits.cavalryArcher]),
         ],
-        upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
+        upgrades: new UpgradePerAgeGroup([])
     },
     stable: {
         unitLines: [
