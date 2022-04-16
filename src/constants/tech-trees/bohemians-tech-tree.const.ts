@@ -57,7 +57,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
                 { value: 0, type: ArmorType.hussiteWagon },
             ],
             capacities: [CAPACITIES.projectileProtection],
-            movementSpeed: .85,
+            movementSpeed: .8,
             lineOfSight: 8,
         },
         duration: 21
@@ -97,7 +97,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
                 { value: 0, type: ArmorType.hussiteWagon },
             ],
             capacities: [CAPACITIES.projectileProtection],
-            movementSpeed: .85,
+            movementSpeed: .8,
             lineOfSight: 8,
         },
         duration: 21

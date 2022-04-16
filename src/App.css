@@ -13,16 +13,20 @@
 
 .Tools {
   position: fixed;
+  display: flex;
   z-index: 1001;
-  padding: 0 2px;
   margin-top: -10px;
+}
+
+.Tools > .Box {
+  display: flex;
+  padding: 0 2px;
   color: white;
   border: 1px solid white;
-  display: flex;
   background-color: #bbada1;
 }
 
-.Tools > button {
+.Tools > .Box > button {
   cursor: pointer;
   display: flex;
   align-items: center;

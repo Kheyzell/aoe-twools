@@ -32,7 +32,7 @@ export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit 
             stone: 0
         },
         stats: {
-            health: 50,
+            health: 65,
             rateOfFire: 2,
             attackType: AttackType.melee,
             attackComponents: [

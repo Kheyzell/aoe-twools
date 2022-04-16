@@ -32,11 +32,11 @@ export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
             stone: 0
         },
         stats: {
-            health: 60,
+            health: 70,
             rateOfFire: 1.9,
             attackType: AttackType.melee,
             attackComponents: [
-                { value: 8, type: ArmorType.melee },
+                { value: 10, type: ArmorType.melee },
                 { value: 10, type: ArmorType.uniqueUnit },
                 { value: 2, type: ArmorType.eagleWarrior },
                 { value: 2, type: ArmorType.standardBuilding }

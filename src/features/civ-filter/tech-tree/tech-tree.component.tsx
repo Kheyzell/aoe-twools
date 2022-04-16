@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 
 import { BoxSize } from "../../../components/tech/tech.component"
-import { fullTechTree } from "../../../constants/tech-trees/_full-tech-tree.const"
 import localStorageService from "../../../core/local-storage.service"
 import { Tech } from "../../../models/techs.model"
 import increaseIcon from "../../../resources/icons/increase.svg"
@@ -119,25 +118,28 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
   return (
     <div className="TechTree" ref={scrollRef as React.RefObject<HTMLDivElement>} onWheel={(e) => scrollHorizontally(e, scrollRef)}>
       <div className="Tools">
-        <Tooltip title={<span>{techSize === BoxSize.normal ? t('Scale down') : t('Scale up')}</span>}>
-          <button onClick={onChangeTechSize}> <img src={techSize === BoxSize.normal ? reduceIcon : increaseIcon} alt="Size" /> </button>
-        </Tooltip>
+        <div className="Box">
+          <Tooltip title={<span>{techSize === BoxSize.normal ? t('Scale down') : t('Scale up')}</span>}>
+            <button onClick={onChangeTechSize}> <img src={techSize === BoxSize.normal ? reduceIcon : increaseIcon} alt="Size" /> </button>
+          </Tooltip>
 
-        <Tooltip title={<span>{t(tooltipButtonDescription)}</span>}>
-          <button onClick={onToggleTechDescriptionInteractivity}> <img src={tooltipInteractivityIcon} alt="Size" /> </button>
-        </Tooltip>
+          <Tooltip title={<span>{t(tooltipButtonDescription)}</span>}>
+            <button onClick={onToggleTechDescriptionInteractivity}> <img src={tooltipInteractivityIcon} alt="Size" /> </button>
+          </Tooltip>
 
-        <Tooltip title={<span>{t('Reset filters')}</span>}>
-          <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> </button>
-        </Tooltip>
+          <Tooltip title={<span>{t('Reset filters')}</span>}>
+            <button onClick={onResetClick}> <img src={refreshIcon} alt="Refresh" /> </button>
+          </Tooltip>
 
-        <SelectedCivs></SelectedCivs>
+          <SelectedCivs></SelectedCivs>
 
-        <div className="SelectedTechs">
-          {toolsSelectedTechs.map((tech: Tech, index: number) => {
-            return (<CivFilterTechComponent key={index} tech={tech} size={BoxSize.mini}></CivFilterTechComponent>)
-          })}
+          <div className="SelectedTechs">
+            {toolsSelectedTechs.map((tech: Tech, index: number) => {
+              return (<CivFilterTechComponent key={index} tech={tech} size={BoxSize.mini}></CivFilterTechComponent>)
+            })}
+          </div>
         </div>
+        <span className="LastUpdate"> {t('Last update')}: { Intl.DateTimeFormat().format(new Date(Date.UTC(2022, 3, 16))) } </span>
       </div>
 
       <div className="LeftPanel" style={{ background: `url(${woodenBackground})` }}>

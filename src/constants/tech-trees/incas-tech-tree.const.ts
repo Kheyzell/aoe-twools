@@ -31,7 +31,7 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
             stone: 0
         },
         stats: {
-            health: 60,
+            health: 70,
             rateOfFire: 2,
             attackType: AttackType.melee,
             range: 1,
@@ -43,7 +43,7 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
                 { value: 1, type: ArmorType.mameluke }
             ],
             armorComponents: [
-                { value: 0, type: ArmorType.melee },
+                { value: 1, type: ArmorType.melee },
                 { value: 0, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit }

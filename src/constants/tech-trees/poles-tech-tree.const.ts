@@ -51,7 +51,7 @@ export const polesUniqueUnits: { obuch: Unit, eliteObuch: Unit } = {
             lineOfSight: 3,
             capacities: [CAPACITIES.reduceArmor]
         },
-        duration: 9
+        duration: 12
     }),
     eliteObuch: new Unit({
         id: 'eliteObuch',
@@ -83,7 +83,7 @@ export const polesUniqueUnits: { obuch: Unit, eliteObuch: Unit } = {
             lineOfSight: 3,
             capacities: [CAPACITIES.reduceArmor]
         },
-        duration: 9
+        duration: 12
     })
 }
 
@@ -256,6 +256,7 @@ export const polesTechTree: CivTechTree = {
             universityUpgrades.treadmillCrane,
             universityUpgrades.chemistry,
             universityUpgrades.bombardTower,
+            universityUpgrades.siegeEngineers,
             universityUpgrades.keep,
             universityUpgrades.arrowslits,
         ])

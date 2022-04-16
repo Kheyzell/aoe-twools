@@ -127,9 +127,9 @@ const uniqueTechs = [
         value: null,
         cost: { wood: 0, food: 650, gold: 400, stone: 0 },
         effects: [{
-            order: EffectOrder.first,
+                order: EffectOrder.first,
             apply: (unit: Unit) => {
-                unit.addAttackComponent(6, ArmorType.standardBuilding)
+                unit.addAttackComponent(5, ArmorType.archer)
             }
         }],
         duration: 40,
