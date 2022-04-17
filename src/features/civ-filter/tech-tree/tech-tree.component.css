@@ -2,7 +2,6 @@
     display: flex;
     overflow: auto;
     padding: 16px 0 0 112px;
-    height: 100%;
 }
 
 .TechTree .Tools > .Box > button {

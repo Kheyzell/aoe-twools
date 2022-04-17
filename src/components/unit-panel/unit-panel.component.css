@@ -9,6 +9,8 @@
     outline: none;
     user-select: none;
     background-size: cover !important;
+    overflow-y: auto;
+    max-height: 90vh;
 }
 
 .TechPanel .Title {

@@ -1,14 +1,6 @@
 .App {
+  height: 100%;
   text-align: center;
-}
-
-.Header {
-  background-size: cover;
-}
-
-.Body {
-  height: calc(100vh - 80px);
-  background-size: 100vw;
 }
 
 .Tools {

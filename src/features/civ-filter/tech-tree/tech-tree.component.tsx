@@ -139,7 +139,7 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
             })}
           </div>
         </div>
-        <span className="LastUpdate"> {t('Last update')}: { Intl.DateTimeFormat().format(new Date(Date.UTC(2022, 3, 16))) } </span>
+        <span className="LastUpdate"> {t('Last update')}: { Intl.DateTimeFormat().format(new Date(Date.UTC(2022, 3, 17))) } </span>
       </div>
 
       <div className="LeftPanel" style={{ background: `url(${woodenBackground})` }}>

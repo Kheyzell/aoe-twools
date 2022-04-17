@@ -1,0 +1,16 @@
+.CivFilter {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.CivFilter > .Header {
+    background-size: cover;
+}
+
+.CivFilter > .Body {
+    display: flex;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-size: 100vw;
+}

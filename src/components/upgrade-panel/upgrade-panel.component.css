@@ -47,6 +47,7 @@
 
 .TechPanel .TechList {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .TechPanel .TechList > .Tech:not(:first-child) {
