@@ -5,6 +5,8 @@ import TechTreeComponent from "./tech-tree/tech-tree.component"
 import woodenBackground from "../../resources/images/backgrounds/wood.jpg"
 import woodenBackground4 from "../../resources/images/backgrounds/wood4.jpg"
 
+import './civ-filter.component.css'
+
 type CivFilterProps = {}
 
 const CivFilter: React.FC<CivFilterProps> = () => {
