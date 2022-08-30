@@ -120,13 +120,13 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             range: 12,
             accuracy: 1,
             attackComponents: [
-                { value: 55, type: ArmorType.melee },
+                { value: 50, type: ArmorType.melee },
                 { value: 250, type: ArmorType.building },
                 { value: 55, type: ArmorType.ship },
-                { value: 55, type: ArmorType.fishingShip },
-                { value: 55, type: ArmorType.stoneDefense },
+                { value: 50, type: ArmorType.fishingShip },
+                { value: 50, type: ArmorType.stoneDefense },
                 { value: 20, type: ArmorType.siegeWeapon },
-                { value: 55, type: ArmorType.hussiteWagon },
+                { value: 50, type: ArmorType.hussiteWagon },
             ],
             armorComponents: [
                 { value: 2, type: ArmorType.melee },

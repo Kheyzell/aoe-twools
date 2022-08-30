@@ -18,6 +18,7 @@ import { universityUpgrades } from "../techs/university-techs.const";
 import crest from '../../resources/images/crests/saracens.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 
 export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
     mameluke: new Unit({
@@ -43,7 +44,6 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
                 { value: 0, type: ArmorType.pierce },
-                { value: 0, type: ArmorType.archer },
                 { value: 0, type: ArmorType.mameluke },
                 { value: 0, type: ArmorType.camel },
                 { value: 0, type: ArmorType.uniqueUnit },
@@ -77,7 +77,6 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
                 { value: 0, type: ArmorType.pierce },
-                { value: 0, type: ArmorType.archer },
                 { value: 0, type: ArmorType.mameluke },
                 { value: 0, type: ArmorType.camel },
                 { value: 0, type: ArmorType.uniqueUnit },
@@ -97,24 +96,8 @@ setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgr
 
 const uniqueTechs = [
     new UniqueTech({
-        id: 'madrasah',
-        age: 3,
-        effectType: EffectType.miscallenous,
-        value: 33,
-        cost: { wood: 0, food: 200, gold: 100, stone: 0 },
-        effects: [{
-            order: EffectOrder.first,
-            apply: (unit: Unit) => {
-                unit.stats.capacities.push(CAPACITIES.madrasahRefund)
-            }
-        }],
-        duration: 30,
-        affectedUnits: [monasteryUnits.monk],
-        affectedUpgrades: []
-    }),
-    new UniqueTech({
         id: 'zealotry',
-        age: 4,
+        age: 3,
         effectType: EffectType.health,
         value: 20,
         cost: { wood: 0, food: 500, gold: 450, stone: 0 },
@@ -127,7 +110,23 @@ const uniqueTechs = [
         duration: 50,
         affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke],
         affectedUpgrades: []
-    })
+    }),
+    new UniqueTech({
+        id: 'counterweights',
+        age: 4,
+        effectType: EffectType.damagePercent,
+        value: 15,
+        cost: { wood: 0, food: 650, gold: 500, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.attackComponents.forEach(attack => attack.value = multiplyNumber(attack.value, 1.15))
+            }
+        }],
+        duration: 60,
+        affectedUnits: [siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager, castleUnits.trebuchet],
+        affectedUpgrades: []
+    }),
 ]
 
 export const saracensTechTree: CivTechTree = {

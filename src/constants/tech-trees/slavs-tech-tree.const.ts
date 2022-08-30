@@ -89,20 +89,13 @@ setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgr
 
 const uniqueTechs = [
     new UniqueTech({
-        id: 'orthodoxy',
+        id: 'detinets',
         age: 3,
-        effectType: EffectType.armor,
+        effectType: EffectType.miscallenous,
         value: 3,
-        cost: { wood: 0, food: 200, gold: 300, stone: 0 },
-        effects: [{
-            order: EffectOrder.first,
-            apply: (unit: Unit) => {
-                unit.addArmorComponent(3, ArmorType.melee)
-                unit.addArmorComponent(3, ArmorType.pierce)
-            }
-        }],
+        cost: { wood: 400, food: 0, gold: 200, stone: 0 },
         duration: 40,
-        affectedUnits: [monasteryUnits.monk],
+        affectedUnits: [],
         affectedUpgrades: []
     }),
     new UniqueTech({

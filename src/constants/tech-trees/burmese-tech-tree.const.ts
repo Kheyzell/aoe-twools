@@ -54,7 +54,7 @@ export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
             movementSpeed: 1.3,
             lineOfSight: 7,
         },
-        duration: 21
+        duration: 18
     }),
     eliteArambai: new Unit({
         id: 'eliteArambai',
@@ -89,7 +89,7 @@ export const burmeseUniqueUnits: { arambai: Unit, eliteArambai: Unit } = {
             movementSpeed: 1.3,
             lineOfSight: 7,
         },
-        duration: 21
+        duration: 18
     })
 }
 
@@ -113,7 +113,7 @@ const uniqueTechs = [
             order: EffectOrder.first,
             apply: (unit: Unit) => {
                 unit.addArmorComponent(1, ArmorType.melee)
-                unit.addArmorComponent(2, ArmorType.pierce)
+                unit.addArmorComponent(1, ArmorType.pierce)
             }
         }],
         duration: 40,
@@ -125,7 +125,7 @@ const uniqueTechs = [
         age: 4,
         effectType: EffectType.miscallenous,
         value: null,
-        cost: { wood: 0, food: 650, gold: 400, stone: 0 },
+        cost: { wood: 0, food: 400, gold: 400, stone: 0 },
         effects: [{
                 order: EffectOrder.first,
             apply: (unit: Unit) => {
@@ -183,6 +183,13 @@ export const burmeseTechTree: CivTechTree = {
         },
         {
             id: 'burmese4',
+            effectType: EffectType.armor,
+            value: 1,
+            affectedUnits: [stableUnits.battleElephant, stableUnits.eliteBattleElephant],
+            affectedUpgrades: [],
+        },
+        {
+            id: 'burmese5',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],

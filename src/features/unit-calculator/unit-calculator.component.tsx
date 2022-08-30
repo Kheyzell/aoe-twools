@@ -30,7 +30,7 @@ import parchmentBackground2 from "../../resources/images/backgrounds/parchment.j
 import parchmentBackground from "../../resources/images/backgrounds/parchment7.jpg"
 import woodenBackground from "../../resources/images/backgrounds/wood4.jpg"
 import { incasUniqueUnits } from "../../constants/tech-trees/incas-tech-tree.const"
-import { indiansUniqueUnits } from "../../constants/tech-trees/indians-tech-tree.const"
+import { hindustanisUniqueUnits } from "../../constants/tech-trees/hindustanis-tech-tree.const"
 import { polesUniqueUnits } from "../../constants/tech-trees/poles-tech-tree.const"
 import { vietnameseUniqueUnits } from "../../constants/tech-trees/vietnamese-tech-tree.const"
 
@@ -71,9 +71,9 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
 
     const units = [
         new Unit({ ...barracksUnits.champion }), new Unit({ ...barracksUnits.halberdier }), new Unit({ ...barracksUnits.eliteEagleWarrior }),
-        new Unit({ ...archeryUnits.arbalester }), new Unit({ ...archeryUnits.eliteSkirmisher }), new Unit({ ...archeryUnits.handCannoneer }), new Unit({ ...archeryUnits.heavyCavalryArcher }),
+        new Unit({ ...archeryUnits.arbalester }), new Unit({ ...archeryUnits.eliteSkirmisher }), new Unit({ ...archeryUnits.handCannoneer }), new Unit({ ...archeryUnits.heavyCavalryArcher }), new Unit({ ...archeryUnits.eliteElephantArcher }),
         new Unit({ ...stableUnits.hussar }), new Unit({ ...stableUnits.wingedHussar }), new Unit({ ...stableUnits.paladin }), new Unit({ ...stableUnits.heavyCamelRider }), new Unit({ ...stableUnits.eliteBattleElephant }), new Unit({ ...stableUnits.eliteSteppeLancer }),
-        new Unit({ ...siegeUnits.siegeRam }), new Unit({ ...siegeUnits.siegeOnager }), new Unit({ ...siegeUnits.heavyScorpion }), new Unit({ ...siegeUnits.siegeTower }), new Unit({ ...siegeUnits.bombardCannon }),
+        new Unit({ ...siegeUnits.siegeRam }), new Unit({ ...siegeUnits.siegeElephant }), new Unit({ ...siegeUnits.siegeOnager }), new Unit({ ...siegeUnits.heavyScorpion }), new Unit({ ...siegeUnits.siegeTower }), new Unit({ ...siegeUnits.bombardCannon }),
         new Unit({ ...castleUnits.petard }), new Unit({ ...castleUnits.trebuchet }),
         new Unit({ ...monasteryUnits.monk }),
         new Unit({ ...townCenterUnits.villager }),
@@ -95,9 +95,9 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...ethiopiansUniqueUnits.eliteShotelWarrior }),
         new Unit({ ...franksUniqueUnits.eliteThrowingAxeman }),
         new Unit({ ...gothsUniqueUnits.eliteHuskarl }),
+        new Unit({ ...hindustanisUniqueUnits.eliteGhulam }), new Unit({ ...hindustanisUniqueUnits.imperialCamelRider }),
         new Unit({ ...hunsUniqueUnits.eliteTarkan }),
         new Unit({ ...incasUniqueUnits.eliteKamayuk }), new Unit({ ...incasUniqueUnits.slinger }),
-        new Unit({ ...indiansUniqueUnits.eliteElephantArcher }), new Unit({ ...indiansUniqueUnits.imperialCamelRider }),
         new Unit({ ...italiansUniqueUnits.eliteGenoeseCrossbowman }), new Unit({ ...italiansUniqueUnits.condottiero }),
         new Unit({ ...japaneseUniqueUnits.eliteSamurai }),
         new Unit({ ...khmerUniqueUnits.eliteBallistaElephant }),

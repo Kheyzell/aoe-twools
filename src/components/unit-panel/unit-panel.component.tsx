@@ -1,8 +1,9 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
+import { Trans, useTranslation } from "react-i18next"
 
 import { allCivTechTrees } from "../../constants"
 import { CostStat } from "../../features/unit-calculator/stats-lines/static-stats-lines"
+import UnitCalculatorUnitComponent from "../../features/unit-calculator/unit-calculator-tech/unit-calculator-unit.component"
 import { Bonus, UniqueTech } from "../../models/bonus.model"
 import { CostCompared } from "../../models/stats-calculation.model"
 import { TechType } from "../../models/techs.model"
@@ -20,7 +21,7 @@ type Props = {
 }
 
 const UnitPanel: React.FC<Props> = (props) => {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
     const panelRef = React.createRef<HTMLDivElement>();
 
     const translationKey = `${(props.unit.type === TechType.unit ? 'unit' : props.unit.type === TechType.upgrade ? 'upgrade' : 'unique')}.${props.unit.id}`
@@ -75,11 +76,19 @@ const UnitPanel: React.FC<Props> = (props) => {
             { props.unit.stats?.capacities.length ?
                 <div className="Section">
                     <div className="SubTitle"> Capacities </div>
-                    <div className="CapacityList"> {
-                        props.unit.stats.capacities.map(capacity => {
-                            return (<li key={ capacity.id }> { capacity.id } </li>)
-                            // return (<li> <BonusLine key={capacity.id} bonus={capacity} displayCivCrest={true}></BonusLine> </li>)
-                        })
+                    <div className="CapacityList"> {props.unit.stats.capacities.map(capacity => {
+                        const hasShortDescription = i18n.exists(`capacities.${capacity.id}.shortDescription`)
+                        return (<div> • 
+                            <span> {t(`capacities.${capacity.id}.title`)} </span>
+                            { hasShortDescription ?
+                                <span className="ShortDescription">
+                                    : <Trans
+                                        i18nKey={`capacities.${capacity.id}.shortDescription`}
+                                        values={ capacity }
+                                        components={{ Unit: <UnitCalculatorUnitComponent unit={(capacity as any).unit} size={BoxSize.mini} /> }} />
+                                </span>
+                            : null }
+                        </div>)})
                     } </div>
                 </div>
             : null }

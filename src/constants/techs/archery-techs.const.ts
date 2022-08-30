@@ -12,6 +12,8 @@ interface ArcheryUnits {
     handCannoneer: Unit
     cavalryArcher: Unit
     heavyCavalryArcher: Unit
+    elephantArcher: Unit
+    eliteElephantArcher: Unit
 }
 
 interface ArcheryUpgrades {
@@ -133,7 +135,8 @@ export const archeryUnits: ArcheryUnits = {
             attackComponents: [
                 { value: 2, type: ArmorType.pierce },
                 { value: 3, type: ArmorType.archer },
-                { value: 3, type: ArmorType.spearman }
+                { value: 3, type: ArmorType.spearman },
+                { value: 0, type: ArmorType.cavalryArcher },
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
@@ -278,12 +281,77 @@ export const archeryUnits: ArcheryUnits = {
         },
         duration: 27
     }),
+    elephantArcher: new Unit({
+        id: 'elephantArcher',
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 90,
+            gold: 70,
+            stone: 0
+        },
+        stats: {
+            health: 230,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .7,
+            attackComponents: [
+                { value: 6, type: ArmorType.pierce },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: -7, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.warElephant },
+            ],
+            movementSpeed: .9,
+            lineOfSight: 7,
+        },
+        duration: 34
+    }),
+    eliteElephantArcher: new Unit({
+        id: 'eliteElephantArcher',
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 90,
+            gold: 70,
+            stone: 0
+        },
+        stats: {
+            health: 280,
+            rateOfFire: 2,
+            attackType: AttackType.projectile,
+            range: 4,
+            accuracy: .85,
+            attackComponents: [
+                { value: 7, type: ArmorType.pierce },
+            ],
+            armorComponents: [
+                { value: 0, type: ArmorType.melee },
+                { value: 2, type: ArmorType.pierce },
+                { value: -7, type: ArmorType.cavalryArcher },
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.cavalry },
+                { value: 0, type: ArmorType.warElephant },
+            ],
+            movementSpeed: .9,
+            lineOfSight: 7,
+        },
+        duration: 34
+    }),
 }
 
 chainTechs([archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester])
 chainTechs([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher])
 chainTechs([archeryUnits.handCannoneer])
 chainTechs([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher])
+chainTechs([archeryUnits.elephantArcher, archeryUnits.eliteElephantArcher])
 
 export const archeryUpgrades: ArcheryUpgrades = {
     thumbRing: new Upgrade({

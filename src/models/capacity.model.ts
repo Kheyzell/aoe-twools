@@ -1,5 +1,6 @@
 import { Unit } from "./unit.model";
 
+
 export enum CapacityId {
     selfDestruction = "selfDestruction", conversion = "conversion", ballistics = "ballistics",
     trampleDruzhina = "trampleDruzhina", madrasahRefund = "madrasahRefund",
@@ -19,7 +20,8 @@ export enum CapacityId {
     halfPopulation = "halfPopulation",
     reduceArmor = "reduceArmor",
     projectilePassesThroughUnits = "projectilePassesThroughUnits",
-    generateGoldWhenFighting = "generateGoldWhenFighting"
+    generateGoldWhenFighting = "generateGoldWhenFighting",
+    attackPassThrough = "attackPassThrough"
 }
 
 export const CAPACITIES = {
@@ -44,7 +46,8 @@ export const CAPACITIES = {
     halfPopulation: { id: CapacityId.halfPopulation },
     reduceArmor: { id: CapacityId.reduceArmor, melee: 1, pierce: 1 } as ReduceArmorCapacity,
     projectilePassesThroughUnits: { id: CapacityId.projectilePassesThroughUnits },
-    generateGoldWhenFighting: { id: CapacityId.generateGoldWhenFighting, goldPerSecond: 0 } as GenerateGoldWhenFightingCapacity
+    generateGoldWhenFighting: { id: CapacityId.generateGoldWhenFighting, goldPerSecond: 0 } as GenerateGoldWhenFightingCapacity,
+    attackPassThrough: { id: CapacityId.attackPassThrough, range: 1 } as AttackPassThrough,
 }
 
 export interface Capacity {
@@ -92,4 +95,9 @@ export interface ReduceArmorCapacity extends Capacity {
 export interface GenerateGoldWhenFightingCapacity extends Capacity {
     id: CapacityId
     goldPerSecond: number
+}
+
+export interface AttackPassThrough extends Capacity {
+    id: CapacityId
+    range: number
 }

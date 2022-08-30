@@ -214,10 +214,17 @@ export const incasTechTree: CivTechTree = {
         },
         {
             id: 'incas5',
-            effectType: EffectType.miscallenous,
-            value: 100,
-            affectedUnits: [],
-            affectedUpgrades: []
+            effectType: EffectType.lineOfSight,
+            value: 2,
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.stats.lineOfSight = unit.stats.lineOfSight + 2
+                }
+            }],
+            affectedUnits: [barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher],
+            affectedUpgrades: [],
+            team: true
         }
     ],
     uniqueTechs,

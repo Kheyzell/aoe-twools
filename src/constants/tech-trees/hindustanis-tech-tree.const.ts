@@ -13,84 +13,79 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/indians.png'
+import crest from '../../resources/images/crests/hindustanis.png'
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
 import { AttackType, Unit } from "../../models/unit.model";
+import { CAPACITIES } from "../../models/capacity.model";
 
-export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Unit, imperialCamelRider: Unit } = {
-    elephantArcher: new Unit({
-        id: 'elephantArcher',
+export const hindustanisUniqueUnits: { ghulam: Unit, eliteGhulam: Unit, imperialCamelRider: Unit } = {
+    ghulam: new Unit({
+        id: 'ghulam',
         unique: true,
         age: 3,
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 100,
-            gold: 70,
+            food: 30,
+            gold: 45,
             stone: 0
         },
         stats: {
-            health: 280,
+            health: 55,
             rateOfFire: 2,
-            attackType: AttackType.projectile,
-            range: 4,
-            accuracy: 1,
+            attackType: AttackType.melee,
             attackComponents: [
-                { value: 6, type: ArmorType.pierce },
-                { value: 3, type: ArmorType.stoneDefense },
-                { value: 3, type: ArmorType.standardBuilding },
+                { value: 8, type: ArmorType.melee },
+                { value: 5, type: ArmorType.archer },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding },
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
                 { value: 3, type: ArmorType.pierce },
-                { value: -2, type: ArmorType.cavalryArcher },
-                { value: 0, type: ArmorType.archer },
-                { value: 0, type: ArmorType.cavalry },
-                { value: 0, type: ArmorType.warElephant },
+                { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit },
             ],
-            movementSpeed: .8,
-            lineOfSight: 7,
+            movementSpeed: 1.15,
+            lineOfSight: 6,
+            capacities: [CAPACITIES.attackPassThrough]
         },
-        duration: 25
+        duration: 12
     }),
-    eliteElephantArcher: new Unit({
-        id: 'eliteElephantArcher',
+    eliteGhulam: new Unit({
+        id: 'eliteGhulam',
         unique: true,
         age: 4,
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 100,
-            gold: 70,
+            food: 30,
+            gold: 45,
             stone: 0
         },
         stats: {
-            health: 330,
+            health: 65,
             rateOfFire: 2,
-            attackType: AttackType.projectile,
-            range: 4,
-            accuracy: 1,
+            attackType: AttackType.melee,
             attackComponents: [
-                { value: 7, type: ArmorType.pierce },
-                { value: 4, type: ArmorType.stoneDefense },
-                { value: 4, type: ArmorType.standardBuilding },
+                { value: 10, type: ArmorType.melee },
+                { value: 6, type: ArmorType.archer },
+                { value: 2, type: ArmorType.eagleWarrior },
+                { value: 2, type: ArmorType.standardBuilding },
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
-                { value: 3, type: ArmorType.pierce },
-                { value: -2, type: ArmorType.cavalryArcher },
-                { value: 0, type: ArmorType.archer },
-                { value: 0, type: ArmorType.cavalry },
-                { value: 0, type: ArmorType.warElephant },
+                { value: 6, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit },
             ],
-            movementSpeed: .8,
-            lineOfSight: 7,
+            movementSpeed: 1.2,
+            lineOfSight: 6,
+            capacities: [CAPACITIES.attackPassThrough]
         },
-        duration: 25
+        duration: 12
     }),
     imperialCamelRider: new Unit({
         id: 'imperialCamelRider',
@@ -108,7 +103,7 @@ export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Un
             rateOfFire: 2,
             attackType: AttackType.melee,
             attackComponents: [
-                { value: 9, type: ArmorType.melee },
+                { value: 8, type: ArmorType.melee },
                 { value: 18, type: ArmorType.cavalry },
                 { value: 9, type: ArmorType.camel },
                 { value: 9, type: ArmorType.ship },
@@ -128,16 +123,14 @@ export const indiansUniqueUnits: { elephantArcher: Unit, eliteElephantArcher: Un
     })
 }
 
-chainTechs([indiansUniqueUnits.elephantArcher, indiansUniqueUnits.eliteElephantArcher])
-const uniqueUnitLine = new UnitLine([indiansUniqueUnits.elephantArcher, indiansUniqueUnits.eliteElephantArcher])
-setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
-    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
-    archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis,
-    stableUpgrades.bloodlines, stableUpgrades.husbandry,
-    universityUpgrades.ballistics, universityUpgrades.chemistry])
+chainTechs([hindustanisUniqueUnits.ghulam, hindustanisUniqueUnits.eliteGhulam])
+const uniqueUnitLine = new UnitLine([hindustanisUniqueUnits.ghulam, hindustanisUniqueUnits.eliteGhulam])
+setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor,
+    barracksUpgrade.squires, barracksUpgrade.arson,])
 
-chainTechs([stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider])
-const camelLine = new UnitLine([stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider])
+chainTechs([stableUnits.camelRider, stableUnits.heavyCamelRider, hindustanisUniqueUnits.imperialCamelRider])
+const camelLine = new UnitLine([stableUnits.camelRider, stableUnits.heavyCamelRider, hindustanisUniqueUnits.imperialCamelRider])
 setAffectingUpgrades(camelLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
     blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor,
     stableUpgrades.bloodlines, stableUpgrades.husbandry])
@@ -162,7 +155,7 @@ const uniqueTechs = [
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
-                unit.stats.range! += 1
+                unit.stats.range! += 2
             }
         }],
         duration: 40,
@@ -171,20 +164,13 @@ const uniqueTechs = [
     })
 ]
 
-export const indiansTechTree: CivTechTree = {
-    id: 'indians',
+export const hindustanisTechTree: CivTechTree = {
+    id: 'hindustanis',
     crest,
-    wikiUrl: 'Indians_(Age_of_Empires_II)',
+    wikiUrl: 'Hindustanis',
     bonuses: [
         {
-            id: 'indians1',
-            effectType: EffectType.miscallenous,
-            value: 10,
-            affectedUnits: [townCenterUnits.villager],
-            affectedUpgrades: []
-        },
-        {
-            id: 'indians2',
+            id: 'hindustanis1',
             effectType: EffectType.discount,
             value: { age1: 10, age2: 15, age3: 20, age4: 25 },
             effects: [{
@@ -222,33 +208,51 @@ export const indiansTechTree: CivTechTree = {
             affectedUpgrades: []
         },
         {
-            id: 'indians3',
-            effectType: EffectType.pierceArmor,
-            value: { age3: 1, age4: 2 },
+            id: 'hindustanis2',
+            effectType: EffectType.fireRate,
+            value: 25,
             effects: [{
-                order: EffectOrder.first,
-                apply: (unit, upgrades) => {
-                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
-                    unit.addArmorComponent(1, ArmorType.pierce)                    
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
-                        unit.addArmorComponent(1, ArmorType.pierce)
-                    }
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.multiplyAttackRate(1.25)
                 }
             }],
-            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar, stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider],
+            affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, hindustanisUniqueUnits.imperialCamelRider],
             affectedUpgrades: []
         },
         {
-            id: 'indians4',
-            effectType: EffectType.miscallenous,
-            value: 4,
+            id: 'hindustanis3',
+            effectType: EffectType.armor,
+            value: 1,
             effects: [{
                 order: EffectOrder.first,
                 apply: (unit: Unit) => {
-                    unit.addAttackComponent(4, ArmorType.standardBuilding)
+                    unit.addArmorComponent(1, ArmorType.melee)
+                    unit.addArmorComponent(1, ArmorType.pierce)
                 }
             }],
-            affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, indiansUniqueUnits.imperialCamelRider],
+            affectedUnits: [archeryUnits.handCannoneer],
+            affectedUpgrades: []
+        },
+        {
+            id: 'hindustanis4',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'hindustanis5',
+            effectType: EffectType.miscallenous,
+            value: 2,
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.addAttackComponent(2, ArmorType.standardBuilding)
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar,
+                stableUnits.camelRider, stableUnits.heavyCamelRider, hindustanisUniqueUnits.imperialCamelRider],
             affectedUpgrades: [],
             team: true
         }
@@ -257,7 +261,7 @@ export const indiansTechTree: CivTechTree = {
     barracks: {
         unitLines: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
-            new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
+            new UnitLine([barracksUnits.spearman, barracksUnits.pikeman,]),
         ],
         upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
     },
@@ -268,7 +272,7 @@ export const indiansTechTree: CivTechTree = {
             new UnitLine([archeryUnits.handCannoneer]),
             new UnitLine([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher]),
         ],
-        upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis])
+        upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing])
     },
     stable: {
         unitLines: [
@@ -279,7 +283,7 @@ export const indiansTechTree: CivTechTree = {
     },
     siege: {
         unitLines: [
-            new UnitLine([siegeUnits.batteringRam, siegeUnits.cappedRam]),
+            new UnitLine([siegeUnits.armoredElephant, siegeUnits.siegeElephant]),
             new UnitLine([siegeUnits.mangonel, siegeUnits.onager]),
             new UnitLine([siegeUnits.scorpion]),
             new UnitLine([siegeUnits.siegeTower]),
@@ -299,7 +303,7 @@ export const indiansTechTree: CivTechTree = {
         unitLines: [],
         upgrades: new UpgradePerAgeGroup([
             blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
-            blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor,
+            blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateBardingArmor,
             blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor,
             blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
             blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor
@@ -315,7 +319,7 @@ export const indiansTechTree: CivTechTree = {
             monasteryUpgrade.faith,
             monasteryUpgrade.illumination,
             monasteryUpgrade.blockPrinting,
-            monasteryUpgrade.theocracy,
+            monasteryUpgrade.theocracy
         ])
     },
     university: {
@@ -325,7 +329,6 @@ export const indiansTechTree: CivTechTree = {
             universityUpgrades.fortifiedWall,
             universityUpgrades.ballistics,
             universityUpgrades.guardTower,
-            universityUpgrades.heatedShot,
             universityUpgrades.murderHoles,
             universityUpgrades.chemistry,
             universityUpgrades.siegeEngineers,
@@ -383,16 +386,15 @@ export const indiansTechTree: CivTechTree = {
             new UnitLine([dockUnits.transportShip]),
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip]),
-            new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
+            new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip]),
             new UnitLine([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon]),
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,
             dockUpgrades.careening,
-            dockUpgrades.dryDock,
         ])
     }
 }
 
-setCivOnUniqueTechs(uniqueTechs, indiansTechTree)
-setCivOnUniqueTechs(indiansTechTree.bonuses, indiansTechTree)
+setCivOnUniqueTechs(uniqueTechs, hindustanisTechTree)
+setCivOnUniqueTechs(hindustanisTechTree.bonuses, hindustanisTechTree)

@@ -38,7 +38,7 @@ export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: 
             range: 5,
             accuracy: 1,
             attackComponents: [
-                { value: 8, type: ArmorType.pierce },
+                { value: 10, type: ArmorType.pierce },
                 { value: 8, type: ArmorType.ship },
                 { value: 8, type: ArmorType.fishingShip },
                 { value: 3, type: ArmorType.stoneDefense },
@@ -76,7 +76,7 @@ export const khmerUniqueUnits: { ballistaElephant: Unit, eliteBallistaElephant: 
             range: 5,
             accuracy: 1,
             attackComponents: [
-                { value: 9, type: ArmorType.pierce },
+                { value: 11, type: ArmorType.pierce },
                 { value: 8, type: ArmorType.ship },
                 { value: 8, type: ArmorType.fishingShip },
                 { value: 4, type: ArmorType.stoneDefense },

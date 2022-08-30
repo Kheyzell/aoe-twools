@@ -6,6 +6,8 @@ interface SiegeUnits {
     batteringRam: Unit
     cappedRam: Unit
     siegeRam: Unit
+    armoredElephant: Unit
+    siegeElephant: Unit
     mangonel: Unit
     onager: Unit
     siegeOnager: Unit
@@ -106,6 +108,72 @@ export const siegeUnits: SiegeUnits = {
             ],
             movementSpeed: .6,
             lineOfSight: 3
+        },
+        duration: 36
+    }),
+    armoredElephant: new Unit({
+        id: 'armoredElephant',
+        wikiUrl: 'Armored_Elephant_(Age_of_Empires_II)',
+        age: 3,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 130,
+            gold: 95,
+            stone: 0
+        },
+        stats: {
+            health: 200,
+            rateOfFire: 3,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 4, type: ArmorType.melee },
+                { value: 75, type: ArmorType.building },
+                { value: 25, type: ArmorType.siegeWeapon },
+            ],
+            armorComponents: [
+                { value: -2, type: ArmorType.melee },
+                { value: 140, type: ArmorType.pierce },
+                { value: 7, type: ArmorType.cavalry },
+                { value: 17, type: ArmorType.warElephant },
+                { value: 0, type: ArmorType.siegeWeapon },
+                { value: 0, type: ArmorType.ram }
+            ],
+            movementSpeed: .6,
+            lineOfSight: 4
+        },
+        duration: 36
+    }),
+    siegeElephant: new Unit({
+        id: 'siegeElephant',
+        wikiUrl: 'Siege_Elephant_(Age_of_Empires_II)',
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 130,
+            gold: 95,
+            stone: 0
+        },
+        stats: {
+            health: 250,
+            rateOfFire: 3,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 4, type: ArmorType.melee },
+                { value: 105, type: ArmorType.building },
+                { value: 35, type: ArmorType.siegeWeapon },
+            ],
+            armorComponents: [
+                { value: -2, type: ArmorType.melee },
+                { value: 150, type: ArmorType.pierce },
+                { value: 8, type: ArmorType.cavalry },
+                { value: 18, type: ArmorType.warElephant },
+                { value: 0, type: ArmorType.siegeWeapon },
+                { value: 2, type: ArmorType.ram }
+            ],
+            movementSpeed: .6,
+            lineOfSight: 4
         },
         duration: 36
     }),
@@ -268,7 +336,7 @@ export const siegeUnits: SiegeUnits = {
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
-                { value: 7, type: ArmorType.pierce },
+                { value: 8, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.siegeWeapon },
             ],
             movementSpeed: .65,
@@ -341,6 +409,7 @@ export const siegeUnits: SiegeUnits = {
 }
 
 chainTechs([siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam])
+chainTechs([siegeUnits.armoredElephant, siegeUnits.siegeElephant])
 chainTechs([siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager])
 chainTechs([siegeUnits.scorpion, siegeUnits.heavyScorpion])
 chainTechs([siegeUnits.siegeTower])

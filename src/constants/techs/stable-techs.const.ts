@@ -260,7 +260,7 @@ export const stableUnits: StableUnits = {
                 { value: 0, type: ArmorType.camel }
             ],
             movementSpeed: 1.45,
-            lineOfSight: 4
+            lineOfSight: 5
         },
         duration: 22
     }),

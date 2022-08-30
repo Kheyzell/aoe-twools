@@ -32,6 +32,7 @@ export const fullTechTree: CivTechTree = {
             new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher]),
             new UnitLine([archeryUnits.handCannoneer]),
             new UnitLine([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher]),
+            new UnitLine([archeryUnits.elephantArcher, archeryUnits.eliteElephantArcher]),
         ],
         upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis])
     },
@@ -48,6 +49,7 @@ export const fullTechTree: CivTechTree = {
     siege: {
         unitLines: [
             new UnitLine([siegeUnits.batteringRam, siegeUnits.cappedRam, siegeUnits.siegeRam]),
+            new UnitLine([siegeUnits.armoredElephant, siegeUnits.siegeElephant]),
             new UnitLine([siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager]),
             new UnitLine([siegeUnits.scorpion, siegeUnits.heavyScorpion]),
             new UnitLine([siegeUnits.siegeTower]),
