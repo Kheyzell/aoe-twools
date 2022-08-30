@@ -3,7 +3,6 @@ import { EffectOrder, GroupTechTree, UnitLine, UpgradePerAgeGroup } from "../../
 import { Unit } from "../../models/unit.model";
 import { setAffectingUpgrades } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
-import { indiansUniqueUnits } from "../tech-trees/indians-tech-tree.const";
 import { vietnameseUniqueUnits } from "../tech-trees/vietnamese-tech-tree.const";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -14,6 +13,7 @@ const archerLine = new UnitLine([archeryUnits.archer, archeryUnits.crossbowman, 
 const skirmisherLine = new UnitLine([archeryUnits.skirmisher, archeryUnits.eliteSkirmisher])
 const handCannoneerLine = new UnitLine([archeryUnits.handCannoneer])
 const cavalryArcherLine = new UnitLine([archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher])
+const elephantArcherLine = new UnitLine([archeryUnits.elephantArcher, archeryUnits.eliteElephantArcher])
 
 archeryUpgrades.thumbRing.effects = [
     {
@@ -29,7 +29,7 @@ archeryUpgrades.thumbRing.effects = [
                 unit.id === mongolsUniqueUnits.mangudai.id || unit.id === mongolsUniqueUnits.eliteMangudai.id ||
                 unit.id === berbersUniqueUnits.camelArcher.id || unit.id === berbersUniqueUnits.eliteCamelArcher.id ||
                 unit.id === italiansUniqueUnits.genoeseCrossbowman.id || unit.id === italiansUniqueUnits.eliteGenoeseCrossbowman.id ||
-                unit.id === indiansUniqueUnits.elephantArcher.id || unit.id === indiansUniqueUnits.eliteElephantArcher.id ||
+                unit.id === archeryUnits.elephantArcher.id || unit.id === archeryUnits.eliteElephantArcher.id ||
                 unit.id === mayansUniqueUnits.plumedArcher.id || unit.id === mayansUniqueUnits.elitePlumedArcher.id ||
                 unit.id === vietnameseUniqueUnits.rattanArcher.id || unit.id === vietnameseUniqueUnits.eliteRattanArcher.id ||
                 unit.id === cumansUniqueUnits.kipchak.id || unit.id === cumansUniqueUnits.eliteKipchak.id
@@ -68,9 +68,14 @@ setAffectingUpgrades(cavalryArcherLine, [
     archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis,
     stableUpgrades.bloodlines, stableUpgrades.husbandry,
     universityUpgrades.ballistics, universityUpgrades.chemistry])
+setAffectingUpgrades(elephantArcherLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+    blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
+    archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry,
+    universityUpgrades.ballistics, universityUpgrades.chemistry])
 
 export const archeryTechs: GroupTechTree = {
     name: 'Archery range',
-    unitLines: [archerLine, skirmisherLine, handCannoneerLine, cavalryArcherLine],
+    unitLines: [archerLine, skirmisherLine, handCannoneerLine, cavalryArcherLine, elephantArcherLine],
     upgrades: new UpgradePerAgeGroup([archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis])
 };

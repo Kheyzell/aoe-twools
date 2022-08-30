@@ -26,7 +26,7 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
         age: 3,
         unitType: UnitType.military,
         cost: {
-            wood: 115,
+            wood: 125,
             food: 0,
             gold: 60,
             stone: 0
@@ -60,7 +60,7 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
         age: 4,
         unitType: UnitType.military,
         cost: {
-            wood: 115,
+            wood: 125,
             food: 0,
             gold: 60,
             stone: 0

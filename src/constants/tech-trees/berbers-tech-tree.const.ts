@@ -96,7 +96,7 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
         unitType: UnitType.military,
         cost: {
             wood: 35,
-            food: 50,
+            food: 40,
             gold: 0,
             stone: 0
         },
@@ -132,7 +132,7 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
         unitType: UnitType.military,
         cost: {
             wood: 35,
-            food: 50,
+            food: 40,
             gold: 0,
             stone: 0
         },

@@ -14,7 +14,7 @@ import { franksTechTree } from "./tech-trees/franks-tech-tree.const"
 import { gothsTechTree } from "./tech-trees/goths-tech-tree.const"
 import { hunsTechTree } from "./tech-trees/huns-tech-tree.const"
 import { incasTechTree } from "./tech-trees/incas-tech-tree.const"
-import { indiansTechTree } from "./tech-trees/indians-tech-tree.const"
+import { hindustanisTechTree } from "./tech-trees/hindustanis-tech-tree.const"
 import { italiansTechTree } from "./tech-trees/italians-tech-tree.const"
 import { japaneseTechTree } from "./tech-trees/japanese-tech-tree.const"
 import { khmerTechTree } from "./tech-trees/khmer-tech-tree.const"
@@ -90,7 +90,7 @@ export const allCivTechTrees = [
     gothsTechTree,
     hunsTechTree,
     incasTechTree,
-    indiansTechTree,
+    hindustanisTechTree,
     italiansTechTree,
     japaneseTechTree,
     khmerTechTree,

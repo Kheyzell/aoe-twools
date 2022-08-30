@@ -63,7 +63,7 @@
             "name": "Bohemians",
             "bonus": {
                 "bohemians1": {
-                    "description": "Forges, Monastères, et Universités coûtent -100 de bois"
+                    "description": "Forges et Universités coûtent -100 de bois"
                 },
                 "bohemians2": {
                     "description": "Chimie et canoniers à main disponible à l'âge des châteaux"
@@ -152,6 +152,9 @@
                     "description": "Coût des technologies associées aux monastères -50 %"
                 },
                 "burmese4": {
+                    "description": "Les Éléphants de combat ont +1/+1 d'armure"
+                },
+                "burmese5": {
                     "description": "Reliques visibles sur la carte au début de la partie"
                 }
             }
@@ -332,24 +335,27 @@
                     "description": "Coût en pierre des bâtiments -15 %"
                 },
                 "incas5": {
-                    "description": "Vitesse de construction des fermes +100 %"
+                    "description": "Les Piquiers et tirailleurs ont +2 ligne de mire"
                 }
             }
         },
-        "indians": {
-            "name": "Indiens",
+        "hindustanis": {
+            "name": "Hindustanis",
             "bonus": {
-                "indians1": {
-                    "description": "Cadence de travail +10 % pour les pêcheurs"
-                },
-                "indians2": {
+                "hindustanis1": {
                     "description": "Coût des villageois -10 % à l'âge sombre, -15 % à l'âge féodal, -20 % à l'âge des châteaux, -25 % à l'âge impérial"
                 },
-                "indians3": {
-                    "description": "+1 protection perçage pour les unités de l'écurie à l'âge des châteaux et l'âge impérial (+2 au total)"
+                "hindustanis2": {
+                    "description": "Vitesse d'attaque des chameaux +25 %"
                 },
-                "indians4": {
-                    "description": "Attaque des chameaux +4 contre les bâtiments"
+                "hindustanis3": {
+                    "description": "Unités à poudre à canon +1 d'armure/+1 de protection perçage"
+                },
+                "hindustanis4": {
+                    "description": "Peut construire des caravansérails à partir de l'âge impérial"
+                },
+                "hindustanis5": {
+                    "description": "Attaque des chameaux +2 contre les bâtiments"
                 }
             }
         },
@@ -1095,6 +1101,12 @@
         "eliteElephantArcher": {
             "name": "Éléphant archer d'élite"
         },
+        "ghulam": {
+            "name": "Ghulam"
+        },
+        "eliteGhulam": {
+            "name": "Ghulam d'élite"
+        },
         "imperialCamelRider": {
             "name": "Chameau impérial"
         },
@@ -1543,7 +1555,7 @@
         },
         "howdah": {
             "name": "Howdah",
-            "description": "Les éléphants de combat gagnent +1/+2 d'armure"
+            "description": "Les éléphants de combat gagnent +1/+1 d'armure"
         },
         "manipurCavalry": {
             "name": "cavalerie du Manipur",
@@ -1579,7 +1591,7 @@
         },
         "cumanMercenaries": {
             "name": "Mercenaires coumans",
-            "description": "Les membres de l'équipe peuvent créer 10 Kipchaks d'élite gratuits au château"
+            "description": "Les membres de l'équipe peuvent créer 5 Kipchaks d'élite gratuits par château, incluant les châteaux construits plus tard"
         },
         "royalHeirs": {
             "name": "Héritiers royaux",
@@ -1627,7 +1639,7 @@
         },
         "shatagni": {
             "name": "Shatagni",
-            "description": "Les cannoniers à main gagnent +1 de portée"
+            "description": "Les cannoniers à main gagnent +2 de portée"
         },
         "pavise": {
             "name": "Pavois",
@@ -1733,13 +1745,13 @@
             "name": "Arquebuse",
             "description": "Les unités à pourdre à canon sont plus précisent contre les cibles mouvantes"
         },
-        "madrasah": {
-            "name": "Madrasa",
-            "description": "Les moines rapportent 33 % de leur coût une fois tués"
-        },
         "zealotry": {
             "name": "Fanatisme",
             "description": "Les chameaux gagnent +20 PV"
+        },
+        "counterweights": {
+            "name": "Contrepoids",
+            "description": "Les Trebuchets et Mangonneaux gagnent +15% d'attaque"
         },
         "firstCrusade": {
             "name": "Première croisade",
@@ -1749,9 +1761,9 @@
             "name": "Hauberk",
             "description": "Les Chevaliers gagnent +1 d'armure de mélêe et +2 d'armure perçante"
         },
-        "orthodoxy": {
-            "name": "Orthodoxie",
-            "description": "Les moines gagnent +3/+3 d'armure"
+        "detinets": {
+            "name": "Detinets",
+            "description": "Remplace 40 % du coût en pierre par du bois pour les châteaux et les tours"
         },
         "druzhina": {
             "name": "Druzhina",
@@ -1795,7 +1807,7 @@
         },
         "paperMoney": {
             "name": "Monnaie de papier",
-            "description": "Chaque allié reçoit 500 d'or"
+            "description": "Les bûcherons génèrent lentement de l'or en plus du bois"
         },
         "chieftains": {
             "name": "Chefs de tribu",

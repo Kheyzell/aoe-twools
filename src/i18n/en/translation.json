@@ -63,7 +63,7 @@
             "name": "Bohemians",
             "bonus": {
                 "bohemians1": {
-                    "description": "Blacksmiths, Monasteries, and Universities cost -100 wood"
+                    "description": "Blacksmiths and Universities cost -100 wood"
                 },
                 "bohemians2": {
                     "description": "Chemistry and Hand Cannoneer available in Castle Age"
@@ -152,6 +152,9 @@
                     "description": "Monastery technologies are 50% cheaper"
                 },
                 "burmese4": {
+                    "description": "Battle Elephants have +1 melee and +1 pierce armor"
+                },
+                "burmese5": {
                     "description": "Relics are visible on the map at game start"
                 }
             }
@@ -332,24 +335,27 @@
                     "description": "Buildings cost -15% stone"
                 },
                 "incas5": {
-                    "description": "Farms are built 100% faster"
+                    "description": "Spearmen and Skirmishers +2 Line of Sight"
                 }
             }
         },
-        "indians": {
-            "name": "Indians",
+        "hindustanis": {
+            "name": "Hindustanis",
             "bonus": {
-                "indians1": {
-                    "description": "Fishermen work 10% faster"
-                },
-                "indians2": {
+                "hindustanis1": {
                     "description": "Villagers are 10%/15%/20%/25% cheaper in the Dark/Feudal/Castle/Imperial Age"
                 },
-                "indians3": {
-                    "description": "All Stable units have +1 pierce armor in the Castle Age and +1 in the Imperial Age"
+                "hindustanis2": {
+                    "description": "Camel Riders attack 25% faster"
                 },
-                "indians4": {
-                    "description": "Camel units have +4 attack against standard buildings"
+                "hindustanis3": {
+                    "description": "Gunpowder units have +1/+1 armor"
+                },
+                "hindustanis4": {
+                    "description": "Can build Caravanserai in the Imperial Age"
+                },
+                "hindustanis5": {
+                    "description": "Camel units and light cavalry have +2 attack against standard buildings"
                 }
             }
         },
@@ -888,6 +894,12 @@
         "siegeRam": {
             "name": "Siege Ram"
         },
+        "armoredElephant": {
+            "name": "Armored Elephant"
+        },
+        "siegeElephant": {
+            "name": "Siege Elephant"
+        },
         "mangonel": {
             "name": "Mangonel"
         },
@@ -1094,6 +1106,12 @@
         },
         "eliteElephantArcher": {
             "name": "Elite Elephant Archer"
+        },
+        "ghulam": {
+            "name": "Ghulam"
+        },
+        "eliteGhulam": {
+            "name": "Elite Ghulam"
         },
         "imperialCamelRider": {
             "name": "Imperial Camel Rider"
@@ -1543,7 +1561,7 @@
         },
         "howdah": {
             "name": "Howdah",
-            "description": "Battle Elephants +1/+2 armor"
+            "description": "Battle Elephants +1/+1 armor"
         },
         "manipurCavalry": {
             "name": "Manipur Cavalry",
@@ -1579,7 +1597,7 @@
         },
         "cumanMercenaries": {
             "name": "Cuman Mercenaries",
-            "description": "team members can create 10 free Elite Kipchaks at the Castle"
+            "description": "team members can create 5 free Elite Kipchaks per Castle owned, including Castles built at a later time"
         },
         "royalHeirs": {
             "name": "Royal Heirs",
@@ -1627,7 +1645,7 @@
         },
         "shatagni": {
             "name": "Shatagni",
-            "description": "Hand Cannoneers +1 range"
+            "description": "Hand Cannoneers +2 range"
         },
         "pavise": {
             "name": "Pavise",
@@ -1733,13 +1751,13 @@
             "name": "Arquebus",
             "description": "gunpowder units fire more accurately at moving targets"
         },
-        "madrasah": {
-            "name": "Madrasah",
-            "description": "33% of a Monk's gold cost are returned if the Monk gets killed"
-        },
         "zealotry": {
             "name": "Zealotry",
             "description": "Camel Riders and Mamelukes +20 hit points"
+        },
+        "counterweights": {
+            "name": "Counterweights",
+            "description": "Trebuchets and Mangonel-line +15% attack"
         },
         "firstCrusade": {
             "name": "First Crusade",
@@ -1749,9 +1767,9 @@
             "name": "Hauberk",
             "description": "Knight-line +1 melee and +2 pierce armor"
         },
-        "orthodoxy": {
-            "name": "Orthodoxy",
-            "description": "+3/+3 armor for Monks"
+        "detinets": {
+            "name": "Detinets",
+            "description": "Replaces 40% of Castles' and Towers' stone cost with wood"
         },
         "druzhina": {
             "name": "Druzhina",
@@ -1795,7 +1813,7 @@
         },
         "paperMoney": {
             "name": "Paper Money",
-            "description": "tributes 500 gold to each ally"
+            "description": "Lumberjacks slowly generate gold in addition to wood"
         },
         "chieftains": {
             "name": "Chieftains",
@@ -1863,6 +1881,10 @@
         "dismountOnDeath": {
             "title": "Dismount On Death",
             "shortDescription": "Turn into <Unit></Unit> upon death"
+        },
+        "attackPassThrough": {
+            "title": "Attack passes through",
+            "shortDescription": "Deals damage to the unit behind its target up to {{range}} tiles away"
         }
     }
 }

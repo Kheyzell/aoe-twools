@@ -96,10 +96,11 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
             attackType: AttackType.melee,
             attackComponents: [
                 { value: 20, type: ArmorType.melee },
-                { value: 100, type: ArmorType.building },
+                { value: 200, type: ArmorType.building },
                 { value: 50, type: ArmorType.cavalry },
                 { value: 50, type: ArmorType.camel },
                 { value: 130, type: ArmorType.warElephant },
+                { value: 25, type: ArmorType.siegeWeapon },
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
