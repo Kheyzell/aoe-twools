@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import BonusLine from "../../components/bonus/bonus-line/bonus-line.component"
 import TechComponent, { BoxSize } from "../../components/tech/tech.component"
-import { allCivTechTrees, aztecsUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits, celtsUniqueUnits, chineseUniqueUnits, cumansUniqueUnits, ethiopiansUniqueUnits, franksUniqueUnits, gothsUniqueUnits, hunsUniqueUnits, italiansUniqueUnits, japaneseUniqueUnits, khmerUniqueUnits, koreansUniqueUnits, lithuaniansUniqueUnits, magyarsUniqueUnits, malayUniqueUnits, maliansUniqueUnits, mayansUniqueUnits, mongolsUniqueUnits, persiansUniqueUnits, portugeseUniqueUnits, saracensUniqueUnits, siciliansUniqueUnits, slavsUniqueUnits, spanishUniqueUnits, tatarsUniqueUnits, teutonsUniqueUnits, turksUniqueUnits, vikingsUniqueUnits } from "../../constants"
+import { allCivTechTrees, aztecsUniqueUnits, bengalisUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits, celtsUniqueUnits, chineseUniqueUnits, cumansUniqueUnits, ethiopiansUniqueUnits, franksUniqueUnits, gothsUniqueUnits, hunsUniqueUnits, italiansUniqueUnits, japaneseUniqueUnits, khmerUniqueUnits, koreansUniqueUnits, lithuaniansUniqueUnits, magyarsUniqueUnits, malayUniqueUnits, maliansUniqueUnits, mayansUniqueUnits, mongolsUniqueUnits, persiansUniqueUnits, portugeseUniqueUnits, saracensUniqueUnits, siciliansUniqueUnits, slavsUniqueUnits, spanishUniqueUnits, tatarsUniqueUnits, teutonsUniqueUnits, turksUniqueUnits, vikingsUniqueUnits } from "../../constants"
 import { archeryUnits } from "../../constants/techs/archery-techs.const"
 import { barracksUnits } from "../../constants/techs/barracks-techs.const"
 import { castleUnits } from "../../constants/techs/castle-techs.const"
@@ -82,6 +82,7 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
     ]
     const uniqueUnits = [
         new Unit({ ...aztecsUniqueUnits.eliteJaguarWarrior }),
+        new Unit({ ...bengalisUniqueUnits.eliteRathaRanged }),
         new Unit({ ...berbersUniqueUnits.eliteCamelArcher }), new Unit({ ...berbersUniqueUnits.eliteGenitour }),
         new Unit({ ...bohemiansUniqueUnits.eliteHussiteWagon }), new Unit({ ...bohemiansUniqueUnits.houfnice }),
         new Unit({ ...britonsUniqueUnits.eliteLongbowman }),

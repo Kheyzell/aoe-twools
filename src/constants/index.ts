@@ -1,4 +1,5 @@
 import { aztecsTechTree } from "./tech-trees/aztecs-tech-tree.const"
+import { bengalisTechTree } from "./tech-trees/bengalis-tech-tree.const"
 import { berbersTechTree } from "./tech-trees/berbers-tech-tree.const"
 import { bohemiansTechTree } from "./tech-trees/bohemians-tech-tree.const"
 import { britonsTechTree } from "./tech-trees/britons-tech-tree.const"
@@ -12,9 +13,9 @@ import { cumansTechTree } from "./tech-trees/cumans-tech-tree.const"
 import { ethiopiansTechTree } from "./tech-trees/ethiopians-tech-tree.const"
 import { franksTechTree } from "./tech-trees/franks-tech-tree.const"
 import { gothsTechTree } from "./tech-trees/goths-tech-tree.const"
+import { hindustanisTechTree } from "./tech-trees/hindustanis-tech-tree.const"
 import { hunsTechTree } from "./tech-trees/huns-tech-tree.const"
 import { incasTechTree } from "./tech-trees/incas-tech-tree.const"
-import { hindustanisTechTree } from "./tech-trees/hindustanis-tech-tree.const"
 import { italiansTechTree } from "./tech-trees/italians-tech-tree.const"
 import { japaneseTechTree } from "./tech-trees/japanese-tech-tree.const"
 import { khmerTechTree } from "./tech-trees/khmer-tech-tree.const"
@@ -39,6 +40,7 @@ import { vietnameseTechTree } from "./tech-trees/vietnamese-tech-tree.const"
 import { vikingsTechTree } from "./tech-trees/vikings-tech-tree.const"
 
 export * from "./tech-trees/aztecs-tech-tree.const"
+export * from "./tech-trees/bengalis-tech-tree.const"
 export * from "./tech-trees/berbers-tech-tree.const"
 export * from "./tech-trees/britons-tech-tree.const"
 export * from "./tech-trees/bulgarians-tech-tree.const"
@@ -75,6 +77,7 @@ export * from "./tech-trees/vikings-tech-tree.const"
 
 export const allCivTechTrees = [
     aztecsTechTree,
+    bengalisTechTree,
     berbersTechTree,
     bohemiansTechTree,
     britonsTechTree,

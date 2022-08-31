@@ -42,6 +42,26 @@
                 }
             }
         },
+        "bengalis": {
+            "name": "Bengalis",
+            "bonus": {
+                "bengalis1": {
+                    "description": "Elephant units receive -25% bonus damage and are more resistant to conversion"
+                },
+                "bengalis2": {
+                    "description": "Town Centers spawn 2 Villagers when the next Age is reached"
+                },
+                "bengalis3": {
+                    "description": "Ships regenerate 15 HP per minute"
+                },
+                "bengalis4": {
+                    "description": "Monks +3/+3 armor"
+                },
+                "bengalis5": {
+                    "description": "Trade units yield 10% food in addition to gold"
+                }
+            }
+        },
         "berbers": {
             "name": "Berbers",
             "bonus": {
@@ -990,6 +1010,18 @@
         "eliteJaguarWarrior": {
             "name": "Elite Jaguar Warrior"
         },
+        "rathaRanged": {
+            "name": "Ratha (ranged)"
+        },
+        "rathaMelee": {
+            "name": "Ratha (melee)"
+        },
+        "eliteRathaRanged": {
+            "name": "Elite Ratha (ranged)"
+        },
+        "eliteRathaMelee": {
+            "name": "Elite Ratha (melee)"
+        },
         "camelArcher": {
             "name": "Camel Archer"
         },
@@ -1519,6 +1551,14 @@
             "name": "Garland Wars",
             "description": "+4 infantry melee attack"
         },
+        "paiks": {
+            "name": "Paiks",
+            "description": "+20% attack speed Rathas and Elephant units"
+        },
+        "mahayana": {
+            "name": "Mahayana",
+            "description": "Reduces the population space taken by Villagers by 10%"
+        },
         "kasbah": {
             "name": "Kasbah",
             "description": "team Castles work +25% faster"
@@ -1885,6 +1925,10 @@
         "attackPassThrough": {
             "title": "Attack passes through",
             "shortDescription": "Deals damage to the unit behind its target up to {{range}} tiles away"
+        },
+        "swapUnit": {
+            "title": "Swap unit",
+            "shortDescription": "Can turn into <Unit></Unit>"
         }
     }
 }
