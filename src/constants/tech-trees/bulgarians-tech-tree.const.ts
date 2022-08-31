@@ -356,6 +356,7 @@ export const bulgariansTechTree: CivTechTree = {
         unitLines: [
             new UnitLine([dockUnits.fishingShip]),
             new UnitLine([dockUnits.transportShip]),
+            new UnitLine([dockUnits.tradeCog]),
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip]),
