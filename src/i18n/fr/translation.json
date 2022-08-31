@@ -42,6 +42,26 @@
                 }
             }
         },
+        "bengalis": {
+            "name": "Bengalis",
+            "bonus": {
+                "bengalis1": {
+                    "description": "Les éléphants subissent 25 % de bonus de dégâts en moins et résistent plus à la conversion"
+                },
+                "bengalis2": {
+                    "description": "2 villageois apparaissent près des forums quand vous avez atteint l'âge suivant"
+                },
+                "bengalis3": {
+                    "description": "Les navires régénèrent 15 PV par minute"
+                },
+                "bengalis4": {
+                    "description": "Moines +3/+3 d'armure"
+                },
+                "bengalis5": {
+                    "description": "Les unités de commerce rapportent 10 % de nourriture en plus de l'or"
+                }
+            }
+        },
         "berbers": {
             "name": "Berbères",
             "bonus": {
@@ -984,6 +1004,18 @@
         "eliteJaguarWarrior": {
             "name": "Guerrier jaguar d'élite"
         },
+        "rathaRanged": {
+            "name": "Ratha (à distance)"
+        },
+        "rathaMelee": {
+            "name": "Ratha (corps à corps)"
+        },
+        "eliteRathaRanged": {
+            "name": "Ratha d'élite (à distance)"
+        },
+        "eliteRathaMelee": {
+            "name": "Ratha d'élite (corps à corps)"
+        },
         "camelArcher": {
             "name": "Archer de chamellerie d'élite"
         },
@@ -1512,6 +1544,14 @@
         "garlandWars": {
             "name": "Guerres glorieuses ",
             "description": "+4 d'attaque de mêlée pour l'infanterie"
+        },
+        "paiks": {
+            "name": "Paiks",
+            "description": "Les Rathas et les Éléphants attaquent +20% plus vite"
+        },
+        "mahayana": {
+            "name": "Mahayana",
+            "description": "Reduces la population qu'occupent les villageois de 10%"
         },
         "kasbah": {
             "name": "Kasbah",
