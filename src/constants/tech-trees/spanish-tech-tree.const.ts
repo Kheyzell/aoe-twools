@@ -370,6 +370,7 @@ export const spanishTechTree: CivTechTree = {
         unitLines: [
             new UnitLine([dockUnits.fishingShip]),
             new UnitLine([dockUnits.transportShip]),
+            new UnitLine([dockUnits.tradeCog]),
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
