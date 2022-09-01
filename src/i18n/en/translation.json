@@ -262,6 +262,26 @@
                 }
             }
         },
+        "dravidians": {
+            "name": "Dravidians",
+            "bonus": {
+                "dravidians1": {
+                    "description": "Receive 200 wood when advancing to the next Age"
+                },
+                "dravidians2": {
+                    "description": "Fishermen and Fishing Ships carry +15"
+                },
+                "dravidians3": {
+                    "description": "Barracks technologies cost -50%"
+                },
+                "dravidians4": {
+                    "description": "Skirmishers and Elephant Archers attack 25% faster"
+                },
+                "dravidians5": {
+                    "description": "Docks provide +5 population space"
+                }
+            }
+        },
         "ethiopians": {
             "name": "Ethiopians",
             "bonus": {
@@ -1100,6 +1120,15 @@
         "eliteKipchak": {
             "name": "Elite Kipchak"
         },
+        "urumiSwordsman": {
+            "name": "Urumi Swordsman"
+        },
+        "eliteUrumiSwordsman": {
+            "name": "Elite Urumi Swordsman"
+        },
+        "thirisadai": {
+            "name": "Thirisadai"
+        },
         "shotelWarrior": {
             "name": "Shotel Warrior"
         },
@@ -1639,6 +1668,14 @@
             "name": "Cuman Mercenaries",
             "description": "team members can create 5 free Elite Kipchaks per Castle owned, including Castles built at a later time"
         },
+        "medicalCorps": {
+            "name": "Medical Corps",
+            "description": "Elephant units regenerate 20 HP per minute"
+        },
+        "wootzSteel": {
+            "name": "Wootz Steel",
+            "description": "Infantry and cavalry attacks ignore armor"
+        },
         "royalHeirs": {
             "name": "Royal Heirs",
             "description": "halves Shotel Warrior training time"
@@ -1866,60 +1903,68 @@
     },
     "capacities": {
         "selfDestruction": {
-            "title": "self destruction"
+            "title": "Self destruction"
         },
         "conversion": {
-            "title": "conversion"
+            "title": "Conversion"
         },
         "healing": {
-            "title": "healing",
+            "title": "Healing",
             "shortDescription": "heal target unit for {{healthPerMinute}}/min at a range of {{range}}"
         },
         "redemption": {
-            "title": "redemption"
+            "title": "Redemption"
         },
         "atonement": {
-            "title": "atonement"
+            "title": "Atonement"
         },
         "theocracy": {
-            "title": "theocracy"
+            "title": "Theocracy"
         },
         "heresy": {
-            "title": "heresy"
+            "title": "Heresy"
         },
         "ballistics": {
-            "title": "ballistics"
+            "title": "Ballistics"
         },
         "trampleDruzhina": {
-            "title": "trample"
+            "title": "Trample"
         },
         "trampleLogistica": {
-            "title": "trample"
+            "title": "Trample"
         },
         "madrasahRefund": {
-            "title": "refund on death"
+            "title": "Refund on death"
         },
         "aztecsMonkHealthBonus": {
-            "title": "health bonus"
+            "title": "Health bonus"
         },
         "regen": {
-            "title": "regen",
+            "title": "Regen",
             "shortDescription": "{{healthPerMinute}} hp/min"
         },
         "chargedAttack": {
-            "title": "charged attack",
-            "shortDescription": "deals {{damage}} then recharge the attack over {{reloadTime}} s"
+            "title": "Charged attack",
+            "shortDescription": "deals {{damage}} then recharge the attack over {{reloadTime}}s"
+        },
+        "blastAttack": {
+            "title": "Blast attack",
+            "shortDescription": "deals {{damage}} to the target and {{blastDamagePercent}}% damage to units at a distance of {{blastRadius}} tiles away then recharge the attack over {{reloadTime}}s"
         },
         "fullMissedShot": {
-            "title": "full missed shot",
+            "title": "Full missed shot",
             "shortDescription": "missed shots that hit a target deal full damage instead of half"
         },
         "projectileProtection": {
-            "title": "projectile protection",
+            "title": "Projectile protection",
             "shortDescription": "Halves the damage dealt by enemy ranged projectiles passing through the Hussite Wagon"
         },
         "dismountOnDeath": {
             "title": "Dismount On Death",
+            "shortDescription": "Turn into <Unit></Unit> upon death"
+        },
+        "ignoreArmor": {
+            "title": "Ignore armor",
             "shortDescription": "Turn into <Unit></Unit> upon death"
         },
         "attackPassThrough": {

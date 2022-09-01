@@ -21,7 +21,8 @@ export enum CapacityId {
     projectilePassesThroughUnits = "projectilePassesThroughUnits",
     generateGoldWhenFighting = "generateGoldWhenFighting",
     attackPassThrough = "attackPassThrough",
-    swapUnit = "swapUnit"
+    swapUnit = "swapUnit",
+    blastAttack = "blastAttack"
 }
 
 export const CAPACITIES = {
@@ -39,6 +40,7 @@ export const CAPACITIES = {
     aztecsMonkHealthBonus: { id: CapacityId.aztecsMonkHealthBonus },
     regen: { id: CapacityId.regen, healthPerMinute: 0 } as RegenCapacity,
     chargedAttack: { id: CapacityId.chargedAttack, reloadTime: 0, damage: 0 } as ChargedAttackCapacity,
+    blastAttack: { id: CapacityId.blastAttack, reloadTime: 0, damage: 0, blastRadius: 0 } as BlastAttackCapacity,
     fullMissedShot: { id: CapacityId.fullMissedShot },
     projectileProtection: { id: CapacityId.projectileProtection },
     dismountOnDeath: { id: CapacityId.dismountOnDeath, unit: new Unit({}) } as SpawnUnitOnDeathCapacity,
@@ -61,45 +63,42 @@ export interface ConvertionCapacity extends Capacity {
 }
 
 export interface RegenCapacity extends Capacity {
-    id: CapacityId
     healthPerMinute: number
 }
 
 export interface HealingCapacity extends Capacity {
-    id: CapacityId
     healthPerMinute: number
     range: number
 }
 
 export interface RefundAfterDeathCapacity extends Capacity {
-    id: CapacityId
     percentValue: number
 }
 
 export interface ChargedAttackCapacity extends Capacity {
-    id: CapacityId
     reloadTime: number
     damage: number
 }
 
+export interface BlastAttackCapacity extends ChargedAttackCapacity {
+    blastRadius: number
+    blastDamagePercent: number
+}
+
 export interface SpawnUnitOnDeathCapacity extends Capacity {
-    id: CapacityId
     unit: Unit
 }
 
 export interface ReduceArmorCapacity extends Capacity {
-    id: CapacityId
     melee: number
     pierce: number
 }
 
 export interface GenerateGoldWhenFightingCapacity extends Capacity {
-    id: CapacityId
     goldPerSecond: number
 }
 
 export interface AttackPassThrough extends Capacity {
-    id: CapacityId
     range: number
 }
 

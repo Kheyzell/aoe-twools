@@ -9,7 +9,7 @@ import { calculatedStatsSelector, selectedUnitsSelector } from "../unit-calculat
 import { StatDisplay, StatLine } from "./basic-stats-components/basic-stats-components"
 
 const DamagePerHitStat = (props: { unit: Unit, damagePerHit: CombatStat[], secondaryDamagePerHit: CombatStat[], secondaryAttackCount: number, totalDamageCompared: StatCompared }) => {
-    const chargedAttack = props.unit.stats.capacities.find(capacity => capacity.id === CapacityId.chargedAttack) as ChargedAttackCapacity
+    const chargedAttack = props.unit.stats.capacities.find(capacity => capacity.id === CapacityId.chargedAttack || capacity.id === CapacityId.blastAttack) as ChargedAttackCapacity
 
     return (
         <span className="DamagePerHitStat">

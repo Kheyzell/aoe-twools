@@ -55,8 +55,8 @@ class UnitCalculatorService {
         const secondaryDamagePerSecondWithAccuracyLow1 = unit1.stats.attackType === AttackType.projectile ? secondaryDamagePerSecond1 * (unit1.stats.accuracy || 1) : secondaryDamagePerSecond1
         const secondaryDamagePerSecondWithAccuracyLow2 = unit2.stats.attackType === AttackType.projectile ? secondaryDamagePerSecond2 * (unit2.stats.accuracy || 1) : secondaryDamagePerSecond2
 
-        const chargedAttackCapacity1 = unit1.stats.capacities.find(capacity => capacity.id === CapacityId.chargedAttack) as ChargedAttackCapacity
-        const chargedAttackCapacity2 = unit2.stats.capacities.find(capacity => capacity.id === CapacityId.chargedAttack) as ChargedAttackCapacity
+        const chargedAttackCapacity1 = unit1.stats.capacities.find(capacity => capacity.id === CapacityId.chargedAttack || capacity.id === CapacityId.blastAttack) as ChargedAttackCapacity
+        const chargedAttackCapacity2 = unit2.stats.capacities.find(capacity => capacity.id === CapacityId.chargedAttack || capacity.id === CapacityId.blastAttack) as ChargedAttackCapacity
 
         const numberOfHitToKill1 = Math.max(Math.ceil((unit2.stats.health - (chargedAttackCapacity1?.damage || 0)) / totalDamageDealtPerHit1), 1)
         const numberOfHitToKill2 = Math.max(Math.ceil((unit1.stats.health - (chargedAttackCapacity2?.damage || 0)) / totalDamageDealtPerHit2), 1)

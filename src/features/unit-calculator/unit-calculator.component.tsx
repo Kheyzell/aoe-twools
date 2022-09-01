@@ -33,6 +33,7 @@ import { incasUniqueUnits } from "../../constants/tech-trees/incas-tech-tree.con
 import { hindustanisUniqueUnits } from "../../constants/tech-trees/hindustanis-tech-tree.const"
 import { polesUniqueUnits } from "../../constants/tech-trees/poles-tech-tree.const"
 import { vietnameseUniqueUnits } from "../../constants/tech-trees/vietnamese-tech-tree.const"
+import { dravidiansUniqueUnits } from "../../constants/tech-trees/dravidians-tech-tree.const"
 
 
 type UnitCalculatorProps = {}
@@ -93,6 +94,7 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...celtsUniqueUnits.eliteWoadRaider }),
         new Unit({ ...chineseUniqueUnits.eliteChukonu }),
         new Unit({ ...cumansUniqueUnits.eliteKipchak }),
+        new Unit({ ...dravidiansUniqueUnits.eliteUrumiSwordsman }), new Unit({ ...dravidiansUniqueUnits.thirisadai }),
         new Unit({ ...ethiopiansUniqueUnits.eliteShotelWarrior }),
         new Unit({ ...franksUniqueUnits.eliteThrowingAxeman }),
         new Unit({ ...gothsUniqueUnits.eliteHuskarl }),
