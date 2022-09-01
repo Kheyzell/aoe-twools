@@ -10,6 +10,7 @@ import { byzantinesTechTree } from "./tech-trees/byzantines-tech-tree.const"
 import { celtsTechTree } from "./tech-trees/celts-tech-tree.const"
 import { chineseTechTree } from "./tech-trees/chinese-tech-tree.const"
 import { cumansTechTree } from "./tech-trees/cumans-tech-tree.const"
+import { dravidiansTechTree } from "./tech-trees/dravidians-tech-tree.const"
 import { ethiopiansTechTree } from "./tech-trees/ethiopians-tech-tree.const"
 import { franksTechTree } from "./tech-trees/franks-tech-tree.const"
 import { gothsTechTree } from "./tech-trees/goths-tech-tree.const"
@@ -50,6 +51,7 @@ export * from "./tech-trees/byzantines-tech-tree.const"
 export * from "./tech-trees/celts-tech-tree.const"
 export * from "./tech-trees/chinese-tech-tree.const"
 export * from "./tech-trees/cumans-tech-tree.const"
+export * from "./tech-trees/dravidians-tech-tree.const"
 export * from "./tech-trees/ethiopians-tech-tree.const"
 export * from "./tech-trees/franks-tech-tree.const"
 export * from "./tech-trees/goths-tech-tree.const"
@@ -88,6 +90,7 @@ export const allCivTechTrees = [
     celtsTechTree,
     chineseTechTree,
     cumansTechTree,
+    dravidiansTechTree,
     ethiopiansTechTree,
     franksTechTree,
     gothsTechTree,

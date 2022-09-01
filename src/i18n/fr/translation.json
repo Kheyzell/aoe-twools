@@ -262,6 +262,26 @@
                 }
             }
         },
+        "dravidians": {
+            "name": "Dravidiens",
+            "bonus": {
+                "dravidians1": {
+                    "description": "Reçois 200 de bois en progressant vers l'âge suivant"
+                },
+                "dravidians2": {
+                    "description": "Les pêcheurs et navires de pêche portent +15 unités"
+                },
+                "dravidians3": {
+                    "description": "Coût des technologies des casernes -50%"
+                },
+                "dravidians4": {
+                    "description": "Les tirailleurs et les éléphants archers attaquent 25% plus vite"
+                },
+                "dravidians5": {
+                    "description": "Population +5 pour les ports"
+                }
+            }
+        },
         "ethiopians": {
             "name": "Éthiopiens",
             "bonus": {
@@ -1094,6 +1114,15 @@
         "eliteKipchak": {
             "name": "Kipchak d'élite"
         },
+        "urumiSwordsman": {
+            "name": "Épéiste urumi"
+        },
+        "eliteUrumiSwordsman": {
+            "name": "Épéiste urumi d'élite"
+        },
+        "thirisadai": {
+            "name": "Thirisadai"
+        },
         "shotelWarrior": {
             "name": "Guerrier à shotel"
         },
@@ -1632,6 +1661,14 @@
         "cumanMercenaries": {
             "name": "Mercenaires coumans",
             "description": "Les membres de l'équipe peuvent créer 5 Kipchaks d'élite gratuits par château, incluant les châteaux construits plus tard"
+        },
+        "medicalCorps": {
+            "name": "Corps médical",
+            "description": "Les éléphants régénèrent 20 PV par minute"
+        },
+        "wootzSteel": {
+            "name": "Acier wootz",
+            "description": "Les attaques de l'infanterie et la cavalerie ignorent l'armure"
         },
         "royalHeirs": {
             "name": "Héritiers royaux",
