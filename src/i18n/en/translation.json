@@ -342,6 +342,26 @@
                 }
             }
         },
+        "gurjaras": {
+            "name": "Gurjaras",
+            "bonus": {
+                "gurjaras1": {
+                    "description": "Start with 2 Forage Bushes"
+                },
+                "gurjaras2": {
+                    "description": "Can garrison Mills with livestock to produce food"
+                },
+                "gurjaras3": {
+                    "description": "Mounted units deal +40% bonus damage"
+                },
+                "gurjaras4": {
+                    "description": "Can garrison Docks with Fishing Ships"
+                },
+                "gurjaras5": {
+                    "description": "Camel and Elephant units created 25% faster"
+                }
+            }
+        },
         "huns": {
             "name": "Huns",
             "bonus": {
@@ -1147,6 +1167,21 @@
         "eliteHuskarl": {
             "name": "Elite Huskarl"
         },
+        "chakramThrower": {
+            "name": "Chakram Thrower"
+        },
+        "eliteChakramThrower": {
+            "name": "Elite Chakram Thrower"
+        },
+        "shrivamshaRider": {
+            "name": "Shrivamsha Rider"
+        },
+        "eliteShrivamshaRider": {
+            "name": "Elite Shrivamsha Rider"
+        },
+        "camelScout": {
+            "name": "Camel Scout"
+        },
         "tarkan": {
             "name": "Tarkan"
         },
@@ -1700,6 +1735,14 @@
             "name": "Perfusion",
             "description": "Barracks create units 100% faster"
         },
+        "kshatriyas": {
+            "name": "Kshatriyas",
+            "description": "Military units cost -25% food"
+        },
+        "frontierGuards": {
+            "name": "Frontier Guards",
+            "description": "Camel Riders and Elephant Archers +4 melee armor"
+        },
         "marauders": {
             "name": "Marauders",
             "description": "create Tarkans at Stables"
@@ -1970,6 +2013,10 @@
         "attackPassThrough": {
             "title": "Attack passes through",
             "shortDescription": "Deals damage to the unit behind its target up to {{range}} tiles away"
+        },
+        "projectilePassThrough": {
+            "title": "Projectile passes through",
+            "shortDescription": "Projectiles has pass-through damage in {{width}} tiles width"
         },
         "swapUnit": {
             "title": "Swap unit",

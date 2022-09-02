@@ -342,6 +342,26 @@
                 }
             }
         },
+        "gurjaras": {
+            "name": "Gurjaras",
+            "bonus": {
+                "gurjaras1": {
+                    "description": "Commence avec 2 buissons"
+                },
+                "gurjaras2": {
+                    "description": "Le bétail peut rester en garnison dans les moulins pour produire de la nourriture"
+                },
+                "gurjaras3": {
+                    "description": "Les unités montées infligent +40 % de dégâts supplémentaires"
+                },
+                "gurjaras4": {
+                    "description": "Les navires de pêche peuvent rester en garnison dans les ports"
+                },
+                "gurjaras5": {
+                    "description": "Unités de chameaux et d'éléphants sont créées 25 % plus rapidement"
+                }
+            }
+        },
         "huns": {
             "name": "Huns",
             "bonus": {
@@ -1141,6 +1161,21 @@
         "eliteHuskarl": {
             "name": "Huskarl d'élite"
         },
+        "chakramThrower": {
+            "name": "Lanceur de chakrams"
+        },
+        "eliteChakramThrower": {
+            "name": "Lanceur de chakrams d'élite"
+        },
+        "shrivamshaRider": {
+            "name": "Cavalier Shrivamsha"
+        },
+        "eliteShrivamshaRider": {
+            "name": "Cavalier Shrivamsha d'élite"
+        },
+        "camelScout": {
+            "name": "Éclaireur de chamellerie"
+        },
         "tarkan": {
             "name": "Tarkan"
         },
@@ -1693,6 +1728,14 @@
         "perfusion": {
             "name": "Perfusion",
             "description": "Les casernes fonctionnent 100 % plus rapidement"
+        },
+        "kshatriyas": {
+            "name": "Kshatriyas",
+            "description": "Les unités militaires coûtent -25 % en nourriture"
+        },
+        "frontierGuards": {
+            "name": "Gardes-frontières",
+            "description": "L'armure des chameaux et des éléphants archers +4 au corps à corps"
         },
         "marauders": {
             "name": "Maraudeurs",

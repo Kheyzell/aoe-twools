@@ -14,6 +14,7 @@ import { dravidiansTechTree } from "./tech-trees/dravidians-tech-tree.const"
 import { ethiopiansTechTree } from "./tech-trees/ethiopians-tech-tree.const"
 import { franksTechTree } from "./tech-trees/franks-tech-tree.const"
 import { gothsTechTree } from "./tech-trees/goths-tech-tree.const"
+import { gurjarasTechTree } from "./tech-trees/gurjaras-tech-tree.const"
 import { hindustanisTechTree } from "./tech-trees/hindustanis-tech-tree.const"
 import { hunsTechTree } from "./tech-trees/huns-tech-tree.const"
 import { incasTechTree } from "./tech-trees/incas-tech-tree.const"
@@ -55,6 +56,7 @@ export * from "./tech-trees/dravidians-tech-tree.const"
 export * from "./tech-trees/ethiopians-tech-tree.const"
 export * from "./tech-trees/franks-tech-tree.const"
 export * from "./tech-trees/goths-tech-tree.const"
+export * from "./tech-trees/gurjaras-tech-tree.const"
 export * from "./tech-trees/huns-tech-tree.const"
 export * from "./tech-trees/italians-tech-tree.const"
 export * from "./tech-trees/japanese-tech-tree.const"
@@ -94,6 +96,7 @@ export const allCivTechTrees = [
     ethiopiansTechTree,
     franksTechTree,
     gothsTechTree,
+    gurjarasTechTree,
     hunsTechTree,
     incasTechTree,
     hindustanisTechTree,

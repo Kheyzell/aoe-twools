@@ -22,7 +22,8 @@ export enum CapacityId {
     generateGoldWhenFighting = "generateGoldWhenFighting",
     attackPassThrough = "attackPassThrough",
     swapUnit = "swapUnit",
-    blastAttack = "blastAttack"
+    blastAttack = "blastAttack",
+    projectilePassThrough = "projectilePassThrough"
 }
 
 export const CAPACITIES = {
@@ -50,6 +51,7 @@ export const CAPACITIES = {
     projectilePassesThroughUnits: { id: CapacityId.projectilePassesThroughUnits },
     generateGoldWhenFighting: { id: CapacityId.generateGoldWhenFighting, goldPerSecond: 0 } as GenerateGoldWhenFightingCapacity,
     attackPassThrough: { id: CapacityId.attackPassThrough, range: 1 } as AttackPassThrough,
+    projectilePassThrough: { id: CapacityId.projectilePassThrough, width: .2 } as ProjectilePassThrough,
     swapUnit: { id: CapacityId.swapUnit, unit: new Unit({}) } as SwapUnit,
 }
 
@@ -100,6 +102,10 @@ export interface GenerateGoldWhenFightingCapacity extends Capacity {
 
 export interface AttackPassThrough extends Capacity {
     range: number
+}
+
+export interface ProjectilePassThrough extends Capacity {
+    width: number
 }
 
 export interface SwapUnit extends Capacity {

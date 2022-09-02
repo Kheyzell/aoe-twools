@@ -1,9 +1,26 @@
 import { fullTechTree } from "../../constants/tech-trees/_full-tech-tree.const"
 import { castleUnits, castleUpgrades } from "../../constants/techs/castle-techs.const"
-import { CivTechTree, Tech, TechType, GroupTechTree, UpgradePerAgeGroup, UnitLine } from "../../models/techs.model"
+import { CivTechTree, GroupTechTree, Tech, TechType, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model"
 import { Unit } from "../../models/unit.model"
 import { Upgrade } from "../../models/upgrade.model"
 import { chainTechs } from "../../utils/techs.utils"
+
+enum GroupTechTreeType {
+    barracks = 'barracks',
+    archery = 'archery',
+    stable = 'stable',
+    siege = 'siege',
+    castle = 'castle',
+    blacksmith = 'blacksmith',
+    monastery = 'monastery',
+    university = 'university',
+    townCenter = 'townCenter',
+    lumberCamp = 'lumberCamp',
+    mill = 'mill',
+    miningCamp = 'miningCamp',
+    market = 'market',
+    dock = 'dock'
+}
 
 class CivFilterService {
 
@@ -32,31 +49,31 @@ class CivFilterService {
             return fullTechTree
         }
 
-        const GROUPS = ['barracks', 'archery', 'stable', 'siege', 'castle', 'blacksmith', 'monastery', 'university', 'townCenter', 'lumberCamp', 'mill', 'miningCamp', 'market', 'dock']
+        const GROUPS = [GroupTechTreeType.barracks, GroupTechTreeType.archery, GroupTechTreeType.stable, GroupTechTreeType.siege, GroupTechTreeType.castle, GroupTechTreeType.blacksmith, GroupTechTreeType.monastery, GroupTechTreeType.university, GroupTechTreeType.townCenter, GroupTechTreeType.lumberCamp, GroupTechTreeType.mill, GroupTechTreeType.miningCamp, GroupTechTreeType.market, GroupTechTreeType.dock]
         let mergedTechTree: any = {}
-        GROUPS.forEach(key => {
-            const isCastle = key === 'castle'
+        GROUPS.forEach(groupTechTreeType => {
+            const isCastle = groupTechTreeType === GroupTechTreeType.castle
 
-            const civGroups = techTrees.map(techTree => (techTree as any)[key] as GroupTechTree)
-            const baseGroup = (fullTechTree as any)[key] as GroupTechTree
+            const civGroups = techTrees.map(techTree => (techTree as any)[groupTechTreeType] as GroupTechTree)
+            const baseGroup = (fullTechTree as any)[groupTechTreeType] as GroupTechTree
 
             let mergedGroup: { unitLines: UnitLine[], upgrades: UpgradePerAgeGroup } = { unitLines: [], upgrades: baseGroup.upgrades }
             if (isCastle) {
                 const uniqueUpgrades = civGroups.map(group => group.upgrades.list.filter(up => up.unique)).reduce((upgrades, civUpgrades) => upgrades.concat(civUpgrades), [])
                 mergedGroup.upgrades = new UpgradePerAgeGroup(uniqueUpgrades.concat(baseGroup.upgrades.list.slice(2))) // removing generic unique tech
             } else {
-                mergedGroup.unitLines = ((fullTechTree as any)[key] as GroupTechTree).unitLines.map(lines => new UnitLine(lines.list))
+                mergedGroup.unitLines = ((fullTechTree as any)[groupTechTreeType] as GroupTechTree).unitLines.map(lines => new UnitLine(lines.list))
             }
 
             baseGroup.unitLines.forEach(baseUnitLine => {
-                const correspondingLines = civGroups.map(group => group.unitLines.find(unitLine => unitLine.list[0].id === baseUnitLine.list[0].id))
+                const correspondingLines = civGroups.map(group => group.unitLines.find(unitLine => unitLine.list.includes(baseUnitLine.list[0])))
                 const rootUnitLineIndex: number = mergedGroup.unitLines.findIndex((unitLine: UnitLine) => unitLine.list[0].id === baseUnitLine.list[0].id) // correspond to the original unit line, other corresponding unit lines are alternatives of this line for certain civs (for instance: hussar (generic civ)/ winged hussar (lithuanian/poles))
                 correspondingLines.forEach(line => {
                     if (!line) return
 
                     // prolongation of existing line
                     if (line.list.length > baseUnitLine.list.length) { // this part of the code handle only one new upgrade of unit for a unit line among the selected civ (currently there is no unit line where multiple civs have different specific upgrade)
-                        const expandedLine = mergedGroup.unitLines[rootUnitLineIndex].list.concat(line.list.slice(baseUnitLine.list.length))
+                        const expandedLine = line.list.slice()
                         mergedGroup.unitLines[rootUnitLineIndex] = new UnitLine(expandedLine)
                         return
                     }
@@ -70,21 +87,19 @@ class CivFilterService {
                     }
                 })
             })
-            
+
             // new lines
             const specificUnitLines = civGroups
-                .map(group => group.unitLines.filter(unitLine => !baseGroup.unitLines.some(baseUnitLine => baseUnitLine.list[0].id === unitLine.list[0].id)))
+                .map(group => group.unitLines.filter(unitLine => !baseGroup.unitLines.some(baseUnitLine => unitLine.list.includes(baseUnitLine.list[0]))))
                 .filter(unitLine => !!unitLine)
                 .reduce((unitLines, civUnitLines) => unitLines.concat(civUnitLines), [])
-            specificUnitLines.forEach(unitLine => {
-                mergedGroup.unitLines.push(new UnitLine(unitLine!.list))
-            })
+            specificUnitLines.forEach(unitLine => mergedGroup.unitLines.push(new UnitLine(unitLine!.list)))
 
             if (isCastle) {
                 mergedGroup.unitLines = mergedGroup.unitLines.concat(baseGroup.unitLines.slice(1))
             }
 
-            mergedTechTree[key] = mergedGroup as GroupTechTree
+            mergedTechTree[groupTechTreeType] = mergedGroup as GroupTechTree
         })
 
         return mergedTechTree as CivTechTree
