@@ -1,6 +1,9 @@
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
-import { CAPACITIES } from "../../models/capacity.model";
+import crest from '../../resources/images/crests/saracens.png';
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,10 +18,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/saracens.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { multiplyNumber } from "../../utils/utils";
 
 export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
     mameluke: new Unit({
@@ -36,6 +35,7 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
             health: 65,
             rateOfFire: 2,
             attackType: AttackType.projectile,
+            range: 3,
             accuracy: 1,
             attackComponents: [
                 { value: 8, type: ArmorType.melee },
@@ -68,6 +68,7 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
             health: 80,
             rateOfFire: 2,
             attackType: AttackType.projectile,
+            range: 3,
             accuracy: 1,
             attackComponents: [
                 { value: 10, type: ArmorType.melee },
@@ -91,8 +92,8 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
 chainTechs([saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke])
 const uniqueUnitLine = new UnitLine([saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke])
 setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
-    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
-    stableUpgrades.bloodlines, stableUpgrades.husbandry])
+blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
 const uniqueTechs = [
     new UniqueTech({

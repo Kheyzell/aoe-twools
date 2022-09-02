@@ -1,10 +1,8 @@
-import { siciliansUniqueUnits } from "..";
 import { ArmorType, EffectOrder, UnitType } from "../../models/techs.model";
-import { Unit, AttackType } from "../../models/unit.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { Upgrade } from "../../models/upgrade.model";
 import { chainTechs } from "../../utils/techs.utils";
-import { addNumber, multiplyNumber } from "../../utils/utils";
-import { barracksUnits } from "./barracks-techs.const";
+import { multiplyNumber } from "../../utils/utils";
 import { stableUnits } from "./stable-techs.const";
 
 interface TownCenterUnits {
@@ -65,19 +63,6 @@ export const townCenterUpgrade: TownCenterUpgrades = {
             gold: 0,
             stone: 0
         },
-        effects: [{
-            order: EffectOrder.first,
-            apply: (unit: Unit) => {
-                if (unit.id === stableUnits.scoutCavalry.id) {
-                    unit.stats.attackComponents.find(attack => attack.type === ArmorType.melee)!.value += 2
-                    unit.stats.movementSpeed = addNumber(unit.stats.movementSpeed, .35)
-                    unit.stats.lineOfSight += 2
-                }
-                if (unit.id === barracksUnits.eagleScout.id) {
-                    unit.stats.attackComponents.find(attack => attack.type === ArmorType.melee)!.value += 3
-                }
-            }
-        }],
         duration: 130
     }),
     loom: new Upgrade({

@@ -79,11 +79,11 @@ export class Unit implements Tech {
     }
 
     addAttackComponent(value: number, type: ArmorType) {
-        addCombatStat(this, value, type, true)
+        addCombatStat(this, value, type, ComponentType.attack)
     }
     
     addArmorComponent(value: number, type: ArmorType) {
-        addCombatStat(this, value, type, false)
+        addCombatStat(this, value, type, ComponentType.defence)
     }
 
     addCapacity(capacity: Capacity) {
@@ -101,7 +101,8 @@ export class Unit implements Tech {
     }
 }
 
-const addCombatStat = (unit: Unit, value: number, type: ArmorType, isAttack: boolean) => {
+const addCombatStat = (unit: Unit, value: number, type: ArmorType, componentType: ComponentType) => {
+    const isAttack = componentType === ComponentType.attack
     const statComponents = isAttack ? unit.stats.attackComponents : unit.stats.armorComponents
     const componentStat = statComponents.find(stat => stat.type === type)
     if (componentStat) {
@@ -143,4 +144,9 @@ export interface StatList {
     conversionResistance: number
     conversionMinCyclesResistance: number
     conversionMaxCyclesResistance: number
+}
+
+enum ComponentType {
+    attack = "attack",
+    defence = "defence"
 }

@@ -1,7 +1,7 @@
 import React from "react"
 
-import { BoxSize } from "../../../../components/tech/tech.component";
-import { GroupTechTree } from "../../../../models/techs.model";
+import { BoxSize } from "../../../../components/tech/tech.component"
+import { GroupTechTree } from "../../../../models/techs.model"
 import CivFilterTechComponent from "../civ-filter-tech/civ-filter-tech.component"
 import UnitLineTechTreeComponent from "../unit-line-tech-tree/unit-line-tech-tree.component";
 import './group-tech-tree.component.css'
@@ -47,7 +47,6 @@ const GroupTechTreeComponent: React.FC<Props> = (props) => {
       </div>
     </div>
   );
-
 }
 
 export default GroupTechTreeComponent;

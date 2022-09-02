@@ -1,5 +1,6 @@
-import { UnitType, ArmorType } from "../../models/techs.model";
-import { Unit, AttackType } from "../../models/unit.model";
+import { CAPACITIES } from "../../models/capacity.model";
+import { ArmorType, UnitType } from "../../models/techs.model";
+import { AttackType, Unit } from "../../models/unit.model";
 import { chainTechs } from "../../utils/techs.utils";
 
 interface SiegeUnits {
@@ -305,6 +306,7 @@ export const siegeUnits: SiegeUnits = {
                 { value: 7, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.siegeWeapon },
             ],
+            capacities: [CAPACITIES.projectilePassThrough],
             movementSpeed: .65,
             lineOfSight: 9
         },
@@ -339,6 +341,7 @@ export const siegeUnits: SiegeUnits = {
                 { value: 8, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.siegeWeapon },
             ],
+            capacities: [CAPACITIES.projectilePassThrough],
             movementSpeed: .65,
             lineOfSight: 9
         },
