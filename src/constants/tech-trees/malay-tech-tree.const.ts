@@ -257,6 +257,7 @@ export const malayTechTree: CivTechTree = {
             universityUpgrades.guardTower,
             universityUpgrades.heatedShot,
             universityUpgrades.murderHoles,
+            universityUpgrades.treadmillCrane,
             universityUpgrades.chemistry,
             universityUpgrades.bombardTower,
             universityUpgrades.siegeEngineers,

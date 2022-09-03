@@ -277,6 +277,7 @@ export const byzantinesTechTree: CivTechTree = {
             universityUpgrades.ballistics,
             universityUpgrades.guardTower,
             universityUpgrades.murderHoles,
+            universityUpgrades.treadmillCrane,
             universityUpgrades.chemistry,
             universityUpgrades.bombardTower,
             universityUpgrades.keep,

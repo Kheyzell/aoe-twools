@@ -252,6 +252,7 @@ export const britonsTechTree: CivTechTree = {
             universityUpgrades.guardTower,
             universityUpgrades.heatedShot,
             universityUpgrades.murderHoles,
+            universityUpgrades.treadmillCrane,
             universityUpgrades.architecture,
             universityUpgrades.chemistry,
             universityUpgrades.siegeEngineers,

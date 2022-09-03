@@ -143,10 +143,10 @@
             "name": "Burgundians",
             "bonus": {
                 "burgundians1": {
-                    "description": "Economic upgrades cost -50% food and are available one Age earlier than other civilizations"
+                    "description": "Economic upgrades cost -{{value}}% food and are available one Age earlier than other civilizations"
                 },
                 "burgundians2": {
-                    "description": "Stable technologies are 50% cheaper"
+                    "description": "Stable technologies are {{value}}% cheaper"
                 },
                 "burgundians3": {
                     "description": "Gunpowder units gain a +25% bonus to their attack"
@@ -349,7 +349,7 @@
                     "description": "Start with 2 Forage Bushes"
                 },
                 "gurjaras2": {
-                    "description": "Can garrison Mills with livestock to produce food"
+                    "description": "Can garrison Mills with livestock to produce food ( with diminishing return, use this formula: 15 *ln (FoodAmount/200+1) )"
                 },
                 "gurjaras3": {
                     "description": "Mounted units deal +40% bonus damage"
@@ -685,7 +685,7 @@
                     "description": "Castles and Town Centers are constructed 100% faster"
                 },
                 "sicilians2": {
-                    "description": "Land military units (except Siege weapons) absorb 50% of all incoming bonus damage"
+                    "description": "Land military units (except Siege weapons) absorb {{value}}% of all incoming bonus damage"
                 },
                 "sicilians3": {
                     "description": "Farm upgrades provide +100% additional food to Farms before they need to be reseeded"

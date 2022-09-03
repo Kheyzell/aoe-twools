@@ -143,14 +143,14 @@ export const siciliansTechTree: CivTechTree = {
         {
             id: 'sicilians2',
             effectType: EffectType.miscallenous,
-            value: 50,
+            value: 33,
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit, _, targetedUnit) => {
                     targetedUnit?.stats.attackComponents
                         .filter(attack => attack.type !== ArmorType.melee && attack.type !== ArmorType.pierce)
                         .filter(attack => unit.stats.armorComponents.some(armor => armor.type === attack.type))
-                        .forEach(attack => attack.value = attack.value / 2)
+                        .forEach(attack => multiplyNumber(attack.value, .66))
                 }
             }],
             affectedUnits: [barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion,
@@ -270,7 +270,6 @@ export const siciliansTechTree: CivTechTree = {
             universityUpgrades.ballistics,
             universityUpgrades.heatedShot,
             universityUpgrades.murderHoles,
-            universityUpgrades.treadmillCrane,
             universityUpgrades.chemistry,
             universityUpgrades.siegeEngineers,
             universityUpgrades.arrowslits,

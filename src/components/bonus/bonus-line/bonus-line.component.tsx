@@ -1,5 +1,5 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
+import { Trans, useTranslation } from "react-i18next"
 
 import { Bonus, UniqueTech } from "../../../models/bonus.model"
 import CivCrest from "../../civ-crest/civ-crest.component"
@@ -23,7 +23,10 @@ const BonusLine: React.FC<BonusLineProps> = (props) => {
     const bonusDescriptionDisplay = (bonus: Bonus) => (
         <span className={hasTooltip ? 'HasTooltip' : ''}>
             { props.displayCivCrest ? <CivCrest civ={props.bonus.civ} mini={true}></CivCrest> : '' }
-            {bonus.team && props.displayTeamBonus ? (<span className="TeamBonus"> {t('Team bonus')}: </span>) : ''} {t(`civ.${props.bonus.civ?.id}.bonus.${bonus.id}.description`)}
+            { bonus.team && props.displayTeamBonus ? (<span className="TeamBonus"> {t('Team bonus')}: </span>) : '' }
+            <Trans
+                i18nKey={`civ.${props.bonus.civ?.id}.bonus.${bonus.id}.description`}
+                values={ bonus } />
         </span>
     )
 

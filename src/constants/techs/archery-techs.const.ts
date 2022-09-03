@@ -287,7 +287,7 @@ export const archeryUnits: ArcheryUnits = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 90,
+            food: 80,
             gold: 70,
             stone: 0
         },
@@ -303,7 +303,7 @@ export const archeryUnits: ArcheryUnits = {
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
                 { value: 2, type: ArmorType.pierce },
-                { value: -7, type: ArmorType.cavalryArcher },
+                { value: -4, type: ArmorType.cavalryArcher },
                 { value: 0, type: ArmorType.archer },
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.warElephant },
@@ -319,7 +319,7 @@ export const archeryUnits: ArcheryUnits = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 90,
+            food: 80,
             gold: 70,
             stone: 0
         },
@@ -335,7 +335,7 @@ export const archeryUnits: ArcheryUnits = {
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
                 { value: 2, type: ArmorType.pierce },
-                { value: -7, type: ArmorType.cavalryArcher },
+                { value: -4, type: ArmorType.cavalryArcher },
                 { value: 0, type: ArmorType.archer },
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.warElephant },
