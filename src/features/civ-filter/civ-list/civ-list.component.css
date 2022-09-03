@@ -105,7 +105,9 @@
 }
 
 .CivTree > img {
-    width: 44px;
+    width: 100%;
+    max-width: 56px;
+    min-width: 32px;
     user-drag: none;
     -webkit-user-drag: none;
     user-select: none;
