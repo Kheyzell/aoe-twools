@@ -143,10 +143,10 @@
             "name": "Bourguignons",
             "bonus": {
                 "burgundians1": {
-                    "description": "Les améliorations économiques sont disponibles un âge plus tôt et coûtent -50 % de nourriture"
+                    "description": "Les améliorations économiques sont disponibles un âge plus tôt et coûtent -{{value}} % de nourriture"
                 },
                 "burgundians2": {
-                    "description": "Coût des technologies des écuries -50 %"
+                    "description": "Coût des technologies des écuries -{{value}} %"
                 },
                 "burgundians3": {
                     "description": "Attaque des unités à poudre à canon +25 %"
@@ -349,7 +349,7 @@
                     "description": "Commence avec 2 buissons"
                 },
                 "gurjaras2": {
-                    "description": "Le bétail peut rester en garnison dans les moulins pour produire de la nourriture"
+                    "description": "Le bétail peut rester en garnison dans les moulins pour produire de la nourriture ( avec un rendement décroissante, utilise cette formule: 15 *ln (Nourriture/200+1) )"
                 },
                 "gurjaras3": {
                     "description": "Les unités montées infligent +40 % de dégâts supplémentaires"
@@ -685,7 +685,7 @@
                     "description": "La vitesse de construction des châteaux et des forums est augmentée de 100 %"
                 },
                 "sicilians2": {
-                    "description": "Les unités militaires terrestres (sauf unités de siège) subissent 50 % de bonus de dégâts en moins"
+                    "description": "Les unités militaires terrestres (sauf unités de siège) subissent {{value}} % de bonus de dégâts en moins"
                 },
                 "sicilians3": {
                     "description": "Les améliorations de ferme confèrent 100 % de nourriture supplémentaire"

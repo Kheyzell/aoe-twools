@@ -45,7 +45,7 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
-            capacities: [{ ...CAPACITIES.chargedAttack, reloadTime: 40, damage: 25 } as ChargedAttackCapacity],
+            capacities: [{ ...CAPACITIES.chargedAttack, reloadTime: 40, damage: 20 } as ChargedAttackCapacity],
             movementSpeed: 1.35,
             lineOfSight: 5
         },
@@ -75,7 +75,7 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
-            capacities: [{ ...CAPACITIES.chargedAttack, reloadTime: 40, damage: 30 } as ChargedAttackCapacity],
+            capacities: [{ ...CAPACITIES.chargedAttack, reloadTime: 40, damage: 25 } as ChargedAttackCapacity],
             movementSpeed: 1.35,
             lineOfSight: 5
         },
@@ -162,7 +162,7 @@ export const burgundiansTechTree: CivTechTree = {
         {
             id: 'burgundians1',
             effectType: EffectType.miscallenous,
-            value: 50,
+            value: 40,
             affectedUnits: [],
             affectedUpgrades: [
                 townCenterUpgrade.wheelbarrow, townCenterUpgrade.handCart,

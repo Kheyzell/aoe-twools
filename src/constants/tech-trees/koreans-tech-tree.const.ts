@@ -45,7 +45,7 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
                 { value: 0, type: ArmorType.melee },
                 { value: 3, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.archer },
-                { value: 0, type: ArmorType.cavalryArcher },
+                { value: -1, type: ArmorType.cavalryArcher },
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
@@ -79,7 +79,7 @@ export const koreansUniqueUnits: { warWagon: Unit, eliteWarWagon: Unit, turtleSh
                 { value: 0, type: ArmorType.melee },
                 { value: 4, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.archer },
-                { value: 0, type: ArmorType.cavalryArcher },
+                { value: -1, type: ArmorType.cavalryArcher },
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
