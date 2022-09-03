@@ -49,10 +49,8 @@
 
 .TechPanel .TechList {
     display: flex;
-}
-
-.TechPanel .TechList > .Tech:not(:first-child) {
-    margin-left: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .TechPanel .BonusList {
