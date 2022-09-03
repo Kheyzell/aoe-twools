@@ -13,10 +13,8 @@
 .UnitCalculator .UnitLists .UnitList {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-}
-.UnitCalculator .UnitLists .UnitList .UnitCalculatorUnit + .UnitCalculatorUnit {
-    margin-left: 8px;
+    gap: 8px;
+    padding: 4px 8px;
 }
 
 .UnitCalculator .Main {
@@ -25,9 +23,18 @@
     padding-bottom: 16px;
 }
 
+.UnitCalculator .Main .SelectedUnitLine {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 .UnitCalculator .Main .Upgrades {
     display: flex;
     flex-direction: column;
+}
+.UnitCalculator .Main .Upgrades.Upgrades1 {
+    align-items: flex-end;
 }
 
 .UnitCalculator .Main .Upgrades .UpgradeLine {

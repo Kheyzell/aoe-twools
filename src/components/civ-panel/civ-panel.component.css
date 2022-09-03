@@ -39,8 +39,6 @@
 
 .UnitList {
     display: flex;
-}
-
-.UnitList > .Tech:not(:first-child) {
-    margin-left: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
 }

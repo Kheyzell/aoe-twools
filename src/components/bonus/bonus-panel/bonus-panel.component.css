@@ -4,18 +4,15 @@
     background-size: cover !important;
 }
 
-.BonusPanel > .Section > .Title {
+.BonusPanel>.Section>.Title {
     font-size: 1.1rem;
     text-decoration: underline;
 }
 
-.BonusPanel > .Section .List {
+.BonusPanel>.Section .List {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    gap: 8px;
     margin-top: 4px;
-}
-
-.BonusPanel > .Section .List > div:not(:first-child) {
-    margin-left: 8px;
 }

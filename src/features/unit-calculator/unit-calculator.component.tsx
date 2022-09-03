@@ -159,14 +159,14 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
             </div>
 
             <div className="Main">
-                <div>
+                <div className="SelectedUnitLine">
                     {
                         getChainedUnits(unit1).map(unit => (
                             <UnitCalculatorUnitComponent key={unit.id} unit={unit} onClick={onUnit1Click} size={BoxSize.mini}></UnitCalculatorUnitComponent>
                         ))
                     }
                 </div>
-                <div className="Upgrades">
+                <div className="Upgrades Upgrades1">
                     {
                         unit1UpgradeLines.map((line, i) => {
                             return (<div key={i} className="UpgradeLine">
@@ -238,7 +238,7 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
                         <TrainingTimeLine></TrainingTimeLine>
                     </StatsContainer>
                 </div>
-                <div className="Upgrades">
+                <div className="Upgrades Upgrades2">
                     {
                         unit2UpgradeLines.map((line, i) => {
                             return (<div key={i} className="UpgradeLine">
@@ -266,7 +266,7 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
                         }
                     </div>
                 </div>
-                <div>
+                <div className="SelectedUnitLine">
                     {
                         getChainedUnits(unit2).map(unit => (
                             <UnitCalculatorUnitComponent key={unit.id} unit={unit} onClick={onUnit2Click} size={BoxSize.mini}></UnitCalculatorUnitComponent>
