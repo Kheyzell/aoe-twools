@@ -262,7 +262,65 @@ export const gurjarasTechTree: CivTechTree = {
     id: 'gurjaras',
     crest,
     wikiUrl: 'gurjaras',
-    bonuses: [],
+    bonuses: [
+        {
+            id: 'gurjaras1',
+            effectType: EffectType.miscallenous,
+            value: 2,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'gurjaras2',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'gurjaras3',
+            effectType: EffectType.damagePercent,
+            value: 40,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.stats.attackComponents
+                        .filter(attack => attack.type !== ArmorType.melee && attack.type !== ArmorType.pierce)
+                        .forEach(attack => multiplyNumber(attack.value, 1.4))
+                }
+            }],
+            affectedUnits: [
+                stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar,
+                gurjarasUniqueUnits.camelScout, stableUnits.camelRider, stableUnits.heavyCamelRider,
+            ],
+            affectedUpgrades: []
+        },
+        {
+            id: 'gurjaras4',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [dockUnits.fishingShip],
+            affectedUpgrades: []
+        },
+        {
+            id: 'gurjaras5',
+            effectType: EffectType.creationSpeed,
+            value: 25,
+            effects: [{
+                order: EffectOrder.last,
+                apply: (unit: Unit) => {
+                    unit.duration = multiplyNumber(unit.duration, 1 / 1.25)
+                }
+            }],
+            affectedUnits: [
+                archeryUnits.elephantArcher, archeryUnits.eliteElephantArcher,
+                gurjarasUniqueUnits.camelScout, stableUnits.camelRider, stableUnits.heavyCamelRider,
+                siegeUnits.armoredElephant, siegeUnits.siegeElephant,
+            ],
+            affectedUpgrades: [],
+            team: true
+        }
+    ],
     uniqueTechs,
     barracks: {
         unitLines: [
@@ -403,72 +461,6 @@ export const gurjarasTechTree: CivTechTree = {
         ])
     }
 }
-
-// Gurjaras
-const bonuses = [
-    {
-        id: 'gurjaras1',
-        effectType: EffectType.miscallenous,
-        value: 2,
-        affectedUnits: [],
-        affectedUpgrades: []
-    },
-    {
-        id: 'gurjaras2',
-        effectType: EffectType.miscallenous,
-        value: null,
-        affectedUnits: [],
-        affectedUpgrades: []
-    },
-    {
-        id: 'gurjaras3',
-        effectType: EffectType.damagePercent,
-        value: 40,
-        effects: [{
-            order: EffectOrder.last,
-            apply: (unit: Unit) => {
-                unit.stats.attackComponents
-                    .filter(attack => attack.type !== ArmorType.melee && attack.type !== ArmorType.pierce)
-                    .forEach(attack => multiplyNumber(attack.value, 1.4))
-            }
-        }],
-        affectedUnits: [
-            stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar,
-            gurjarasUniqueUnits.camelScout, stableUnits.camelRider, stableUnits.heavyCamelRider,
-        ],
-        affectedUpgrades: []
-    },
-    {
-        id: 'gurjaras4',
-        effectType: EffectType.miscallenous,
-        value: null,
-        affectedUnits: [dockUnits.fishingShip],
-        affectedUpgrades: []
-    },
-    {
-        id: 'gurjaras5',
-        effectType: EffectType.creationSpeed,
-        value: 25,
-        effects: [{
-            order: EffectOrder.last,
-            apply: (unit: Unit) => {
-                unit.duration = multiplyNumber(unit.duration, 1 / 1.25)
-            }
-        }],
-        affectedUnits: [
-            archeryUnits.elephantArcher, archeryUnits.eliteElephantArcher,
-            stableUnits.battleElephant, stableUnits.eliteBattleElephant,
-            gurjarasUniqueUnits.camelScout, stableUnits.camelRider, stableUnits.heavyCamelRider,
-            siegeUnits.armoredElephant, siegeUnits.siegeElephant,
-            khmerUniqueUnits.ballistaElephant, khmerUniqueUnits.eliteBallistaElephant,
-            persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant,
-        ],
-        affectedUpgrades: [],
-        team: true
-    }
-]
-
-gurjarasTechTree.bonuses = bonuses
 
 setCivOnUniqueTechs(uniqueTechs, gurjarasTechTree)
 setCivOnUniqueTechs(gurjarasTechTree.bonuses, gurjarasTechTree)
