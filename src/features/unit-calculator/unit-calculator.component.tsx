@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import BonusLine from "../../components/bonus/bonus-line/bonus-line.component"
 import TechComponent, { BoxSize } from "../../components/tech/tech.component"
-import { allCivTechTrees, aztecsUniqueUnits, bengalisUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits, celtsUniqueUnits, chineseUniqueUnits, cumansUniqueUnits, ethiopiansUniqueUnits, franksUniqueUnits, gothsUniqueUnits, hunsUniqueUnits, italiansUniqueUnits, japaneseUniqueUnits, khmerUniqueUnits, koreansUniqueUnits, lithuaniansUniqueUnits, magyarsUniqueUnits, malayUniqueUnits, maliansUniqueUnits, mayansUniqueUnits, mongolsUniqueUnits, persiansUniqueUnits, portugeseUniqueUnits, saracensUniqueUnits, siciliansUniqueUnits, slavsUniqueUnits, spanishUniqueUnits, tatarsUniqueUnits, teutonsUniqueUnits, turksUniqueUnits, vikingsUniqueUnits } from "../../constants"
+import { allCivTechTrees, aztecsUniqueUnits, bengalisUniqueUnits, berbersUniqueUnits, britonsUniqueUnits, bulgariansUniqueUnits, burgundiansUniqueUnits, burmeseUniqueUnits, byzantinesUniqueUnits, celtsUniqueUnits, chineseUniqueUnits, cumansUniqueUnits, ethiopiansUniqueUnits, franksUniqueUnits, gothsUniqueUnits, gurjarasUniqueUnits, hunsUniqueUnits, italiansUniqueUnits, japaneseUniqueUnits, khmerUniqueUnits, koreansUniqueUnits, lithuaniansUniqueUnits, magyarsUniqueUnits, malayUniqueUnits, maliansUniqueUnits, mayansUniqueUnits, mongolsUniqueUnits, persiansUniqueUnits, portugeseUniqueUnits, saracensUniqueUnits, siciliansUniqueUnits, slavsUniqueUnits, spanishUniqueUnits, tatarsUniqueUnits, teutonsUniqueUnits, turksUniqueUnits, vikingsUniqueUnits } from "../../constants"
 import { archeryUnits } from "../../constants/techs/archery-techs.const"
 import { barracksUnits } from "../../constants/techs/barracks-techs.const"
 import { castleUnits } from "../../constants/techs/castle-techs.const"
@@ -97,6 +97,7 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...dravidiansUniqueUnits.eliteUrumiSwordsman }), new Unit({ ...dravidiansUniqueUnits.thirisadai }),
         new Unit({ ...ethiopiansUniqueUnits.eliteShotelWarrior }),
         new Unit({ ...franksUniqueUnits.eliteThrowingAxeman }),
+        new Unit({ ...gurjarasUniqueUnits.camelScout }), new Unit({ ...gurjarasUniqueUnits.eliteChakramThrower }), new Unit({ ...gurjarasUniqueUnits.eliteShrivamshaRider }),
         new Unit({ ...gothsUniqueUnits.eliteHuskarl }),
         new Unit({ ...hindustanisUniqueUnits.eliteGhulam }), new Unit({ ...hindustanisUniqueUnits.imperialCamelRider }),
         new Unit({ ...hunsUniqueUnits.eliteTarkan }),
