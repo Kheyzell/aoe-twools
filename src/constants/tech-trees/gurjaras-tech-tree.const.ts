@@ -201,6 +201,7 @@ setAffectingUpgrades(camelRiderLine, [
     blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
     stableUpgrades.bloodlines, stableUpgrades.husbandry,
 ])
+gurjarasUniqueUnits.camelScout.affectingUpgrades.push(townCenterUpgrade.feudalAge)
 
 const uniqueTechs = [
     new UniqueTech({
@@ -217,7 +218,6 @@ const uniqueTechs = [
         affectedUnits: [
             barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman,
             barracksUnits.spearman,
-            archeryUnits.archer, archeryUnits.crossbowman,
             archeryUnits.skirmisher, archeryUnits.eliteSkirmisher,
             archeryUnits.handCannoneer,
             archeryUnits.elephantArcher, archeryUnits.eliteElephantArcher,
@@ -225,17 +225,8 @@ const uniqueTechs = [
             gurjarasUniqueUnits.shrivamshaRider, gurjarasUniqueUnits.eliteShrivamshaRider,
             gurjarasUniqueUnits.camelScout, stableUnits.camelRider, stableUnits.heavyCamelRider,
             siegeUnits.armoredElephant, siegeUnits.siegeElephant,
-            siegeUnits.mangonel, siegeUnits.onager,
-            siegeUnits.scorpion, siegeUnits.heavyScorpion,
-            siegeUnits.siegeTower,
-            siegeUnits.bombardCannon,
             gurjarasUniqueUnits.chakramThrower, gurjarasUniqueUnits.eliteChakramThrower,
             castleUnits.petard,
-            castleUnits.trebuchet,
-            dockUnits.galley, dockUnits.warGalley, dockUnits.galleon,
-            dockUnits.fireGalley, dockUnits.fireShip,
-            dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip,
-            dockUnits.cannonGalleon,
         ],
         affectedUpgrades: []
     }),
