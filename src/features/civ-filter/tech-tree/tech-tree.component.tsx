@@ -41,6 +41,13 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
   const techTooltipInteractivity = useSelector(techTooltipInteractivitySelector)
   const techTreeToDisplay = civFilterService.mergeTechTrees([selectedCiv!, selectedCiv2!].filter(civ => !!civ))
 
+  const dateOption: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }
+
   const onChangeTechSize = () => {
     const newTechSize = techSize === BoxSize.normal ? BoxSize.small : BoxSize.normal
     setTechSize(newTechSize)
@@ -139,7 +146,7 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
             })}
           </div>
         </div>
-        <span className="LastUpdate"> {t('Last update')}: { Intl.DateTimeFormat().format(new Date(Date.UTC(2022, 9, 2))) } </span>
+        <span className="LastUpdate"> {t('Last update')}: { Intl.DateTimeFormat(t('locale'), dateOption).format(new Date(Date.UTC(2022, 9, 2))) } </span>
       </div>
 
       <div className="LeftPanel" style={{ background: `url(${woodenBackground})` }}>
