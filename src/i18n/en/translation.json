@@ -353,7 +353,7 @@
                     "description": "Can garrison Mills with livestock to produce food ( with diminishing return, use this formula: 15 *ln (FoodAmount/200+1) )"
                 },
                 "gurjaras3": {
-                    "description": "Mounted units deal +40% bonus damage"
+                    "description": "Mounted units deal + 20% in Feudal / 30% in Castle / and 40% bonus damage"
                 },
                 "gurjaras4": {
                     "description": "Can garrison Docks with Fishing Ships"
@@ -407,7 +407,7 @@
                     "description": "Villagers are 10%/15%/20%/25% cheaper in the Dark/Feudal/Castle/Imperial Age"
                 },
                 "hindustanis2": {
-                    "description": "Camel Riders attack 25% faster"
+                    "description": "Camel Riders attack 20% faster"
                 },
                 "hindustanis3": {
                     "description": "Gunpowder units have +1/+1 armor"
@@ -629,7 +629,7 @@
                     "description": "The Folwark replaces the Mill"
                 },
                 "poles3": {
-                    "description": "Stone miners generate gold in addition to stone (at about half the rate of stone mining: 0.184 gold/s)"
+                    "description": "Stone miners generate gold in addition to stone (at 33% the rate of stone mining: 0.121 gold/s)"
                 },
                 "poles4": {
                     "description": "The Scout Cavalry line has +1 attack vs. archers"
@@ -649,10 +649,10 @@
                     "description": "The Feitoria becomes available for building in the Imperial Age"
                 },
                 "portuguese4": {
-                    "description": "All technologies (excluding advancing ages) are researched 30% faster"
+                    "description": "Foragers generate a trickle of wood (33%)"
                 },
                 "portuguese5": {
-                    "description": "The Line of Sight is shared with the team from the beginning of the game"
+                    "description": "All technologies (excluding advancing ages) are researched 25% faster"
                 }
             }
         },

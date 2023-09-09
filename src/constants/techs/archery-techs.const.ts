@@ -267,7 +267,7 @@ export const archeryUnits: ArcheryUnits = {
             accuracy: .5,
             attackComponents: [
                 { value: 7, type: ArmorType.pierce },
-                { value: 2, type: ArmorType.spearman },
+                { value: 4, type: ArmorType.spearman },
             ],
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
@@ -384,12 +384,7 @@ export const archeryUpgrades: ArcheryUpgrades = {
             apply: (unit: Unit) => {
                 unit.addArmorComponent(1, ArmorType.melee)
                 unit.addArmorComponent(2, ArmorType.pierce)
-
-                if (unit.id === archeryUnits.cavalryArcher.id || unit.id === archeryUnits.heavyCavalryArcher.id) {
-                    unit.addAttackComponent(4, ArmorType.spearman)
-                } else {
-                    unit.addAttackComponent(2, ArmorType.spearman)
-                }
+                unit.addAttackComponent(2, ArmorType.spearman)
             }
         }],
         duration: 65

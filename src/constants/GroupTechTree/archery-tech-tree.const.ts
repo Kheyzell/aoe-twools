@@ -1,8 +1,9 @@
-import { mongolsUniqueUnits, berbersUniqueUnits, italiansUniqueUnits, mayansUniqueUnits, cumansUniqueUnits, koreansUniqueUnits, chineseUniqueUnits } from "..";
+import { berbersUniqueUnits, chineseUniqueUnits, cumansUniqueUnits, italiansUniqueUnits, koreansUniqueUnits, mayansUniqueUnits, mongolsUniqueUnits } from "..";
 import { EffectOrder, GroupTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
 import { Unit } from "../../models/unit.model";
 import { setAffectingUpgrades } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
+import { incasUniqueUnits } from "../tech-trees/incas-tech-tree.const";
 import { vietnameseUniqueUnits } from "../tech-trees/vietnamese-tech-tree.const";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -45,6 +46,10 @@ archeryUpgrades.thumbRing.effects = [
             }
             if (unit.id === chineseUniqueUnits.chukonu.id || unit.id === chineseUniqueUnits.eliteChukonu.id) {
                 unit.stats.attackRate = multiplyNumber(unit.stats.attackRate, 1.25)
+                unit.stats.rateOfFire = 1/unit.stats.attackRate
+            }
+            if (unit.id === incasUniqueUnits.slinger.id) {
+                unit.stats.attackRate = multiplyNumber(unit.stats.attackRate, 1.17)
                 unit.stats.rateOfFire = 1/unit.stats.attackRate
             }
         }

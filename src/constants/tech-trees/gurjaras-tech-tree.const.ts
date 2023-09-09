@@ -4,7 +4,7 @@ import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeG
 import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/gurjaras.png';
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { addNumber, multiplyNumber } from "../../utils/utils";
+import { addElementIfNotInArray, addNumber, multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -19,8 +19,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import { khmerUniqueUnits } from "./khmer-tech-tree.const";
-import { persiansUniqueUnits } from "./persians-tech-tree.const";
 
 export const gurjarasUniqueUnits: { chakramThrower: Unit, eliteChakramThrower: Unit, shrivamshaRider: Unit, eliteShrivamshaRider: Unit, camelScout: Unit } = {
     chakramThrower: new Unit({
@@ -41,7 +39,7 @@ export const gurjarasUniqueUnits: { chakramThrower: Unit, eliteChakramThrower: U
             range: 5,
             accuracy: 1,
             attackComponents: [
-                { value: 5, type: ArmorType.melee },
+                { value: 3, type: ArmorType.melee },
                 { value: 1, type: ArmorType.eagleWarrior },
                 { value: 1, type: ArmorType.standardBuilding },
             ],
@@ -75,9 +73,11 @@ export const gurjarasUniqueUnits: { chakramThrower: Unit, eliteChakramThrower: U
             range: 6,
             accuracy: 1,
             attackComponents: [
-                { value: 6, type: ArmorType.melee },
+                { value: 4, type: ArmorType.melee },
                 { value: 2, type: ArmorType.eagleWarrior },
                 { value: 2, type: ArmorType.standardBuilding },
+                { value: 1, type: ArmorType.infantry },
+                { value: 1, type: ArmorType.condottiero },
             ],
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
@@ -271,13 +271,28 @@ export const gurjarasTechTree: CivTechTree = {
         {
             id: 'gurjaras3',
             effectType: EffectType.damagePercent,
-            value: 40,
+            value: 20,
             effects: [{
                 order: EffectOrder.last,
-                apply: (unit: Unit) => {
-                    unit.stats.attackComponents
-                        .filter(attack => attack.type !== ArmorType.melee && attack.type !== ArmorType.pierce)
-                        .forEach(attack => multiplyNumber(attack.value, 1.4))
+                apply: (unit, upgrades) => {
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
+                    addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                        unit.stats.attackComponents
+                            .filter(attack => attack.type !== ArmorType.melee && attack.type !== ArmorType.pierce)
+                            .forEach(attack => multiplyNumber(attack.value, 1.2))
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
+                        unit.stats.attackComponents
+                            .filter(attack => attack.type !== ArmorType.melee && attack.type !== ArmorType.pierce)
+                            .forEach(attack => multiplyNumber(attack.value, 1.3))
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                        unit.stats.attackComponents
+                            .filter(attack => attack.type !== ArmorType.melee && attack.type !== ArmorType.pierce)
+                            .forEach(attack => multiplyNumber(attack.value, 1.4))
+                    }
                 }
             }],
             affectedUnits: [

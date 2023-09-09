@@ -210,11 +210,11 @@ export const hindustanisTechTree: CivTechTree = {
         {
             id: 'hindustanis2',
             effectType: EffectType.fireRate,
-            value: 25,
+            value: 20,
             effects: [{
                 order: EffectOrder.last,
                 apply: unit => {
-                    unit.multiplyAttackRate(1.25)
+                    unit.multiplyAttackRate(1.2)
                 }
             }],
             affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, hindustanisUniqueUnits.imperialCamelRider],
