@@ -404,7 +404,7 @@
             "name": "Hindustanis",
             "bonus": {
                 "hindustanis1": {
-                    "description": "Coût des villageois -10 % à l'âge sombre, -15 % à l'âge féodal, -20 % à l'âge des châteaux, -25 % à l'âge impérial"
+                    "description": "Coût des villageois -{{value.age1}} % à l'âge sombre, -{{value.age2}} % à l'âge féodal, -{{value.age3}} % à l'âge des châteaux, -{{value.age4}} % à l'âge impérial"
                 },
                 "hindustanis2": {
                     "description": "Vitesse d'attaque des chameaux +20 %"
@@ -626,7 +626,7 @@
                     "description": "Les Villageois récupèrent 5/10/15/20 HP par minute à l'âge Sombre/Féodal/Château/Impérial"
                 },
                 "poles2": {
-                    "description": "Le Folwarki remplace the Moulin"
+                    "description": "Le Folwarki remplace the Moulin (convertion de nourriture : {{value}}%)"
                 },
                 "poles3": {
                     "description": "Les mineurs de pierre génèrent de l'or en plus de la pierre (à un taux de 33 % : 0.121 or/s)"

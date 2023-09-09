@@ -172,7 +172,7 @@ export const hindustanisTechTree: CivTechTree = {
         {
             id: 'hindustanis1',
             effectType: EffectType.discount,
-            value: { age1: 10, age2: 15, age3: 20, age4: 25 },
+            value: { age1: 5, age2: 10, age3: 15, age4: 20 },
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
@@ -180,27 +180,27 @@ export const hindustanisTechTree: CivTechTree = {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
-                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.25))
-                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.25))
-                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.25))
-                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.25))
-                    } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.20))
                         unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.20))
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.20))
                         unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.20))
                     } else
-                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.15))
                         unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.15))
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.15))
                         unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.15))
-                    } else {
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
                         unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.10))
                         unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.10))
                         unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.10))
                         unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.10))
+                    } else {
+                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.5))
+                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.5))
+                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.5))
+                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.5))
                     }
                 }
             }],

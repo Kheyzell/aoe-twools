@@ -162,7 +162,7 @@ export const burgundiansTechTree: CivTechTree = {
         {
             id: 'burgundians1',
             effectType: EffectType.miscallenous,
-            value: 40,
+            value: 33,
             affectedUnits: [],
             affectedUpgrades: [
                 townCenterUpgrade.wheelbarrow, townCenterUpgrade.handCart,

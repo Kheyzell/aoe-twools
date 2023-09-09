@@ -156,7 +156,7 @@ export const polesTechTree: CivTechTree = {
         {
             id: 'poles2',
             effectType: EffectType.miscallenous,
-            value: null,
+            value: 8,
             affectedUnits: [],
             affectedUpgrades: []
         },
