@@ -124,7 +124,7 @@ export const siegeUnits: SiegeUnits = {
             stone: 0
         },
         stats: {
-            health: 200,
+            health: 180,
             rateOfFire: 3,
             attackType: AttackType.melee,
             attackComponents: [
@@ -157,7 +157,7 @@ export const siegeUnits: SiegeUnits = {
             stone: 0
         },
         stats: {
-            health: 250,
+            health: 220,
             rateOfFire: 3,
             attackType: AttackType.melee,
             attackComponents: [
@@ -168,10 +168,10 @@ export const siegeUnits: SiegeUnits = {
             armorComponents: [
                 { value: -2, type: ArmorType.melee },
                 { value: 150, type: ArmorType.pierce },
-                { value: 8, type: ArmorType.cavalry },
-                { value: 18, type: ArmorType.warElephant },
+                { value: 10, type: ArmorType.cavalry },
+                { value: 20, type: ArmorType.warElephant },
                 { value: 0, type: ArmorType.siegeWeapon },
-                { value: 2, type: ArmorType.ram }
+                { value: 0, type: ArmorType.ram }
             ],
             movementSpeed: .6,
             lineOfSight: 4

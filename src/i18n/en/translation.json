@@ -404,7 +404,7 @@
             "name": "Hindustanis",
             "bonus": {
                 "hindustanis1": {
-                    "description": "Villagers are 10%/15%/20%/25% cheaper in the Dark/Feudal/Castle/Imperial Age"
+                    "description": "Villagers are {{value.age1}}%/{{value.age2}}%/{{value.age3}}%/{{value.age4}}% cheaper in the Dark/Feudal/Castle/Imperial Age"
                 },
                 "hindustanis2": {
                     "description": "Camel Riders attack 20% faster"
@@ -626,7 +626,7 @@
                     "description": "Villagers recover 5/10/15/20 HP per minute in the Dark/Feudal/Castle/Imperial Age"
                 },
                 "poles2": {
-                    "description": "The Folwark replaces the Mill"
+                    "description": "The Folwark replaces the Mill (food convertion: {{value}}%)"
                 },
                 "poles3": {
                     "description": "Stone miners generate gold in addition to stone (at 33% the rate of stone mining: 0.121 gold/s)"
