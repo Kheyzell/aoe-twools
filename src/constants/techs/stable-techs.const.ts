@@ -304,7 +304,7 @@ export const stableUnits: StableUnits = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 120,
+            food: 110,
             gold: 70,
             stone: 0
         },
@@ -335,7 +335,7 @@ export const stableUnits: StableUnits = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 120,
+            food: 110,
             gold: 70,
             stone: 0
         },

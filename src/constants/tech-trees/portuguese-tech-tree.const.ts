@@ -285,6 +285,14 @@ export const portugueseTechTree: CivTechTree = {
         },
         {
             id: 'portuguese4',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: [],
+            team: false
+        },
+        {
+            id: 'portuguese5',
             effectType: EffectType.creationSpeed,
             value: 30,
             affectedUnits: [],
@@ -306,16 +314,9 @@ export const portugueseTechTree: CivTechTree = {
                 miningCampUpgrades.goldMining, miningCampUpgrades.stoneMining, miningCampUpgrades.stoneShaftMining,
                 marketUpgrade.coinage, marketUpgrade.caravan, marketUpgrade.banking, marketUpgrade.guilds,
                 dockUpgrades.gillnets, dockUpgrades.careening, dockUpgrades.dryDock
-            ]
-        },
-        {
-            id: 'portuguese5',
-            effectType: EffectType.miscallenous,
-            value: null,
-            affectedUnits: [],
-            affectedUpgrades: [],
+            ],
             team: true
-        }
+        },
     ],
     uniqueTechs,
     barracks: {
