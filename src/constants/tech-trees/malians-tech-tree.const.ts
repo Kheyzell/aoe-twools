@@ -32,7 +32,7 @@ export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
             stone: 0
         },
         stats: {
-            health: 35,
+            health: 40,
             rateOfFire: 2,
             attackType: AttackType.projectile,
             range: 5,
@@ -64,7 +64,7 @@ export const maliansUniqueUnits: { gbeto: Unit, eliteGbeto: Unit } = {
             stone: 0
         },
         stats: {
-            health: 45,
+            health: 50,
             rateOfFire: 2,
             attackType: AttackType.projectile,
             range: 5,
@@ -97,7 +97,7 @@ const uniqueTechs = [
         id: 'tigui',
         age: 3,
         effectType: EffectType.miscallenous,
-        value: null,
+        value: 8,
         cost: { wood: 300, food: 200, gold: 0, stone: 0 },
         duration: 40,
         affectedUnits: [],
@@ -160,7 +160,7 @@ export const maliansTechTree: CivTechTree = {
         {
             id: 'malians3',
             effectType: EffectType.miscallenous,
-            value: 30,
+            value: 15,
             affectedUnits: [],
             affectedUpgrades: []
         },

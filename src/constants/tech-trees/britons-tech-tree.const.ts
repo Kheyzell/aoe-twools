@@ -169,11 +169,11 @@ export const britonsTechTree: CivTechTree = {
         {
             id: 'britons4',
             effectType: EffectType.creationSpeed,
-            value: 20,
+            value: 10,
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit: Unit) => {
-                    unit.duration = multiplyNumber(unit.duration, 1/1.20)
+                    unit.duration = multiplyNumber(unit.duration, 1/1.10)
                 }
             }],
             affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher, archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],

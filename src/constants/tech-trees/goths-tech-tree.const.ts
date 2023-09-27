@@ -215,6 +215,13 @@ export const gothsTechTree: CivTechTree = {
         },
         {
             id: 'goths6',
+            effectType: EffectType.miscallenous,
+            value: 20,
+            affectedUnits: [townCenterUnits.villager],
+            affectedUpgrades: []
+        },
+        {
+            id: 'goths7',
             effectType: EffectType.creationSpeed,
             value: 20,
             effects: [{

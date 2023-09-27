@@ -24,7 +24,7 @@ export const fullTechTree: CivTechTree = {
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
             new UnitLine([barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

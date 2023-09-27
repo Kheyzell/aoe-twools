@@ -1,8 +1,9 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
+import { Upgrade } from "../../models/upgrade.model";
 import crest from '../../resources/images/crests/incas.png';
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, getAllCivMilitaryUnits, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -26,7 +27,7 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 60,
+            food: 65,
             gold: 30,
             stone: 0
         },
@@ -60,7 +61,7 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 60,
+            food: 65,
             gold: 30,
             stone: 0
         },
@@ -94,7 +95,7 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 30,
+            food: 40,
             gold: 40,
             stone: 0
         },
@@ -140,8 +141,16 @@ const uniqueTechs = [
         id: 'andeanSling',
         age: 3,
         effectType: EffectType.minimumRange,
-        value: 0,
+        value: 1,
         cost: { wood: 0, food: 200, gold: 300, stone: 0 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                if (unit.id === incasUniqueUnits.slinger.id) {
+                    unit.addAttackComponent(1, ArmorType.pierce)
+                }
+            }
+        }],
         duration: 40,
         affectedUnits: [archeryUnits.skirmisher, archeryUnits.eliteSkirmisher, incasUniqueUnits.slinger],
         affectedUpgrades: []
@@ -169,64 +178,7 @@ export const incasTechTree: CivTechTree = {
     id: 'incas',
     crest,
     wikiUrl: 'Incas_(Age_of_Empires_II)',
-    bonuses: [
-        {
-            id: 'incas1',
-            effectType: EffectType.miscallenous,
-            value: null,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'incas2',
-            effectType: EffectType.miscallenous,
-            value: null,
-            effects: [{
-                order: EffectOrder.last,
-                apply: (unit, upgrades) => {
-                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.forging)
-                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.ironCasting)
-                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.blastFurnace)
-                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.scaleMailArmor)
-                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.chainMailArmor)
-                    addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.plateMailArmor)
-                }
-            }],
-            affectedUnits: [townCenterUnits.villager],
-            affectedUpgrades: [
-                blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
-                blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor
-            ]
-        },
-        {
-            id: 'incas3',
-            effectType: EffectType.miscallenous,
-            value: 10,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'incas4',
-            effectType: EffectType.discoutStone,
-            value: 15,
-            affectedUnits: [],
-            affectedUpgrades: []
-        },
-        {
-            id: 'incas5',
-            effectType: EffectType.lineOfSight,
-            value: 2,
-            effects: [{
-                order: EffectOrder.first,
-                apply: (unit: Unit) => {
-                    unit.stats.lineOfSight = unit.stats.lineOfSight + 2
-                }
-            }],
-            affectedUnits: [barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher],
-            affectedUpgrades: [],
-            team: true
-        }
-    ],
+    bonuses: [],
     uniqueTechs,
     barracks: {
         unitLines: [
@@ -234,7 +186,7 @@ export const incasTechTree: CivTechTree = {
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
             new UnitLine([barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [
@@ -366,6 +318,74 @@ export const incasTechTree: CivTechTree = {
         ])
     }
 }
+
+const bonuses = [
+    {
+        id: 'incas1',
+        effectType: EffectType.miscallenous,
+        value: null,
+        affectedUnits: [],
+        affectedUpgrades: []
+    },
+    {
+        id: 'incas2',
+        effectType: EffectType.miscallenous,
+        value: null,
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.forging)
+                addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.ironCasting)
+                addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.blastFurnace)
+                addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.scaleMailArmor)
+                addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.chainMailArmor)
+                addElementIfNotInArray(unit.affectingUpgrades, blacksmithUpgrades.plateMailArmor)
+            }
+        }],
+        affectedUnits: [townCenterUnits.villager],
+        affectedUpgrades: [
+            blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+            blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor
+        ]
+    },
+    {
+        id: 'incas3',
+        effectType: EffectType.miscallenous,
+        value: 10,
+        affectedUnits: [],
+        affectedUpgrades: []
+    },
+    {
+        id: 'incas4',
+        effectType: EffectType.discoutStone,
+        value: 15,
+        affectedUnits: [],
+        affectedUpgrades: []
+    },
+    {
+        id: 'incas5',
+        effectType: EffectType.discoutFood,
+        value: { age1: 15, age2: 20, age3: 25, age4: 30 },
+        affectedUnits: getAllCivMilitaryUnits(incasTechTree),
+        affectedUpgrades: []
+    },
+    {
+        id: 'incas6',
+        effectType: EffectType.lineOfSight,
+        value: 2,
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.lineOfSight = unit.stats.lineOfSight + 2
+            }
+        }],
+        affectedUnits: [barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier, archeryUnits.skirmisher, archeryUnits.eliteSkirmisher],
+        affectedUpgrades: [],
+        team: true
+    }
+]
+
+incasTechTree.bonuses = bonuses
 
 setCivOnUniqueTechs(uniqueTechs, incasTechTree)
 setCivOnUniqueTechs(incasTechTree.bonuses, incasTechTree)

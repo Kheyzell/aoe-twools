@@ -32,11 +32,11 @@ export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
             stone: 0
         },
         stats: {
-            health: 65,
+            health: 70,
             rateOfFire: 2,
             attackType: AttackType.melee,
             attackComponents: [
-                { value: 10, type: ArmorType.melee },
+                { value: 11, type: ArmorType.melee },
                 { value: 2, type: ArmorType.eagleWarrior },
                 { value: 2, type: ArmorType.standardBuilding },
             ],
@@ -63,11 +63,11 @@ export const celtsUniqueUnits: { woadRaider: Unit, eliteWoadRaider: Unit } = {
             stone: 0
         },
         stats: {
-            health: 80,
+            health: 85,
             rateOfFire: 2,
             attackType: AttackType.melee,
             attackComponents: [
-                { value: 13, type: ArmorType.melee },
+                { value: 14, type: ArmorType.melee },
                 { value: 3, type: ArmorType.eagleWarrior },
                 { value: 3, type: ArmorType.standardBuilding },
             ],
@@ -95,7 +95,7 @@ const uniqueTechs = [
         id: 'stronghold',
         age: 3,
         effectType: EffectType.fireRate,
-        value: 25,
+        value: 33,
         cost: { wood: 0, food: 250, gold: 200, stone: 0 },
         duration: 30,
         affectedUnits: [],
@@ -187,7 +187,7 @@ export const celtsTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

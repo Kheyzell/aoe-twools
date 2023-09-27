@@ -197,7 +197,7 @@ const uniqueTechs = [
         value: 10,
         cost: { wood: 800, food: 0, gold: 650, stone: 0 },
         duration: 60,
-        affectedUnits: [townCenterUnits.villager],
+        affectedUnits: [townCenterUnits.villager, monasteryUnits.monk],
         affectedUpgrades: []
     })
 ]
@@ -268,6 +268,19 @@ export const bengalisTechTree: CivTechTree = {
         },
         {
             id: 'bengalis5',
+            effectType: EffectType.damage,
+            value: 2,
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.addAttackComponent(2, ArmorType.skirmisher)
+                }
+            }],
+            affectedUnits: [stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.battleElephant, stableUnits.eliteBattleElephant, bengalisUniqueUnits.rathaMelee, bengalisUniqueUnits.eliteRathaMelee],
+            affectedUpgrades: []
+        },
+        {
+            id: 'bengalis6',
             effectType: EffectType.miscallenous,
             value: 10,
             affectedUnits: [marketUnits.tradeCart, dockUnits.tradeCog],
@@ -281,7 +294,7 @@ export const bengalisTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

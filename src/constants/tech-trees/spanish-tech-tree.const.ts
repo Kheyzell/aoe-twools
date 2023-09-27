@@ -3,7 +3,7 @@ import { CAPACITIES, CapacityId, ConvertionCapacity } from "../../models/capacit
 import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/spanish.png';
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { chainTechs, getAllCivUpgrades, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { multiplyNumber, roundHundredth } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
@@ -44,7 +44,7 @@ export const spanishUniqueUnits: { conquistador: Unit, eliteConquistador: Unit, 
             ],
             armorComponents: [
                 { value: 2, type: ArmorType.melee },
-                { value: 2, type: ArmorType.pierce },
+                { value: 1, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.archer },
                 { value: 0, type: ArmorType.cavalryArcher },
                 { value: 0, type: ArmorType.cavalry },
@@ -154,9 +154,13 @@ const uniqueTechs = [
             order: EffectOrder.first,
             apply: (unit: Unit) => {
                 const conversion = unit.stats.capacities.find(capacity => capacity.id === CapacityId.conversion) as ConvertionCapacity
-                if (conversion) {
+                if (!!conversion) {
                     conversion.conversionCyclesMin = conversion.conversionCyclesMin - 1
                     conversion.conversionCyclesMax = conversion.conversionCyclesMax - 1
+                }
+
+                if (unit.id === spanishUniqueUnits.missionary.id) {
+                    unit.stats.range! += 1
                 }
             }
         }],
@@ -189,63 +193,14 @@ export const spanishTechTree: CivTechTree = {
     id: 'spanish',
     crest,
     wikiUrl: 'Spanish_(Age_of_Empires_II)',
-    bonuses: [
-        {
-            id: 'spanish1',
-            effectType: EffectType.constructionSpeed,
-            value: 30,
-            affectedUnits: [townCenterUnits.villager],
-            affectedUpgrades: []
-        },
-        {
-            id: 'spanish2',
-            effectType: EffectType.discoutGold,
-            value: 100,
-            affectedUnits: [],
-            affectedUpgrades: [
-                blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
-                blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
-                blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
-                blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
-                blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor
-            ]
-        },
-        {
-            id: 'spanish3',
-            effectType: EffectType.accuracy,
-            value: null,
-            affectedUnits: [dockUnits.eliteCannonGalleon],
-            affectedUpgrades: []
-        },
-        {
-            id: 'spanish4',
-            effectType: EffectType.fireRate,
-            value: 18,
-            effects: [{
-                order: EffectOrder.last,
-                apply: unit => {
-                    unit.multiplyAttackRate(1.18)
-                }
-            }],
-            affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon],
-            affectedUpgrades: []
-        },
-        {
-            id: 'spanish5',
-            effectType: EffectType.miscallenous,
-            value: 25,
-            affectedUnits: [marketUnits.tradeCart],
-            affectedUpgrades: [],
-            team: true
-        }
-    ],
+    bonuses: [],
     uniqueTechs,
     barracks: {
         unitLines: [
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [
@@ -384,6 +339,67 @@ export const spanishTechTree: CivTechTree = {
         ])
     }
 }
+
+const bonuses = [
+    {
+        id: 'spanish1',
+        effectType: EffectType.constructionSpeed,
+        value: 30,
+        affectedUnits: [townCenterUnits.villager],
+        affectedUpgrades: []
+    },
+    {
+        id: 'spanish2',
+        effectType: EffectType.discoutGold,
+        value: 100,
+        affectedUnits: [],
+        affectedUpgrades: [
+            blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+            blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
+            blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+            blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
+            blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor
+        ]
+    },
+    {
+        id: 'spanish3',
+        effectType: EffectType.accuracy,
+        value: null,
+        affectedUnits: [dockUnits.eliteCannonGalleon],
+        affectedUpgrades: []
+    },
+    {
+        id: 'spanish4',
+        effectType: EffectType.fireRate,
+        value: 18,
+        effects: [{
+            order: EffectOrder.last,
+            apply: (unit: Unit) => {
+                unit.multiplyAttackRate(1.18)
+            }
+        }],
+        affectedUnits: [archeryUnits.handCannoneer, siegeUnits.bombardCannon],
+        affectedUpgrades: []
+    },
+    {
+        id: 'spanish5',
+        effectType: EffectType.miscallenous,
+        value: 20,
+        effects: [],
+        affectedUnits: [],
+        affectedUpgrades: getAllCivUpgrades(spanishTechTree)
+    },
+    {
+        id: 'spanish6',
+        effectType: EffectType.miscallenous,
+        value: 25,
+        affectedUnits: [marketUnits.tradeCart],
+        affectedUpgrades: [],
+        team: true
+    }
+]
+
+spanishTechTree.bonuses = bonuses
 
 setCivOnUniqueTechs(uniqueTechs, spanishTechTree)
 setCivOnUniqueTechs(spanishTechTree.bonuses, spanishTechTree)

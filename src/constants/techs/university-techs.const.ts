@@ -92,7 +92,7 @@ export const universityUpgrades: UniversityUpgrades = {
             gold: 0,
             stone: 100
         },
-        duration: 60
+        duration: 35
     }),
     treadmillCrane: new Upgrade({
         id: 'treadmillCrane',

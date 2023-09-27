@@ -48,7 +48,7 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
             lineOfSight: 5,
             capacities: [{ ...CAPACITIES.generateGoldWhenFighting, goldPerSecond: .367 } as GenerateGoldWhenFightingCapacity]
         },
-        duration: 16
+        duration: 17
     }),
     eliteKeshik: new Unit({
         id: 'eliteKeshik',
@@ -78,7 +78,7 @@ export const tatarsUniqueUnits: { keshik: Unit, eliteKeshik: Unit, flamingCamel:
             lineOfSight: 5,
             capacities: [{ ...CAPACITIES.generateGoldWhenFighting, goldPerSecond: .367 } as GenerateGoldWhenFightingCapacity]
         },
-        duration: 14
+        duration: 15
     }),
     flamingCamel: new Unit({
         id: 'flamingCamel',

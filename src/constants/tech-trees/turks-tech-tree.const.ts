@@ -114,7 +114,7 @@ const uniqueTechs = [
         age: 4,
         effectType: EffectType.range,
         value: 2,
-        cost: { wood: 0, food: 0, gold: 500, stone: 450 },
+        cost: { wood: 600, food: 0, gold: 650, stone: 0 },
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {

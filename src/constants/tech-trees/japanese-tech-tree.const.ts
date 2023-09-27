@@ -27,7 +27,7 @@ export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 60,
+            food: 50,
             gold: 30,
             stone: 0
         },
@@ -59,7 +59,7 @@ export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 60,
+            food: 50,
             gold: 30,
             stone: 0
         },
@@ -109,7 +109,7 @@ const uniqueTechs = [
         age: 4,
         effectType: EffectType.miscallenous,
         value: null,
-        cost: { wood: 750, food: 0, gold: 400, stone: 0 },
+        cost: { wood: 550, food: 0, gold: 300, stone: 0 },
         duration: 60,
         effects: [{
             order: EffectOrder.last,
@@ -191,7 +191,7 @@ export const japaneseTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [
@@ -224,7 +224,7 @@ export const japaneseTechTree: CivTechTree = {
             new UnitLine([castleUnits.petard]),
             new UnitLine([castleUnits.trebuchet]),
         ],
-        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.conscription, castleUpgrades.spies])
+        upgrades: new UpgradePerAgeGroup([uniqueTechs[0], uniqueTechs[1], castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies])
     },
     blacksmith: {
         unitLines: [],

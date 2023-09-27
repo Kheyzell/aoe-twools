@@ -101,7 +101,7 @@ const uniqueTechs = [
         age: 3,
         effectType: EffectType.health,
         value: 20,
-        cost: { wood: 0, food: 500, gold: 450, stone: 0 },
+        cost: { wood: 0, food: 400, gold: 400, stone: 0 },
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
@@ -209,7 +209,7 @@ export const saracensTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

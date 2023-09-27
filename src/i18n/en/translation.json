@@ -59,6 +59,9 @@
                     "description": "Monks +3/+3 armor"
                 },
                 "bengalis5": {
+                    "description": "Cavalry units +2 attack vs Skirmishers"
+                },
+                "bengalis6": {
                     "description": "Trade units yield 10% food in addition to gold"
                 }
             }
@@ -296,7 +299,7 @@
                     "description": "The Pikeman upgrade is free"
                 },
                 "ethiopians4": {
-                    "description": "Towers and Outposts have +3 LOS"
+                    "description": "Towers and Outposts have +3 LOS and stone cost removed"
                 }
             }
         },
@@ -339,7 +342,10 @@
                     "description": "Loom is researched instantly"
                 },
                 "goths6": {
-                    "description": "Barracks work 20% faster"
+                    "description": "Hunt lasts {{value}}% longer"
+                },
+                "goths7": {
+                    "description": "Barracks work {{value}}% faster"
                 }
             }
         },
@@ -384,19 +390,19 @@
             "name": "Incas",
             "bonus": {
                 "incas1": {
-                    "description": "Start with a free Llama"
-                },
-                "incas2": {
                     "description": "Villagers benefit from Blacksmith infantry upgrades starting in the Castle Age"
                 },
-                "incas3": {
+                "incas2": {
                     "description": "Houses support 10 population"
                 },
-                "incas4": {
+                "incas3": {
                     "description": "Buildings cost -15% stone"
                 },
+                "incas4": {
+                    "description": "Military units cost -{{value.age1}}/{{value.age2}}/{{value.age3}}/{{value.age4}}% food in Dark/Feudal/Castle/Imperial"
+                },
                 "incas5": {
-                    "description": "Spearmen and Skirmishers +2 Line of Sight"
+                    "description": "Start with a free Llama"
                 }
             }
         },
@@ -504,7 +510,7 @@
             "name": "Lithuanians",
             "bonus": {
                 "lithuanians1": {
-                    "description": "Start the game with +150 food"
+                    "description": "Each Town Center provides +{{value}} food"
                 },
                 "lithuanians2": {
                     "description": "Spearman and Skirmisher lines move 10% faster"
@@ -550,6 +556,9 @@
                     "description": "Battle Elephants are 30% cheaper in the Castle Age, 40% cheaper in the Imperial Age"
                 },
                 "malay5": {
+                    "description": "Receive infantry armor upgrades for free"
+                },
+                "malay6": {
                     "description": "Docks have double Line of Sight"
                 }
             }
@@ -564,7 +573,7 @@
                     "description": "Barracks units have +1/+2/+3 pierce armor in the Feudal/Castle/Imperial Age"
                 },
                 "malians3": {
-                    "description": "Gold mines last 30% longer"
+                    "description": "Villagers drop off {{value}}% more gold"
                 },
                 "malians4": {
                     "description": "Universities research +80% faster"
@@ -683,13 +692,13 @@
             "name": "Sicilians",
             "bonus": {
                 "sicilians1": {
-                    "description": "Castles and Town Centers are constructed 100% faster"
+                    "description": "Castle build {{value.castle}}% and Town Centers build {{value.townCenter}}% faster"
                 },
                 "sicilians2": {
                     "description": "Land military units (except Siege weapons) absorb {{value}}% of all incoming bonus damage"
                 },
                 "sicilians3": {
-                    "description": "Farm upgrades provide +100% additional food to Farms before they need to be reseeded"
+                    "description": "Farm upgrades provide +{{value}}% additional food to Farms before they need to be reseeded"
                 },
                 "sicilians4": {
                     "description": "Can build Donjons, which replace the regular Watch Tower line"
@@ -709,7 +718,7 @@
                     "description": "Farmers work 10% faster"
                 },
                 "slavs2": {
-                    "description": "Supplies is free"
+                    "description": "Supplies and Gambesons are free"
                 },
                 "slavs3": {
                     "description": "Siege Workshop units are 15% cheaper"
@@ -735,6 +744,9 @@
                     "description": "Hand Cannoneers and Bombard Cannons fire 18% faster"
                 },
                 "spanish5": {
+                    "description": "Gain {{value}} gold for each technology researched"
+                },
+                "spanish6": {
                     "description": "Trade units generate +25% gold"
                 }
             }
@@ -1425,6 +1437,9 @@
         "supplies": {
             "name": "Supplies"
         },
+        "gambesons": {
+            "name": "Gambesons"
+        },
         "squires": {
             "name": "Squires"
         },
@@ -1674,7 +1689,7 @@
         },
         "greekFire": {
             "name": "Greek Fire",
-            "description": "Fire Ships +1 range"
+            "description": "Fire Ships +1 range and +5 splash damage to Bombard Towers"
         },
         "logistica": {
             "name": "Logistica",
@@ -1682,7 +1697,7 @@
         },
         "stronghold": {
             "name": "Stronghold",
-            "description": "Castles and towers fire 25% faster"
+            "description": "Castles and towers fire {{value}}% faster, and castles heal allied infantry by 30 HP per minute"
         },
         "furorCeltica": {
             "name": "Furor Celtica",
@@ -1706,7 +1721,7 @@
         },
         "medicalCorps": {
             "name": "Medical Corps",
-            "description": "Elephant units regenerate 20 HP per minute"
+            "description": "Elephant units regenerate {{value}} HP per minute"
         },
         "wootzSteel": {
             "name": "Wootz Steel",
@@ -1714,7 +1729,7 @@
         },
         "royalHeirs": {
             "name": "Royal Heirs",
-            "description": "halves Shotel Warrior training time"
+            "description": "Shotels and Camel units receive -3 damage from Mounted Units"
         },
         "torsionEngines": {
             "name": "Torsion Engines",
@@ -1754,7 +1769,7 @@
         },
         "andeanSling": {
             "name": "Andean Sling",
-            "description": "Slingers and Skirmisher have no minimum range"
+            "description": "Slingers and Skirmisher have no minimum range, and provides +1 attack to Slingers"
         },
         "fabricShields": {
             "name": "Fabric Shields",
@@ -1826,7 +1841,7 @@
         },
         "tigui": {
             "name": "Tigui",
-            "description": "Town Centers fire arrows even without garrison"
+            "description": "Town Centers fire {{value}} additional arrows even without garrison"
         },
         "farimba": {
             "name": "Farimba",
@@ -1882,7 +1897,7 @@
         },
         "firstCrusade": {
             "name": "First Crusade",
-            "description": "Upon researching, each Town Center (up to 5) spawns a one-time group of 7 Serjeants; units become more resistant to conversion (+3)"
+            "description": "Upon researching, each Town Center (up to 5) spawns a one-time group of {{value}} Serjeants; units become more resistant to conversion (+3)"
         },
         "hauberk": {
             "name": "Hauberk",
@@ -1938,11 +1953,11 @@
         },
         "chieftains": {
             "name": "Chieftains",
-            "description": "Infantry +5 attack against cavalry and +4 attack against camels"
+            "description": "Infantry +5 attack against cavalry and +4 attack against camels, and infantry generate gold when killing villagers, trade units and monks"
         },
-        "berserkergang": {
-            "name": "Berserkergang",
-            "description": "Berserks regenerate faster (40HP/min)"
+        "bogsveigar": {
+            "name": "Bogsveigar",
+            "description": "Archer-line and Longboats +{{value}} Attack"
         }
     },
     "capacities": {

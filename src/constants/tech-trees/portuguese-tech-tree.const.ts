@@ -39,13 +39,15 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
             range: 7,
             accuracy: .5,
             attackComponents: [
-                { value: 16, type: ArmorType.pierce },
+                { value: 7, type: ArmorType.pierce },
                 { value: 1, type: ArmorType.ram },
+                { value: 1, type: ArmorType.infantry },
+                { value: 1, type: ArmorType.building },
             ],
             secondaryAttack: {
-                count: 4,
-                accuracy: .5,
-                components: [{ value: 2, type: ArmorType.pierce }]
+                count: 6,
+                accuracy: 0,
+                components: [{ value: 7, type: ArmorType.pierce }]
             },
             armorComponents: [
                 { value: 2, type: ArmorType.melee },
@@ -77,13 +79,15 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
             range: 7,
             accuracy: .5,
             attackComponents: [
-                { value: 20, type: ArmorType.pierce },
+                { value: 9, type: ArmorType.pierce },
                 { value: 1, type: ArmorType.ram },
+                { value: 1, type: ArmorType.infantry },
+                { value: 1, type: ArmorType.building },
             ],
             secondaryAttack: {
-                count: 4,
-                accuracy: .75,
-                components: [{ value: 2, type: ArmorType.pierce }]
+                count: 7,
+                accuracy: 0,
+                components: [{ value: 9, type: ArmorType.pierce }]
             },
             armorComponents: [
                 { value: 2, type: ArmorType.melee },
@@ -324,7 +328,7 @@ export const portugueseTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

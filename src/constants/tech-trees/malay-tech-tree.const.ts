@@ -177,6 +177,18 @@ export const malayTechTree: CivTechTree = {
         },
         {
             id: 'malay5',
+            effectType: EffectType.armor,
+            value: null,
+            effects: [],
+            affectedUnits: [
+                barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman,
+                barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier,
+                malayUniqueUnits.karambitWarrior, malayUniqueUnits.eliteKarambitWarrior,
+            ],
+            affectedUpgrades: [blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor]
+        },
+        {
+            id: 'malay6',
             effectType: EffectType.lineOfSightPercent,
             value: 100,
             affectedUnits: [],
@@ -190,7 +202,7 @@ export const malayTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

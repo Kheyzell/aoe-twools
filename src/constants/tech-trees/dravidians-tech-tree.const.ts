@@ -4,6 +4,7 @@ import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeG
 import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/dravidians.png';
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -148,8 +149,8 @@ const uniqueTechs = [
         id: 'medicalCorps',
         age: 3,
         effectType: EffectType.regen,
-        value: 20,
-        cost: { wood: 0, food: 350, gold: 250, stone: 0 },
+        value: 30,
+        cost: { wood: 0, food: 300, gold: 200, stone: 0 },
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
@@ -223,6 +224,26 @@ export const dravidiansTechTree: CivTechTree = {
         },
         {
             id: 'dravidians5',
+            effectType: EffectType.fireRate,
+            value: 33,
+            effects: [{
+                order: EffectOrder.last,
+                apply: unit => {
+                    unit.cost.wood = multiplyNumber(unit.cost.wood, 1 - .33)
+                }
+            }],
+            affectedUnits: [
+                siegeUnits.armoredElephant, siegeUnits.siegeElephant,
+                siegeUnits.mangonel, siegeUnits.onager, siegeUnits.siegeOnager,
+                siegeUnits.scorpion, siegeUnits.heavyScorpion,
+                siegeUnits.siegeTower,
+                siegeUnits.bombardCannon,
+                castleUnits.trebuchet,
+            ],
+            affectedUpgrades: []
+        },
+        {
+            id: 'dravidians6',
             effectType: EffectType.miscallenous,
             value: 5,
             affectedUnits: [],
@@ -236,7 +257,7 @@ export const dravidiansTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

@@ -155,9 +155,9 @@ export const castleUpgrades: CastleUpgrades = {
         wikiUrl: 'Sappers',
         age: 4,
         cost: {
-            wood: 0,
+            wood: 200,
             food: 400,
-            gold: 200,
+            gold: 0,
             stone: 0
         },
         effects: [{
@@ -165,6 +165,7 @@ export const castleUpgrades: CastleUpgrades = {
             apply: (unit: Unit) => {
                 unit.addAttackComponent(15, ArmorType.building)
                 unit.addAttackComponent(15, ArmorType.stoneDefense)
+                unit.addAttackComponent(3, ArmorType.ram)
             }
         }],
         duration: 10
