@@ -99,12 +99,12 @@ export const gurjarasUniqueUnits: { chakramThrower: Unit, eliteChakramThrower: U
         cost: {
             wood: 0,
             food: 70,
-            gold: 20,
+            gold: 30,
             stone: 0
         },
         stats: {
             health: 55,
-            rateOfFire: 1.75,
+            rateOfFire: 2,
             attackType: AttackType.melee,
             attackComponents: [
                 { value: 8, type: ArmorType.melee },
@@ -128,12 +128,12 @@ export const gurjarasUniqueUnits: { chakramThrower: Unit, eliteChakramThrower: U
         cost: {
             wood: 0,
             food: 70,
-            gold: 20,
+            gold: 30,
             stone: 0
         },
         stats: {
             health: 70,
-            rateOfFire: 1.75,
+            rateOfFire: 1.9,
             attackType: AttackType.melee,
             attackComponents: [
                 { value: 11, type: ArmorType.melee },
@@ -209,7 +209,7 @@ const uniqueTechs = [
         age: 3,
         effectType: EffectType.discoutFood,
         value: 25,
-        cost: { wood: 0, food: 200, gold: 400, stone: 0 },
+        cost: { wood: 0, food: 500, gold: 450, stone: 0 },
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.25))

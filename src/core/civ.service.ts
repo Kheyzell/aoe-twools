@@ -1,4 +1,4 @@
-import { allCivTechTrees, aztecsTechTree, berbersUniqueUnits, bulgariansUniqueUnits, gurjarasTechTree, khmerUniqueUnits, mayansTechTree, persiansUniqueUnits, tatarsTechTree, turksTechTree } from "../constants"
+import { allCivTechTrees, aztecsTechTree, berbersUniqueUnits, bulgariansUniqueUnits, gurjarasTechTree, khmerUniqueUnits, lithuaniansTechTree, magyarsTechTree, mayansTechTree, persiansUniqueUnits, tatarsTechTree, turksTechTree } from "../constants"
 import { incasTechTree } from "../constants/tech-trees/incas-tech-tree.const"
 import { vietnameseUniqueUnits } from "../constants/tech-trees/vietnamese-tech-tree.const"
 import { fullTechTree } from "../constants/tech-trees/_full-tech-tree.const"
@@ -8,6 +8,7 @@ import { Tech } from "../models/techs.model"
 import { Unit } from "../models/unit.model"
 import { Upgrade } from "../models/upgrade.model"
 import { getAllCivRegularUnits, getAllCivRegularUpgrades, getAllCivUniqueUnits, getAllCivUniqueUpgrades } from "../utils/techs.utils"
+import { byzantinesTechTree } from '../constants/tech-trees/byzantines-tech-tree.const';
 
 class CivService {
     allTechs: Tech[]
@@ -23,11 +24,15 @@ class CivService {
         // unique techs
         aztecsTechTree.uniqueTechs[0].affectedUnits.push(berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour, vietnameseUniqueUnits.imperialSkirmisher)
         incasTechTree.uniqueTechs[0].affectedUnits.push(berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour, vietnameseUniqueUnits.imperialSkirmisher)
+        lithuaniansTechTree.uniqueTechs[1].affectedUnits.push(berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour)
+        magyarsTechTree.uniqueTechs[1].affectedUnits.push(berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour)
         mayansTechTree.uniqueTechs[0].affectedUnits.push(berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour, vietnameseUniqueUnits.imperialSkirmisher)
         tatarsTechTree.uniqueTechs[0].affectedUnits.push(berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour, vietnameseUniqueUnits.imperialSkirmisher)
         turksTechTree.uniqueTechs[0].affectedUnits.push(berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour, vietnameseUniqueUnits.imperialSkirmisher)
 
         // bonuses
+        byzantinesTechTree.bonuses[1].affectedUnits.push(berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour)
+
         gurjarasTechTree.bonuses[4].affectedUnits.push(stableUnits.battleElephant, stableUnits.eliteBattleElephant, khmerUniqueUnits.ballistaElephant, khmerUniqueUnits.eliteBallistaElephant, persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant)
 
         bulgariansUniqueUnits.konnik.addCapacity({ ...CAPACITIES.dismountOnDeath, unit: bulgariansUniqueUnits.dismountedKonnik } as SpawnUnitOnDeathCapacity)

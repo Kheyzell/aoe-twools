@@ -33,7 +33,7 @@ export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
             stone: 0
         },
         stats: {
-            health: 45,
+            health: 50,
             rateOfFire: 2,
             attackType: AttackType.melee,
             attackComponents: [
@@ -97,8 +97,8 @@ const uniqueTechs = [
         id: 'firstCrusade',
         age: 3,
         effectType: EffectType.miscallenous,
-        value: null,
-        cost: { wood: 0, food: 300, gold: 600, stone: 0 },
+        value: 5,
+        cost: { wood: 0, food: 400, gold: 300, stone: 0 },
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
@@ -136,7 +136,7 @@ export const siciliansTechTree: CivTechTree = {
         {
             id: 'sicilians1',
             effectType: EffectType.constructionSpeed,
-            value: 100,
+            value: { castle: 50, townCenter: 100 },
             affectedUnits: [],
             affectedUpgrades: []
         },
@@ -166,7 +166,7 @@ export const siciliansTechTree: CivTechTree = {
         {
             id: 'sicilians3',
             effectType: EffectType.miscallenous,
-            value: 100,
+            value: 125,
             affectedUnits: [],
             affectedUpgrades: [millUpgrades.horseColar, millUpgrades.heavyPlow, millUpgrades.cropRotation]
         },
@@ -209,7 +209,7 @@ export const siciliansTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

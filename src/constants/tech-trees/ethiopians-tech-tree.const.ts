@@ -18,6 +18,7 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { AttackType, Unit } from "../../models/unit.model";
 import { multiplyNumber } from "../../utils/utils";
+import { Upgrade } from "../../models/upgrade.model";
 
 export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: Unit } = {
     shotelWarrior: new Unit({
@@ -80,7 +81,7 @@ export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: U
             movementSpeed: 1.2,
             lineOfSight: 3,
         },
-        duration: 8
+        duration: 4
     })
 }
 
@@ -94,17 +95,21 @@ const uniqueTechs = [
     new UniqueTech({
         id: 'royalHeirs',
         age: 3,
-        effectType: EffectType.creationSpeed,
-        value: 100,
+        effectType: EffectType.armor,
+        value: 3,
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
         effects: [{
             order: EffectOrder.last,
-            apply: (unit: Unit) => {
-                unit.duration = multiplyNumber(unit.duration, 1/2)
+            apply: (_: Unit, __: Upgrade[], targetedUnit: Unit) => {
+                const isEnemyCalvalry = targetedUnit.stats.armorComponents.some(armor => armor.type === ArmorType.cavalry)
+                if (isEnemyCalvalry) {
+                    targetedUnit.addAttackComponent(-3, ArmorType.melee)
+                    targetedUnit.addAttackComponent(-3, ArmorType.pierce)
+                }
             }
         }],
         duration: 40,
-        affectedUnits: [ethiopiansUniqueUnits.shotelWarrior, ethiopiansUniqueUnits.eliteShotelWarrior],
+        affectedUnits: [ethiopiansUniqueUnits.shotelWarrior, ethiopiansUniqueUnits.eliteShotelWarrior, stableUnits.camelRider, stableUnits.heavyCamelRider],
         affectedUpgrades: []
     }),
     new UniqueTech({

@@ -88,16 +88,16 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 60,
-            gold: 25,
+            food: 50,
+            gold: 15,
             stone: 0
         },
         stats: {
-            health: 75,
+            health: 60,
             rateOfFire: 2 ,
             attackType: AttackType.melee,
             attackComponents: [
-                { value: 12, type: ArmorType.melee },
+                { value: 11, type: ArmorType.melee },
                 { value: 8, type: ArmorType.cavalry },
                 { value: 8, type: ArmorType.warElephant },
                 { value: 6, type: ArmorType.camel },
@@ -106,7 +106,7 @@ export const burgundiansUniqueUnits: { coustillier: Unit, eliteCoustillier: Unit
             ],
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
-                { value: 1, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],

@@ -44,7 +44,7 @@ export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit 
             ],
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
-                { value: 1, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit },
             ],
@@ -77,7 +77,7 @@ export const aztecsUniqueUnits: { jaguarWarrior: Unit, eliteJaguarWarrior: Unit 
             ],
             armorComponents: [
                 { value: 2, type: ArmorType.melee },
-                { value: 1, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit },
             ],
@@ -142,7 +142,7 @@ export const aztecsTechTree: CivTechTree = {
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman]),
             new UnitLine([barracksUnits.eagleScout, barracksUnits.eagleWarrior, barracksUnits.eliteEagleWarrior]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

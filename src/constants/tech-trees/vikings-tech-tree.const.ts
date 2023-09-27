@@ -50,6 +50,7 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
             movementSpeed: 1.05,
             lineOfSight: 3,
         },
+        capacities: [{ ...CAPACITIES.regen, healthPerMinute: 20 } as RegenCapacity],
         duration: 12
     }),
     eliteBerserk: new Unit({
@@ -81,6 +82,7 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
             movementSpeed: 1.05,
             lineOfSight: 5,
         },
+        capacities: [{ ...CAPACITIES.regen, healthPerMinute: 40 } as RegenCapacity],
         duration: 14
     }),
     longboat: new Unit({
@@ -145,9 +147,9 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
             accuracy: 1,
             attackComponents: [
                 { value: 8, type: ArmorType.pierce },
-                { value: 11, type: ArmorType.ship },
+                { value: 10, type: ArmorType.ship },
                 { value: 11, type: ArmorType.fishingShip },
-                { value: 8, type: ArmorType.building },
+                { value: 7, type: ArmorType.building },
                 { value: 4, type: ArmorType.ram },
             ],
             secondaryAttack: {
@@ -188,7 +190,7 @@ const uniqueTechs = [
         age: 3,
         effectType: EffectType.miscallenous,
         value: null,
-        cost: { wood: 0, food: 700, gold: 500, stone: 0 },
+        cost: { wood: 0, food: 600, gold: 450, stone: 0 },
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
@@ -201,19 +203,19 @@ const uniqueTechs = [
         affectedUpgrades: []
     }),
     new UniqueTech({
-        id: 'berserkergang',
+        id: 'bogsveigar',
         age: 4,
-        effectType: EffectType.regen,
-        value: 40,
+        effectType: EffectType.damage,
+        value: 1,
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
-                unit.addCapacity({ ...CAPACITIES.regen, healthPerMinute: 40 } as RegenCapacity)
+                unit.addAttackComponent(1, ArmorType.pierce)
             }
         }],
-        cost: { wood: 0, food: 850, gold: 400, stone: 0 },
+        cost: { wood: 0, food: 650, gold: 500, stone: 0 },
         duration: 40,
-        affectedUnits: [vikingsUniqueUnits.berserk, vikingsUniqueUnits.eliteBerserk],
+        affectedUnits: [archeryUnits.archer, archeryUnits.crossbowman, archeryUnits.arbalester, vikingsUniqueUnits.longboat, vikingsUniqueUnits.eliteLongboat],
         affectedUpgrades: []
     })
 ]
@@ -303,7 +305,7 @@ export const vikingsTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

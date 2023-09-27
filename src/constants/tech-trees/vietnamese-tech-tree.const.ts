@@ -157,7 +157,7 @@ const uniqueTechs = [
         age: 4,
         effectType: EffectType.miscallenous,
         value: 500,
-        cost: { wood: 600, food: 0, gold: 350, stone: 0 },
+        cost: { wood: 200, food: 550, gold: 0, stone: 0 },
         duration: 60,
         affectedUnits: [townCenterUnits.villager],
         affectedUpgrades: []

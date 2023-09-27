@@ -59,6 +59,9 @@
                     "description": "Moines +3/+3 d'armure"
                 },
                 "bengalis5": {
+                    "description": "Les unités de cavalerie inflige +2 dégâts contre les tirailleurs"
+                },
+                "bengalis6": {
                     "description": "Les unités de commerce rapportent 10 % de nourriture en plus de l'or"
                 }
             }
@@ -296,7 +299,7 @@
                     "description": "Amélioration des piquiers gratuite"
                 },
                 "ethiopians4": {
-                    "description": "Ligne de mire des tours et des postes avancés +3"
+                    "description": "Ligne de mire des tours et des postes avancés +3 et coût en pierre retiré"
                 }
             }
         },
@@ -339,7 +342,10 @@
                     "description": "Développement de Métier à tisser instantané"
                 },
                 "goths6": {
-                    "description": "Les casernes fonctionnent 20 % plus rapidement"
+                    "description": "la chasse dure {{value}} % plus longtemps"
+                },
+                "goths7": {
+                    "description": "Les casernes fonctionnent {{value}} % plus rapidement"
                 }
             }
         },
@@ -384,19 +390,19 @@
             "name": "Incas",
             "bonus": {
                 "incas1": {
-                    "description": "Commence avec un lama gratuit"
-                },
-                "incas2": {
                     "description": "Les améliorations de la forge s'appliquent aux villageois à l'âge des châteaux"
                 },
-                "incas3": {
+                "incas2": {
                     "description": "Chaque habitation augmente la population de 10"
                 },
-                "incas4": {
+                "incas3": {
                     "description": "Coût en pierre des bâtiments -15 %"
                 },
+                "incas4": {
+                    "description": "Les unités militaires coûtent -{{value.age1}}/{{value.age2}}/{{value.age3}}/{{value.age4}}% de nourriture à l'âge Sombre/Féodal/Château/Impérial"
+                },
                 "incas5": {
-                    "description": "Les Piquiers et tirailleurs ont +2 ligne de mire"
+                    "description": "Commence avec un lama gratuit"
                 }
             }
         },
@@ -504,7 +510,7 @@
             "name": "Lithuaniens",
             "bonus": {
                 "lithuanians1": {
-                    "description": "Commence avec +150 de nourriture"
+                    "description": "Chaque Forum fournit +{{value}} de nourriture"
                 },
                 "lithuanians2": {
                     "description": "Déplacement des unités de type lancier et des tirailleurs +10 %"
@@ -550,6 +556,9 @@
                     "description": "Coût des éléphants de combat -30 % à l'âge des châteaux, -40 % à l'âge impérial"
                 },
                 "malay5": {
+                    "description": "Amélioration gratuite de l'armure de l'infanterie"
+                },
+                "malay6": {
                     "description": "Ligne de mire des ports +100 %"
                 }
             }
@@ -564,7 +573,7 @@
                     "description": "Protection perçage +1/+2/+3 par âge pour les unités des casernes à l'âge féodal/châteaux/impérial"
                 },
                 "malians3": {
-                    "description": "Les mines d'or durent 30% plus longtemps"
+                    "description": "Les villageois déposent {{value}} % d'or en plus"
                 },
                 "malians4": {
                     "description": "Cadence de travail +80 % pour les universités"
@@ -683,13 +692,13 @@
             "name": "Siciliens",
             "bonus": {
                 "sicilians1": {
-                    "description": "La vitesse de construction des châteaux et des forums est augmentée de 100 %"
+                    "description": "La vitesse de construction des châteaux est augmentée de {{value.castle}} %, celle des forums de {{value.townCenter}} %"
                 },
                 "sicilians2": {
                     "description": "Les unités militaires terrestres (sauf unités de siège) subissent {{value}} % de bonus de dégâts en moins"
                 },
                 "sicilians3": {
-                    "description": "Les améliorations de ferme confèrent 100 % de nourriture supplémentaire"
+                    "description": "Les améliorations de ferme confèrent {{value}} % de nourriture supplémentaire"
                 },
                 "sicilians4": {
                     "description": "La construction de donjons est possible"
@@ -709,7 +718,7 @@
                     "description": "Cadence de travail +10 % pour les fermiers"
                 },
                 "slavs2": {
-                    "description": "Ravitaillement gratuit"
+                    "description": "Ravitaillement et Jaques gratuits"
                 },
                 "slavs3": {
                     "description": "Coût des unités de l'atelier de siège -15 %"
@@ -735,6 +744,9 @@
                     "description": "Les unités à poudre à canon tirent 18 % plus rapidement"
                 },
                 "spanish5": {
+                    "description": "Reçoit +20 d'or pour chaque technologie développée"
+                },
+                "spanish6": {
                     "description": "Or généré par les unités de commerce +25 %"
                 }
             }
@@ -1419,6 +1431,9 @@
         "supplies": {
             "name": "Ravitaillement"
         },
+        "gambesons": {
+            "name": "Jaques"
+        },
         "squires": {
             "name": "Écuyers"
         },
@@ -1668,7 +1683,7 @@
         },
         "greekFire": {
             "name": "Feu grégeois",
-            "description": "Les navirent d'incendie gagnent +1 de portée"
+            "description": "Les navirent d'incendie gagnent +1 de portée et les tours à canon +5 dégats de zone"
         },
         "logistica": {
             "name": "Logistique",
@@ -1676,7 +1691,7 @@
         },
         "stronghold": {
             "name": "Citadelle",
-            "description": "Les châteaux et les tours tirent 25 % plus vite"
+            "description": "Les châteaux et les tours tirent {{value}} % plus vite, et les châteaux soignent les unités d'infanterie alliées de 30 HP par minute"
         },
         "furorCeltica": {
             "name": "Fureur celte",
@@ -1700,7 +1715,7 @@
         },
         "medicalCorps": {
             "name": "Corps médical",
-            "description": "Les éléphants régénèrent 20 PV par minute"
+            "description": "Les éléphants régénèrent {{value}} PV par minute"
         },
         "wootzSteel": {
             "name": "Acier wootz",
@@ -1708,7 +1723,7 @@
         },
         "royalHeirs": {
             "name": "Héritiers royaux",
-            "description": "Vitesse de formation des guerriers à shotel divisée par deux"
+            "description": "Les guerriers à shotels et les chameaux reçoivent -3 de dégâts des unités montées"
         },
         "torsionEngines": {
             "name": "Mécanismes à torsion",
@@ -1748,7 +1763,7 @@
         },
         "andeanSling": {
             "name": "Fronde des Andes",
-            "description": "Les frondeurs et les tirailleurs n'ont plus de portée minimale"
+            "description": "Les frondeurs et les tirailleurs n'ont plus de portée minimale, et les frondeurs gagnent +1 d'attaque"
         },
         "fabricShields": {
             "name": "Boucliers en tissu",
@@ -1820,7 +1835,7 @@
         },
         "tigui": {
             "name": "Tigui",
-            "description": "Les forums tirent des flèches sans être en garnison"
+            "description": "Les forums tirent {{value}} flèches supplémentaires sans être en garnison"
         },
         "farimba": {
             "name": "Farimba",
@@ -1876,7 +1891,7 @@
         },
         "firstCrusade": {
             "name": "Première croisade",
-            "description": "Chaque forum (max 5) produit un groupe de 7 sergents à la fin de la recherche. Les unités sont plus résistantes à la conversion (+3)"
+            "description": "Chaque forum (max 5) produit un groupe de {{value}} sergents à la fin de la recherche. Les unités sont plus résistantes à la conversion (+3)"
         },
         "hauberk": {
             "name": "Hauberk",
@@ -1932,11 +1947,11 @@
         },
         "chieftains": {
             "name": "Chefs de tribu",
-            "description": "L'infanterie gagnent +5 d'attaque contre la cavalerie et +4 d'attaque contre les chameaux"
+            "description": "L'infanterie gagnent +5 d'attaque contre la cavalerie et +4 d'attaque contre les chameaux, et génère de l'or en tuant les villageois, les unités de commerce et les moines"
         },
-        "berserkergang": {
-            "name": "Gang de fous",
-            "description": "Les fous de guerre se régénèrent plus vite (40 PV/min)"
+        "bogsveigar": {
+            "name": "Bogsveigar",
+            "description": "Les archers et les drakkars gagnent +{{value}} d'attaque"
         }
     }
 }

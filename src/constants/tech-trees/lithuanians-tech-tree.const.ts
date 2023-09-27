@@ -126,7 +126,7 @@ export const lithuaniansTechTree: CivTechTree = {
         {
             id: 'lithuanians1',
             effectType: EffectType.miscallenous,
-            value: 150,
+            value: 100,
             affectedUnits: [],
             affectedUpgrades: []
         },

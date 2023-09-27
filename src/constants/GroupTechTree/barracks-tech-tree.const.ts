@@ -1,6 +1,6 @@
 import { GroupTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
 import { setAffectingUpgrades } from "../../utils/techs.utils";
-import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
+import { barracksUnits, barracksUpgrade } from '../techs/barracks-techs.const';
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 import { townCenterUpgrade } from "../techs/town-center-techs.const";
 
@@ -13,7 +13,7 @@ const infantryUpgrades = [
     blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
     barracksUpgrade.squires, barracksUpgrade.arson,
 ]
-setAffectingUpgrades(militiaLine, [...infantryUpgrades, barracksUpgrade.supplies])
+setAffectingUpgrades(militiaLine, [...infantryUpgrades, barracksUpgrade.supplies, barracksUpgrade.gambesons])
 setAffectingUpgrades(spearLine, infantryUpgrades)
 setAffectingUpgrades(eagleLine, infantryUpgrades)
 barracksUnits.eagleScout.affectingUpgrades = [...barracksUnits.eagleScout.affectingUpgrades, townCenterUpgrade.feudalAge, townCenterUpgrade.castleAge]

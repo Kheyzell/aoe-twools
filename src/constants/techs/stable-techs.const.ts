@@ -409,7 +409,7 @@ export const stableUnits: StableUnits = {
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
-                { value: 1, type: ArmorType.pierce },
+                { value: 2, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.cavalry },
             ],
             movementSpeed: 1.45,

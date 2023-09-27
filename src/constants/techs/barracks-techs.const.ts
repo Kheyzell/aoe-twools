@@ -20,6 +20,7 @@ interface BarracksUnits {
 
 interface BarracksUpgrades {
     supplies: Upgrade,
+    gambesons: Upgrade,
     squires: Upgrade,
     arson: Upgrade
 }
@@ -291,7 +292,7 @@ export const barracksUnits: BarracksUnits = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 20,
+            food: 25,
             gold: 50,
             stone: 0
         },
@@ -325,7 +326,7 @@ export const barracksUnits: BarracksUnits = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 20,
+            food: 25,
             gold: 50,
             stone: 0
         },
@@ -359,7 +360,7 @@ export const barracksUnits: BarracksUnits = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 20,
+            food: 25,
             gold: 50,
             stone: 0
         },
@@ -410,7 +411,25 @@ export const barracksUpgrade: BarracksUpgrades = {
                 unit.cost.food -= 15
             }
         }],
-        duration: 35
+        duration: 20
+    }),
+    gambesons: new Upgrade({
+        id: 'gambesons',
+        wikiUrl: 'Gambesons_(Age_of_Empires_II)',
+        age: 3,
+        cost: {
+            wood: 0,
+            food: 100,
+            gold: 100,
+            stone: 0
+        },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.addArmorComponent(1, ArmorType.pierce)
+            }
+        }],
+        duration: 25
     }),
     squires: new Upgrade({
         id: 'squires',
@@ -449,3 +468,5 @@ export const barracksUpgrade: BarracksUpgrades = {
         duration: 25
     }),
 }
+
+chainTechs([barracksUpgrade.supplies, barracksUpgrade.gambesons])

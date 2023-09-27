@@ -59,7 +59,7 @@ townCenterUpgrade.castleAge.effects = [{
             unit.duration = 35
         }
         if (unit.id === siciliansUniqueUnits.serjeant.id) {
-            unit.stats.health += 20
+            unit.stats.health += 25
             unit.addAttackComponent(3, ArmorType.melee)
             unit.addArmorComponent(1, ArmorType.melee)
             unit.addArmorComponent(1, ArmorType.pierce)

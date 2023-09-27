@@ -28,8 +28,8 @@ export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 50,
-            gold: 80,
+            food: 60,
+            gold: 70,
             stone: 0
         },
         stats: {
@@ -57,8 +57,8 @@ export const slavsUniqueUnits: { boyar: Unit, eliteBoyar: Unit } = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 50,
-            gold: 80,
+            food: 60,
+            gold: 70,
             stone: 0
         },
         stats: {
@@ -103,7 +103,7 @@ const uniqueTechs = [
         age: 4,
         effectType: EffectType.miscallenous,
         value: null,
-        cost: { wood: 0, food: 1200, gold: 500, stone: 0 },
+        cost: { wood: 0, food: 900, gold: 500, stone: 0 },
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
@@ -133,7 +133,7 @@ export const slavsTechTree: CivTechTree = {
             effectType: EffectType.freeUpgrade,
             value: null,
             affectedUnits: [],
-            affectedUpgrades: [barracksUpgrade.supplies]
+            affectedUpgrades: [barracksUpgrade.supplies, barracksUpgrade.gambesons]
         },
         {
             id: 'slavs3',
@@ -169,7 +169,7 @@ export const slavsTechTree: CivTechTree = {
             new UnitLine([barracksUnits.militia, barracksUnits.manAtArms, barracksUnits.longSwordsman, barracksUnits.twoHandedSwordsman, barracksUnits.champion]),
             new UnitLine([barracksUnits.spearman, barracksUnits.pikeman, barracksUnits.halberdier]),
         ],
-        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.squires, barracksUpgrade.arson])
+        upgrades: new UpgradePerAgeGroup([barracksUpgrade.supplies, barracksUpgrade.gambesons, barracksUpgrade.squires, barracksUpgrade.arson])
     },
     archery: {
         unitLines: [

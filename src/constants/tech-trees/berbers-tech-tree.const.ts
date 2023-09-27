@@ -19,6 +19,7 @@ import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 import { CAPACITIES, RegenCapacity } from "../../models/capacity.model";
 import { UnitType, EffectOrder, CivTechTree, UnitLine, UpgradePerAgeGroup, ArmorType } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
+import { Upgrade } from '../../models/upgrade.model';
 
 export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, genitour: Unit, eliteGenitour: Unit } = {
     camelArcher: new Unit({
@@ -167,7 +168,7 @@ chainTechs([berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher]
 chainTechs([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour])
 const uniqueUnitsLine = new UnitLine([berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher])
 const genitourLine = new UnitLine([berbersUniqueUnits.genitour, berbersUniqueUnits.eliteGenitour])
-const cavArcherUpgrades = [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+const cavArcherUpgrades = [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
     blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
     archeryUpgrades.thumbRing, archeryUpgrades.parthianTactis,
     stableUpgrades.bloodlines, stableUpgrades.husbandry,
@@ -222,8 +223,13 @@ export const berbersTechTree: CivTechTree = {
             value: 10,
             effects: [{
                 order: EffectOrder.last,
-                apply: (unit: Unit) => {
-                    unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.1)
+                apply: (unit, upgrades) => {
+                    const isFeudalAgeOrMore = upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)
+                    if (isFeudalAgeOrMore) {
+                        unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.1)
+                    } else {
+                        unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.05)
+                    }
                 }
             }],
             affectedUnits: [townCenterUnits.villager],

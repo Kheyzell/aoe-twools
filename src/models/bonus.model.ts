@@ -41,7 +41,7 @@ export interface Bonus {
     id: string
     civ?: CivTechTree
     effectType: EffectType
-    value: number | { age1?: number, age2?: number, age3?: number, age4?: number } | null
+    value: number | { age1?: number, age2?: number, age3?: number, age4?: number } | { [key: string]: number } | null
     effects?: Effect[]
     affectedUnits: Unit[]
     affectedUpgrades: Upgrade[]

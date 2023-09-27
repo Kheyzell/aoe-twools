@@ -311,7 +311,7 @@ export const archeryUnits: ArcheryUnits = {
             movementSpeed: .9,
             lineOfSight: 7,
         },
-        duration: 34
+        duration: 32
     }),
     eliteElephantArcher: new Unit({
         id: 'eliteElephantArcher',
@@ -343,7 +343,7 @@ export const archeryUnits: ArcheryUnits = {
             movementSpeed: .9,
             lineOfSight: 7,
         },
-        duration: 34
+        duration: 32
     }),
 }
 

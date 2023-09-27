@@ -32,7 +32,7 @@ const BonusLine: React.FC<BonusLineProps> = (props) => {
 
     const uniqueTechDescriptionDisplay = (uniqueTech: UniqueTech) => (
         <span className={hasTooltip ? 'HasTooltip' : ''}>
-            {t(`upgrade.${uniqueTech.id}.name`)}: {t(`upgrade.${uniqueTech.id}.description`)}
+            {t(`upgrade.${uniqueTech.id}.name`)}: {t(`upgrade.${uniqueTech.id}.description`, uniqueTech)}
         </span>
     )
 
