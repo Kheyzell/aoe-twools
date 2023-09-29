@@ -23,7 +23,9 @@ export enum CapacityId {
     attackPassThrough = "attackPassThrough",
     swapUnit = "swapUnit",
     blastAttack = "blastAttack",
-    projectilePassThrough = "projectilePassThrough"
+    projectilePassThrough = "projectilePassThrough",
+    auraBonus = "aura",
+    movementSpeedAndAttackSpeedAuraBonus = "movementSpeedAndAttackSpeedAuraBonus"
 }
 
 export const CAPACITIES = {
@@ -44,7 +46,7 @@ export const CAPACITIES = {
     blastAttack: { id: CapacityId.blastAttack, reloadTime: 0, damage: 0, blastRadius: 0 } as BlastAttackCapacity,
     fullMissedShot: { id: CapacityId.fullMissedShot },
     projectileProtection: { id: CapacityId.projectileProtection },
-    dismountOnDeath: { id: CapacityId.dismountOnDeath, unit: new Unit({}) } as SpawnUnitOnDeathCapacity,
+    dismountOnDeath: { id: CapacityId.dismountOnDeath, units: [new Unit({})] } as SpawnUnitOnDeathCapacity,
     ignoreArmor: { id: CapacityId.ignoreArmor },
     halfPopulation: { id: CapacityId.halfPopulation },
     reduceArmor: { id: CapacityId.reduceArmor, melee: 1, pierce: 1 } as ReduceArmorCapacity,
@@ -52,7 +54,9 @@ export const CAPACITIES = {
     generateGoldWhenFighting: { id: CapacityId.generateGoldWhenFighting, goldPerSecond: 0 } as GenerateGoldWhenFightingCapacity,
     attackPassThrough: { id: CapacityId.attackPassThrough, range: 1 } as AttackPassThrough,
     projectilePassThrough: { id: CapacityId.projectilePassThrough, width: .2 } as ProjectilePassThrough,
-    swapUnit: { id: CapacityId.swapUnit, unit: new Unit({}) } as SwapUnit,
+    swapUnit: { id: CapacityId.swapUnit, units: [new Unit({})] } as SwapUnit,
+    auraBonus: { id: CapacityId.auraBonus } as AuraBonus,
+    movementSpeedAndAttackSpeedAuraBonus: { id: CapacityId.movementSpeedAndAttackSpeedAuraBonus } as MovementSpeedAndAttackSpeedAuraBonus,
 }
 
 export interface Capacity {
@@ -88,7 +92,7 @@ export interface BlastAttackCapacity extends ChargedAttackCapacity {
 }
 
 export interface SpawnUnitOnDeathCapacity extends Capacity {
-    unit: Unit
+    units: Unit[]
 }
 
 export interface ReduceArmorCapacity extends Capacity {
@@ -109,6 +113,18 @@ export interface ProjectilePassThrough extends Capacity {
 }
 
 export interface SwapUnit extends Capacity {
-    id: CapacityId
-    unit: Unit
+    units: Unit[]
+}
+
+export interface Aura extends Capacity {
+    range: number
+}
+
+export interface AuraBonus extends Aura {
+    units: Unit[]
+}
+
+export interface MovementSpeedAndAttackSpeedAuraBonus extends AuraBonus {
+    movementSpeed: number
+    attackSpeed: number
 }

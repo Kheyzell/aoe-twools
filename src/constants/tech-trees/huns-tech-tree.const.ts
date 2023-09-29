@@ -304,6 +304,7 @@ export const hunsTechTree: CivTechTree = {
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
+            new UnitLine([dockUnits.dromon]),
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,

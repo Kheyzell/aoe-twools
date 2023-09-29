@@ -365,7 +365,7 @@ export const gothsTechTree: CivTechTree = {
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
-            new UnitLine([dockUnits.cannonGalleon]),
+            new UnitLine([dockUnits.dromon]),
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,

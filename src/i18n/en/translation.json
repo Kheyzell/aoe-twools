@@ -193,7 +193,7 @@
                     "description": "Camel Riders, Skirmishers, and Spearmen are 25% cheaper"
                 },
                 "byzantines3": {
-                    "description": "Fire Ships fire 25% faster"
+                    "description": "Fire Ships and Dromons fire 25% faster"
                 },
                 "byzantines4": {
                     "description": "Advancing to the Imperial Age is 33% cheaper"
@@ -662,6 +662,23 @@
                 },
                 "portuguese5": {
                     "description": "All technologies (excluding advancing ages) are researched 25% faster"
+                }
+            }
+        },
+        "romans": {
+            "name": "Romans",
+            "bonus": {
+                "romans1": {
+                    "description": "Villagers gather, build, and repair {{value}}% faster"
+                },
+                "romans2": {
+                    "description": "Galley-line and Dromon +{{value}}/+{{value}} armor"
+                },
+                "romans3": {
+                    "description": "Infantry receives double the effect from Blacksmith armor upgrades"
+                },
+                "romans4": {
+                    "description": "Scorpions cost -{{value}}% gold and benefit from Ballistics"
                 }
             }
         },
@@ -1312,6 +1329,15 @@
         "eliteOrganGun": {
             "name": "Elite Organ Gun"
         },
+        "centurion": {
+            "name": "Centurion"
+        },
+        "eliteCenturion": {
+            "name": "Elite Centurion"
+        },
+        "legionary": {
+            "name": "Legionary"
+        },
         "caravel": {
             "name": "Caravel"
         },
@@ -1887,6 +1913,14 @@
             "name": "Arquebus",
             "description": "gunpowder units fire more accurately at moving targets"
         },
+        "ballistas": {
+            "name": "Ballistas",
+            "description": "Scorpions fire {{value.scorpion}}% faster, and Galley-line +{{value.galley}} attack"
+        },
+        "comitatenses": {
+            "name": "Comitatenses",
+            "description": "Militia-line, Knight-line, and Centurions train {{value}}% faster and receive +5 charge attack over 20 seconds"
+        },
         "zealotry": {
             "name": "Zealotry",
             "description": "Camel Riders and Mamelukes +20 hit points"
@@ -2020,11 +2054,11 @@
         },
         "dismountOnDeath": {
             "title": "Dismount On Death",
-            "shortDescription": "Turn into <Unit></Unit> upon death"
+            "shortDescription": "Turn into <Units></Units> upon death"
         },
         "ignoreArmor": {
             "title": "Ignore armor",
-            "shortDescription": "Turn into <Unit></Unit> upon death"
+            "shortDescription": "Deals full damage regardless opponent armor"
         },
         "attackPassThrough": {
             "title": "Attack passes through",
@@ -2036,7 +2070,11 @@
         },
         "swapUnit": {
             "title": "Swap unit",
-            "shortDescription": "Can turn into <Unit></Unit>"
+            "shortDescription": "Can turn into <Units></Units>"
+        },
+        "movementSpeedAndAttackSpeedAuraBonus": {
+            "title": "Aura",
+            "shortDescription": "Aura that has a range of {{range}} that increases movement speed by {{movementSpeed}}% and attack speeds by {{attackSpeed}}% of nearby Militia line units <Units></Units>"
         }
     }
 }

@@ -20,6 +20,7 @@ interface DockUnits {
     heavyDemolitionShip: Unit
     cannonGalleon: Unit
     eliteCannonGalleon: Unit
+    dromon: Unit
 }
 
 interface DockUpgrades {
@@ -463,6 +464,39 @@ export const dockUnits: DockUnits = {
             lineOfSight: 17
         },
         duration: 46
+    }),
+    dromon: new Unit({
+        id: 'dromon',
+        wikiUrl: 'Dromon',
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 175,
+            food: 0,
+            gold: 150,
+            stone: 0
+        },
+        stats: {
+            health: 125,
+            attackType: AttackType.projectile,
+            range: 12,
+            accuracy: 1,
+            rateOfFire: 8,
+            attackComponents: [
+                { value: 50, type: ArmorType.melee },
+                { value: 1335, type: ArmorType.building },
+                { value: 30, type: ArmorType.siegeWeapon },
+            ],
+            armorComponents: [
+                { value: 1, type: ArmorType.melee },
+                { value: 6, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.ship },
+            ],
+            capacities: [{ ...CAPACITIES.blastAttack, blastRadius: .8 }],
+            movementSpeed: 1.2,
+            lineOfSight: 14
+        },
+        duration: 50
     }),
 }
 

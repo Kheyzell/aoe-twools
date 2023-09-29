@@ -31,6 +31,7 @@ import { mongolsTechTree } from "./tech-trees/mongols-tech-tree.const"
 import { persiansTechTree } from "./tech-trees/persians-tech-tree.const"
 import { polesTechTree } from "./tech-trees/poles-tech-tree.const"
 import { portugueseTechTree } from "./tech-trees/portuguese-tech-tree.const"
+import { romanTechTree } from "./tech-trees/roman-tech-tree.const"
 import { saracensTechTree } from "./tech-trees/saracens-tech-tree.const"
 import { siciliansTechTree } from "./tech-trees/sicilians-tech-tree.const"
 import { slavsTechTree } from "./tech-trees/slavs-tech-tree.const"
@@ -113,6 +114,7 @@ export const allCivTechTrees = [
     persiansTechTree,
     polesTechTree,
     portugueseTechTree,
+    romanTechTree,
     saracensTechTree,
     siciliansTechTree,
     slavsTechTree,

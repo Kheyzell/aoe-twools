@@ -168,10 +168,10 @@ setAffectingUpgrades(rathaMeleeLine, [blacksmithUpgrades.forging, blacksmithUpgr
     archeryUpgrades.parthianTactis,
 ])
 
-bengalisUniqueUnits.rathaRanged.addCapacity({ ...CAPACITIES.swapUnit, unit: bengalisUniqueUnits.rathaMelee } as SwapUnit)
-bengalisUniqueUnits.rathaMelee.addCapacity({ ...CAPACITIES.swapUnit, unit: bengalisUniqueUnits.rathaRanged } as SwapUnit)
-bengalisUniqueUnits.eliteRathaRanged.addCapacity({ ...CAPACITIES.swapUnit, unit: bengalisUniqueUnits.eliteRathaMelee } as SwapUnit)
-bengalisUniqueUnits.eliteRathaMelee.addCapacity({ ...CAPACITIES.swapUnit, unit: bengalisUniqueUnits.eliteRathaRanged } as SwapUnit)
+bengalisUniqueUnits.rathaRanged.addCapacity({ ...CAPACITIES.swapUnit, units: [bengalisUniqueUnits.rathaMelee] } as SwapUnit)
+bengalisUniqueUnits.rathaMelee.addCapacity({ ...CAPACITIES.swapUnit, units: [bengalisUniqueUnits.rathaRanged] } as SwapUnit)
+bengalisUniqueUnits.eliteRathaRanged.addCapacity({ ...CAPACITIES.swapUnit, units: [bengalisUniqueUnits.eliteRathaMelee] } as SwapUnit)
+bengalisUniqueUnits.eliteRathaMelee.addCapacity({ ...CAPACITIES.swapUnit, units: [bengalisUniqueUnits.eliteRathaRanged] } as SwapUnit)
 
 const uniqueTechs = [
     new UniqueTech({
