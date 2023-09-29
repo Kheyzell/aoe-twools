@@ -33,20 +33,24 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             stone: 0
         },
         stats: {
-            health: 200,
+            health: 180,
             rateOfFire: 3.45,
             attackType: AttackType.projectile,
             range: 6,
             accuracy: .85,
             attackComponents: [
-                { value: 17, type: ArmorType.pierce },
+                { value: 11, type: ArmorType.pierce },
                 { value: 3, type: ArmorType.ram },
                 { value: 1, type: ArmorType.building },
             ],
             secondaryAttack: {
-                count: 2,
+                count: 5,
                 accuracy: .75,
-                components: [{ value: 2, type: ArmorType.trueDamage }]
+                components: [
+                    { value: 4, type: ArmorType.trueDamage },
+                    { value: 3, type: ArmorType.building },
+                    { value: 3, type: ArmorType.ram },
+                ]
             },
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
@@ -54,7 +58,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
                 { value: 0, type: ArmorType.siegeWeapon },
                 { value: 0, type: ArmorType.gunpowderUnit },
                 { value: 0, type: ArmorType.uniqueUnit },
-                { value: 0, type: ArmorType.hussiteWagon },
+                { value: 0, type: ArmorType.heavySiege },
             ],
             capacities: [CAPACITIES.projectileProtection],
             movementSpeed: .8,
@@ -74,19 +78,24 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             stone: 0
         },
         stats: {
-            health: 250,
+            health: 230,
             rateOfFire: 3.45,
             attackType: AttackType.projectile,
             range: 6,
             accuracy: .9,
             attackComponents: [
-                { value: 20, type: ArmorType.pierce },
+                { value: 13, type: ArmorType.pierce },
                 { value: 3, type: ArmorType.ram },
                 { value: 2, type: ArmorType.building },
             ],
             secondaryAttack: {
-                count: 3,
-                components: [{ value: 2, accuracy: .75, type: ArmorType.trueDamage }]
+                count: 5,
+                accuracy: .75,
+                components: [
+                    { value: 6, accuracy: .75, type: ArmorType.trueDamage },
+                    { value: 6, accuracy: .73, type: ArmorType.building },
+                    { value: 6, accuracy: .73, type: ArmorType.ram },
+                ]
             },
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
@@ -94,7 +103,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
                 { value: 0, type: ArmorType.siegeWeapon },
                 { value: 0, type: ArmorType.gunpowderUnit },
                 { value: 0, type: ArmorType.uniqueUnit },
-                { value: 0, type: ArmorType.hussiteWagon },
+                { value: 0, type: ArmorType.heavySiege },
             ],
             capacities: [CAPACITIES.projectileProtection],
             movementSpeed: .8,
@@ -126,7 +135,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
                 { value: 50, type: ArmorType.fishingShip },
                 { value: 50, type: ArmorType.stoneDefense },
                 { value: 20, type: ArmorType.siegeWeapon },
-                { value: 50, type: ArmorType.hussiteWagon },
+                { value: 50, type: ArmorType.heavySiege },
             ],
             armorComponents: [
                 { value: 2, type: ArmorType.melee },
@@ -247,7 +256,7 @@ export const bohemiansTechTree: CivTechTree = {
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit: Unit) => {
-                    unit.duration = multiplyNumber(unit.duration, 1/1.8)
+                    unit.duration = multiplyNumber(unit.duration, 1 / 1.8)
                 }
             }],
             affectedUnits: [marketUnits.tradeCart],

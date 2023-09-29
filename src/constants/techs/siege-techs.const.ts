@@ -119,7 +119,7 @@ export const siegeUnits: SiegeUnits = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 130,
+            food: 120,
             gold: 95,
             stone: 0
         },
@@ -152,7 +152,7 @@ export const siegeUnits: SiegeUnits = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 130,
+            food: 120,
             gold: 95,
             stone: 0
         },
@@ -199,7 +199,7 @@ export const siegeUnits: SiegeUnits = {
                 { value: 40, type: ArmorType.melee },
                 { value: 35, type: ArmorType.building },
                 { value: 12, type: ArmorType.siegeWeapon },
-                { value: 40, type: ArmorType.hussiteWagon },
+                { value: 40, type: ArmorType.heavySiege },
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
@@ -232,7 +232,7 @@ export const siegeUnits: SiegeUnits = {
                 { value: 50, type: ArmorType.melee },
                 { value: 45, type: ArmorType.building },
                 { value: 12, type: ArmorType.siegeWeapon },
-                { value: 50, type: ArmorType.hussiteWagon },
+                { value: 50, type: ArmorType.heavySiege },
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
@@ -265,7 +265,7 @@ export const siegeUnits: SiegeUnits = {
                 { value: 75, type: ArmorType.melee },
                 { value: 60, type: ArmorType.building },
                 { value: 12, type: ArmorType.siegeWeapon },
-                { value: 75, type: ArmorType.hussiteWagon },
+                { value: 50, type: ArmorType.heavySiege },
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
@@ -396,7 +396,7 @@ export const siegeUnits: SiegeUnits = {
                 { value: 40, type: ArmorType.fishingShip },
                 { value: 40, type: ArmorType.stoneDefense },
                 { value: 20, type: ArmorType.siegeWeapon },
-                { value: 40, type: ArmorType.hussiteWagon },
+                { value: 40, type: ArmorType.heavySiege },
             ],
             armorComponents: [
                 { value: 2, type: ArmorType.melee },

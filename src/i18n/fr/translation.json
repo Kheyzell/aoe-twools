@@ -310,7 +310,7 @@
                     "description": "Amélioration gratuite des fermes (nécessite un moulin)"
                 },
                 "franks2": {
-                    "description": "Les châteaux coûtent -25 %"
+                    "description": "Les châteaux coûtent -{{value.age3}} % à l'âge des châteaux et -{{value.age4}} % à l'âge impérial"
                 },
                 "franks3": {
                     "description": "Cavalerie +20 % de PV à partir de l'âge féodal"
