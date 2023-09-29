@@ -39,7 +39,8 @@ export const townCenterUnits: TownCenterUnits = {
             attackComponents: [
                 { value: 3, type: ArmorType.melee },
                 { value: 6, type: ArmorType.stoneDefense },
-                { value: 3, type: ArmorType.building }
+                { value: 3, type: ArmorType.building },
+                { value: 6, type: ArmorType.heavySiege },
             ],
             armorComponents: [
                 { value: 0, type: ArmorType.melee },

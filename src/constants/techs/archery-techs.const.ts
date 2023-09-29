@@ -264,7 +264,7 @@ export const archeryUnits: ArcheryUnits = {
             rateOfFire: 2,
             attackType: AttackType.projectile,
             range: 4,
-            accuracy: .5,
+            accuracy: .8,
             attackComponents: [
                 { value: 7, type: ArmorType.pierce },
                 { value: 4, type: ArmorType.spearman },

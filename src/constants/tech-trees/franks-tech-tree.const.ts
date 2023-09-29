@@ -144,7 +144,7 @@ export const franksTechTree: CivTechTree = {
         {
             id: 'franks2',
             effectType: EffectType.discount,
-            value: 25,
+            value: { age3: 15, age4: 25 },
             affectedUnits: [],
             affectedUpgrades: []
         },

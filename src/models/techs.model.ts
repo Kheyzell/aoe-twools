@@ -29,7 +29,7 @@ export enum ArmorType {
     monk = 'Monk',
     siegeWeapon = 'Siege Weapon',
     ram = 'Ram',
-    hussiteWagon = 'Hussite Wagon',
+    heavySiege = 'Heavy Siege',
     standardBuilding = 'Standard building',
     building = 'Building',
     castle = 'Castle',

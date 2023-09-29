@@ -28,7 +28,7 @@ export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 60,
+            food: 50,
             gold: 35,
             stone: 0
         },
@@ -59,7 +59,7 @@ export const siciliansUniqueUnits: { serjeant: Unit, eliteSerjeant: Unit } = {
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 60,
+            food: 50,
             gold: 35,
             stone: 0
         },

@@ -1,6 +1,6 @@
 {
-  "name": "aoe2-civ-picker",
-  "version": "0.1.0",
+  "name": "aoe-twools",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",

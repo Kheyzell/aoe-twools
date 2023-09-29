@@ -310,7 +310,7 @@
                     "description": "Farm upgrades are free"
                 },
                 "franks2": {
-                    "description": "Castles are 25% cheaper"
+                    "description": "Castles are {{value.age3}}/{{value.age4}}% cheaper in the Castle/Imperial Age"
                 },
                 "franks3": {
                     "description": "Mounted units +20% HP (starting in the Feudal Age)"
