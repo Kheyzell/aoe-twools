@@ -35,8 +35,8 @@ class CivService {
 
         gurjarasTechTree.bonuses[4].affectedUnits.push(stableUnits.battleElephant, stableUnits.eliteBattleElephant, khmerUniqueUnits.ballistaElephant, khmerUniqueUnits.eliteBallistaElephant, persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant)
 
-        bulgariansUniqueUnits.konnik.addCapacity({ ...CAPACITIES.dismountOnDeath, unit: bulgariansUniqueUnits.dismountedKonnik } as SpawnUnitOnDeathCapacity)
-        bulgariansUniqueUnits.eliteKonnik.addCapacity({ ...CAPACITIES.dismountOnDeath, unit: bulgariansUniqueUnits.eliteDismountedKonnik } as SpawnUnitOnDeathCapacity)
+        bulgariansUniqueUnits.konnik.addCapacity({ ...CAPACITIES.dismountOnDeath, units: [bulgariansUniqueUnits.dismountedKonnik] } as SpawnUnitOnDeathCapacity)
+        bulgariansUniqueUnits.eliteKonnik.addCapacity({ ...CAPACITIES.dismountOnDeath, units: [bulgariansUniqueUnits.eliteDismountedKonnik] } as SpawnUnitOnDeathCapacity)
     }
 
     getTech(techId: string) {

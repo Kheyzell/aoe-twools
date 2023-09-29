@@ -1,7 +1,7 @@
 import React from "react"
 import { Trans, useTranslation } from "react-i18next"
 
-import { allCivTechTrees } from "../../constants"
+import { allCivTechTrees, siciliansTechTree } from "../../constants"
 import { CostStat } from "../../features/unit-calculator/stats-lines/static-stats-lines"
 import UnitCalculatorUnitComponent from "../../features/unit-calculator/unit-calculator-tech/unit-calculator-unit.component"
 import { Bonus, UniqueTech } from "../../models/bonus.model"
@@ -14,6 +14,7 @@ import BonusLine from "../bonus/bonus-line/bonus-line.component"
 import TechComponent, { BoxSize } from "../tech/tech.component"
 
 import './unit-panel.component.css'
+import { Capacity } from '../../models/capacity.model';
 
 
 type Props = {
@@ -73,19 +74,25 @@ const UnitPanel: React.FC<Props> = (props) => {
 
             <StatsSection></StatsSection>
 
-            { props.unit.stats?.capacities.length ?
+            { props.unit.stats?.capacities?.length ?
                 <div className="Section">
                     <div className="SubTitle"> Capacities </div>
                     <div className="CapacityList"> {props.unit.stats.capacities.map(capacity => {
                         const hasShortDescription = i18n.exists(`capacities.${capacity.id}.shortDescription`)
-                        return (<div> • 
+                        return (<div key={capacity.id}> • 
                             <span> {t(`capacities.${capacity.id}.title`)} </span>
                             { hasShortDescription ?
                                 <span className="ShortDescription">
                                     : <Trans
                                         i18nKey={`capacities.${capacity.id}.shortDescription`}
                                         values={ capacity }
-                                        components={{ Unit: <UnitCalculatorUnitComponent unit={(capacity as any).unit} size={BoxSize.mini} /> }} />
+                                        components={{
+                                            Units: (capacity as any).units
+                                                ? (<span>
+                                                    {(capacity as any).units.map((unit: Unit) => <UnitCalculatorUnitComponent unit={unit} size={BoxSize.mini} />)}
+                                                </span>)
+                                                : <></>
+                                        }} />
                                 </span>
                             : null }
                         </div>)})

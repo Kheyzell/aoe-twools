@@ -164,6 +164,7 @@ export const fullTechTree: CivTechTree = {
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
             new UnitLine([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon]),
+            new UnitLine([dockUnits.dromon]),
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,

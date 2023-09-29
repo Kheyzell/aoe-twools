@@ -21,6 +21,7 @@ i18n
   .use(initReactI18next)
   .use(detector)
   .init({
+    fallbackLng: 'en',
     lng: lang,
     resources
   })

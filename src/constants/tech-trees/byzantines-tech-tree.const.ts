@@ -168,7 +168,7 @@ export const byzantinesTechTree: CivTechTree = {
                     unit.multiplyAttackRate(1.25)
                 }
             }],
-            affectedUnits: [dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip],
+            affectedUnits: [dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip, dockUnits.dromon],
             affectedUpgrades: []
         },
         {
@@ -339,7 +339,7 @@ export const byzantinesTechTree: CivTechTree = {
             new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnits.galleon]),
             new UnitLine([dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip]),
             new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip]),
-            new UnitLine([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon]),
+            new UnitLine([dockUnits.dromon]),
         ],
         upgrades: new UpgradePerAgeGroup([
             dockUpgrades.gillnets,

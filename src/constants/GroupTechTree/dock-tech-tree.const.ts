@@ -12,6 +12,7 @@ const galleyLine = new UnitLine([dockUnits.galley, dockUnits.warGalley, dockUnit
 const fireGalleyLine = new UnitLine([dockUnits.fireGalley, dockUnits.fireShip, dockUnits.fastFireShip])
 const demolitionRaftLine = new UnitLine([dockUnits.demolitionRaft, dockUnits.demotionShip, dockUnits.heavyDemolitionShip])
 const cannonGalleonLine = new UnitLine([dockUnits.cannonGalleon, dockUnits.eliteCannonGalleon])
+const dromonLine = new UnitLine([dockUnits.dromon])
 
 const shipUpgrades = [dockUpgrades.careening, dockUpgrades.shipwright, dockUpgrades.dryDock]
 
@@ -21,10 +22,11 @@ setAffectingUpgrades(tradeCogLine, [marketUpgrade.caravan, ...shipUpgrades])
 setAffectingUpgrades(galleyLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, universityUpgrades.chemistry, universityUpgrades.ballistics, ...shipUpgrades])
 setAffectingUpgrades(fireGalleyLine, [...shipUpgrades])
 setAffectingUpgrades(demolitionRaftLine, [...shipUpgrades])
-setAffectingUpgrades(cannonGalleonLine, [...shipUpgrades])
+setAffectingUpgrades(cannonGalleonLine, [...shipUpgrades, universityUpgrades.siegeEngineers])
+setAffectingUpgrades(dromonLine, [...shipUpgrades, universityUpgrades.siegeEngineers])
 export const dockTechs: GroupTechTree = {
     name: 'Dock',
-    unitLines: [fishingShipLine, transportShipLine, galleyLine, fireGalleyLine, demolitionRaftLine, cannonGalleonLine],
+    unitLines: [fishingShipLine, transportShipLine, galleyLine, fireGalleyLine, demolitionRaftLine, cannonGalleonLine, dromonLine],
     upgrades: new UpgradePerAgeGroup([
         dockUpgrades.gillnets,
         dockUpgrades.careening,

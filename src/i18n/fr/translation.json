@@ -193,7 +193,7 @@
                     "description": "Les chameaux, tirailleurs, piquiers, hallebardiers coûtent -25 %"
                 },
                 "byzantines3": {
-                    "description": "Attaque des navires d'incendie +25 %"
+                    "description": "Attaque des navires d'incendie et des dromons +25 %"
                 },
                 "byzantines4": {
                     "description": "Coût de progression vers l'âge impérial -33 %"
@@ -662,6 +662,23 @@
                 },
                 "portuguese5": {
                     "description": "Technologies développées 25 % plus rapidement (excepté l'avancée d'âge)"
+                }
+            }
+        },
+        "romans": {
+            "name": "Romans",
+            "bonus": {
+                "romans1": {
+                    "description": "Les villageois récoltent des ressources, construisent et réparent {{value}} % plus rapidement"
+                },
+                "romans2": {
+                    "description": "+{{value}}/+{{value}} d'armure aux galères de guerre et aux dromons"
+                },
+                "romans3": {
+                    "description": "L'infanterie reçoit le double d'effets de la part des améliorations d'armure de la forge"
+                },
+                "romans4": {
+                    "description": "Les scorpions coûtent -{{value}} % d'or et bénéficient du développement Balistique"
                 }
             }
         },
@@ -1306,6 +1323,15 @@
         "eliteOrganGun": {
             "name": "Ribaudequin d'élite"
         },
+        "centurion": {
+            "name": "Centurion"
+        },
+        "eliteCenturion": {
+            "name": "Centurion d'Élite"
+        },
+        "legionary": {
+            "name": "Légionnaire"
+        },
         "caravel": {
             "name": "Caravelle"
         },
@@ -1880,6 +1906,14 @@
         "arquebus": {
             "name": "Arquebuse",
             "description": "Les unités à pourdre à canon sont plus précisent contre les cibles mouvantes"
+        },
+        "ballistas": {
+            "name": "Ballistes",
+            "description": "Les Scorpions tirent {{value.scorpion}} % plus rapidement, et attaque des galères de guerre +{{value.galley}}"
+        },
+        "comitatenses": {
+            "name": "Comitatenses",
+            "description": "Les miliciens, les chevaliers et les centurions s'entraînent {{value}} % plus rapidement et reçoivent une attaque de charge de +5 toutes les 20 secondes"
         },
         "zealotry": {
             "name": "Fanatisme",

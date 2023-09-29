@@ -79,7 +79,7 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...monasteryUnits.monk }),
         new Unit({ ...townCenterUnits.villager }),
         new Unit({ ...marketUnits.tradeCart }),
-        new Unit({ ...dockUnits.fishingShip }), new Unit({ ...dockUnits.transportShip }), new Unit({ ...dockUnits.tradeCog }), new Unit({ ...dockUnits.galleon }), new Unit({ ...dockUnits.fastFireShip }), new Unit({ ...dockUnits.heavyDemolitionShip }), new Unit({ ...dockUnits.eliteCannonGalleon }),
+        new Unit({ ...dockUnits.fishingShip }), new Unit({ ...dockUnits.transportShip }), new Unit({ ...dockUnits.tradeCog }), new Unit({ ...dockUnits.galleon }), new Unit({ ...dockUnits.fastFireShip }), new Unit({ ...dockUnits.heavyDemolitionShip }), new Unit({ ...dockUnits.eliteCannonGalleon }), new Unit({ ...dockUnits.dromon }),
     ]
     const uniqueUnits = [
         new Unit({ ...aztecsUniqueUnits.eliteJaguarWarrior }),
