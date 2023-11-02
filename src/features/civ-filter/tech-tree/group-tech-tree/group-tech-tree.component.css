@@ -38,4 +38,10 @@
   height: 300px;
 }
 
+.UpgradesContainer {
+  height: 150px;
+  display: flex;
+  gap: 4px;
+}
+
 /* .UnitLine {} */
