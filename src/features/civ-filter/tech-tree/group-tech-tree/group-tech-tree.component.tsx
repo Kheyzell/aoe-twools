@@ -25,24 +25,32 @@ const GroupTechTreeComponent: React.FC<Props> = (props) => {
 
       <div className="Upgrades">
         <div className="Age Age1">
-          {upgradeLine.age1.map((upgrade, index) => {
-            return (<CivFilterTechComponent key={index} tech={upgrade} size={props.techSize}></CivFilterTechComponent>)
-          })}
+          <div className="UpgradesContainer">            
+          {upgradeLine.age1.map((upgrade, index) =>
+            (<CivFilterTechComponent key={index} tech={upgrade} size={props.techSize}></CivFilterTechComponent>))
+          }
+          </div>
         </div>
         <div className="Age Age2">
-          {upgradeLine.age2.map((upgrade, index) => {
-            return (<CivFilterTechComponent key={index} tech={upgrade} size={props.techSize}></CivFilterTechComponent>)
-          })}
+          <div className="UpgradesContainer">            
+          {upgradeLine.age2.map((upgrade, index) =>
+            (<CivFilterTechComponent key={index} tech={upgrade} size={props.techSize}></CivFilterTechComponent>))
+          }
+          </div>
         </div>
         <div className="Age Age3">
-          {upgradeLine.age3.map((upgrade, index) => {
-            return (<CivFilterTechComponent key={index} tech={upgrade} size={props.techSize}></CivFilterTechComponent>)
-          })}
+          <div className="UpgradesContainer">            
+          {upgradeLine.age3.map((upgrade, index) =>
+            (<CivFilterTechComponent key={index} tech={upgrade} size={props.techSize}></CivFilterTechComponent>))
+          }
+          </div>
         </div>
         <div className="Age Age4">
-          {upgradeLine.age4.map((upgrade, index) => {
-            return (<CivFilterTechComponent key={index} tech={upgrade} size={props.techSize}></CivFilterTechComponent>)
-          })}
+          <div className="UpgradesContainer">            
+          {upgradeLine.age4.map((upgrade, index) =>
+            (<CivFilterTechComponent key={index} tech={upgrade} size={props.techSize}></CivFilterTechComponent>))
+          }
+          </div>
         </div>
       </div>
     </div>
