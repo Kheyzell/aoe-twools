@@ -168,7 +168,7 @@ export const archeryUnits: ArcheryUnits = {
             attackComponents: [
                 { value: 3, type: ArmorType.pierce },
                 { value: 4, type: ArmorType.archer },
-                { value: 3, type: ArmorType.spearman },
+                { value: 4, type: ArmorType.spearman },
                 { value: 2, type: ArmorType.cavalryArcher }
             ],
             armorComponents: [

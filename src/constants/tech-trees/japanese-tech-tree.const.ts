@@ -172,6 +172,19 @@ export const japaneseTechTree: CivTechTree = {
         },
         {
             id: 'japanese4',
+            effectType: EffectType.damage,
+            value: 2,
+            effects: [{
+                order: EffectOrder.first,
+                apply: (unit: Unit) => {
+                    unit.addAttackComponent(2, ArmorType.archer)
+                }
+            }],
+            affectedUnits: [archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: []
+        },
+        {
+            id: 'japanese5',
             effectType: EffectType.lineOfSightPercent,
             value: 50,
             effects: [{

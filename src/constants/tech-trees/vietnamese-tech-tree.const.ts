@@ -105,7 +105,7 @@ export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Uni
             attackComponents: [
                 { value: 4, type: ArmorType.pierce },
                 { value: 5, type: ArmorType.archer },
-                { value: 3, type: ArmorType.spearman },
+                { value: 4, type: ArmorType.spearman },
                 { value: 3, type: ArmorType.cavalryArcher },
             ],
             armorComponents: [

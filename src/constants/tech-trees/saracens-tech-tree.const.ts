@@ -32,7 +32,7 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
             stone: 0
         },
         stats: {
-            health: 65,
+            health: 80,
             rateOfFire: 2,
             attackType: AttackType.projectile,
             range: 3,
@@ -65,7 +65,7 @@ export const saracensUniqueUnits: { mameluke: Unit, eliteMameluke: Unit } = {
             stone: 0
         },
         stats: {
-            health: 80,
+            health: 90,
             rateOfFire: 2,
             attackType: AttackType.projectile,
             range: 3,
@@ -97,19 +97,14 @@ stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
 const uniqueTechs = [
     new UniqueTech({
-        id: 'zealotry',
+        id: 'bimaristan',
         age: 3,
-        effectType: EffectType.health,
-        value: 20,
-        cost: { wood: 0, food: 400, gold: 400, stone: 0 },
-        effects: [{
-            order: EffectOrder.first,
-            apply: (unit: Unit) => {
-                unit.stats.health += 20
-            }
-        }],
+        effectType: EffectType.miscallenous,
+        value: { radius: 5, healing: 75 },
+        cost: { wood: 300, food: 0, gold: 200, stone: 0 },
+        effects: [/* @TODO add multiple healing capacity */],
         duration: 50,
-        affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke],
+        affectedUnits: [monasteryUnits.monk],
         affectedUpgrades: []
     }),
     new UniqueTech({
@@ -178,11 +173,11 @@ export const saracensTechTree: CivTechTree = {
         {
             id: 'saracens5',
             effectType: EffectType.health,
-            value: 10,
+            value: 25,
             effects: [{
                 order: EffectOrder.first,
                 apply: (unit: Unit) => {
-                    unit.stats.health += 10
+                    unit.stats.health = multiplyNumber(unit.stats.health, 1.25)
                 }
             }],
             affectedUnits: [stableUnits.camelRider, stableUnits.heavyCamelRider, saracensUniqueUnits.mameluke, saracensUniqueUnits.eliteMameluke],

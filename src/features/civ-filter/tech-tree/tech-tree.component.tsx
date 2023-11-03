@@ -4,12 +4,13 @@ import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 
 import { BoxSize } from "../../../components/tech/tech.component"
+import { lastUpdateDate } from "../../../constants/global.const"
 import localStorageService from "../../../core/local-storage.service"
 import { Tech } from "../../../models/techs.model"
-import increaseIcon from "../../../resources/icons/increase.svg"
-import noTooltipIcon from "../../../resources/icons/comment-disactivated.svg"
 import tooltipDisplayIcon from "../../../resources/icons/comment-activated.svg"
+import noTooltipIcon from "../../../resources/icons/comment-disactivated.svg"
 import tooltipLockedIcon from "../../../resources/icons/comment-locked.svg"
+import increaseIcon from "../../../resources/icons/increase.svg"
 import reduceIcon from "../../../resources/icons/reduce.svg"
 import refreshIcon from "../../../resources/icons/refresh.png"
 import woodenBackground from "../../../resources/images/backgrounds/wood2.jpg"
@@ -19,7 +20,7 @@ import feudalAge from "../../../resources/images/feudalAge.png"
 import imperialAge from "../../../resources/images/imperialAge.png"
 import { scrollHorizontally } from "../../../utils/utils"
 import civFilterService from "../civ-filter.service"
-import { isInComparisonModeSelector, techTooltipInteractivitySelector, resetTechSelection, selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleTechTooltipInteractivity, unselectCiv1, unselectCiv2, unselectCivs, TooltipInteractivity } from "../civ-filter.slice"
+import { TooltipInteractivity, isInComparisonModeSelector, resetTechSelection, selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, techTooltipInteractivitySelector, toggleTechTooltipInteractivity, unselectCiv1, unselectCiv2, unselectCivs } from "../civ-filter.slice"
 import CivFilterTechComponent from "./civ-filter-tech/civ-filter-tech.component"
 import GroupTechTreeComponent from "./group-tech-tree/group-tech-tree.component"
 
@@ -146,7 +147,7 @@ const TechTreeComponent: React.FC<TechTreeProps> = (props: TechTreeProps) => {
             })}
           </div>
         </div>
-        <span className="LastUpdate"> {t('Last update')}: { Intl.DateTimeFormat(t('locale'), dateOption).format(new Date(Date.UTC(2023, 8, 29))) } </span>
+        <span className="LastUpdate"> {t('Last update')}: { Intl.DateTimeFormat(t('locale'), dateOption).format(lastUpdateDate) } </span>
       </div>
 
       <div className="LeftPanel" style={{ background: `url(${woodenBackground})` }}>

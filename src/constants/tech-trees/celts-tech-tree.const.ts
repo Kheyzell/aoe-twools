@@ -228,7 +228,7 @@ export const celtsTechTree: CivTechTree = {
             blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
             blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor,
             blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow,
-            blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor
+            blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor
         ])
     },
     monastery: {
