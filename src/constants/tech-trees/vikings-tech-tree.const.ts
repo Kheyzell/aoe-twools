@@ -196,6 +196,8 @@ const uniqueTechs = [
             apply: (unit: Unit) => {
                 unit.addAttackComponent(5, ArmorType.cavalry)
                 unit.addAttackComponent(4, ArmorType.camel)
+
+                // @TODO generate gold on kill
             }
         }],
         duration: 40,

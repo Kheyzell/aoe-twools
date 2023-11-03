@@ -19,7 +19,7 @@ import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 
-export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } = {
+export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit, savar: Unit } = {
     warElephant: new Unit({
         id: 'warElephant',
         unique: true,
@@ -37,8 +37,8 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } 
             attackType: AttackType.melee,
             attackComponents: [
                 { value: 15, type: ArmorType.melee },
-                { value: 7, type: ArmorType.building },
-                { value: 7, type: ArmorType.stoneDefense },
+                { value: 30, type: ArmorType.building },
+                { value: 30, type: ArmorType.stoneDefense },
             ],
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
@@ -47,8 +47,8 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } 
                 { value: 0, type: ArmorType.warElephant },
                 { value: 0, type: ArmorType.uniqueUnit },
             ],
-            movementSpeed: .6,
-            lineOfSight: 4
+            movementSpeed: .8,
+            lineOfSight: 7
         },
         duration: 25
     }),
@@ -69,8 +69,8 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } 
             attackType: AttackType.melee,
             attackComponents: [
                 { value: 20, type: ArmorType.melee },
-                { value: 10, type: ArmorType.building },
-                { value: 10, type: ArmorType.stoneDefense },
+                { value: 30, type: ArmorType.building },
+                { value: 30, type: ArmorType.stoneDefense },
             ],
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
@@ -79,16 +79,50 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit } 
                 { value: 0, type: ArmorType.warElephant },
                 { value: 0, type: ArmorType.uniqueUnit },
             ],
-            movementSpeed: .6,
-            lineOfSight: 5
+            movementSpeed: .8,
+            lineOfSight: 8
         },
         duration: 25
-    })
+    }),
+    savar: new Unit({
+        id: 'savar',
+        unique: true,
+        age: 4,
+        unitType: UnitType.military,
+        cost: {
+            wood: 0,
+            food: 60,
+            gold: 75,
+            stone: 0
+        },
+        stats: {
+            health: 145,
+            rateOfFire: 1.8,
+            attackType: AttackType.melee,
+            attackComponents: [
+                { value: 14, type: ArmorType.melee }
+            ],
+            armorComponents: [
+                { value: 3, type: ArmorType.melee },
+                { value: 4, type: ArmorType.pierce },
+                { value: 0, type: ArmorType.cavalry }
+            ],
+            movementSpeed: 1.35,
+            lineOfSight: 5
+        },
+        duration: 30
+    }),
 }
 
 chainTechs([persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant])
 const uniqueUnitLine = new UnitLine([persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant])
 setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
+    blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
+    stableUpgrades.bloodlines, stableUpgrades.husbandry])
+
+chainTechs([stableUnits.knight, stableUnits.cavalier, persiansUniqueUnits.savar])
+const knightLine = new UnitLine([stableUnits.knight, stableUnits.cavalier, persiansUniqueUnits.savar])
+setAffectingUpgrades(knightLine, [blacksmithUpgrades.forging, blacksmithUpgrades.ironCasting, blacksmithUpgrades.blastFurnace,
     blacksmithUpgrades.scaleBardingArmor, blacksmithUpgrades.chainBardingArmor, blacksmithUpgrades.plateBardingArmor,
     stableUpgrades.bloodlines, stableUpgrades.husbandry])
 
@@ -102,7 +136,7 @@ const uniqueTechs = [
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
-                unit.cost.wood = 60
+                unit.cost.wood = unit.cost.wood + unit.cost.gold
                 unit.cost.gold = 0
             }
         }],
@@ -111,19 +145,13 @@ const uniqueTechs = [
         affectedUpgrades: []
     }),
     new UniqueTech({
-        id: 'mahouts',
+        id: 'citadels',
         age: 4,
-        effectType: EffectType.movementSpeed,
-        value: 30,
-        cost: { wood: 0, food: 300, gold: 300, stone: 0 },
-        effects: [{
-            order: EffectOrder.last,
-            apply: (unit: Unit) => {
-                unit.stats.movementSpeed = multiplyNumber(unit.stats.movementSpeed, 1.3)
-            }
-        }],
+        effectType: EffectType.miscallenous,
+        value: { reduceDamage: 25, bulletDamage: 4, bonusInfantry: 3, bonusRam: 3 },
+        cost: { wood: 600, food: 0, gold: 300, stone: 0 },
         duration: 50,
-        affectedUnits: [persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant],
+        affectedUnits: [],
         affectedUpgrades: []
     })
 ]
@@ -143,7 +171,7 @@ export const persiansTechTree: CivTechTree = {
         {
             id: 'persians2',
             effectType: EffectType.creationSpeed,
-            value: { age2: 10, age3: 15, age4: 20 },
+            value: { age1: 5, age2: 10, age3: 15, age4: 20 },
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
@@ -154,8 +182,11 @@ export const persiansTechTree: CivTechTree = {
                     } else
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.duration = multiplyNumber(unit.duration, 1/1.15)
-                    } else {
+                    } else
+                    if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
                         unit.duration = multiplyNumber(unit.duration, 1/1.1)
+                    } else {
+                        unit.duration = multiplyNumber(unit.duration, 1/1.05)
                     }
                 }
             }],
@@ -171,6 +202,33 @@ export const persiansTechTree: CivTechTree = {
         {
             id: 'persians3',
             effectType: EffectType.miscallenous,
+            value: 5,
+            effects: [ /* @TODO generate gold on kill */ ],
+            affectedUnits: [
+                stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar,
+                stableUnits.knight, stableUnits.cavalier, persiansUniqueUnits.savar,
+                stableUnits.camelRider, stableUnits.heavyCamelRider,
+                persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant,
+            ],
+            affectedUpgrades: []
+        },
+        {
+            id: 'persians4',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
+            affectedUpgrades: [archeryUpgrades.parthianTactis]
+        },
+        {
+            id: 'persians5',
+            effectType: EffectType.miscallenous,
+            value: null,
+            affectedUnits: [],
+            affectedUpgrades: []
+        },
+        {
+            id: 'persians6',
+            effectType: EffectType.miscallenous,
             value: 2,
             effects: [{
                 order: EffectOrder.first,
@@ -178,7 +236,7 @@ export const persiansTechTree: CivTechTree = {
                     unit.addAttackComponent(2, ArmorType.archer)
                 }
             }],
-            affectedUnits: [stableUnits.knight, stableUnits.cavalier, stableUnits.paladin],
+            affectedUnits: [stableUnits.knight, stableUnits.cavalier, persiansUniqueUnits.savar],
             affectedUpgrades: [],
             team: true
         }
@@ -203,7 +261,7 @@ export const persiansTechTree: CivTechTree = {
     stable: {
         unitLines: [
             new UnitLine([stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar]),
-            new UnitLine([stableUnits.knight, stableUnits.cavalier, stableUnits.paladin]),
+            knightLine,
             new UnitLine([stableUnits.camelRider, stableUnits.heavyCamelRider]),
         ],
         upgrades: new UpgradePerAgeGroup([stableUpgrades.bloodlines, stableUpgrades.husbandry])

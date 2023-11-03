@@ -27,12 +27,12 @@ export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit }
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 80,
-            gold: 10,
+            food: 35,
+            gold: 45,
             stone: 0
         },
         stats: {
-            health: 70,
+            health: 75,
             rateOfFire: 1.8,
             attackType: AttackType.melee,
             attackComponents: [
@@ -58,8 +58,8 @@ export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit }
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 80,
-            gold: 10,
+            food: 35,
+            gold: 45,
             stone: 0
         },
         stats: {
@@ -80,7 +80,7 @@ export const magyarsUniqueUnits: { magyarHuszar: Unit, eliteMagyarHuszar: Unit }
             movementSpeed: 1.5,
             lineOfSight: 6,
         },
-        duration: 16
+        duration: 14
     })
 }
 
@@ -100,6 +100,7 @@ const uniqueTechs = [
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
+                unit.cost.food = unit.cost.food + unit.cost.gold
                 unit.cost.gold = 0
             }
         }],

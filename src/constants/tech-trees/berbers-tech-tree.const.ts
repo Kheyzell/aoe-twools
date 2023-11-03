@@ -110,7 +110,7 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
             attackComponents: [
                 { value: 3, type: ArmorType.pierce },
                 { value: 4, type: ArmorType.archer },
-                { value: 2, type: ArmorType.spearman },
+                { value: 3, type: ArmorType.spearman },
                 { value: 2, type: ArmorType.cavalryArcher },
             ],
             armorComponents: [
@@ -146,7 +146,7 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
             attackComponents: [
                 { value: 4, type: ArmorType.pierce },
                 { value: 5, type: ArmorType.archer },
-                { value: 2, type: ArmorType.spearman },
+                { value: 3, type: ArmorType.spearman },
                 { value: 2, type: ArmorType.cavalryArcher },
             ],
             armorComponents: [

@@ -124,7 +124,7 @@ export const slavsTechTree: CivTechTree = {
         {
             id: 'slavs1',
             effectType: EffectType.miscallenous,
-            value: 10,
+            value: 15,
             affectedUnits: [townCenterUnits.villager],
             affectedUpgrades: []
         },

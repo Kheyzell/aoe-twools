@@ -303,7 +303,6 @@ export const polesTechTree: CivTechTree = {
             marketUpgrade.coinage,
             marketUpgrade.caravan,
             marketUpgrade.banking,
-            marketUpgrade.guilds,
         ])
     },
     dock: {

@@ -45,7 +45,7 @@ export const romansUniqueUnits: { centurion: Unit, eliteCenturion: Unit, legiona
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit },
             ],
-            capacities: [{ ...CAPACITIES.movementSpeedAndAttackSpeedAuraBonus, range: 10, movementSpeed: 10, attackSpeed: 25 } as MovementSpeedAndAttackSpeedAuraBonus],
+            capacities: [{ ...CAPACITIES.movementSpeedAndAttackSpeedAuraBonus, range: 10, movementSpeed: 10, attackSpeed: 20 } as MovementSpeedAndAttackSpeedAuraBonus],
             movementSpeed: 1.35,
             lineOfSight: 4
         },
@@ -75,7 +75,7 @@ export const romansUniqueUnits: { centurion: Unit, eliteCenturion: Unit, legiona
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit },
             ],
-            capacities: [{ ...CAPACITIES.movementSpeedAndAttackSpeedAuraBonus, range: 12, movementSpeed: 15, attackSpeed: 33 } as MovementSpeedAndAttackSpeedAuraBonus],
+            capacities: [{ ...CAPACITIES.movementSpeedAndAttackSpeedAuraBonus, range: 12, movementSpeed: 15, attackSpeed: 20 } as MovementSpeedAndAttackSpeedAuraBonus],
             movementSpeed: 1.35,
             lineOfSight: 4
         },

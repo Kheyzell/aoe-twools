@@ -112,7 +112,7 @@ const UnitCalculator: React.FC<UnitCalculatorProps> = () => {
         new Unit({ ...maliansUniqueUnits.eliteGbeto }),
         new Unit({ ...mayansUniqueUnits.elitePlumedArcher }),
         new Unit({ ...mongolsUniqueUnits.eliteMangudai }),
-        new Unit({ ...persiansUniqueUnits.eliteWarElephant }),
+        new Unit({ ...persiansUniqueUnits.eliteWarElephant }), new Unit({ ...persiansUniqueUnits.savar }),
         new Unit({ ...polesUniqueUnits.eliteObuch }),
         new Unit({ ...portugeseUniqueUnits.eliteOrganGun }), new Unit({ ...portugeseUniqueUnits.eliteCaravel }),
         new Unit({ ...saracensUniqueUnits.eliteMameluke }),

@@ -459,6 +459,9 @@
                     "description": "Infantry attack 33% faster starting in the Feudal Age"
                 },
                 "japanese4": {
+                    "description": "Cavalry Archers +{{value}} attack vs. Archers"
+                },
+                "japanese5": {
                     "description": "Galleys have +50% Line of Sight"
                 }
             }
@@ -621,9 +624,18 @@
                     "description": "Start the game with +50 food and +50 wood"
                 },
                 "persians2": {
-                    "description": "Town Centers and Docks have double HP and work 10%/15%/20% faster in the Feudal/Castle/Imperial Age"
+                    "description": "Town Centers and Docks have double HP and work {{value.age1}}%/{{value.age2}}%/{{value.age3}}%/{{value.age4}}% faster in the Dark/Feudal/Castle/Imperial Age"
                 },
                 "persians3": {
+                    "description": "Cavalry generate {{value}} gold when killing enemy military units"
+                },
+                "persians4": {
+                    "description": "Parthian Tactics available in Castle Age"
+                },
+                "persians5": {
+                    "description": "Can build Caravanserai in Imperial Age"
+                },
+                "persians6": {
                     "description": "Knights have +2 attack against archers"
                 }
             }
@@ -698,7 +710,7 @@
                     "description": "Galleys attack 25% faster"
                 },
                 "saracens5": {
-                    "description": "Camel units +10 HP"
+                    "description": "Camel units +{{value}}% HP"
                 },
                 "saracens6": {
                     "description": "Foot archers have +2 attack against standard buildings"
@@ -732,16 +744,16 @@
             "name": "Slavs",
             "bonus": {
                 "slavs1": {
-                    "description": "Farmers work 10% faster"
+                    "description": "Farmers work {{value}}% faster"
                 },
                 "slavs2": {
                     "description": "Supplies and Gambesons are free"
                 },
                 "slavs3": {
-                    "description": "Siege Workshop units are 15% cheaper"
+                    "description": "Siege Workshop units are {{value}}% cheaper"
                 },
                 "slavs4": {
-                    "description": "Military buildings (excluding Castles and Docks) provide +5 population"
+                    "description": "Military buildings (excluding Castles and Docks) provide +{{value}} population"
                 }
             }
         },
@@ -1317,6 +1329,9 @@
         "eliteWarElephant": {
             "name": "Elite War Elephant"
         },
+        "savar": {
+            "name": "Savar"
+        },
         "obuch": {
             "name": "Obuch"
         },
@@ -1851,7 +1866,7 @@
         },
         "corvinianArmy": {
             "name": "Corvinian Army",
-            "description": "Magyar Huszars cost no gold"
+            "description": "Magyar Huszar gold cost is replaced by additional food cost"
         },
         "recurveBow": {
             "name": "Recurve Bow",
@@ -1893,9 +1908,9 @@
             "name": "Kamandaran",
             "description": "turns Archer gold cost into wood cost"
         },
-        "mahouts": {
-            "name": "Mahouts",
-            "description": "War Elephants move +30% faster"
+        "citadels": {
+            "name": "Citadels",
+            "description": "Castles receive -{{value.reduceDamage}}% bonus damage, arrows replaced with bullets which deal +{{value.bulletDamage}} attack, +{{value.bonusInfantry}} attack vs. infantry, and +{{value.bonusRam}} attack vs. rams"
         },
         "szlachtaPrivileges": {
             "name": "Szlachta Privileges",
@@ -1921,9 +1936,9 @@
             "name": "Comitatenses",
             "description": "Militia-line, Knight-line, and Centurions train {{value}}% faster and receive +5 charge attack over 20 seconds"
         },
-        "zealotry": {
-            "name": "Zealotry",
-            "description": "Camel Riders and Mamelukes +20 hit points"
+        "bimaristan": {
+            "name": "Bimaristan",
+            "description": "Monks passively heal all friendly units in a {{value.radius}} tile radius by {{value.healing}} HP/minute"
         },
         "counterweights": {
             "name": "Counterweights",

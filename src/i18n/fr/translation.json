@@ -459,6 +459,9 @@
                     "description": "Attaque de l'infanterie 33 % plus rapide à partir de l'âge féodal"
                 },
                 "japanese4": {
+                    "description": "Archers de cavalerie +{{value}} d'attaque contre les archers"
+                },
+                "japanese5": {
                     "description": "Galères +50 % de ligne de mire"
                 }
             }
@@ -621,9 +624,18 @@
                     "description": "Commence avec +50 de nourriture et de bois"
                 },
                 "persians2": {
-                    "description": "PV du forum et du port x2, Productivité +10 % à l'âge féodal, +15 % à l'âge des châteaux, +20 % à l'âge impéria"
+                    "description": "PV du forum et du port x2, Productivité +{{value.age1}}%/{{value.age2}}%/{{value.age3}}%/{{value.age4}}% à l'âge sombre/féodal/des châteaux/impérial"
                 },
                 "persians3": {
+                    "description": "La Cavalrie génère {{value}} or en tuant des unités militaires ennemies"
+                },
+                "persians4": {
+                    "description": "Tactiques parthes disponible à l'âge des châteaux"
+                },
+                "persians5": {
+                    "description": "Peut construire des caravansérails à partir de l'âge impérial"
+                },
+                "persians6": {
                     "description": "Attaque des chevaliers +2 contre les archers"
                 }
             }
@@ -698,7 +710,7 @@
                     "description": "Vitesse d'attaque des galères +25 %"
                 },
                 "saracens5": {
-                    "description": "PV des chameaux +10"
+                    "description": "PV des chameaux +{{value}}%"
                 },
                 "saracens6": {
                     "description": "Attaque des archers à pied +2 contre les bâtiments"
@@ -732,16 +744,16 @@
             "name": "Slaves",
             "bonus": {
                 "slavs1": {
-                    "description": "Cadence de travail +10 % pour les fermiers"
+                    "description": "Cadence de travail +{{value}} % pour les fermiers"
                 },
                 "slavs2": {
                     "description": "Ravitaillement et Jaques gratuits"
                 },
                 "slavs3": {
-                    "description": "Coût des unités de l'atelier de siège -15 %"
+                    "description": "Coût des unités de l'atelier de siège -{{value}} %"
                 },
                 "slavs4": {
-                    "description": "Population +5 pour les bâtiments militaires (sauf châteaux et ports)"
+                    "description": "Population +{{value}} pour les bâtiments militaires (sauf châteaux et ports)"
                 }
             }
         },
@@ -1311,6 +1323,9 @@
         "eliteWarElephant": {
             "name": "Éléphant de guerre d'élite"
         },
+        "savar": {
+            "name": "Savar"
+        },
         "obuch": {
             "name": "Obuch"
         },
@@ -1845,7 +1860,7 @@
         },
         "corvinianArmy": {
             "name": "Armée corvinienne",
-            "description": "Les hussards hongrois ne coûtent pas d'or"
+            "description": "Le coût en or des hussards hongrois est transformé en nourriture"
         },
         "recurveBow": {
             "name": "Arc recourbé",
@@ -1887,9 +1902,9 @@
             "name": "Kamandaran",
             "description": "Transforme le coût en or des archers en coût en bois"
         },
-        "mahouts": {
-            "name": "Cornacs",
-            "description": "Les éléphants de guerre se déplacent +30 % plus vite"
+        "citadels": {
+            "name": "Citadels",
+            "description": "Les châteaux reçoivent -{{value.reduceDamage}}% de dégât bonus, les flèches sont remplacées par des balles qui ont +{{value.bulletDamage}} de dégât, +{{value.bonusInfantry}} dégât contre l'infanterie, et +{{value.bonusRam}} dégât contre les béliers"
         },
         "szlachtaPrivileges": {
             "name": "Privilèges szlachta",
@@ -1915,9 +1930,9 @@
             "name": "Comitatenses",
             "description": "Les miliciens, les chevaliers et les centurions s'entraînent {{value}} % plus rapidement et reçoivent une attaque de charge de +5 toutes les 20 secondes"
         },
-        "zealotry": {
-            "name": "Fanatisme",
-            "description": "Les chameaux gagnent +20 PV"
+        "bimaristan": {
+            "name": "Bimaristan",
+            "description": "Les moines soignent automatiquement toutes les unités alliées dans un rayon de {{value.radius}} cases de {{value.healing}} PV/minute"
         },
         "counterweights": {
             "name": "Contrepoids",

@@ -354,7 +354,7 @@ export const stableUnits: StableUnits = {
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.warElephant },
             ],
-            movementSpeed: .85,
+            movementSpeed: .88,
             lineOfSight: 5
         },
         duration: 24
