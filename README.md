@@ -2,6 +2,18 @@
 Tool for filtering civilisations of the game **Age of Empire 2** based on units and technologies of your choice <br />
 [aoetwools.firebaseapp.com](aoetwools.firebaseapp.com)
 
+<details>
+  <summary> Motivation behind this project </summary>
+
+  > I started building this application during the covid period where a group of my friends started playing on the new **Age of Empires II: Definitive Edition** version and were a little overwhelmed by all the different civilisations.
+    
+  > It also served as a personnal challenge and a footstep into the React ecosystem for me. 
+
+  > I made this repository public because I cannot keep up with all the Updates in the game anymore while adding features with the limited time I have to put into this project, and also mainly so that more people would be aware this tool exist and could help them. Also some people wanted to have a look at the code.
+
+  > In its current state this project is by no mean a clean professional production ready product (a lot can be improved) and was never the goal given the time and resources I could allocate to it. However I still tried to keep it structured, maintainable, somewhat easy to understand and have its parts separated for low coupling.
+</details>
+
 ## Features
 
 <details>
