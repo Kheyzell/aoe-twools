@@ -23,6 +23,29 @@
     "Scale up": "Agrandir",
     "Scale down": "Réduire",
     "civ": {
+        "armenians": {
+            "name": "Arméniens",
+            "bonus": {
+                "armenians1": {
+                    "description": "Les charrettes à mule coûtent -{{value}}%"
+                },
+                "armenians2": {
+                    "description": "Les technologies de charrette à mule sont {{value}}% plus efficaces"
+                },
+                "armenians3": {
+                    "description": "La première église fortifiée reçoit une relique gratuite"
+                },
+                "armenians4": {
+                    "description": "Les unités de caserne non uniques (sauf hommes d'armes) sont disponibles un âge plus tôt"
+                },
+                "armenians5": {
+                    "description": "Les galères et les dromons tirent {{value.proctileNumber}} projectile supplémentaire additional, le projectile supplémentaire for les galères fait {{value.projectileDamage}} de dégât"
+                },
+                "armenians6": {
+                    "description": "Infantry have +{{value}} Line of Sight"
+                }
+            }
+        },
         "aztecs": {
             "name": "Aztèques",
             "bonus": {
@@ -320,6 +343,26 @@
                 },
                 "franks5": {
                     "description": "Les chevaliers gagnent 2 points de ligne de mire"
+                }
+            }
+        },
+        "georgians": {
+            "name": "Géorgiens",
+            "bonus": {
+                "georgians1": {
+                    "description": "Commence avec une charrette à mule, mais - {{value}} unités de nourriture"
+                },
+                "georgians2": {
+                    "description": "Les églises fortifiées fournissent les villageois + {{value.work}}% de vitesse de travail dans un carré de {{value.square}} parcelles"
+                },
+                "georgians3": {
+                    "description": "Les unités et les bâtiments reçoivent -{{value.reduction}}% de dégâts (-{{value.calculatedReduction}}% à la place de -25%) lorsqu'ils combattent en hauteur"
+                },
+                "georgians4": {
+                    "description": "La cavalerie régénère {{value.feudal}}/{{value.castle}}/{{value.imperial}} PV par minute à l'âge Féodal/Château/Impérial"
+                },
+                "georgians5": {
+                    "description": "Les bâtiments coûtent -{{value}}% de ressources à être réparés"
                 }
             }
         },
@@ -1080,11 +1123,23 @@
         "eliteCannonGalleon": {
             "name": "Galion à canon d'élite"
         },
+        "dromon": {
+            "name": "Dromon"
+        },
+        "compositeBowman": {
+            "name": "Archer composite"
+        },
+        "eliteCompositeBowman": {
+            "name": "Archer composite d'élite"
+        },
         "jaguarWarrior": {
             "name": "Guerrier jaguar"
         },
         "eliteJaguarWarrior": {
             "name": "Guerrier jaguar d'élite"
+        },
+        "warriorPriest": {
+            "name": "Prêtre guerrier"
         },
         "rathaRanged": {
             "name": "Ratha (à distance)"
@@ -1196,6 +1251,12 @@
         },
         "eliteThrowingAxeman": {
             "name": "Lanceur de hache d'élite"
+        },
+        "monaspa": {
+            "name": "Monaspa"
+        },
+        "eliteMonaspa": {
+            "name": "Monaspa d'élite"
         },
         "huskarl": {
             "name": "Huskarl"
@@ -1658,6 +1719,14 @@
         "dryDock": {
             "name": "Cale sèche"
         },
+        "cilicianFleet": {
+            "name": "Flotte de Cilicie",
+            "description": "navires de démolition +{{value.blastRadiusPercent}}% rayon d'impact, galères et dromons +{{value.galleyRange}} portée"
+        },
+        "fereters": {
+            "name": "Reliquaire",
+            "description": "infanterie (sauf unités lancières) +{{value.health}} PV, prêtres guerriers +{{value.healingPercent}}% vitesse de guérison"
+        },
         "atlatl": {
             "name": "Atlatl",
             "description": "Les tirailleurs ont +1 d'attaque et de portée"
@@ -1777,6 +1846,14 @@
         "chivalry": {
             "name": "Chevalerie",
             "description": "Les écuries produisent 40 % plus vite"
+        },
+        "svanTowers": {
+            "name": "Tours svanes",
+            "description": "bâtiments défensifs +{{value}} points d'attaque ; les tours tirent des flèches qui transpercent plusieurs unités"
+        },
+        "aznauriCavalry": {
+            "name": "Cavalerie aznaurie",
+            "description": "les unités de cavalerie occupent {{value}}% de population en moins"
         },
         "anarchy": {
             "name": "Anarchie",

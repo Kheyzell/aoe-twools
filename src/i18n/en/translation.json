@@ -23,6 +23,29 @@
     "Scale up": "Scale up",
     "Scale down": "Scale down",
     "civ": {
+        "armenians": {
+            "name": "Armenians",
+            "bonus": {
+                "armenians1": {
+                    "description": "Mule Carts cost -{{value}}%"
+                },
+                "armenians2": {
+                    "description": "Mule Cart technologies are {{value}}% more effective"
+                },
+                "armenians3": {
+                    "description": "First Fortified Church receives a free Relic"
+                },
+                "armenians4": {
+                    "description": "Long Swordsman and above, and Spearman line available one Age earlier"
+                },
+                "armenians5": {
+                    "description": "Galley-line and Dromons fire {{value.proctileNumber}} additional projectile. The additional projectile for the Galley-line deals {{value.projectileDamage}} damage"
+                },
+                "armenians6": {
+                    "description": "Infantry have +{{value}} Line of Sight"
+                }
+            }
+        },
         "aztecs": {
             "name": "Aztecs",
             "bonus": {
@@ -320,6 +343,26 @@
                 },
                 "franks5": {
                     "description": "Knights have +2 Line of Sight"
+                }
+            }
+        },
+        "georgians": {
+            "name": "Georgians",
+            "bonus": {
+                "georgians1": {
+                    "description": "Start with a Mule Cart, but -{{value}} food"
+                },
+                "georgians2": {
+                    "description": "Fortified Churches provide +{{value.work}}% work rate to Villagers in a {{value.square}} tile square"
+                },
+                "georgians3": {
+                    "description": "Units and buildings receive -{{value.reduction}}% damage (-{{value.calculatedReduction}}% instead of -25%) when fighting from higher elevation"
+                },
+                "georgians4": {
+                    "description": "Mounted units regenerate {{value.feudal}}/{{value.castle}}/{{value.imperial}} HP per minute in the Feudal/Castle/Imperial Age"
+                },
+                "georgians5": {
+                    "description": "Repairing buildings costs -{{value}}% resources"
                 }
             }
         },
@@ -1086,6 +1129,18 @@
         "eliteCannonGalleon": {
             "name": "Elite Cannon Galleon"
         },
+        "dromon": {
+            "name": "Dromon"
+        },
+        "compositeBowman": {
+            "name": "Composite Bowman"
+        },
+        "eliteCompositeBowman": {
+            "name": "Elite Composite Bowman"
+        },
+        "warriorPriest": {
+            "name": "Warrior Priest"
+        },
         "jaguarWarrior": {
             "name": "Jaguar Warrior"
         },
@@ -1202,6 +1257,12 @@
         },
         "eliteThrowingAxeman": {
             "name": "Elite Throwing Axeman"
+        },
+        "monaspa": {
+            "name": "Monaspa"
+        },
+        "eliteMonaspa": {
+            "name": "Elite Monaspa"
         },
         "huskarl": {
             "name": "Huskarl"
@@ -1664,6 +1725,14 @@
         "dryDock": {
             "name": "Dry Dock"
         },
+        "cilicianFleet": {
+            "name": "Cilician Fleet",
+            "description": "Demolition Ships +{{value.blastRadiusPercent}}% blast radius; Galley-line and Dromons +{{value.galleyRange}} range"
+        },
+        "fereters": {
+            "name": "Fereters",
+            "description": "Infantry (except Spearman-line) +{{value.health}} hit points, Warrior Priests +{{value.healingPercent}}% heal speed"
+        },
         "atlatl": {
             "name": "Atlatl",
             "description": "Skirmishers +1 attack, +1 range"
@@ -1783,6 +1852,14 @@
         "chivalry": {
             "name": "Chivalry",
             "description": "Stables work 40% faster"
+        },
+        "svanTowers": {
+            "name": "Svan Towers",
+            "description": "Defensive buildings have +{{value}} attack, and towers fire arrows that pierce multiple units"
+        },
+        "aznauriCavalry": {
+            "name": "Aznauri Cavalry",
+            "description": "Mounted units take {{value}}% less population space"
         },
         "anarchy": {
             "name": "Anarchy",

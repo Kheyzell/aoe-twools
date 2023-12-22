@@ -1,18 +1,18 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 
+import CivCrest from "../../../components/civ-crest/civ-crest.component"
+import CivPanel from "../../../components/civ-panel/civ-panel.component"
+import WideTooltip from "../../../components/wide-tooltip.component"
 import { allCivTechTrees } from "../../../constants"
 import { CivTechTree, TechType } from "../../../models/techs.model"
-import { scrollHorizontally } from "../../../utils/utils"
-import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCiv2Selection, toggleCivSelection } from "../civ-filter.slice"
-import './civ-list.component.css'
-import CivPanel from "../../../components/civ-panel/civ-panel.component"
-import WideTooltip from "../../../components/wide-tooltip.component";
-import civFilterService from "../civ-filter.service";
-import CivCrest from "../../../components/civ-crest/civ-crest.component"
 import { Unit } from "../../../models/unit.model"
 import { Upgrade } from "../../../models/upgrade.model"
+import { scrollHorizontally } from "../../../utils/utils"
+import civFilterService from "../civ-filter.service"
+import { selectedCiv2Selector, selectedCivSelector, selectedTechsSelector, toggleCiv2Selection, toggleCivSelection } from "../civ-filter.slice"
+import './civ-list.component.css'
 
 
 const CivList: React.FC = () => {
@@ -37,9 +37,9 @@ const CivList: React.FC = () => {
         }
     }
 
-    const [showTools, setShowTools] = React.useState<boolean>(false)
-    const [showCivsFullyUpgraded, setShowCivsFullyUpgraded] = React.useState<boolean>(false)
-    const [showCivsExcluded, setShowCivsExcluded] = React.useState<boolean>(false)
+    const [showTools, setShowTools] = useState<boolean>(false)
+    const [showCivsFullyUpgraded, setShowCivsFullyUpgraded] = useState<boolean>(false)
+    const [showCivsExcluded, setShowCivsExcluded] = useState<boolean>(false)
     const onEnterTools = () => setShowTools(true)
     const onLeaveTools = () => setShowTools(false)
 

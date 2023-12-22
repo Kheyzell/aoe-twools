@@ -1,3 +1,4 @@
+import { armeniansTechTree } from "./tech-trees/armenians-tree.const"
 import { aztecsTechTree } from "./tech-trees/aztecs-tech-tree.const"
 import { bengalisTechTree } from "./tech-trees/bengalis-tech-tree.const"
 import { berbersTechTree } from "./tech-trees/berbers-tech-tree.const"
@@ -13,6 +14,7 @@ import { cumansTechTree } from "./tech-trees/cumans-tech-tree.const"
 import { dravidiansTechTree } from "./tech-trees/dravidians-tech-tree.const"
 import { ethiopiansTechTree } from "./tech-trees/ethiopians-tech-tree.const"
 import { franksTechTree } from "./tech-trees/franks-tech-tree.const"
+import { georgiansTechTree } from "./tech-trees/georgians-tech-tree.const"
 import { gothsTechTree } from "./tech-trees/goths-tech-tree.const"
 import { gurjarasTechTree } from "./tech-trees/gurjaras-tech-tree.const"
 import { hindustanisTechTree } from "./tech-trees/hindustanis-tech-tree.const"
@@ -81,6 +83,7 @@ export * from "./tech-trees/turks-tech-tree.const"
 export * from "./tech-trees/vikings-tech-tree.const"
 
 export const allCivTechTrees = [
+    armeniansTechTree,
     aztecsTechTree,
     bengalisTechTree,
     berbersTechTree,
@@ -96,6 +99,7 @@ export const allCivTechTrees = [
     dravidiansTechTree,
     ethiopiansTechTree,
     franksTechTree,
+    georgiansTechTree,
     gothsTechTree,
     gurjarasTechTree,
     hunsTechTree,

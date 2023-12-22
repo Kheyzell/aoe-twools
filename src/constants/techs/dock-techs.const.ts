@@ -484,7 +484,7 @@ export const dockUnits: DockUnits = {
             rateOfFire: 8,
             attackComponents: [
                 { value: 50, type: ArmorType.melee },
-                { value: 1335, type: ArmorType.building },
+                { value: 135, type: ArmorType.building },
                 { value: 30, type: ArmorType.siegeWeapon },
             ],
             armorComponents: [

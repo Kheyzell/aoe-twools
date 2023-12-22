@@ -177,7 +177,7 @@ const uniqueTechs = [
 export const incasTechTree: CivTechTree = {
     id: 'incas',
     crest,
-    wikiUrl: 'Incas_(Age_of_Empires_II)',
+    wikiUrl: 'Incas',
     bonuses: [],
     uniqueTechs,
     barracks: {
@@ -324,13 +324,6 @@ const bonuses = [
         id: 'incas1',
         effectType: EffectType.miscallenous,
         value: null,
-        affectedUnits: [],
-        affectedUpgrades: []
-    },
-    {
-        id: 'incas2',
-        effectType: EffectType.miscallenous,
-        value: null,
         effects: [{
             order: EffectOrder.last,
             apply: (unit: Unit) => {
@@ -349,28 +342,28 @@ const bonuses = [
         ]
     },
     {
-        id: 'incas3',
+        id: 'incas2',
         effectType: EffectType.miscallenous,
         value: 10,
         affectedUnits: [],
         affectedUpgrades: []
     },
     {
-        id: 'incas4',
+        id: 'incas3',
         effectType: EffectType.discoutStone,
         value: 15,
         affectedUnits: [],
         affectedUpgrades: []
     },
     {
-        id: 'incas5',
+        id: 'incas4',
         effectType: EffectType.discoutFood,
         value: { age1: 15, age2: 20, age3: 25, age4: 30 },
         affectedUnits: getAllCivMilitaryUnits(incasTechTree),
         affectedUpgrades: []
     },
     {
-        id: 'incas6',
+        id: 'incas5',
         effectType: EffectType.lineOfSight,
         value: 2,
         effects: [{

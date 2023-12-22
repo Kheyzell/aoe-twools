@@ -29,17 +29,6 @@ import UnitCalculator from './features/unit-calculator/unit-calculator.component
 // initialise group tech trees
 const allGroupTechs = [barracksTechs, archeryTechs, stableTechs, siegeTechs, castleTechs, blacksmithTechs, monasteryTechs, universityTechs, townCenterTechs, lumberCampTechs, millTechs, miningCampTechs, marketTechs, dockTechs]
 
-// const routes = [
-//   {
-//     path: "/sandwiches",
-//     component: null
-//   },
-//   {
-//     path: "/tacos",
-//     component: null
-//   }
-// ]
-
 function AppComponent() {
   return (
     <div className="App">
@@ -53,7 +42,6 @@ function AppComponent() {
             <UnitCalculator></UnitCalculator>
           </Route>
           <Route render={() => <Redirect to={{pathname: "/"}} />} />
-          {/* <Redirect from="/" to="" /> */}
         </Switch>
       </Router>
 

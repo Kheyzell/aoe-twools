@@ -20,59 +20,55 @@ import './upgrade-panel.component.css'
 
 type Props = {
     upgrade: Upgrade
-    showDetails: boolean
+    shouldShowDetails: boolean
 }
 
-const UpgradePanel: React.FC<Props> = (props) => {
+const UpgradePanel: React.FC<Props> = ({ upgrade, shouldShowDetails }) => {
     const { t, i18n } = useTranslation()
     const panelRef = React.createRef<HTMLDivElement>();
 
-    const showDetails = props.showDetails
-
-    const translationKey = `${(props.upgrade.type === TechType.unit ? 'unit' : props.upgrade.type === TechType.upgrade ? 'upgrade' : 'unique')}.${props.upgrade.id}`
+    const translationKey = `${(upgrade.type === TechType.unit ? 'unit' : upgrade.type === TechType.upgrade ? 'upgrade' : 'unique')}.${upgrade.id}`
 
     const wikiBaseUrl = 'https://ageofempires.fandom.com/wiki'
-    // const wikiUrl = `${wikiBaseUrl}/${props.tech.wikiUrl}/Tree`
 
-    const isUniqueTech = !!props.upgrade.unique
+    const isUniqueTech = !!upgrade.unique
 
     const hasDescription = i18n.exists(`${translationKey}.description`)
 
     let affectedUnits: Unit[] = []
     let affectedUpgrades: Upgrade[] = []
-    if (showDetails) {
+
+    if (shouldShowDetails) {
         if (isUniqueTech) {
-            affectedUnits = (props.upgrade as UniqueTech).affectedUnits
-            affectedUpgrades = (props.upgrade as UniqueTech).affectedUpgrades
+            affectedUnits = (upgrade as UniqueTech).affectedUnits
+            affectedUpgrades = (upgrade as UniqueTech).affectedUpgrades
         } else {
             const allGenericUnits: Unit[] = getAllCivUnits(fullTechTree)
             const allUniqueUnits: Unit[] = allCivTechTrees.map(civ => getAllCivUniqueUnits(civ)).reduce((allUnits: Unit[], civUnits: Unit[]) => allUnits.concat(civUnits), [])
-            
-            affectedUnits = allGenericUnits.concat(allUniqueUnits).filter(unit => (unit.affectingUpgrades || []).some(u => u.id === props.upgrade.id))
+
+            affectedUnits = allGenericUnits.concat(allUniqueUnits).filter(unit => (unit.affectingUpgrades || []).some(u => u.id === upgrade.id))
         }
     }
 
     return (
         <div className="TechPanel" ref={panelRef} style={{ background: `url(${woodenBackground})` }} onClick={stopEventPropagation}>
-            <div className={ showDetails ? 'Title' : '' }>
+            <div className={ shouldShowDetails ? 'Title' : '' }>
                 { <span>
                     <span> { t(`${translationKey}.name`) } </span>
-                    { isUniqueTech ? <span> ({ t(`civ.${(props.upgrade as UniqueTech).civ.id}.name`) }) </span> : null }
-                    <span className="StatLabel"> </span> <span className="StatValue"> (<CostStat cost={ new CostCompared(props.upgrade.cost) }></CostStat>) </span>
+                    { isUniqueTech ? <span> ({ t(`civ.${(upgrade as UniqueTech).civ.id}.name`) }) </span> : null }
+                    <span className="StatLabel"> </span> <span className="StatValue"> (<CostStat cost={ new CostCompared(upgrade.cost) }></CostStat>) </span>
                 </span> }
                 {/* { showDetails ? (<span> • <a href={wikiBaseUrl} target="_blank" rel="noreferrer"> wiki </a> </span>): null } */}
             </div>
 
-            { hasDescription ? 
+            { hasDescription &&
                 <div className="Section">
-                    { showDetails ? <div className="SubTitle"> Description </div> : null }
-                    <div className="Description"> { t(`${translationKey}.description`) } </div>
+                    { shouldShowDetails && <div className="SubTitle"> Description </div> }
+                    <div className="Description"> { t(`${translationKey}.description`, upgrade) } </div>
                 </div>
-            : null }
-            
-            {
-                showDetails ?
+            }
 
+            { shouldShowDetails &&
                 <div className="Details">
 
                     <div className="Section">
@@ -83,7 +79,7 @@ const UpgradePanel: React.FC<Props> = (props) => {
                             })
                         } </div>
                     </div>
-                    
+
                     { isUniqueTech ?
                         <div className="Section">
                             <div className="SubTitle"> { affectedUpgrades.length > 0 ? t("Affected upgrade(s)") : t("No upgrade is affected by this upgrade") } </div>
@@ -97,7 +93,7 @@ const UpgradePanel: React.FC<Props> = (props) => {
 
                 </div>
 
-            : null }
+            }
         </div>
     )
 }
