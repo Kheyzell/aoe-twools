@@ -25,7 +25,8 @@ export enum CapacityId {
     blastAttack = "blastAttack",
     projectilePassThrough = "projectilePassThrough",
     auraBonus = "aura",
-    movementSpeedAndAttackSpeedAuraBonus = "movementSpeedAndAttackSpeedAuraBonus"
+    movementSpeedAndAttackSpeedAuraBonus = "movementSpeedAndAttackSpeedAuraBonus",
+    monaspaGroupBonus = "monaspaGroupBonus"
 }
 
 export const CAPACITIES = {
@@ -57,6 +58,7 @@ export const CAPACITIES = {
     swapUnit: { id: CapacityId.swapUnit, units: [new Unit({})] } as SwapUnit,
     auraBonus: { id: CapacityId.auraBonus } as AuraBonus,
     movementSpeedAndAttackSpeedAuraBonus: { id: CapacityId.movementSpeedAndAttackSpeedAuraBonus } as MovementSpeedAndAttackSpeedAuraBonus,
+    monaspaGroupBonus: { id: CapacityId.monaspaGroupBonus },
 }
 
 export interface Capacity {

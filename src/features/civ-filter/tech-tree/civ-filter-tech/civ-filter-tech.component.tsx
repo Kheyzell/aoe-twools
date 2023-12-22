@@ -44,7 +44,7 @@ const CivFilterTechComponent: React.FC<Props> = (props) => {
   return (
     <div className="CivFilterTech">
       <TechComponent tech={props.tech} size={size} isSelected={isSelected} isUnavailable={isUnavailable}
-        classes={[isInSelectedCivTree1Class, isInSelectedCivTree2Class]} showTooltip={showTooltip} isTooltipInteractive={isTooltipInteractive} showTooltipDetails={true}
+        classes={[isInSelectedCivTree1Class, isInSelectedCivTree2Class]} showTooltip={showTooltip} isTooltipInteractive={isTooltipInteractive} shouldShowTooltipDetails={true}
         onClick={onTechClick}></TechComponent>
     </div>
   )

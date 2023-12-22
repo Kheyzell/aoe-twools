@@ -25,59 +25,69 @@ type Props = {
   classes?: string[]
   imageSrc?: string
   showTooltip?: boolean
-  showTooltipDetails?: boolean
+  shouldShowTooltipDetails?: boolean
   isTooltipInteractive?: boolean
   onClick?(tech: Tech): void
   onRightClick?(tech: Tech): void
 }
 
-const TechComponent: React.FC<Props> = (props) => {
+const TechComponent: React.FC<Props> = ({
+  tech,
+  size = BoxSize.normal,
+  isSelected,
+  isUnavailable,
+  classes,
+  imageSrc,
+  showTooltip,
+  shouldShowTooltipDetails = false,
+  isTooltipInteractive = size !== BoxSize.mini,
+  onClick,
+  onRightClick,
+}) => {
   const { t } = useTranslation()
 
-  const uniqueTech = props.tech.type === TechType.upgrade && props.tech.unique
-  const size = props.size || BoxSize.normal
-  
-  let imageId = props.tech.id
+  const uniqueTech = tech.type === TechType.upgrade && tech.unique
+
+  let imageId = tech.id
   if (uniqueTech) {
-    if (props.tech.age === 3) {
+    if (tech.age === 3) {
       imageId = castleUpgrades.castleUniqueTech.id
     }
-    if (props.tech.age === 4) {
+    if (tech.age === 4) {
       imageId = castleUpgrades.imperialUniqueTech.id
     }
   }
 
   const onTechClick = () => {
-    if (props.onClick) {
-      props.onClick(props.tech)
+    if (onClick) {
+      onClick(tech)
     }
   }
-  
+
   const onTechRightClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (props.onRightClick) {
+    if (onRightClick) {
       e.preventDefault()
-      props.onRightClick(props.tech)
+      onRightClick(tech)
     }
   }
 
   const imgSrc = './' + process.env.PUBLIC_URL + '/images/techs/' + imageId + '.png'
 
-  const techClass = props.tech.type === TechType.unit ? 'UnitTech' : 'UpgradeTech'
+  const techClass = tech.type === TechType.unit ? 'UnitTech' : 'UpgradeTech'
   const sizeClass = size === BoxSize.normal ? 'Normal' : size === BoxSize.small ? 'Small' : size === BoxSize.mini ? 'Mini' : ''
-  const selectedClass = props.isSelected ? 'Selected' : ''
-  const translationKey = `${(props.tech.type === TechType.unit ? 'unit' : props.tech.type === TechType.upgrade ? 'upgrade' : 'unique')}.${props.tech.id}`
-  const unavailableClass = props.isUnavailable ? 'Unavailable' : ''
-  const uniqueClass = props.tech.unique ? 'Unique' : ''
+  const selectedClass = isSelected ? 'Selected' : ''
+  const translationKey = `${(tech.type === TechType.unit ? 'unit' : tech.type === TechType.upgrade ? 'upgrade' : 'unique')}.${tech.id}`
+  const unavailableClass = isUnavailable ? 'Unavailable' : ''
+  const uniqueClass = tech.unique ? 'Unique' : ''
 
-  const addedClasses = props.classes?.reduce((addedClasses: string, c: string) => addedClasses + ' ' + c, '') || ''
+  const addedClasses = classes?.reduce((addedClasses: string, c: string) => addedClasses + ' ' + c, '') || ''
 
   const isMini = size === BoxSize.mini
-  const showTooltipDetails = !!props.showTooltipDetails && (isUpgrade(props.tech) || (isUnit(props.tech) && !!props.tech.stats))
+  const showTooltipDetails = !!shouldShowTooltipDetails && (isUpgrade(tech) || (isUnit(tech) && !!tech.stats))
 
-  const tooltipContent = props.showTooltip && (props.tech.type === TechType.upgrade || !!(props.tech as Unit).stats.health) ? (isMini ?
-                          (props.tech.type === TechType.unit ? <div className="TooltipName"> {t(`${translationKey}.name`)} </div> : <UpgradePanel upgrade={props.tech as Upgrade} showDetails={showTooltipDetails} />) :
-                          (props.tech.type === TechType.unit ? (<UnitPanel unit={props.tech as Unit} />) : (<UpgradePanel upgrade={props.tech as Upgrade} showDetails={showTooltipDetails} />))) : ''
-  const isTooltipInteractive = props.isTooltipInteractive !== undefined ? props.isTooltipInteractive : size !== BoxSize.mini
+  const tooltipContent = showTooltip && (tech.type === TechType.upgrade || !!(tech as Unit).stats.health) ? (isMini ?
+    (tech.type === TechType.unit ? <div className="TooltipName"> {t(`${translationKey}.name`)} </div> : <UpgradePanel upgrade={tech as Upgrade} shouldShowDetails={shouldShowTooltipDetails} />) :
+    (tech.type === TechType.unit ? (<UnitPanel unit={tech as Unit} />) : (<UpgradePanel upgrade={tech as Upgrade} shouldShowDetails={shouldShowTooltipDetails} />))) : ''
 
   return (
     <WideTooltip title={tooltipContent} interactive={isTooltipInteractive} arrow placement={showTooltipDetails ? 'right' : 'bottom'}>
@@ -86,7 +96,7 @@ const TechComponent: React.FC<Props> = (props) => {
         onClick={onTechClick} onContextMenu={e => onTechRightClick(e)}>
         <div className="Gray-Overlay"></div>
         <span className="Name"> {t(`${translationKey}.name`)} </span>
-        <img src={props.imageSrc ? props.imageSrc : imgSrc} alt="Tech" />
+        <img src={imageSrc ? imageSrc : imgSrc} alt="Tech" />
       </div>
     </WideTooltip>
   )
