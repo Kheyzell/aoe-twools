@@ -10,6 +10,7 @@ import { Bonus } from "../../models/bonus.model"
 import { stopEventPropagation } from "../../utils/utils"
 import BonusLine from "../bonus/bonus-line/bonus-line.component"
 import { Unit } from "../../models/unit.model"
+import { wikiBaseUrl } from "../../constants/global.const"
 
 
 type Props = {
@@ -62,7 +63,6 @@ const CivPanel: React.FC<Props> = (props) => {
     const bonuses = props.civ.bonuses
     const uniqueTechs = props.civ.uniqueTechs
 
-    const wikiBaseUrl = 'https://ageofempires.fandom.com/wiki'
     const wikiUrl = `${wikiBaseUrl}/${props.civ.wikiUrl}/Tree`
 
     const openWiki = () => {

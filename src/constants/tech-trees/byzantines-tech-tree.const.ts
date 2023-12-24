@@ -1,6 +1,6 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { CAPACITIES, CapacityId, ChargedAttackCapacity, HealingCapacity } from "../../models/capacity.model";
-import { UnitType, EffectOrder, CivTechTree, UnitLine, UpgradePerAgeGroup, ArmorType } from "../../models/techs.model";
+import { CAPACITIES, CapacityId, HealingCapacity } from "../../models/capacity.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/byzantines.png';
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";

@@ -1,5 +1,11 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
+import { CAPACITIES } from "../../models/capacity.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { AttackType, Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/bohemians.png';
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
+import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 import { castleUnits, castleUpgrades } from "../techs/castle-techs.const";
@@ -13,12 +19,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/bohemians.png'
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
-import { UnitType, EffectOrder, CivTechTree, ArmorType, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
-import { AttackType, Unit } from "../../models/unit.model";
-import { CAPACITIES } from "../../models/capacity.model";
 
 export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit, houfnice: Unit } = {
     hussiteWagon: new Unit({

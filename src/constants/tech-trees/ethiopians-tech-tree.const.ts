@@ -1,4 +1,9 @@
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { AttackType, Unit } from "../../models/unit.model";
+import { Upgrade } from "../../models/upgrade.model";
+import crest from '../../resources/images/crests/ethiopians.png';
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -13,12 +18,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/ethiopians.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { AttackType, Unit } from "../../models/unit.model";
-import { multiplyNumber } from "../../utils/utils";
-import { Upgrade } from "../../models/upgrade.model";
 
 export const ethiopiansUniqueUnits: { shotelWarrior: Unit, eliteShotelWarrior: Unit } = {
     shotelWarrior: new Unit({
@@ -100,11 +99,11 @@ const uniqueTechs = [
         cost: { wood: 0, food: 300, gold: 300, stone: 0 },
         effects: [{
             order: EffectOrder.last,
-            apply: (_: Unit, __: Upgrade[], targetedUnit: Unit) => {
-                const isEnemyCalvalry = targetedUnit.stats.armorComponents.some(armor => armor.type === ArmorType.cavalry)
+            apply: (_, __, targetedUnit) => {
+                const isEnemyCalvalry = targetedUnit?.stats.armorComponents.some(armor => armor.type === ArmorType.cavalry)
                 if (isEnemyCalvalry) {
-                    targetedUnit.addAttackComponent(-3, ArmorType.melee)
-                    targetedUnit.addAttackComponent(-3, ArmorType.pierce)
+                    targetedUnit?.addAttackComponent(-3, ArmorType.melee)
+                    targetedUnit?.addAttackComponent(-3, ArmorType.pierce)
                 }
             }
         }],

@@ -3,7 +3,7 @@ import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeG
 import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/celts.png';
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { multiplyNumber, roundHundredth } from "../../utils/utils";
+import { multiplyNumber } from "../../utils/utils";
 import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";

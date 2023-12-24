@@ -1,7 +1,8 @@
 import React from "react"
 import { Trans, useTranslation } from "react-i18next"
 
-import { allCivTechTrees, siciliansTechTree } from "../../constants"
+import { allCivTechTrees } from "../../constants"
+import { wikiBaseUrl } from "../../constants/global.const"
 import { CostStat } from "../../features/unit-calculator/stats-lines/static-stats-lines"
 import UnitCalculatorUnitComponent from "../../features/unit-calculator/unit-calculator-tech/unit-calculator-unit.component"
 import { Bonus, UniqueTech } from "../../models/bonus.model"
@@ -14,7 +15,6 @@ import BonusLine from "../bonus/bonus-line/bonus-line.component"
 import TechComponent, { BoxSize } from "../tech/tech.component"
 
 import './unit-panel.component.css'
-import { Capacity } from '../../models/capacity.model';
 
 
 type Props = {
@@ -27,7 +27,6 @@ const UnitPanel: React.FC<Props> = (props) => {
 
     const translationKey = `${(props.unit.type === TechType.unit ? 'unit' : props.unit.type === TechType.upgrade ? 'upgrade' : 'unique')}.${props.unit.id}`
 
-    const wikiBaseUrl = 'https://ageofempires.fandom.com/wiki'
     const wikiUrl = props.unit.wikiUrl ? `${wikiBaseUrl}/${props.unit.wikiUrl}` : ''
 
     const affectingUpgrades = props.unit.affectingUpgrades || []

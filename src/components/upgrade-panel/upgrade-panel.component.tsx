@@ -3,15 +3,15 @@ import { useTranslation } from "react-i18next"
 
 import { allCivTechTrees } from "../../constants"
 import { fullTechTree } from "../../constants/tech-trees/_full-tech-tree.const"
+import { CostStat } from "../../features/unit-calculator/stats-lines/static-stats-lines"
 import { UniqueTech } from "../../models/bonus.model"
+import { CostCompared } from "../../models/stats-calculation.model"
 import { TechType } from "../../models/techs.model"
+import { Unit } from "../../models/unit.model"
+import { Upgrade } from "../../models/upgrade.model"
 import { getAllCivUniqueUnits, getAllCivUnits } from "../../utils/techs.utils"
 import { stopEventPropagation } from "../../utils/utils"
 import TechComponent, { BoxSize } from "../tech/tech.component"
-import { Unit } from "../../models/unit.model"
-import { Upgrade } from "../../models/upgrade.model"
-import { CostStat } from "../../features/unit-calculator/stats-lines/static-stats-lines"
-import { CostCompared } from "../../models/stats-calculation.model"
 
 import woodenBackground from "../../resources/images/backgrounds/parchment2.jpg"
 
@@ -28,8 +28,6 @@ const UpgradePanel: React.FC<Props> = ({ upgrade, shouldShowDetails }) => {
     const panelRef = React.createRef<HTMLDivElement>();
 
     const translationKey = `${(upgrade.type === TechType.unit ? 'unit' : upgrade.type === TechType.upgrade ? 'upgrade' : 'unique')}.${upgrade.id}`
-
-    const wikiBaseUrl = 'https://ageofempires.fandom.com/wiki'
 
     const isUniqueTech = !!upgrade.unique
 
