@@ -44,10 +44,10 @@ export const georgiansUniqueUnits: { monaspa: Unit, eliteMonaspa: Unit } = {
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
+            capacities: [CAPACITIES.monaspaGroupBonus],
             movementSpeed: 1.4,
             lineOfSight: 4
         },
-        capacities: [CAPACITIES.monaspaGroupBonus],
         duration: 11
     }),
     eliteMonaspa: new Unit({
@@ -74,10 +74,10 @@ export const georgiansUniqueUnits: { monaspa: Unit, eliteMonaspa: Unit } = {
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
+            capacities: [CAPACITIES.monaspaGroupBonus],
             movementSpeed: 1.4,
             lineOfSight: 5
         },
-        capacities: [CAPACITIES.monaspaGroupBonus],
         duration: 11
     }),
 }
@@ -223,6 +223,7 @@ export const georgiansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.redemption,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,

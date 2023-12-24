@@ -1,3 +1,4 @@
+import { fullTechTree } from "../constants/tech-trees/_full-tech-tree.const";
 import { CivTechTree, Cost, Effect, TechType } from "./techs.model";
 import { Unit } from "./unit.model";
 import { Upgrade } from "./upgrade.model";
@@ -59,26 +60,24 @@ export class UniqueTech implements Bonus, Upgrade {
     duration: number
     type: TechType
     unique?: boolean
-    description: string
     effectType: EffectType
-    value: number | { age1?: number, age2?: number, age3?: number, age4?: number } | null
+    value: number | { [key: string]: number } | null
     affectedUnits: Unit[]
     affectedUpgrades: Upgrade[]
 
-    constructor(data: any) {
+    constructor(data: Partial<UniqueTech>) {
         this.type = TechType.upgrade
-        this.id = data.id
-        this.wikiUrl = data.wikiUrl
-        this.civ = data.civId
-        this.age = data.age
-        this.cost = data.cost
+        this.id = data.id ?? ""
+        this.wikiUrl = data.wikiUrl ?? ""
+        this.civ = data.civ ?? fullTechTree
+        this.age = data.age ?? 3
+        this.cost = data.cost ?? { wood: 0, food: 0, gold: 0, stone: 0 }
         this.effects = data.effects
-        this.duration = data.duration
+        this.duration = data.duration ?? 0
         this.unique = true
-        this.description = data.description
-        this.effectType = data.effectType
-        this.value = data.value
-        this.affectedUnits = data.affectedUnits
-        this.affectedUpgrades = data.affectedUpgrades
+        this.effectType = data.effectType ?? EffectType.miscallenous
+        this.value = data.value ?? null
+        this.affectedUnits = data.affectedUnits ?? []
+        this.affectedUpgrades = data.affectedUpgrades ?? []
     }
 }

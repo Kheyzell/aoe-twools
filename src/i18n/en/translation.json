@@ -256,7 +256,7 @@
                     "description": "Start game with three extra Villagers, but with -200 food and -50 wood"
                 },
                 "chinese2": {
-                    "description": "Town Centers support ten population and have +5 LOS"
+                    "description": "Town Centers support {{value.populationSpace}} population and have +{{value.lineOfSight}} line of sight"
                 },
                 "chinese3": {
                     "description": "Technologies are 10%/15%/20% cheaper in the Feudal/Castle/Imperial Age"
@@ -502,7 +502,7 @@
                     "description": "Infantry attack 33% faster starting in the Feudal Age"
                 },
                 "japanese4": {
-                    "description": "Cavalry Archers +{{value}} attack vs. Archers"
+                    "description": "Cavalry Archers +{{value}} attack vs. Archers (except Skirmishers)"
                 },
                 "japanese5": {
                     "description": "Galleys have +50% Line of Sight"
@@ -670,15 +670,12 @@
                     "description": "Town Centers and Docks have double HP and work {{value.age1}}%/{{value.age2}}%/{{value.age3}}%/{{value.age4}}% faster in the Dark/Feudal/Castle/Imperial Age"
                 },
                 "persians3": {
-                    "description": "Cavalry generate {{value}} gold when killing enemy military units"
-                },
-                "persians4": {
                     "description": "Parthian Tactics available in Castle Age"
                 },
-                "persians5": {
+                "persians4": {
                     "description": "Can build Caravanserai in Imperial Age"
                 },
-                "persians6": {
+                "persians5": {
                     "description": "Knights have +2 attack against archers"
                 }
             }

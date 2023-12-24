@@ -355,6 +355,7 @@ export const vikingsTechTree: CivTechTree = {
         unitLines: [new UnitLine([monasteryUnits.monk])],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,

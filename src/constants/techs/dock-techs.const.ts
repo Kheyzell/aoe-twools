@@ -1,9 +1,9 @@
-import { Unit, AttackType } from './../../models/unit.model'
+import { BlastAttackCapacity, CAPACITIES } from '../../models/capacity.model';
 import { ArmorType, EffectOrder, UnitType } from "../../models/techs.model";
-import { CAPACITIES } from '../../models/capacity.model';
 import { Upgrade } from '../../models/upgrade.model';
 import { chainTechs } from "../../utils/techs.utils";
 import { multiplyNumber } from "../../utils/utils";
+import { AttackType, Unit } from './../../models/unit.model';
 
 interface DockUnits {
     fishingShip: Unit
@@ -425,7 +425,7 @@ export const dockUnits: DockUnits = {
                 { value: 0, type: ArmorType.ship },
                 { value: 0, type: ArmorType.gunpowderUnit },
             ],
-            capacities: [{ ...CAPACITIES.blastAttack, blastRadius: .25 }],
+            capacities: [{ ...CAPACITIES.blastAttack, blastRadius: .25 } as BlastAttackCapacity],
             movementSpeed: 1.1,
             lineOfSight: 15
         },
@@ -459,7 +459,7 @@ export const dockUnits: DockUnits = {
                 { value: 0, type: ArmorType.ship },
                 { value: 0, type: ArmorType.gunpowderUnit },
             ],
-            capacities: [{ ...CAPACITIES.blastAttack, blastRadius: .3 }],
+            capacities: [{ ...CAPACITIES.blastAttack, blastRadius: .3 } as BlastAttackCapacity],
             movementSpeed: 1.1,
             lineOfSight: 17
         },
@@ -483,20 +483,33 @@ export const dockUnits: DockUnits = {
             accuracy: 1,
             rateOfFire: 8,
             attackComponents: [
-                { value: 50, type: ArmorType.melee },
-                { value: 135, type: ArmorType.building },
-                { value: 30, type: ArmorType.siegeWeapon },
+                { value: 8, type: ArmorType.melee },
+                { value: 34, type: ArmorType.building },
+                { value: 2, type: ArmorType.siegeWeapon },
+                { value: 9, type: ArmorType.castle },
+                { value: 15, type: ArmorType.wallAndGate },
             ],
+            secondaryAttack: {
+                accuracy: 1,
+                count: 4,
+                components: [
+                    { value: 8, type: ArmorType.melee },
+                    { value: 34, type: ArmorType.building },
+                    { value: 2, type: ArmorType.siegeWeapon },
+                    { value: 9, type: ArmorType.castle },
+                    { value: 15, type: ArmorType.wallAndGate },
+                ],
+            },
             armorComponents: [
                 { value: 1, type: ArmorType.melee },
                 { value: 6, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.ship },
             ],
-            capacities: [{ ...CAPACITIES.blastAttack, blastRadius: .8 }],
+            capacities: [{ ...CAPACITIES.blastAttack, blastRadius: .8 } as BlastAttackCapacity],
             movementSpeed: 1.2,
             lineOfSight: 14
         },
-        duration: 50
+        duration: 65
     }),
 }
 
@@ -512,7 +525,6 @@ export const dockUpgrades: DockUpgrades = {
         id: 'gillnets',
         wikiUrl: 'Gillnets',
         age: 3,
-        unitType: UnitType.military,
         cost: {
             wood: 200,
             food: 150,
@@ -525,7 +537,6 @@ export const dockUpgrades: DockUpgrades = {
         id: 'careening',
         wikiUrl: 'Careening',
         age: 3,
-        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 250,
@@ -544,7 +555,6 @@ export const dockUpgrades: DockUpgrades = {
         id: 'shipwright',
         wikiUrl: 'Shipwright',
         age: 4,
-        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 1000,
@@ -564,7 +574,6 @@ export const dockUpgrades: DockUpgrades = {
         id: 'dryDock',
         wikiUrl: 'DryDock',
         age: 4,
-        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 600,

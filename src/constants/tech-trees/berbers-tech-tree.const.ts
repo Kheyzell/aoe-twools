@@ -119,7 +119,8 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
                 { value: 0, type: ArmorType.archer },
                 { value: 1, type: ArmorType.cavalryArcher },
                 { value: 0, type: ArmorType.cavalry },
-                { value: 0, type: ArmorType.uniqueUnit }
+                { value: 0, type: ArmorType.skirmisher },
+                { value: 0, type: ArmorType.uniqueUnit },
             ],
             movementSpeed: 1.35,
             lineOfSight: 5,
@@ -155,7 +156,8 @@ export const berbersUniqueUnits: { camelArcher: Unit, eliteCamelArcher: Unit, ge
                 { value: 0, type: ArmorType.archer },
                 { value: 1, type: ArmorType.cavalryArcher },
                 { value: 0, type: ArmorType.cavalry },
-                { value: 0, type: ArmorType.uniqueUnit }
+                { value: 0, type: ArmorType.skirmisher },
+                { value: 0, type: ArmorType.uniqueUnit },
             ],
             movementSpeed: 1.35,
             lineOfSight: 6,
@@ -192,7 +194,6 @@ const uniqueTechs = [
         duration: 40,
         affectedUnits: [berbersUniqueUnits.camelArcher, berbersUniqueUnits.eliteCamelArcher, castleUnits.petard, castleUnits.trebuchet],
         affectedUpgrades: [castleUpgrades.castleUniqueTech, castleUpgrades.imperialUniqueTech, castleUpgrades.hoardings, castleUpgrades.conscription, castleUpgrades.spies],
-        team: true
     }),
     new UniqueTech({
         id: 'maghrebiCamels',
@@ -349,6 +350,7 @@ export const berbersTechTree: CivTechTree = {
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,

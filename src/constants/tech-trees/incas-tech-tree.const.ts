@@ -1,7 +1,6 @@
-import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { Bonus, EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
-import { AttackType, Unit } from "../../models/unit.model";
-import { Upgrade } from "../../models/upgrade.model";
+import { AttackType, ResourceType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/incas.png';
 import { chainTechs, getAllCivMilitaryUnits, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
 import { addElementIfNotInArray } from "../../utils/utils";
@@ -27,7 +26,7 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 65,
+            food: 60,
             gold: 30,
             stone: 0
         },
@@ -61,7 +60,7 @@ export const incasUniqueUnits: { kamayuk: Unit, eliteKamayuk: Unit, slinger: Uni
         unitType: UnitType.military,
         cost: {
             wood: 0,
-            food: 65,
+            food: 60,
             gold: 30,
             stone: 0
         },
@@ -131,7 +130,7 @@ setAffectingUpgrades(uniqueUnitLine, [blacksmithUpgrades.forging, blacksmithUpgr
     blacksmithUpgrades.scaleMailArmor, blacksmithUpgrades.chainMailArmor, blacksmithUpgrades.plateMailArmor,
     barracksUpgrade.squires, barracksUpgrade.arson])
 const slingerLine = new UnitLine([incasUniqueUnits.slinger])
-setAffectingUpgrades(slingerLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer, 
+setAffectingUpgrades(slingerLine, [blacksmithUpgrades.fletching, blacksmithUpgrades.bodkinArrow, blacksmithUpgrades.bracer,
     blacksmithUpgrades.paddedArcherArmor, blacksmithUpgrades.leatherArcherArmor, blacksmithUpgrades.ringArcherArmor,
     archeryUpgrades.thumbRing,
     universityUpgrades.ballistics, universityUpgrades.chemistry])
@@ -231,6 +230,7 @@ export const incasTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.redemption,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.faith,
@@ -319,7 +319,7 @@ export const incasTechTree: CivTechTree = {
     }
 }
 
-const bonuses = [
+const bonuses: Bonus[] = [
     {
         id: 'incas1',
         effectType: EffectType.miscallenous,
@@ -358,7 +358,27 @@ const bonuses = [
     {
         id: 'incas4',
         effectType: EffectType.discoutFood,
-        value: { age1: 15, age2: 20, age3: 25, age4: 30 },
+        value: { age1: 10, age2: 15, age3: 20, age4: 25 },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit, upgrades) => {
+                addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.feudalAge)
+                addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
+                addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
+
+                if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
+                    unit.decreaseCost({ percent: 25, resource: ResourceType.food })
+                } else
+                if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
+                    unit.decreaseCost({ percent: 20, resource: ResourceType.food })
+                } else
+                if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
+                    unit.decreaseCost({ percent: 15, resource: ResourceType.food })
+                } else {
+                    unit.decreaseCost({ percent: 10, resource: ResourceType.food })
+                }
+            }
+        }],
         affectedUnits: getAllCivMilitaryUnits(incasTechTree),
         affectedUpgrades: []
     },

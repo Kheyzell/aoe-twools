@@ -1,4 +1,9 @@
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { AttackType, Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/huns.png';
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, addNumber, multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -13,11 +18,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/huns.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
-import { AttackType, Unit } from "../../models/unit.model";
 
 export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
     tarkan: new Unit({
@@ -48,7 +48,7 @@ export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
-            movementSpeed: 1.35,
+            movementSpeed: 1.4,
             lineOfSight: 5
         },
         duration: 14
@@ -81,7 +81,7 @@ export const hunsUniqueUnits: { tarkan: Unit, eliteTarkan: Unit } = {
                 { value: 0, type: ArmorType.cavalry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
-            movementSpeed: 1.35,
+            movementSpeed: 1.4,
             lineOfSight: 7
         },
         duration: 14
@@ -235,6 +235,7 @@ export const hunsTechTree: CivTechTree = {
         unitLines: [new UnitLine([monasteryUnits.monk])],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,

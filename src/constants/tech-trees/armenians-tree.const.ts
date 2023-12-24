@@ -141,7 +141,7 @@ const uniqueTechs = [
         id: 'cilicianFleet',
         age: 3,
         effectType: EffectType.miscallenous,
-        value: { blastRadiusPercent: 33, galleyRange: 1 },
+        value: { blastRadiusPercent: 20, galleyRange: 1 },
         cost: { wood: 350, food: 0, gold: 300, stone: 0 },
         effects: [{
             order: EffectOrder.first,
@@ -248,6 +248,7 @@ export const armeniansTechTree: CivTechTree = {
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,
@@ -379,14 +380,25 @@ const bonuses: Bonus[] = [
         effects: [{
             order: EffectOrder.first,
             apply: unit => {
-                unit.stats.secondaryAttack = {
-                    count: 1,
-                    accuracy: 1,
-                    components: [{ value: 1, type: ArmorType.pierce }]
+                const isGalley = unit.id === dockUnits.galley.id || unit.id === dockUnits.warGalley.id || unit.id === dockUnits.galleon.id
+                if (isGalley) {
+                    unit.stats.secondaryAttack = {
+                        count: 1,
+                        accuracy: 1,
+                        components: [{ value: 1, type: ArmorType.pierce }]
+                    }
+                }
+
+                const isDromon = unit.id === dockUnits.dromon.id
+                if (isDromon) {
+                    unit.stats.secondaryAttack!.count++ 
                 }
             }
         }],
-        affectedUnits: [dockUnits.galley, dockUnits.warGalley, dockUnits.galleon],
+        affectedUnits: [
+            dockUnits.galley, dockUnits.warGalley, dockUnits.galleon,
+            dockUnits.dromon,
+        ],
         affectedUpgrades: [],
     },
     {

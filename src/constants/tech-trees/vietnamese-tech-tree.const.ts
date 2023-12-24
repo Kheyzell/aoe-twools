@@ -1,5 +1,9 @@
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/vietnamese.png';
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -14,11 +18,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/vietnamese.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setAffectingUpgrades } from "../../utils/techs.utils";
-import { setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { multiplyNumber } from "../../utils/utils";
 
 export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Unit, imperialSkirmisher: Unit } = {
     rattanArcher: new Unit({
@@ -112,7 +111,8 @@ export const vietnameseUniqueUnits: { rattanArcher: Unit, eliteRattanArcher: Uni
                 { value: 0, type: ArmorType.melee },
                 { value: 5, type: ArmorType.pierce },
                 { value: 0, type: ArmorType.archer },
-                { value: 0, type: ArmorType.uniqueUnit }
+                { value: 0, type: ArmorType.skirmisher },
+                { value: 0, type: ArmorType.uniqueUnit },
             ],
             movementSpeed: .96,
             lineOfSight: 7,
@@ -276,6 +276,7 @@ export const vietnameseTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.faith,
             monasteryUpgrade.illumination,
