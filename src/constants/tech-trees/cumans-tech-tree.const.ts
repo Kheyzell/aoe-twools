@@ -264,6 +264,7 @@ export const cumansTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,

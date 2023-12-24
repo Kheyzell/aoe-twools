@@ -13,14 +13,14 @@ export class Upgrade implements Tech {
     nextLineTech?: Tech
     isSelected?: boolean
 
-    constructor(data: any) {
+    constructor(data: Partial<Upgrade>) {
         this.type = TechType.upgrade
-        this.id = data.id
-        this.wikiUrl = data.wikiUrl
-        this.age = data.age
-        this.cost = data.cost
+        this.id = data.id ?? ""
+        this.wikiUrl = data.wikiUrl ?? ""
+        this.age = data.age ?? 1
+        this.cost = data.cost ?? { wood: 0, food: 0, gold: 0, stone: 0 }
         this.effects = data.effects
-        this.duration = data.duration
+        this.duration = data.duration ?? 0
         this.previousLineTech = data.previousLineTech
         this.nextLineTech = data.nextLineTech
     }

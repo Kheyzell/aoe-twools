@@ -1,6 +1,10 @@
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { CAPACITIES } from "../../models/capacity.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
-import { CAPACITIES } from "../../models/capacity.model";
+import crest from '../../resources/images/crests/portuguese.png';
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addNumber, multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -15,10 +19,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/portuguese.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { multiplyNumber, addNumber } from "../../utils/utils";
 
 export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, caravel: Unit, eliteCaravel: Unit } = {
     organGun: new Unit({
@@ -39,9 +39,10 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
             range: 7,
             accuracy: .5,
             attackComponents: [
-                { value: 7, type: ArmorType.pierce },
+                { value: 6, type: ArmorType.pierce },
                 { value: 1, type: ArmorType.ram },
-                { value: 1, type: ArmorType.infantry },
+                { value: 2, type: ArmorType.infantry },
+                { value: 2, type: ArmorType.skirmisher },
                 { value: 1, type: ArmorType.building },
             ],
             secondaryAttack: {
@@ -79,9 +80,10 @@ export const portugeseUniqueUnits: { organGun: Unit, eliteOrganGun: Unit, carave
             range: 7,
             accuracy: .5,
             attackComponents: [
-                { value: 9, type: ArmorType.pierce },
+                { value: 8, type: ArmorType.pierce },
                 { value: 1, type: ArmorType.ram },
-                { value: 1, type: ArmorType.infantry },
+                { value: 2, type: ArmorType.infantry },
+                { value: 2, type: ArmorType.skirmisher },
                 { value: 1, type: ArmorType.building },
             ],
             secondaryAttack: {
@@ -380,6 +382,7 @@ export const portugueseTechTree: CivTechTree = {
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,

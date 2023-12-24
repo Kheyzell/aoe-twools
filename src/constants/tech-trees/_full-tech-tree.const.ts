@@ -81,6 +81,7 @@ export const fullTechTree: CivTechTree = {
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,

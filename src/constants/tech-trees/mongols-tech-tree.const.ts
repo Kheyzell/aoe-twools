@@ -239,6 +239,7 @@ export const mongolsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,

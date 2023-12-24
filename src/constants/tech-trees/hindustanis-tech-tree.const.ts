@@ -1,4 +1,10 @@
+import { EffectType, UniqueTech } from "../../models/bonus.model";
+import { CAPACITIES } from "../../models/capacity.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
+import { AttackType, ResourceType, Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/hindustanis.png';
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -13,12 +19,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/hindustanis.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
-import { AttackType, Unit } from "../../models/unit.model";
-import { CAPACITIES } from "../../models/capacity.model";
 
 export const hindustanisUniqueUnits: { ghulam: Unit, eliteGhulam: Unit, imperialCamelRider: Unit } = {
     ghulam: new Unit({
@@ -172,7 +172,7 @@ export const hindustanisTechTree: CivTechTree = {
         {
             id: 'hindustanis1',
             effectType: EffectType.discount,
-            value: { age1: 5, age2: 10, age3: 15, age4: 20 },
+            value: { age1: 8, age2: 13, age3: 18, age4: 23 },
             effects: [{
                 order: EffectOrder.last,
                 apply: (unit, upgrades) => {
@@ -180,27 +180,15 @@ export const hindustanisTechTree: CivTechTree = {
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.castleAge)
                     addElementIfNotInArray(unit.affectingUpgrades, townCenterUpgrade.imperialAge)
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.imperialAge.id)) {
-                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.20))
-                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.20))
-                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.20))
-                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.20))
+                        unit.decreaseCost({ percent: 23, resource: ResourceType.all })
                     } else
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.castleAge.id)) {
-                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.15))
-                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.15))
-                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.15))
-                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.15))
+                        unit.decreaseCost({ percent: 18, resource: ResourceType.all })
                     } else
                     if (upgrades?.some(upgrade => upgrade.id === townCenterUpgrade.feudalAge.id)) {
-                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.10))
-                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.10))
-                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.10))
-                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.10))
+                        unit.decreaseCost({ percent: 13, resource: ResourceType.all })
                     } else {
-                        unit.cost.wood = multiplyNumber(unit.cost.wood, addNumber(1, -.5))
-                        unit.cost.food = multiplyNumber(unit.cost.food, addNumber(1, -.5))
-                        unit.cost.gold = multiplyNumber(unit.cost.gold, addNumber(1, -.5))
-                        unit.cost.stone = multiplyNumber(unit.cost.stone, addNumber(1, -.5))
+                        unit.decreaseCost({ percent: 8, resource: ResourceType.all })
                     }
                 }
             }],
@@ -314,6 +302,7 @@ export const hindustanisTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.redemption,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,

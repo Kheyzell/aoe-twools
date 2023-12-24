@@ -141,7 +141,8 @@ export const archeryUnits: ArcheryUnits = {
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
                 { value: 3, type: ArmorType.pierce },
-                { value: 0, type: ArmorType.archer }
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.skirmisher },
             ],
             movementSpeed: .96,
             lineOfSight: 6,
@@ -174,7 +175,8 @@ export const archeryUnits: ArcheryUnits = {
             armorComponents: [
                 { value: 0, type: ArmorType.melee },
                 { value: 4, type: ArmorType.pierce },
-                { value: 0, type: ArmorType.archer }
+                { value: 0, type: ArmorType.archer },
+                { value: 0, type: ArmorType.skirmisher },
             ],
             movementSpeed: .96,
             lineOfSight: 7,
@@ -358,7 +360,6 @@ export const archeryUpgrades: ArcheryUpgrades = {
         id: 'thumbRing',
         wikiUrl: 'ThumbRing_(Age_of_Empires_II)',
         age: 3,
-        unitType: UnitType.military,
         cost: {
             wood: 250,
             food: 300,
@@ -372,7 +373,6 @@ export const archeryUpgrades: ArcheryUpgrades = {
         id: 'parthianTactics',
         wikiUrl: 'ParthianTactics_(Age_of_Empires_II)',
         age: 4,
-        unitType: UnitType.military,
         cost: {
             wood: 0,
             food: 200,

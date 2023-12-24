@@ -33,13 +33,13 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             stone: 0
         },
         stats: {
-            health: 180,
+            health: 160,
             rateOfFire: 3.45,
             attackType: AttackType.projectile,
             range: 6,
             accuracy: .85,
             attackComponents: [
-                { value: 11, type: ArmorType.pierce },
+                { value: 10, type: ArmorType.pierce },
                 { value: 3, type: ArmorType.ram },
                 { value: 1, type: ArmorType.building },
             ],
@@ -64,7 +64,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             movementSpeed: .8,
             lineOfSight: 8,
         },
-        duration: 21
+        duration: 26
     }),
     eliteHussiteWagon: new Unit({
         id: 'eliteHussiteWagon',
@@ -92,9 +92,9 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
                 count: 5,
                 accuracy: .75,
                 components: [
-                    { value: 6, accuracy: .75, type: ArmorType.trueDamage },
-                    { value: 6, accuracy: .73, type: ArmorType.building },
-                    { value: 6, accuracy: .73, type: ArmorType.ram },
+                    { value: 6, type: ArmorType.trueDamage },
+                    { value: 6, type: ArmorType.building },
+                    { value: 6, type: ArmorType.ram },
                 ]
             },
             armorComponents: [
@@ -109,7 +109,7 @@ export const bohemiansUniqueUnits: { hussiteWagon: Unit, eliteHussiteWagon: Unit
             movementSpeed: .8,
             lineOfSight: 8,
         },
-        duration: 21
+        duration: 26
     }),
     houfnice: new Unit({
         id: 'houfnice',
@@ -321,6 +321,7 @@ export const bohemiansTechTree: CivTechTree = {
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,

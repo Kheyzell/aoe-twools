@@ -293,6 +293,7 @@ export const gothsTechTree: CivTechTree = {
         unitLines: [new UnitLine([monasteryUnits.monk])],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,

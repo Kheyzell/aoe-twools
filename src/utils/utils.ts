@@ -6,7 +6,6 @@ export const stopEventPropagation = (event: React.MouseEvent<HTMLElement>) => {
 
 const wheelSpeed = 3;
 export const scrollHorizontally = (e: any, scrollRef: React.RefObject<HTMLElement>) => {
-  e.preventDefault();
   if (scrollRef && scrollRef.current) {
     const container = scrollRef.current
     const containerScrollPosition = scrollRef.current.scrollLeft

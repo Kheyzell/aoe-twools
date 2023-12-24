@@ -270,6 +270,7 @@ export const tatarsTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.fervor,
             monasteryUpgrade.illumination,
             monasteryUpgrade.blockPrinting,

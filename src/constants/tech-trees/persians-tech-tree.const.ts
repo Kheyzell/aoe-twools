@@ -1,5 +1,9 @@
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/persians.png';
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -14,10 +18,6 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/persians.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { addElementIfNotInArray, multiplyNumber } from "../../utils/utils";
 
 export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit, savar: Unit } = {
     warElephant: new Unit({
@@ -100,17 +100,18 @@ export const persiansUniqueUnits: { warElephant: Unit, eliteWarElephant: Unit, s
             rateOfFire: 1.8,
             attackType: AttackType.melee,
             attackComponents: [
-                { value: 14, type: ArmorType.melee }
+                { value: 14, type: ArmorType.melee },
+                { value: 2, type: ArmorType.archer },
             ],
             armorComponents: [
                 { value: 3, type: ArmorType.melee },
                 { value: 4, type: ArmorType.pierce },
-                { value: 0, type: ArmorType.cavalry }
+                { value: 0, type: ArmorType.cavalry },
             ],
             movementSpeed: 1.35,
-            lineOfSight: 5
+            lineOfSight: 5,
         },
-        duration: 30
+        duration: 30,
     }),
 }
 
@@ -202,39 +203,24 @@ export const persiansTechTree: CivTechTree = {
         {
             id: 'persians3',
             effectType: EffectType.miscallenous,
-            value: 5,
-            effects: [ /* @TODO generate gold on kill */ ],
-            affectedUnits: [
-                stableUnits.scoutCavalry, stableUnits.lightCavalry, stableUnits.hussar,
-                stableUnits.knight, stableUnits.cavalier, persiansUniqueUnits.savar,
-                stableUnits.camelRider, stableUnits.heavyCamelRider,
-                persiansUniqueUnits.warElephant, persiansUniqueUnits.eliteWarElephant,
-            ],
-            affectedUpgrades: []
-        },
-        {
-            id: 'persians4',
-            effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
             affectedUpgrades: [archeryUpgrades.parthianTactis]
         },
         {
-            id: 'persians5',
+            id: 'persians4',
             effectType: EffectType.miscallenous,
             value: null,
             affectedUnits: [],
             affectedUpgrades: []
         },
         {
-            id: 'persians6',
+            id: 'persians5',
             effectType: EffectType.miscallenous,
             value: 2,
             effects: [{
                 order: EffectOrder.first,
-                apply: (unit, upgrades) => {
-                    unit.addAttackComponent(2, ArmorType.archer)
-                }
+                apply: unit => unit.addAttackComponent(2, ArmorType.archer)
             }],
             affectedUnits: [stableUnits.knight, stableUnits.cavalier, persiansUniqueUnits.savar],
             affectedUpgrades: [],
@@ -298,6 +284,7 @@ export const persiansTechTree: CivTechTree = {
         unitLines: [new UnitLine([monasteryUnits.monk])],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,
             monasteryUpgrade.blockPrinting,

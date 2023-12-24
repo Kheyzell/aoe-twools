@@ -219,6 +219,7 @@ export const slavsTechTree: CivTechTree = {
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,

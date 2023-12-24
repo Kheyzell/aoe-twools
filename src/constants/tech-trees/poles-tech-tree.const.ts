@@ -238,6 +238,7 @@ export const polesTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.redemption,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,

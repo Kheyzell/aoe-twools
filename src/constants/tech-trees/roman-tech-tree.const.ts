@@ -295,6 +295,7 @@ export const romanTechTree: CivTechTree = {
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,
             monasteryUpgrade.illumination,

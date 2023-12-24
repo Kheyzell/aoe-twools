@@ -256,7 +256,7 @@
                     "description": "Commence avec +3 villageois, mais -50 de bois, -200 de nourriture"
                 },
                 "chinese2": {
-                    "description": "Les forums acceptent 10 de population et gagnent +5 en ligne de mire"
+                    "description": "Les forums acceptent {{value.populationSpace}} de population et gagnent +{{value.lineOfSight}} en ligne de mire"
                 },
                 "chinese3": {
                     "description": "Les technologies coûtent -10 % à l'âge féodal, -15 % à l'âge des châteaux, -20 % à l'âge impérial"
@@ -502,7 +502,7 @@
                     "description": "Attaque de l'infanterie 33 % plus rapide à partir de l'âge féodal"
                 },
                 "japanese4": {
-                    "description": "Archers de cavalerie +{{value}} d'attaque contre les archers"
+                    "description": "Archers de cavalerie +{{value}} d'attaque contre les archers (sauf tirailleurs)"
                 },
                 "japanese5": {
                     "description": "Galères +50 % de ligne de mire"
@@ -670,15 +670,12 @@
                     "description": "PV du forum et du port x2, Productivité +{{value.age1}}%/{{value.age2}}%/{{value.age3}}%/{{value.age4}}% à l'âge sombre/féodal/des châteaux/impérial"
                 },
                 "persians3": {
-                    "description": "La Cavalrie génère {{value}} or en tuant des unités militaires ennemies"
-                },
-                "persians4": {
                     "description": "Tactiques parthes disponible à l'âge des châteaux"
                 },
-                "persians5": {
+                "persians4": {
                     "description": "Peut construire des caravansérails à partir de l'âge impérial"
                 },
-                "persians6": {
+                "persians5": {
                     "description": "Attaque des chevaliers +2 contre les archers"
                 }
             }

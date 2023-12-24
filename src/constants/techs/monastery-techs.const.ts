@@ -13,6 +13,7 @@ interface MonasteryUpgrades {
     redemption: Upgrade,
     atonement: Upgrade,
     herbalMedecine: Upgrade,
+    devotion: Upgrade,
     heresy: Upgrade,
     sanctity: Upgrade,
     fervor: Upgrade,
@@ -103,6 +104,25 @@ export const monasteryUpgrade: MonasteryUpgrades = {
         },
         duration: 35
     }),
+    devotion: new Upgrade({
+        id: 'devotion',
+        wikiUrl: 'Devotion',
+        age: 3,
+        cost: {
+            wood: 0,
+            food: 100,
+            gold: 150,
+            stone: 0
+        },
+        effects: [{
+            order: EffectOrder.first,
+            apply: (unit: Unit) => {
+                unit.stats.conversionMinCyclesResistance = unit.stats.conversionMinCyclesResistance + 1
+                unit.stats.conversionMaxCyclesResistance = unit.stats.conversionMaxCyclesResistance + 1
+            }
+        }],
+        duration: 40
+    }),
     heresy: new Upgrade({
         id: 'heresy',
         wikiUrl: 'Heresy',
@@ -163,15 +183,15 @@ export const monasteryUpgrade: MonasteryUpgrades = {
         age: 4,
         cost: {
             wood: 0,
-            food: 750,
-            gold: 1000,
+            food: 550,
+            gold: 750,
             stone: 0
         },
         effects: [{
             order: EffectOrder.first,
             apply: (unit: Unit) => {
-                unit.stats.conversionResistance = (unit.stats.conversionResistance || 0) + 3
-                unit.stats.conversionMinCyclesResistance = unit.stats.conversionMinCyclesResistance + 2
+                unit.stats.conversionResistance = (unit.stats.conversionResistance || 0) + 4
+                unit.stats.conversionMinCyclesResistance = unit.stats.conversionMinCyclesResistance + 4
                 unit.stats.conversionMaxCyclesResistance = unit.stats.conversionMaxCyclesResistance + 4
             }
         }],

@@ -241,6 +241,7 @@ export const franksTechTree: CivTechTree = {
         unitLines: [new UnitLine([monasteryUnits.monk])],
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.heresy,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,

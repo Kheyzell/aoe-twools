@@ -1,1 +1,1 @@
-export const lastUpdateDate = new Date(Date.UTC(2023, 10, 3))
+export const lastUpdateDate = new Date(Date.UTC(2023, 11, 24))

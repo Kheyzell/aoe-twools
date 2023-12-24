@@ -26,7 +26,8 @@ export enum CapacityId {
     projectilePassThrough = "projectilePassThrough",
     auraBonus = "aura",
     movementSpeedAndAttackSpeedAuraBonus = "movementSpeedAndAttackSpeedAuraBonus",
-    monaspaGroupBonus = "monaspaGroupBonus"
+    monaspaGroupBonus = "monaspaGroupBonus",
+    trampleMeleeRatha = "trampleMeleeRatha"
 }
 
 export const CAPACITIES = {
@@ -40,6 +41,7 @@ export const CAPACITIES = {
     ballistics: { id: CapacityId.ballistics },
     trampleDruzhina: { id: CapacityId.trampleDruzhina },
     trampleLogistica: { id: CapacityId.trampleLogistica },
+    trampleMeleeRatha: { id: CapacityId.trampleMeleeRatha, damagePercent: 20 } as TrampleMeleeRatha,
     madrasahRefund: { id: CapacityId.madrasahRefund, percentValue: 33 } as RefundAfterDeathCapacity,
     aztecsMonkHealthBonus: { id: CapacityId.aztecsMonkHealthBonus },
     regen: { id: CapacityId.regen, healthPerMinute: 0 } as RegenCapacity,
@@ -112,6 +114,10 @@ export interface AttackPassThrough extends Capacity {
 
 export interface ProjectilePassThrough extends Capacity {
     width: number
+}
+
+export interface TrampleMeleeRatha extends Capacity {
+    damagePercent: number
 }
 
 export interface SwapUnit extends Capacity {

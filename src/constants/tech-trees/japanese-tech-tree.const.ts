@@ -1,5 +1,9 @@
+import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
+import crest from '../../resources/images/crests/japanese.png';
+import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
+import { multiplyNumber } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
@@ -14,10 +18,8 @@ import { siegeUnits } from "../techs/siege-techs.const";
 import { stableUnits, stableUpgrades } from "../techs/stable-techs.const";
 import { townCenterUnits, townCenterUpgrade } from "../techs/town-center-techs.const";
 import { universityUpgrades } from "../techs/university-techs.const";
-import crest from '../../resources/images/crests/japanese.png'
-import { EffectType, UniqueTech } from "../../models/bonus.model";
-import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { multiplyNumber, roundHundredth } from "../../utils/utils";
+import { berbersUniqueUnits } from "./berbers-tech-tree.const";
+import { vietnameseUniqueUnits } from "./vietnamese-tech-tree.const";
 
 export const japaneseUniqueUnits: { samurai: Unit, eliteSamurai: Unit } = {
     samurai: new Unit({
@@ -176,8 +178,13 @@ export const japaneseTechTree: CivTechTree = {
             value: 2,
             effects: [{
                 order: EffectOrder.first,
-                apply: (unit: Unit) => {
-                    unit.addAttackComponent(2, ArmorType.archer)
+                apply: (unit: Unit, _, targetUnit) => {
+                    const isTargetSkirmisher = targetUnit?.id === archeryUnits.skirmisher.id || targetUnit?.id === archeryUnits.eliteSkirmisher.id
+                        || targetUnit?.id === vietnameseUniqueUnits.imperialSkirmisher.id
+                        || targetUnit?.id === berbersUniqueUnits.genitour.id || targetUnit?.id === berbersUniqueUnits.eliteGenitour.id
+                    if (!isTargetSkirmisher) {
+                        unit.addAttackComponent(2, ArmorType.archer)
+                    }
                 }
             }],
             affectedUnits: [archeryUnits.cavalryArcher, archeryUnits.heavyCavalryArcher],
@@ -255,6 +262,7 @@ export const japaneseTechTree: CivTechTree = {
             monasteryUpgrade.redemption,
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,

@@ -206,6 +206,7 @@ export const chineseTechTree: CivTechTree = {
         upgrades: new UpgradePerAgeGroup([
             monasteryUpgrade.atonement,
             monasteryUpgrade.herbalMedecine,
+            monasteryUpgrade.devotion,
             monasteryUpgrade.sanctity,
             monasteryUpgrade.fervor,
             monasteryUpgrade.faith,
@@ -305,14 +306,14 @@ chineseTechTree.bonuses = [
     {
         id: 'chinese2',
         effectType: EffectType.lineOfSight,
-        value: 5,
+        value: { populationSpace: 15, lineOfSight: 7 },
         affectedUnits: [],
         affectedUpgrades: []
     },
     {
         id: 'chinese3',
         effectType: EffectType.discount,
-        value: { age2: 10, age3: 15, age4: 20 },
+        value: { age2: 5, age3: 10, age4: 15 },
         affectedUnits: [],
         affectedUpgrades: getAllCivUpgrades(chineseTechTree)
     },
