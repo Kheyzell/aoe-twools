@@ -1,11 +1,11 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { CAPACITIES, RegenCapacity } from "../../models/capacity.model";
-import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/vikings.png';
 import { chainTechs, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { addElementIfNotInArray, multiplyNumber, addNumber } from "../../utils/utils";
-import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
+import { addElementIfNotInArray, addNumber, multiplyNumber } from "../../utils/utils";
+import { archeryUnits } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
 import { castleUnits, castleUpgrades } from "../techs/castle-techs.const";
@@ -47,10 +47,10 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
                 { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
+            capacities: [{ ...CAPACITIES.regen, healthPerMinute: 20 } as RegenCapacity],
             movementSpeed: 1.05,
             lineOfSight: 3,
         },
-        capacities: [{ ...CAPACITIES.regen, healthPerMinute: 20 } as RegenCapacity],
         duration: 12
     }),
     eliteBerserk: new Unit({
@@ -79,10 +79,10 @@ export const vikingsUniqueUnits: { berserk: Unit, eliteBerserk: Unit, longboat: 
                 { value: 0, type: ArmorType.infantry },
                 { value: 0, type: ArmorType.uniqueUnit }
             ],
+            capacities: [{ ...CAPACITIES.regen, healthPerMinute: 40 } as RegenCapacity],
             movementSpeed: 1.05,
             lineOfSight: 5,
         },
-        capacities: [{ ...CAPACITIES.regen, healthPerMinute: 40 } as RegenCapacity],
         duration: 14
     }),
     longboat: new Unit({

@@ -3,7 +3,6 @@ import { ArmorType, EffectOrder } from "../../models/techs.model";
 import { Unit } from "../../models/unit.model";
 import { Upgrade } from "../../models/upgrade.model";
 import { chainTechs } from "../../utils/techs.utils";
-import { multiplyNumber } from "../../utils/utils";
 
 interface UniversityUpgrades {
     masonry: Upgrade

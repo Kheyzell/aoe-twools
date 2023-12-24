@@ -9,6 +9,22 @@ type DecreaseCostByPercent = { percent: number } & { resource: ResourceType }
 export enum ResourceType { wood = 'wood', food = 'food', gold = 'gold', stone = 'stone', all = 'all' }
 type DecreaseCostArg = DecreaseCostByValue | DecreaseCostByPercent
 
+export enum AttackType {
+    none = 'None',
+    melee = 'Melee',
+    projectile = 'Projectile'
+}
+
+export interface CombatStat {
+    value: number
+    type: ArmorType
+}
+
+enum ComponentType {
+    attack = "attack",
+    defence = "defence"
+}
+
 export class Unit implements Tech {
     id: string
     wikiUrl: string
@@ -119,19 +135,19 @@ export class Unit implements Tech {
 
     private decreaseCostByPercent(percent: number, resource: ResourceType) {
         switch (true) {
-            case resource == ResourceType.wood:
+            case resource === ResourceType.wood:
                 return this.cost.wood = multiplyNumber(this.cost.wood, addNumber(1, -percent))
 
-            case resource == ResourceType.food:
+            case resource === ResourceType.food:
                 return this.cost.food = multiplyNumber(this.cost.food, addNumber(1, -percent))
 
-            case resource == ResourceType.gold:
+            case resource === ResourceType.gold:
                 return this.cost.gold = multiplyNumber(this.cost.gold, addNumber(1, -percent))
 
-            case resource == ResourceType.stone:
+            case resource === ResourceType.stone:
                 return this.cost.stone = multiplyNumber(this.cost.stone, addNumber(1, -percent))
 
-            case resource == ResourceType.all:
+            case resource === ResourceType.all:
                 this.cost.wood = multiplyNumber(this.cost.wood, addNumber(1, -percent))
                 this.cost.food = multiplyNumber(this.cost.food, addNumber(1, -percent))
                 this.cost.gold = multiplyNumber(this.cost.gold, addNumber(1, -percent))
@@ -141,19 +157,19 @@ export class Unit implements Tech {
 
     private decreaseCostByValue(value: number, resource: ResourceType) {
         switch (true) {
-            case resource == ResourceType.wood:
+            case resource === ResourceType.wood:
                 return this.cost.wood = this.cost.wood - value
 
-            case resource == ResourceType.food:
+            case resource === ResourceType.food:
                 return this.cost.food = this.cost.food - value
 
-            case resource == ResourceType.gold:
+            case resource === ResourceType.gold:
                 return this.cost.gold = this.cost.gold - value
 
-            case resource == ResourceType.stone:
+            case resource === ResourceType.stone:
                 return this.cost.stone = this.cost.stone - value
 
-            case resource == ResourceType.all:
+            case resource === ResourceType.all:
                 this.cost.wood = this.cost.wood - value
                 this.cost.food = this.cost.food - value
                 this.cost.gold = this.cost.gold - value
@@ -171,18 +187,6 @@ const addCombatStat = (unit: Unit, value: number, type: ArmorType, componentType
     } else {
         statComponents.push({ value, type })
     }
-}
-
-
-export enum AttackType {
-    none = 'None',
-    melee = 'Melee',
-    projectile = 'Projectile'
-}
-
-export interface CombatStat {
-    value: number
-    type: ArmorType
 }
 
 type DataUnit = Partial<Omit<Unit, "stats">> & { stats?: Partial<DataStatList> }
@@ -210,11 +214,6 @@ export interface StatList {
     // calculated
     attackRate: number
     continuousProductionVillagerCost: Cost
-}
-
-enum ComponentType {
-    attack = "attack",
-    defence = "defence"
 }
 
 function isDecreaseCostByValue(arg: DecreaseCostArg): arg is DecreaseCostByValue {

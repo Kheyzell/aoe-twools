@@ -1,10 +1,9 @@
 import { EffectType, UniqueTech } from "../../models/bonus.model";
 import { CAPACITIES, CapacityId, ConvertionCapacity } from "../../models/capacity.model";
-import { UnitType, EffectOrder, ArmorType, CivTechTree, UnitLine, UpgradePerAgeGroup } from "../../models/techs.model";
+import { ArmorType, CivTechTree, EffectOrder, UnitLine, UnitType, UpgradePerAgeGroup } from "../../models/techs.model";
 import { AttackType, Unit } from "../../models/unit.model";
 import crest from '../../resources/images/crests/spanish.png';
 import { chainTechs, getAllCivUpgrades, setAffectingUpgrades, setCivOnUniqueTechs } from "../../utils/techs.utils";
-import { multiplyNumber, roundHundredth } from "../../utils/utils";
 import { archeryUnits, archeryUpgrades } from "../techs/archery-techs.const";
 import { barracksUnits, barracksUpgrade } from "../techs/barracks-techs.const";
 import { blacksmithUpgrades } from "../techs/blacksmith-techs.const";
